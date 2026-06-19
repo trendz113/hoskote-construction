@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — HoskoteConstruction</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:system-ui,sans-serif;background:#0f0f0f;color:#e0e0e0;min-height:100vh;}
+.login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;}
+.login-box{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:16px;padding:40px;width:100%;max-width:380px;text-align:center;}
+.login-box h2{font-size:1.3rem;margin-bottom:6px;}
+.login-box p{color:#666;font-size:0.85rem;margin-bottom:24px;}
+input[type=password],input[type=text],input[type=number],select,textarea{
+  width:100%;padding:12px 14px;background:#111;border:1.5px solid #2a2a2a;
+  border-radius:8px;color:#e0e0e0;font-size:0.95rem;font-family:inherit;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 20px;border-radius:8px;font-size:0.9rem;font-weight:600;
+  cursor:pointer;border:none;transition:opacity 0.15s;
+}
+.btn-primary{background:#B5562C;color:#fff;}
+.btn-secondary{background:#1a1a1a;color:#e0e0e0;border:1px solid #2a2a2a;}
+.btn-danger{background:#7f1d1d;color:#fff;}
+.btn:hover{opacity:0.85;}
+.btn:disabled{opacity:0.4;cursor:not-allowed;}
+
+/* ─── MAIN LAYOUT ─── */
+.main{display:none;}
+.header{background:#1a1a1a;border-bottom:1px solid #2a2a2a;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;}
+.header h1{font-size:1.1rem;}
+.header .logout{font-size:0.82rem;color:#666;cursor:pointer;}
+.header .logout:hover{color:#e0e0e0;}
+.content{max-width:1100px;margin:0 auto;padding:28px 24px;}
+
+/* ─── TABS ─── */
+.tabs{display:flex;gap:4px;margin-bottom:28px;background:#1a1a1a;border-radius:10px;padding:4px;}
+.tab{padding:9px 18px;border-radius:7px;cursor:pointer;font-size:0.88rem;font-weight:500;color:#666;transition:all 0.15s;}
+.tab.active{background:#B5562C;color:#fff;}
+
+/* ─── UPLOAD SECTION ─── */
+.upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:700px){.upload-grid{grid-template-columns:1fr;}}
+.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:24px;}
+.card h3{font-size:1rem;margin-bottom:18px;color:#fff;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:0.8rem;color:#888;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;}
+.drop-zone{
+  border:2px dashed #2a2a2a;border-radius:10px;padding:32px;text-align:center;
+  cursor:pointer;transition:border-color 0.15s;
+}
+.drop-zone:hover,.drop-zone.drag{border-color:#B5562C;}
+.drop-zone .icon{font-size:2rem;margin-bottom:8px;}
+.drop-zone p{font-size:0.85rem;color:#666;}
+.drop-zone input{display:none;}
+.preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;}
+.preview-item{position:relative;aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:#111;}
+.preview-item img{width:100%;height:100%;object-fit:cover;}
+.preview-item .remove{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.7);border:none;color:#fff;width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;}
+.progress{height:4px;background:#2a2a2a;border-radius:2px;margin-top:12px;overflow:hidden;display:none;}
+.progress-bar{height:100%;background:#B5562C;width:0%;transition:width 0.3s;}
+.msg{font-size:0.84rem;margin-top:10px;padding:10px 14px;border-radius:6px;display:none;}
+.msg.success{background:#14532d22;color:#4ade80;border:1px solid #14532d;}
+.msg.error{background:#7f1d1d22;color:#f87171;border:1px solid #7f1d1d;}
+
+/* ─── PROJECTS ─── */
+.projects-list{display:flex;flex-direction:column;gap:16px;}
+.project-row{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;overflow:hidden;}
+.project-header{padding:18px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+.project-header:hover{background:#222;}
+.project-title{font-weight:600;font-size:0.95rem;}
+.project-meta{font-size:0.8rem;color:#666;margin-top:2px;}
+.status-badge{font-size:0.72rem;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;}
+.status-badge.completed{background:#14532d22;color:#4ade80;}
+.status-badge.ongoing{background:#78350f22;color:#fbbf24;}
+.project-body{display:none;padding:20px;border-top:1px solid #2a2a2a;}
+.project-body.open{display:block;}
+.stages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px;}
+@media(max-width:700px){.stages-grid{grid-template-columns:1fr 1fr;}}
+.stage-slot{background:#111;border-radius:8px;padding:14px;text-align:center;}
+.stage-slot .stage-name{font-size:0.74rem;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;}
+.stage-slot .photo-count{font-size:1.2rem;margin-bottom:4px;}
+.stage-slot .count-label{font-size:0.72rem;color:#555;}
+.stage-photos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.stage-photo{position:relative;width:64px;height:48px;border-radius:4px;overflow:hidden;background:#1a1a1a;}
+.stage-photo img{width:100%;height:100%;object-fit:cover;}
+.stage-photo .del{position:absolute;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;}
+.stage-photo:hover .del{display:flex;}
+.edit-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+@media(max-width:700px){.edit-fields{grid-template-columns:1fr 1fr;}}
+.edit-field label{display:block;font-size:0.75rem;color:#666;margin-bottom:5px;font-weight:600;text-transform:uppercase;}
+
+/* ─── STATS ─── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+@media(max-width:700px){.stats-grid{grid-template-columns:1fr 1fr;}}
+.stat-card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:18px;}
+.stat-card .num{font-size:1.8rem;font-weight:700;color:#fff;}
+.stat-card .lbl{font-size:0.78rem;color:#666;margin-top:4px;}
+</style>
+</head>
+<body>
+
+<!-- ─── LOGIN ─── -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div style="font-size:2rem;margin-bottom:12px;">🏗️</div>
+    <h2>HoskoteConstruction</h2>
+    <p>Admin Panel — Enter password to continue</p>
+    <div class="field" style="margin-bottom:14px;">
+      <input type="password" id="pwInput" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()">
+    </div>
+    <button class="btn btn-primary" style="width:100%;" onclick="login()">Login</button>
+    <div class="msg" id="loginMsg"></div>
+  </div>
+</div>
+
+<!-- ─── MAIN ─── -->
+<div class="main" id="mainApp">
+  <div class="header">
+    <h1>🏗️ HoskoteConstruction Admin</h1>
+    <span class="logout" onclick="logout()">Logout →</span>
+  </div>
+  <div class="content">
+
+    <!-- Stats -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card"><div class="num" id="statProjects">—</div><div class="lbl">Total Projects</div></div>
+      <div class="stat-card"><div class="num" id="statCompleted">—</div><div class="lbl">Completed</div></div>
+      <div class="stat-card"><div class="num" id="statOngoing">—</div><div class="lbl">Ongoing</div></div>
+      <div class="stat-card"><div class="num" id="statPhotos">—</div><div class="lbl">Total Photos</div></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('upload')">📤 Upload Photo</div>
+      <div class="tab" onclick="switchTab('projects')">🏠 Manage Projects</div>
+    </div>
+
+    <!-- UPLOAD TAB -->
+    <div id="tabUpload">
+      <div class="upload-grid">
+        <div class="card">
+          <h3>Upload Construction Photo</h3>
+          <div class="field">
+            <label>Select Project</label>
+            <select id="uploadProject"></select>
+          </div>
+          <div class="field">
+            <label>Construction Stage</label>
+            <select id="uploadStage">
+              <option value="empty_plot">Empty Plot</option>
+              <option value="foundation">Foundation</option>
+              <option value="slab">Slab</option>
+              <option value="walls">Walls</option>
+              <option value="finishing">Finishing</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Photo(s)</label>
+            <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFile(event)">
+              <div class="icon">📷</div>
+              <p>Tap to select or drag & drop<br><span style="font-size:0.75rem;color:#444;">JPG, PNG, WEBP — multiple allowed</span></p>
+              <input type="file" id="fileInput" accept="image/*" multiple onchange="previewFiles(this.files)">
+            </div>
+            <div class="preview-grid" id="previewGrid"></div>
+          </div>
+          <div class="progress" id="uploadProgress"><div class="progress-bar" id="progressBar"></div></div>
+          <div class="msg" id="uploadMsg"></div>
+          <button class="btn btn-primary" style="width:100%;margin-top:14px;" onclick="uploadPhotos()" id="uploadBtn">Upload Photos</button>
+        </div>
+        <div class="card">
+          <h3>Upload Tips</h3>
+          <div style="display:flex;flex-direction:column;gap:14px;font-size:0.88rem;color:#888;">
+            <div>📍 <strong style="color:#ccc;">Empty Plot</strong> — Wide shot of full plot before any work. Morning light is best.</div>
+            <div>🏗️ <strong style="color:#ccc;">Foundation</strong> — Show excavation, PCC, steel rods. Get close-up of steel too.</div>
+            <div>🧱 <strong style="color:#ccc;">Slab</strong> — Shuttering, steel binding, concrete pouring day, finished slab.</div>
+            <div>🧱 <strong style="color:#ccc;">Walls</strong> — Block/brick laying, lintel level, columns visible.</div>
+            <div>🎨 <strong style="color:#ccc;">Finishing</strong> — Plastering, tiling, painting, electrical & plumbing.</div>
+            <div>🏠 <strong style="color:#ccc;">Completed</strong> — Front elevation, living room, kitchen, bedroom, gate.</div>
+          </div>
+          <div style="margin-top:20px;padding:14px;background:#111;border-radius:8px;font-size:0.82rem;color:#555;">
+            Photos are automatically resized and optimised. You can upload directly from your phone camera roll.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS TAB -->
+    <div id="tabProjects" style="display:none;">
+      <div class="projects-list" id="projectsList">
+        <div style="text-align:center;padding:40px;color:#555;">Loading projects...</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let adminPassword = '';
+let projectsData = [];
+
+// ─── LOGIN ───
+async function login() {
+  const pw = document.getElementById('pwInput').value;
+  const msg = document.getElementById('loginMsg');
+  if (!pw) return;
+  try {
+    const res = await fetch('/api/admin/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw }),
+    });
+    if (res.ok) {
+      adminPassword = pw;
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('mainApp').style.display = 'block';
+      loadProjects();
+    } else {
+      showMsg(msg, 'Wrong password', 'error');
+    }
+  } catch {
+    showMsg(msg, 'Connection error', 'error');
+  }
+}
+
+function logout() {
+  adminPassword = '';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('mainApp').style.display = 'none';
+  document.getElementById('pwInput').value = '';
+}
+
+// ─── LOAD PROJECTS ───
+async function loadProjects() {
+  try {
+    const res = await fetch('/api/projects');
+    const data = await res.json();
+    projectsData = data.projects;
+    updateStats();
+    populateProjectSelect();
+    renderProjectsList();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function updateStats() {
+  document.getElementById('statProjects').textContent = projectsData.length;
+  document.getElementById('statCompleted').textContent = projectsData.filter(p => p.status === 'completed').length;
+  document.getElementById('statOngoing').textContent = projectsData.filter(p => p.status === 'ongoing').length;
+  let totalPhotos = 0;
+  projectsData.forEach(p => {
+    if (p.stages) Object.values(p.stages).forEach(s => { totalPhotos += s.photos.length; });
+  });
+  document.getElementById('statPhotos').textContent = totalPhotos;
+}
+
+function populateProjectSelect() {
+  const sel = document.getElementById('uploadProject');
+  sel.innerHTML = projectsData.map(p =>
+    `<option value="${p.id}">${p.title} (${p.location}) — ${p.status}</option>`
+  ).join('');
+}
+
+// ─── TABS ───
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === (tab === 'upload' ? 0 : 1)));
+  document.getElementById('tabUpload').style.display = tab === 'upload' ? 'block' : 'none';
+  document.getElementById('tabProjects').style.display = tab === 'projects' ? 'block' : 'none';
+}
+
+// ─── FILE PREVIEW ───
+let selectedFiles = [];
+
+function previewFiles(files) {
+  selectedFiles = Array.from(files);
+  const grid = document.getElementById('previewGrid');
+  grid.innerHTML = selectedFiles.map((f, i) => `
+    <div class="preview-item" id="preview_${i}">
+      <img src="${URL.createObjectURL(f)}" alt="">
+      <button class="remove" onclick="removeFile(${i})">×</button>
+    </div>
+  `).join('');
+}
+
+function removeFile(index) {
+  selectedFiles.splice(index, 1);
+  previewFiles(selectedFiles);
+}
+
+function dragOver(e) { e.preventDefault(); document.getElementById('dropZone').classList.add('drag'); }
+function dragLeave() { document.getElementById('dropZone').classList.remove('drag'); }
+function dropFile(e) {
+  e.preventDefault();
+  dragLeave();
+  previewFiles(e.dataTransfer.files);
+}
+
+// ─── UPLOAD ───
+async function uploadPhotos() {
+  if (!selectedFiles.length) { showMsg(document.getElementById('uploadMsg'), 'Select at least one photo', 'error'); return; }
+  const projectId = document.getElementById('uploadProject').value;
+  const stage = document.getElementById('uploadStage').value;
+  const btn = document.getElementById('uploadBtn');
+  const progress = document.getElementById('uploadProgress');
+  const bar = document.getElementById('progressBar');
+  const msg = document.getElementById('uploadMsg');
+
+  btn.disabled = true;
+  progress.style.display = 'block';
+  let uploaded = 0;
+
+  for (const file of selectedFiles) {
+    const fd = new FormData();
+    fd.append('photo', file);
+    fd.append('projectId', projectId);
+    fd.append('stage', stage);
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'x-admin-password': adminPassword },
+        body: fd,
+      });
+      if (!res.ok) throw new Error('Upload failed');
+      uploaded++;
+      bar.style.width = `${(uploaded / selectedFiles.length) * 100}%`;
+    } catch {
+      showMsg(msg, `Failed to upload ${file.name}`, 'error');
+    }
+  }
+
+  btn.disabled = false;
+  progress.style.display = 'none';
+  bar.style.width = '0%';
+  showMsg(msg, `${uploaded} photo(s) uploaded successfully ✓`, 'success');
+  selectedFiles = [];
+  document.getElementById('previewGrid').innerHTML = '';
+  loadProjects();
+}
+
+// ─── RENDER PROJECTS ───
+function renderProjectsList() {
+  const list = document.getElementById('projectsList');
+  list.innerHTML = projectsData.map(project => {
+    const totalPhotos = project.stages ? Object.values(project.stages).reduce((sum, s) => sum + s.photos.length, 0) : 0;
+    return `
+    <div class="project-row">
+      <div class="project-header" onclick="toggleProject('${project.id}')">
+        <div>
+          <div class="project-title">${project.title}</div>
+          <div class="project-meta">${project.location} · ${project.sqft ? project.sqft + ' sqft' : 'sqft TBD'} · ${totalPhotos} photos</div>
+        </div>
+        <span class="status-badge ${project.status}">${project.status}</span>
+      </div>
+      <div class="project-body" id="body_${project.id}">
+        <!-- Stage photos -->
+        <div class="stages-grid">
+          ${project.stages ? Object.entries(project.stages).map(([stageId, stage]) => `
+            <div class="stage-slot">
+              <div class="stage-name">${stage.label}</div>
+              <div class="photo-count">${stage.photos.length > 0 ? '📷' : '○'}</div>
+              <div class="count-label">${stage.photos.length} photo${stage.photos.length !== 1 ? 's' : ''}</div>
+              <div class="stage-photos">
+                ${stage.photos.map(ph => `
+                  <div class="stage-photo">
+                    <img src="${ph.url}" alt="">
+                    <div class="del" onclick="deletePhoto('${ph.publicId}', '${project.id}')">🗑️</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `).join('') : ''}
+        </div>
+        <!-- Edit project details -->
+        <div style="margin-top:18px;padding-top:18px;border-top:1px solid #2a2a2a;">
+          <div style="font-size:0.8rem;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:14px;">Edit Project Details</div>
+          <div class="edit-fields">
+            <div class="edit-field">
+              <label>Location / Area</label>
+              <input type="text" id="loc_${project.id}" value="${project.location || ''}" placeholder="e.g. Channasandra">
+            </div>
+            <div class="edit-field">
+              <label>Sqft</label>
+              <input type="number" id="sqft_${project.id}" value="${project.sqft || ''}" placeholder="e.g. 1200">
+            </div>
+            <div class="edit-field">
+              <label>Total Cost (₹ Lakhs)</label>
+              <input type="number" id="cost_${project.id}" value="${project.cost || ''}" placeholder="e.g. 28">
+            </div>
+            <div class="edit-field">
+              <label>Duration (months)</label>
+              <input type="number" id="dur_${project.id}" value="${project.duration || ''}" placeholder="e.g. 7">
+            </div>
+            <div class="edit-field">
+              <label>BHK</label>
+              <select id="bhk_${project.id}">
+                <option value="">Select</option>
+                <option value="1BHK" ${project.bhk === '1BHK' ? 'selected' : ''}>1 BHK</option>
+                <option value="2BHK" ${project.bhk === '2BHK' ? 'selected' : ''}>2 BHK</option>
+                <option value="3BHK" ${project.bhk === '3BHK' ? 'selected' : ''}>3 BHK</option>
+                <option value="4BHK" ${project.bhk === '4BHK' ? 'selected' : ''}>4 BHK</option>
+              </select>
+            </div>
+            <div class="edit-field">
+              <label>Floors</label>
+              <select id="floors_${project.id}">
+                <option value="">Select</option>
+                <option value="G" ${project.floors === 'G' ? 'selected' : ''}>Ground Only</option>
+                <option value="G+1" ${project.floors === 'G+1' ? 'selected' : ''}>G+1</option>
+                <option value="G+2" ${project.floors === 'G+2' ? 'selected' : ''}>G+2</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:14px;" onclick="saveProject('${project.id}')">Save Details</button>
+          <span class="msg" id="saveMsg_${project.id}" style="display:inline-block;margin-left:12px;"></span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleProject(id) {
+  const body = document.getElementById(`body_${id}`);
+  body.classList.toggle('open');
+}
+
+// ─── SAVE PROJECT DETAILS ───
+async function saveProject(id) {
+  const data = {
+    location: document.getElementById(`loc_${id}`).value,
+    sqft: document.getElementById(`sqft_${id}`).value,
+    cost: document.getElementById(`cost_${id}`).value,
+    duration: document.getElementById(`dur_${id}`).value,
+    bhk: document.getElementById(`bhk_${id}`).value,
+    floors: document.getElementById(`floors_${id}`).value,
+  };
+  const msg = document.getElementById(`saveMsg_${id}`);
+  try {
+    const res = await fetch(`/api/projects/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': adminPassword },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      showMsg(msg, 'Saved ✓', 'success');
+      loadProjects();
+    } else {
+      showMsg(msg, 'Save failed', 'error');
+    }
+  } catch {
+    showMsg(msg, 'Error', 'error');
+  }
+}
+
+// ─── DELETE PHOTO ───
+async function deletePhoto(publicId, projectId) {
+  if (!confirm('Delete this photo?')) return;
+  try {
+    const res = await fetch('/api/photo', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': adminPassword },
+      body: JSON.stringify({ publicId }),
+    });
+    if (res.ok) { loadProjects(); }
+  } catch { alert('Delete failed'); }
+}
+
+// ─── UTILS ───
+function showMsg(el, text, type) {
+  el.textContent = text;
+  el.className = `msg ${type}`;
+  el.style.display = 'block';
+  setTimeout(() => { el.style.display = 'none'; }, 4000);
+}
+</script>
+</body>
+</html>
