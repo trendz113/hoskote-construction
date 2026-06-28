@@ -239,6 +239,11 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
+// ─── SERVE DOCUMENTS GUIDE PAGE ───
+app.get('/documents', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'documents.html'));
+});
+
 // ─── SERVE INDEX ───
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
