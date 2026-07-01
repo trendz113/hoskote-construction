@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vastu Planner Tool &amp; Home Construction Guide for Hoskote | HoskoteConstruction.in</title>
+<meta name="description" content="Free interactive Vastu planner tool plus a practical, room-by-room Vastu guide for anyone building a house in Hoskote or Bengaluru Rural — entrance direction, kitchen placement, common doshas, and remedies.">
+<link rel="canonical" href="https://hoskoteconstruction.in/vaastu.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vastu Planner Tool & Home Construction Guide | HoskoteConstruction.in">
+<meta property="og:description" content="Free interactive Vastu planner plus a practical guide for homeowners building in Hoskote and Bengaluru Rural.">
+<meta property="og:url" content="https://hoskoteconstruction.in/vaastu.html">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: { terracotta: { 50:'#FBEDE7',100:'#F5D5C4',200:'#EAAA88',300:'#DE7F52',400:'#CC5A2E',500:'#B5461D',600:'#973915',700:'#7A2E11',800:'#5C230D',900:'#3E1709' } },
+      fontFamily: { display: ['Fraunces','serif'], sans: ['Inter','ui-sans-serif','system-ui'] }
+    } }
+  }
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Vastu Planner Tool",
+  "url": "https://hoskoteconstruction.in/vaastu.html#tool",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+  "publisher": { "@type": "Organization", "name": "HoskoteConstruction.in", "url": "https://hoskoteconstruction.in" },
+  "description": "An interactive tool that lets homeowners place rooms across the 9 Vastu compass zones of a house plan and receive an instant compliance score with remedies."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Vastu Tips for Home Construction in Hoskote: A Practical Guide",
+  "description": "A room-by-room Vastu guide for homeowners building in Hoskote and Bengaluru Rural, covering entrance direction, kitchen and bedroom placement, common doshas, and remedies.",
+  "url": "https://hoskoteconstruction.in/vaastu.html#guide",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-01",
+  "author": { "@type": "Organization", "name": "HoskoteConstruction.in" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "HoskoteConstruction.in",
+    "logo": { "@type": "ImageObject", "url": "https://hoskoteconstruction.in/logo.png" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://hoskoteconstruction.in/vaastu.html" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is following Vastu compulsory for house construction or registration in Karnataka?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Vastu Shastra is a traditional design practice, not a legal or regulatory requirement. Karnataka building approvals, khata registration, and property documentation follow municipal and revenue department rules, which are separate from Vastu. You can build a fully compliant, legally registered house with zero Vastu considerations if you choose." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Vastu defects in an existing house be fixed without demolition?",
+      "acceptedAnswer": { "@type": "Answer", "text": "In most cases yes. Common remedies include repositioning furniture, adjusting the direction a person sleeps or cooks in, using mirrors to visually correct a missing corner, adding specific colors or elements to a zone, and placing symbolic items like a copper pyramid or sea-salt bowl. Structural fixes are only recommended for severe doshas and should be reviewed with a structural engineer before any wall is touched." }
+    },
+    {
+      "@type": "Question",
+      "name": "What direction should the main entrance of a house face for good Vastu?",
+      "acceptedAnswer": { "@type": "Answer", "text": "North, East, and Northeast-facing entrances are considered the most favourable in Vastu Shastra, since these zones are associated with the rising sun and water element. South and Southwest facing entrances are considered the most challenging, though they can still be used with door placement and threshold remedies." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does plot shape affect Vastu compliance in layouts around Hoskote?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Most new layouts around Hoskote are rectangular sites on a grid road pattern, which generally makes Vastu zoning easier to apply than an irregular or corner plot. Corner plots, plots with a cut corner, and odd-angled sites need a site-specific reading rather than generic rules, since the compass zones shift with the plot's actual orientation." }
+    }
+  ]
+}
+</script>
+
+<style>
+  .grid-cell { transition: all .3s cubic-bezier(.4,0,.2,1); }
+  .grid-cell:hover { transform: scale(1.02); }
+  body { font-family: 'Inter', ui-sans-serif, system-ui; }
+  .font-display { font-family: 'Fraunces', serif; }
+  .prose-custom p { margin-bottom: 1.1rem; line-height: 1.75; }
+  .prose-custom h2 { margin-top: 2.5rem; margin-bottom: 0.9rem; }
+  .prose-custom h3 { margin-top: 1.75rem; margin-bottom: 0.6rem; }
+  .prose-custom ul { margin-bottom: 1.1rem; }
+  .prose-custom li { margin-bottom: 0.4rem; line-height: 1.7; }
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body class="bg-stone-100 text-stone-900 min-h-screen antialiased">
+
+<!-- SITE HEADER -->
+<header class="bg-white border-b border-stone-200 sticky top-0 z-30">
+  <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
+    <a href="/" class="font-display text-lg font-semibold text-stone-900 tracking-tight">
+      Hoskote<span class="text-terracotta-600">Construction</span>.in
+    </a>
+    <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-stone-600">
+      <a href="/" class="hover:text-stone-900">Home</a>
+      <a href="/#services" class="hover:text-stone-900">Services</a>
+      <a href="/#projects" class="hover:text-stone-900">Projects</a>
+      <a href="/documents.html" class="hover:text-stone-900">Documents Guide</a>
+      <a href="#tool" class="hover:text-indigo-700">Planner Tool</a>
+      <a href="#guide" class="hover:text-indigo-700">Guide</a>
+    </nav>
+    <a href="/#contact" class="hidden sm:inline-flex items-center px-4 py-2 rounded-lg bg-indigo-700 hover:bg-indigo-800 text-white text-sm font-semibold transition-colors">
+      Get a Free Quote
+    </a>
+  </div>
+</header>
+
+<div class="max-w-6xl mx-auto px-4 pt-4 text-xs text-stone-500">
+  <a href="/" class="hover:text-stone-800">Home</a> <span class="mx-1.5">/</span> <span class="text-stone-700">Vastu Planner &amp; Guide</span>
+</div>
+
+<!-- PAGE HERO -->
+<div class="max-w-6xl mx-auto px-4 pt-8 pb-4">
+  <span class="inline-block text-xs font-bold tracking-wider uppercase text-terracotta-600 mb-2">Free Tool + Practical Guide</span>
+  <h1 class="font-display text-3xl md:text-4xl font-semibold text-stone-900 mb-3 max-w-2xl">
+    Vastu Planner Tool &amp; Home Construction Guide for Hoskote
+  </h1>
+  <p class="text-stone-600 leading-relaxed max-w-2xl">
+    Score your house layout against the 9 Vastu zones, then read the full room-by-room guide below — written for
+    homeowners planning construction in Hoskote and Bengaluru Rural.
+  </p>
+  <div class="flex gap-4 mt-4 text-sm font-semibold">
+    <a href="#tool" class="text-indigo-700 hover:text-indigo-800">Jump to Tool ↓</a>
+    <a href="#guide" class="text-indigo-700 hover:text-indigo-800">Jump to Guide ↓</a>
+  </div>
+</div>
+
+<!-- ============ TOOL SECTION ============ -->
+<section id="tool">
+<main class="max-w-6xl mx-auto px-4 py-8">
+
+  <div class="bg-white rounded-2xl shadow-xl shadow-stone-900/5 border border-stone-200 overflow-hidden">
+
+    <div class="border-b border-stone-200 p-6 bg-stone-50 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <h2 class="text-lg font-display font-semibold text-stone-900 mb-1">2D Vastu Grid Planner</h2>
+        <p class="text-sm text-stone-500">Map your layout across the 9 spatial zones to test compliance instantly.</p>
+      </div>
+
+      <div class="flex items-center gap-4 bg-white py-3 px-6 rounded-xl border border-stone-200">
+        <div class="relative flex items-center justify-center w-20 h-20">
+          <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+            <path class="text-stone-200" stroke-width="3" stroke="currentColor" fill="transparent" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <path id="scoreCircle" class="text-emerald-500 transition-all duration-500 ease-out" stroke-dasharray="0, 100" stroke-width="3" stroke-linecap="round" stroke="currentColor" fill="transparent" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+          </svg>
+          <div id="scoreText" class="absolute text-xl font-extrabold text-stone-900">0%</div>
+        </div>
+        <div>
+          <div class="text-xs font-semibold tracking-wider text-stone-500 uppercase">Compliance Score</div>
+          <div id="scoreRating" class="text-sm font-bold text-stone-500 mt-0.5">Empty Map</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6">
+
+      <div class="lg:col-span-4 space-y-6">
+        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-terracotta-600 mb-3">Step 1: Select a Room</h3>
+          <div id="roomInventory" class="space-y-2"></div>
+        </div>
+
+        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-stone-500 mb-2">Instructions</h3>
+          <ul class="text-xs text-stone-500 space-y-2 list-disc pl-4">
+            <li>Click any room archetype on the list above to arm your placement cursor.</li>
+            <li>Click on any of the 9 compass directions on the grid plan to assign it.</li>
+            <li>Each room can only exist in one zone at a time.</li>
+          </ul>
+          <button onclick="resetPlanner()" class="w-full mt-4 py-2 px-4 bg-white hover:bg-stone-100 active:bg-stone-200 text-stone-700 font-medium text-xs rounded-lg transition-colors border border-stone-300">
+            Clear Layout Grid
+          </button>
+        </div>
+      </div>
+
+      <div class="lg:col-span-8 flex flex-col justify-center items-center">
+        <div class="w-full max-w-lg aspect-square bg-stone-100 p-4 rounded-2xl border border-stone-200 shadow-inner grid grid-cols-3 grid-rows-3 gap-3" id="vaastuGrid"></div>
+      </div>
+
+    </div>
+
+    <div class="border-t border-stone-200 p-6 bg-stone-50">
+      <h3 class="text-base font-display font-semibold text-stone-900 mb-4 flex items-center gap-2">
+        <span>📋</span> Diagnostics &amp; Remedies
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-stone-700">
+          <thead class="bg-white text-xs font-semibold uppercase tracking-wider text-stone-500 border-b border-stone-200">
+            <tr>
+              <th class="px-4 py-3 rounded-tl-lg">Room</th>
+              <th class="px-4 py-3">Assigned Direction</th>
+              <th class="px-4 py-3">Status</th>
+              <th class="px-4 py-3 rounded-tr-lg">Remedy / Insight</th>
+            </tr>
+          </thead>
+          <tbody id="analysisReport" class="divide-y divide-stone-200 bg-white"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="text-sm text-stone-500 leading-relaxed mt-6 max-w-3xl">
+    Vastu Shastra is a traditional Indian design system, not a structural or legal requirement. Use this score as
+    directional guidance alongside your architect's structural plan. Read the reasoning behind each zone in the
+    <a href="#guide" class="text-indigo-700 underline decoration-indigo-300 hover:decoration-indigo-600">full guide below</a>.
+  </p>
+
+</main>
+</section>
+
+<!-- ============ GUIDE SECTION ============ -->
+<section id="guide" class="bg-white border-t border-stone-200">
+<main class="max-w-3xl mx-auto px-4 py-14">
+
+  <article class="prose-custom text-stone-700">
+
+    <span class="inline-block text-xs font-bold tracking-wider uppercase text-terracotta-600 mb-3">Vastu &amp; Planning · 9 min read</span>
+    <h2 class="font-display text-3xl md:text-[2.5rem] leading-tight font-semibold text-stone-900 mb-4">
+      Vastu Tips for Home Construction in Hoskote: A Practical Guide
+    </h2>
+    <p class="text-stone-500 text-sm mb-8">Published 1 July 2026 · By the HoskoteConstruction.in team</p>
+
+    <p>
+      If you're building a house anywhere in the Hoskote–Bengaluru Rural belt right now, you've probably had this conversation
+      at least twice: someone in the family asks whether the kitchen is in the "right" direction, or whether the main door should
+      shift a foot to the left. Vastu Shastra comes up early in almost every construction conversation here, often before the
+      floor plan is even finalised.
+    </p>
+    <p>
+      This guide walks through what actually matters, room by room, using the same directional logic we apply when reviewing
+      layouts for clients. It's written for people who want a working understanding, not a religious treatise — plus a few
+      practical notes specific to how plots are typically laid out in newer Hoskote developments.
+    </p>
+    <p>
+      Want to test your own layout as you read? Use the
+      <a href="#tool" class="text-indigo-700 font-medium underline decoration-indigo-300 hover:decoration-indigo-600">interactive Vastu Planner above</a>
+      to place rooms on a 9-zone grid and get an instant score with remedies.
+    </p>
+
+    <h3 class="font-display text-2xl font-semibold text-stone-900">What Vastu Shastra Actually Is</h3>
+    <p>
+      Vastu Shastra is a centuries-old Indian system of architectural guidelines that maps a building's layout to eight compass
+      directions plus a centre zone, each associated with an element (fire, water, air, earth, space) and a governing principle.
+      It's a design tradition, not a building code — it has no legal standing in Karnataka's construction approval process, and
+      a house that ignores it entirely is just as buildable and registrable as one that follows it strictly.
+    </p>
+    <p>
+      That said, many of its practical recommendations — morning sun into the kitchen, ventilation on the windward side, heavier
+      rooms toward the earth-facing corners of the plot — overlap with genuinely sound passive design. Treat Vastu as one input
+      among several: structural safety, budget, and your architect's plan should always take priority when they conflict with a
+      directional preference.
+    </p>
+
+    <h3 class="font-display text-2xl font-semibold text-stone-900">The 9-Zone Grid, Explained</h3>
+    <p>
+      Vastu divides a plot into a 3×3 grid of eight compass directions around a centre (called the Brahmasthan). Each zone
+      carries a different weight for different rooms:
+    </p>
+    <div class="overflow-x-auto my-6">
+      <table class="w-full text-sm text-left border border-stone-200 rounded-lg overflow-hidden">
+        <thead class="bg-stone-50 text-xs uppercase tracking-wider text-stone-500">
+          <tr>
+            <th class="px-4 py-3 border-b border-stone-200">Zone</th>
+            <th class="px-4 py-3 border-b border-stone-200">Element</th>
+            <th class="px-4 py-3 border-b border-stone-200">Best suited for</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-stone-200">
+          <tr><td class="px-4 py-3 font-semibold text-stone-900">Northeast (NE)</td><td class="px-4 py-3">Water</td><td class="px-4 py-3">Entrance, pooja room, open space</td></tr>
+          <tr><td class="px-4 py-3 font-semibold text-stone-900">North (N)</td><td class="px-4 py-3">Wealth</td><td class="px-4 py-3">Entrance, living room, cash locker</td></tr>
+          <tr><td class="px-4 py-3 font-semibold text-stone-900">East (E)</td><td class="px-4 py-3">Solar</td><td class="px-4 py-3">Entrance, pooja room, windows</td></tr>
+          <tr><td class="px-4 py-3 font-semibold text-stone-900">Southeast (SE)</td><td class="px-4 py-3">Fire</td><td class="px-4 py-3">Kitchen</td></tr>
+          <tr><td class="px-4 py-3 font-semibold text-stone-900">South (S)</td><td class="px-4 py-3">Fire</td><td class="px-4 py-3">Bedroom, heavier storage</td></tr>
+          <tr><td class="px-4 py-3 font-semibold text-stone-900">Southwest (SW)</td><td class="px-4 py-3">Earth</td><td class="px-4 py-3">Master bedroom, heaviest structure</td></tr>
+          <tr><td class="px-4 py-3 font-semibold text-stone-900">West (W)</td><td class="px-4 py-3">Space</td><td class="px-4 py-3">Bedroom, dining, study</td></tr>
+          <tr><td class="px-4 py-3 font-semibold text-stone-900">Northwest (NW)</td><td class="px-4 py-3">Air</td><td class="px-4 py-3">Guest room, bathroom, kitchen (secondary)</td></tr>
+          <tr><td class="px-4 py-3 font-semibold text-stone-900">Centre (C)</td><td class="px-4 py-3">Space</td><td class="px-4 py-3">Kept open — courtyard or light well, no heavy room</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="font-display text-2xl font-semibold text-stone-900">Room-by-Room Placement</h3>
+
+    <h4 class="font-display text-xl font-semibold text-stone-900">1. Main Entrance</h4>
+    <p>
+      The entrance is treated as the single most consequential element in Vastu. North, East, and Northeast are the preferred
+      directions since they face the rising sun. South and Southwest entrances are considered the toughest to work with — if
+      your plot forces a south-facing gate, common practice is to offset the door within that wall rather than centering it,
+      and to keep the threshold well lit.
+    </p>
+
+    <h4 class="font-display text-xl font-semibold text-stone-900">2. Kitchen</h4>
+    <p>
+      The kitchen represents the fire element, so Southeast is the classical placement, with Northeast avoided entirely since
+      fire and water zones are considered to clash there. A practical detail that gets missed: it's not just the room's
+      location that matters in this belief system, but which way the person faces while cooking — facing east while at the
+      stove is the common recommendation, regardless of which zone the kitchen itself sits in.
+    </p>
+
+    <h4 class="font-display text-xl font-semibold text-stone-900">3. Master Bedroom</h4>
+    <p>
+      Southwest is considered the strongest position for the master bedroom — it's the "earth" corner, associated with
+      stability and the head of the household. South and West are acceptable secondary options. Northeast bedrooms are
+      generally discouraged, since that zone is meant to stay light and uncluttered.
+    </p>
+
+    <h4 class="font-display text-xl font-semibold text-stone-900">4. Pooja Room</h4>
+    <p>
+      Northeast is the standard placement for a prayer room, since it's considered the most spiritually charged zone. Sharing
+      a wall with a bathroom is specifically avoided in most Vastu readings, which matters in compact Hoskote plot layouts
+      where plumbing stacks are often planned early — worth flagging to your architect before pipe runs are finalised.
+    </p>
+
+    <h4 class="font-display text-xl font-semibold text-stone-900">5. Bathrooms and Toilets</h4>
+    <p>
+      Northwest and West are preferred for bathrooms, since these zones are associated with elimination and outward movement.
+      Northeast bathrooms are considered one of the more disruptive placements and are generally avoided if the plan allows
+      any flexibility.
+    </p>
+
+    <h4 class="font-display text-xl font-semibold text-stone-900">6. Staircase</h4>
+    <p>
+      Staircases are usually planned in the South, Southwest, or West of the plot, moving in a clockwise direction as you
+      ascend. A staircase in the Northeast or directly in the centre of the house is one of the more commonly flagged
+      layout issues in Vastu reviews.
+    </p>
+
+    <h4 class="font-display text-xl font-semibold text-stone-900">7. Overhead Tank, Sump, and Borewell</h4>
+    <p>
+      Water storage — whether an overhead tank, sump, or borewell — is typically placed in the Northeast. This is relevant
+      for Hoskote specifically, since groundwater depth and borewell placement are already a practical civil consideration
+      here; where possible, aligning the Vastu-preferred direction with your site's actual best drilling spot avoids a
+      trade-off later.
+    </p>
+
+    <h4 class="font-display text-xl font-semibold text-stone-900">8. Open Space and Setback</h4>
+    <p>
+      General guidance favours keeping more open setback space on the North and East sides of the plot, with the Southwest
+      corner built up the most solidly. On the narrower plots common in Hoskote's newer layouts, this often means resisting
+      the temptation to push the building line all the way to the north boundary, even when the setback rules technically
+      allow it.
+    </p>
+
+    <h3 class="font-display text-2xl font-semibold text-stone-900">Common Vastu Doshas and Practical Remedies</h3>
+    <p>
+      A "dosha" is simply a flagged deviation from the ideal zone for a given room. Most doshas in an already-built or
+      under-construction house don't require demolition — they're corrected through placement, color, or symbolic
+      remedies:
+    </p>
+    <ul class="list-disc pl-5">
+      <li><strong>Kitchen in the Northeast</strong> — the most commonly cited serious dosha. If the structure can't be changed, remedies include a green aventurine cluster near the stove and ensuring the cook faces east.</li>
+      <li><strong>South or Southwest-facing main door</strong> — offset the door within the wall, keep the threshold brightly lit, and add brass or metal accents at the frame.</li>
+      <li><strong>Bedroom in the Northeast</strong> — reposition the bed so the head points south, and avoid using this room as the primary bedroom if an alternative exists.</li>
+      <li><strong>Staircase in the centre of the house</strong> — this is the hardest dosha to remedy without structural change; it's worth raising with your architect at the design stage rather than after construction.</li>
+      <li><strong>Toilet attached to the pooja room</strong> — if unavoidable, keep the door closed at all times and add an exhaust fan to manage the shared wall.</li>
+    </ul>
+    <p>
+      You can check your own layout against these patterns using the
+      <a href="#tool" class="text-indigo-700 font-medium underline decoration-indigo-300 hover:decoration-indigo-600">Vastu Planner tool above</a> —
+      place each room on the grid and it will flag doshas with the same remedies listed above.
+    </p>
+
+    <h3 class="font-display text-2xl font-semibold text-stone-900">A Note on Plots Around Hoskote</h3>
+    <p>
+      Most residential layouts developed around Hoskote in recent years sit on a fairly regular north-south / east-west road
+      grid, which makes applying standard Vastu zoning more straightforward than on an irregular urban plot. The exceptions
+      worth planning around early are corner sites, plots with an angled or cut corner, and narrower east-facing sites where
+      the kitchen and pooja room compete for the same Southeast/Northeast real estate. In all three cases, a generic rule of
+      thumb isn't enough — it's worth getting the actual site orientation checked against a compass, not just the layout
+      plan, since plans can be drawn slightly off true north.
+    </p>
+    <p>
+      For anything related to your plot's legal documentation — khata, sale deed, encumbrance certificate, and the other
+      paperwork that has nothing to do with Vastu but everything to do with actually being able to build — see our
+      <a href="/documents.html" class="text-indigo-700 font-medium underline decoration-indigo-300 hover:decoration-indigo-600">Karnataka property documents guide</a>.
+    </p>
+
+    <h3 class="font-display text-2xl font-semibold text-stone-900">Frequently Asked Questions</h3>
+
+    <h4 class="font-display text-lg font-semibold text-stone-900">Is following Vastu compulsory for house construction or registration in Karnataka?</h4>
+    <p>
+      No. Vastu is a design tradition, not a legal requirement. Karnataka's building approvals, khata registration, and
+      property documentation are governed by municipal and revenue department rules that are entirely separate from Vastu.
+    </p>
+
+    <h4 class="font-display text-lg font-semibold text-stone-900">Can Vastu defects be fixed without demolition?</h4>
+    <p>
+      In most cases, yes. Furniture repositioning, sleeping or cooking direction, mirrors, color, and symbolic remedies
+      resolve the majority of common doshas. Structural change should only be considered for severe cases, and always in
+      consultation with a structural engineer.
+    </p>
+
+    <h4 class="font-display text-lg font-semibold text-stone-900">What direction should the main entrance face?</h4>
+    <p>
+      North, East, and Northeast are considered the most favourable. South and Southwest are the most challenging, though
+      workable with door offset and threshold remedies.
+    </p>
+
+    <h4 class="font-display text-lg font-semibold text-stone-900">Does plot shape affect Vastu compliance in Hoskote layouts?</h4>
+    <p>
+      Yes. Regular rectangular plots on a grid road pattern — common in newer Hoskote layouts — are easier to zone correctly.
+      Corner plots and irregular sites need a site-specific compass reading rather than generic rules.
+    </p>
+
+    <div class="mt-10 p-6 bg-indigo-50 border border-indigo-100 rounded-2xl">
+      <h4 class="font-display text-lg font-semibold text-stone-900 mb-2">Planning a build in Hoskote?</h4>
+      <p class="text-sm text-stone-600 mb-4">
+        Our team reviews floor plans for both structural soundness and directional layout before construction starts.
+        Get a free consultation for your plot.
+      </p>
+      <a href="/#contact" class="inline-flex items-center px-5 py-2.5 rounded-lg bg-indigo-700 hover:bg-indigo-800 text-white text-sm font-semibold transition-colors">
+        Talk to Our Team
+      </a>
+    </div>
+
+    <div class="mt-8 p-5 bg-stone-50 border border-dashed border-stone-300 rounded-2xl text-center text-stone-400 text-sm">
+      ✍️ More guides on construction cost, RCC vs load-bearing, and Karnataka property documents coming soon on this page.
+    </div>
+
+  </article>
+
+</main>
+</section>
+
+<footer class="bg-stone-900 text-stone-400">
+  <div class="max-w-6xl mx-auto px-4 py-10 text-sm flex flex-col md:flex-row justify-between gap-4">
+    <div class="font-display text-white text-base">HoskoteConstruction.in</div>
+    <div class="flex gap-6">
+      <a href="/" class="hover:text-white">Home</a>
+      <a href="/documents.html" class="hover:text-white">Documents Guide</a>
+      <a href="#tool" class="hover:text-white">Planner Tool</a>
+      <a href="/#contact" class="hover:text-white">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const roomData = {
+    entrance: {
+      name: "Main Entrance", color: "from-indigo-500/10 to-indigo-600/10 border-indigo-600",
+      rules: { NE:20, N:20, E:20, NW:10, SE:-10, S:-20, W:-10, SW:-20, C:-20 },
+      remedies: {
+        positive: "Excellent. Maximum influx of positive cosmic solar energy vectors.",
+        neutral: "Acceptable layout. Install brass threshold enhancements to stabilize flow.",
+        negative: "Severe block. Affix a copper pyramid array or paint entrance elements ivory/silver."
+      }
+    },
+    kitchen: {
+      name: "Kitchen (Fire)", color: "from-terracotta-400/15 to-terracotta-500/15 border-terracotta-600",
+      rules: { SE:20, NW:15, E:10, S:10, W:5, N:-10, NE:-20, SW:-20, C:-20 },
+      remedies: {
+        positive: "Ideal placement. Keeps Agni (the cosmic fire element) harmonized perfectly.",
+        neutral: "Fair alignment. Position your main cooktop facing east within this sector.",
+        negative: "Destructive elemental clash. Place a green aventurine stone pyramid cluster below the stove base."
+      }
+    },
+    bedroom: {
+      name: "Master Bedroom", color: "from-stone-400/20 to-stone-500/20 border-stone-500",
+      rules: { SW:20, S:15, W:15, NW:5, N:-10, E:-10, SE:-10, NE:-20, C:-20 },
+      remedies: {
+        positive: "Perfect. Heavy Earth zone rules here, establishing ideal authority and calm sleep.",
+        neutral: "Moderate stability. Sleep with head pointing exactly toward south.",
+        negative: "Disrupts peace. Place a heavy sea-salt earthen bowl in the room's southwest corner."
+      }
+    },
+    pooja: {
+      name: "Pooja Room (Prayer)", color: "from-amber-400/20 to-amber-500/20 border-amber-500",
+      rules: { NE:20, E:15, N:15, C:10, NW:-10, SE:-10, S:-15, W:-10, SW:-20 },
+      remedies: {
+        positive: "Ethereal alignment. The Ishanya quadrant delivers maximum mental clarity.",
+        neutral: "Acceptable zone. Ensure deities face west so you pray looking eastward.",
+        negative: "Clashes with waste energy. Keep the room clean and avoid sharing walls with washrooms."
+      }
+    },
+    bathroom: {
+      name: "Bathroom / Toilet", color: "from-slate-400/15 to-slate-500/15 border-slate-500",
+      rules: { NW:20, W:15, S:15, SE:-10, E:-15, N:-15, NE:-20, SW:-20, C:-20 },
+      remedies: {
+        positive: "Flushes negative elements securely out of active living fields.",
+        neutral: "Functional sector. Keep the bathroom door closed at all times.",
+        negative: "Major energy drain vector. Install a Vastu crystal grid or a zinc plate outside the door."
+      }
+    }
+  };
+
+  const gridZones = {
+    NW: { name: "Northwest", element: "Air (Vayu)" },
+    N:  { name: "North", element: "Wealth (Kuber)" },
+    NE: { name: "Northeast", element: "Water (Ishanya)" },
+    W:  { name: "West", element: "Space (Varun)" },
+    C:  { name: "Center", element: "Space (Brahma)" },
+    E:  { name: "East", element: "Solar (Indra)" },
+    SW: { name: "Southwest", element: "Earth (Nairutya)" },
+    S:  { name: "South", element: "Fire (Yama)" },
+    SE: { name: "Southeast", element: "Fire (Agni)" }
+  };
+
+  let activeSelectedRoom = null;
+  let placementState = { NW:null, N:null, NE:null, W:null, C:null, E:null, SW:null, S:null, SE:null };
+
+  function initApp() { renderInventory(); renderGrid(); recalculateVaastuScore(); }
+
+  function renderInventory() {
+    const container = document.getElementById("roomInventory");
+    container.innerHTML = "";
+    Object.keys(roomData).forEach(key => {
+      const room = roomData[key];
+      const isPlaced = Object.values(placementState).includes(key);
+      const isActive = activeSelectedRoom === key;
+      let btnStyles = "w-full text-left p-3 rounded-xl border font-medium flex justify-between items-center transition-all text-sm ";
+      if (isActive) {
+        btnStyles += "bg-terracotta-600 border-terracotta-600 text-white shadow-lg font-bold";
+      } else if (isPlaced) {
+        btnStyles += "bg-white border-stone-200 text-stone-400 opacity-70 hover:opacity-100";
+      } else {
+        btnStyles += "bg-white border-stone-300 text-stone-700 hover:border-indigo-400 hover:bg-indigo-50";
+      }
+      container.innerHTML += `
+        <button onclick="selectRoom('${key}')" class="${btnStyles}">
+          <span>${room.name}</span>
+          <span class="text-xs px-2 py-0.5 rounded-md bg-black/5">
+            ${isPlaced ? 'Placed' : isActive ? 'Active' : 'Ready'}
+          </span>
+        </button>`;
+    });
+  }
+
+  function renderGrid() {
+    const gridContainer = document.getElementById("vaastuGrid");
+    gridContainer.innerHTML = "";
+    Object.keys(gridZones).forEach(zoneKey => {
+      const zone = gridZones[zoneKey];
+      const assignedRoomKey = placementState[zoneKey];
+      const roomObj = assignedRoomKey ? roomData[assignedRoomKey] : null;
+      let cellStyle = "grid-cell bg-white border border-stone-200 rounded-xl p-3 flex flex-col justify-between cursor-pointer shadow-sm select-none text-center ";
+      if (roomObj) {
+        cellStyle += `bg-gradient-to-br ${roomObj.color} border-2`;
+      } else if (activeSelectedRoom) {
+        cellStyle += "hover:bg-indigo-50 hover:border-indigo-400 border-dashed border-stone-300";
+      } else {
+        cellStyle += "border-stone-200 hover:bg-stone-50";
+      }
+      gridContainer.innerHTML += `
+        <div onclick="assignRoomToZone('${zoneKey}')" class="${cellStyle}">
+          <div class="text-[10px] tracking-wider uppercase text-stone-400 font-bold">${zone.name}</div>
+          <div class="my-auto font-bold text-sm tracking-wide ${roomObj ? 'text-stone-900 text-base scale-105 transition-transform' : 'text-stone-400'}">
+            ${roomObj ? roomObj.name : '—'}
+          </div>
+          <div class="text-[9px] font-medium text-stone-400">${zone.element}</div>
+        </div>`;
+    });
+  }
+
+  function selectRoom(roomKey) {
+    activeSelectedRoom = activeSelectedRoom === roomKey ? null : roomKey;
+    renderInventory(); renderGrid();
+  }
+
+  function assignRoomToZone(zoneKey) {
+    if (!activeSelectedRoom) {
+      if (placementState[zoneKey]) { placementState[zoneKey] = null; recalculateVaastuScore(); }
+      return;
+    }
+    Object.keys(placementState).forEach(k => { if (placementState[k] === activeSelectedRoom) placementState[k] = null; });
+    placementState[zoneKey] = activeSelectedRoom;
+    activeSelectedRoom = null;
+    recalculateVaastuScore();
+  }
+
+  function recalculateVaastuScore() {
+    let directPointsEarned = 0, roomsPlacedCount = 0;
+    Object.keys(placementState).forEach(zoneKey => {
+      const roomKey = placementState[zoneKey];
+      if (roomKey) {
+        roomsPlacedCount++;
+        const scoreYield = roomData[roomKey].rules[zoneKey] || 0;
+        if (scoreYield > 0) directPointsEarned += scoreYield;
+      }
+    });
+    const currentScore = roomsPlacedCount === 0 ? 0 : Math.max(0, Math.min(100, directPointsEarned));
+    document.getElementById("scoreText").innerText = `${currentScore}%`;
+    const circle = document.getElementById("scoreCircle");
+    circle.setAttribute("stroke-dasharray", `${currentScore}, 100`);
+
+    const ratingText = document.getElementById("scoreRating");
+    if (roomsPlacedCount === 0) {
+      ratingText.innerText = "Empty Map Layout";
+      ratingText.className = "text-sm font-bold text-stone-500 mt-0.5";
+      circle.setAttribute("class", "text-stone-300 transition-all duration-500");
+    } else if (currentScore >= 80) {
+      ratingText.innerText = "Excellent Vastu Alignment";
+      ratingText.className = "text-sm font-bold text-emerald-600 mt-0.5";
+      circle.setAttribute("class", "text-emerald-500 transition-all duration-500");
+    } else if (currentScore >= 50) {
+      ratingText.innerText = "Moderate (Remedies Advised)";
+      ratingText.className = "text-sm font-bold text-amber-600 mt-0.5";
+      circle.setAttribute("class", "text-amber-500 transition-all duration-500");
+    } else {
+      ratingText.innerText = "Poor Layout Harmony";
+      ratingText.className = "text-sm font-bold text-rose-600 mt-0.5";
+      circle.setAttribute("class", "text-rose-500 transition-all duration-500");
+    }
+    renderInventory(); renderGrid(); buildDiagnosticsReport();
+  }
+
+  function buildDiagnosticsReport() {
+    const reportBody = document.getElementById("analysisReport");
+    reportBody.innerHTML = "";
+    let elementsTracked = 0;
+    Object.keys(roomData).forEach(roomKey => {
+      const targetRoom = roomData[roomKey];
+      let foundZoneKey = null;
+      Object.keys(placementState).forEach(zk => { if (placementState[zk] === roomKey) foundZoneKey = zk; });
+      if (foundZoneKey) {
+        elementsTracked++;
+        const calculationValue = targetRoom.rules[foundZoneKey];
+        let statusBadge = "", adviceText = "";
+        if (calculationValue >= 15) {
+          statusBadge = `<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">🟢 High Compliance</span>`;
+          adviceText = targetRoom.remedies.positive;
+        } else if (calculationValue >= 0) {
+          statusBadge = `<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">🟡 Neutral Zone</span>`;
+          adviceText = targetRoom.remedies.neutral;
+        } else {
+          statusBadge = `<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200">🔴 Major Dosha</span>`;
+          adviceText = targetRoom.remedies.negative;
+        }
+        reportBody.innerHTML += `
+          <tr class="hover:bg-stone-50 transition-colors">
+            <td class="px-4 py-4 font-semibold text-stone-900">${targetRoom.name}</td>
+            <td class="px-4 py-4 text-stone-500">${gridZones[foundZoneKey].name} (${gridZones[foundZoneKey].element})</td>
+            <td class="px-4 py-4">${statusBadge}</td>
+            <td class="px-4 py-4 text-xs text-stone-600 italic">${adviceText}</td>
+          </tr>`;
+      }
+    });
+    if (elementsTracked === 0) {
+      reportBody.innerHTML = `
+        <tr><td colspan="4" class="px-4 py-8 text-center text-stone-400 italic">
+          No rooms mapped yet. Select a room above and click a zone to begin.
+        </td></tr>`;
+    }
+  }
+
+  function resetPlanner() {
+    activeSelectedRoom = null;
+    placementState = { NW:null, N:null, NE:null, W:null, C:null, E:null, SW:null, S:null, SE:null };
+    recalculateVaastuScore();
+  }
+
+  window.onload = initApp;
+</script>
+</body>
+</html>
