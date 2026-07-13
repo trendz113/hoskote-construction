@@ -74,8 +74,9 @@
 
 /* ============================================================ RESET */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body { font-family: var(--font-body); background: var(--stone-50); color: var(--stone-900); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+body { font-family: var(--font-body); background: var(--stone-50); color: var(--stone-900); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; word-break: break-word; overflow-wrap: break-word; }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -.25rem; padding: 0 .25rem; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 button { cursor: pointer; font-family: inherit; border: none; background: none; }
@@ -276,9 +277,9 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 .pricing-card__includes li::before { content: '✓'; color: var(--green-600); font-weight: 700; flex-shrink: 0; }
 
 /* ============================================================ LOAN CALCULATOR */
-.loan-table { width: 100%; border-collapse: collapse; font-size: .875rem; }
-.loan-table th { background: var(--indigo-900); color: white; padding: .875rem 1rem; text-align: left; font-size: .8rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
-.loan-table td { padding: .875rem 1rem; border-bottom: 1px solid var(--stone-200); }
+.loan-table { width: 100%; min-width: 460px; border-collapse: collapse; font-size: .875rem; }
+.loan-table th { background: var(--indigo-900); color: white; padding: .875rem 1rem; text-align: left; font-size: .8rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+.loan-table td { padding: .875rem 1rem; border-bottom: 1px solid var(--stone-200); word-break: break-word; }
 .loan-table tr:last-child td { border-bottom: none; }
 .loan-table tr:hover td { background: var(--stone-50); }
 .loan-table .highlight { font-weight: 700; color: var(--indigo-900); }
@@ -386,6 +387,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 /* ============================================================ RESPONSIVE */
 @media (max-width: 768px) {
   :root { --section-py: 3rem; }
+  .container { padding: 0 1.1rem; }
   .hero__grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .hero { padding: 3rem 0 2.5rem; }
   .hero__image-card { padding: .85rem; margin-top: .5rem; }
@@ -395,6 +397,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   .pricing-grid { grid-template-columns: 1fr; }
   .calc-grid { grid-template-columns: 1fr; }
   .calc-breakdown { grid-template-columns: 1fr 1fr; }
+  .project-card__stats { grid-template-columns: 1fr 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
   .cta-bar__inner { flex-direction: column; text-align: center; }
@@ -410,11 +413,15 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   .warranty-banner { flex-direction: column; gap: 1.5rem; }
   .page-tab-btn { padding: .875rem 1rem; font-size: .8rem; }
   .trust-strip__inner { gap: 1rem; }
+  .loan-table { font-size: .8rem; }
+  .loan-table th, .loan-table td { padding: .65rem .75rem; }
 }
 @media (max-width: 480px) {
   .footer__grid { grid-template-columns: 1fr; }
   .calc-breakdown { grid-template-columns: 1fr 1fr; }
   .answer-grid { grid-template-columns: 1fr; }
+  .project-card__stats { grid-template-columns: 1fr; }
+  .hero__title { font-size: 1.9rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -1185,6 +1192,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       </div>
       <div>
         <h4 style="margin-bottom:1rem;">Typical approval fees (Hoskote Panchayats)</h4>
+        <div class="table-scroll">
         <table class="loan-table" style="margin-bottom:1.5rem;">
           <thead>
             <tr><th>Plot Size</th><th>Construction Area</th><th>Approx. Fee</th></tr>
@@ -1196,6 +1204,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
             <tr><td>50×80 (4,000 sqft)</td><td>Up to 5,000 sqft</td><td class="highlight">₹65,000–₹1,00,000</td></tr>
           </tbody>
         </table>
+        </div>
 
         <div style="background:var(--indigo-100);border-radius:var(--radius);padding:1.5rem;">
           <h4 style="margin-bottom:.75rem;color:var(--indigo-900);">How we help</h4>
@@ -1339,6 +1348,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 
       <div>
         <h3 style="margin-bottom:1.25rem;">Budget Planning Guide</h3>
+        <div class="table-scroll">
         <table class="loan-table">
           <thead>
             <tr><th>Cost Component</th><th>Typical Range</th><th>Notes</th></tr>
@@ -1358,6 +1368,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
             <tr><td class="highlight">Contingency Buffer</td><td class="highlight">10–15%</td><td>Always keep this</td></tr>
           </tbody>
         </table>
+        </div>
 
         <div style="background:var(--terracotta-light);border:1.5px solid var(--terracotta);border-radius:var(--radius);padding:1.25rem;margin-top:1.5rem;">
           <h4 style="color:var(--terracotta-dark);margin-bottom:.5rem;">💡 Construction Loan vs Personal Savings</h4>
