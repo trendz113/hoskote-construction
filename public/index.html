@@ -37,7 +37,7 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
@@ -84,6 +84,9 @@
   --shadow-md: 0 4px 16px rgba(28,25,23,.10), 0 2px 6px rgba(28,25,23,.06);
   --shadow-lg: 0 20px 48px rgba(28,25,23,.12), 0 8px 16px rgba(28,25,23,.08);
 }
+
+.font-kn { font-family: 'Noto Sans Kannada', 'Inter', sans-serif; }
+.hero__lead-kn { font-family: 'Noto Sans Kannada', 'Inter', sans-serif; font-size: 1.05rem; color: rgba(255,255,255,.68); line-height: 1.8; margin-top: -1.25rem; margin-bottom: 1.75rem; }
 
 /* ============================================================ RESET */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -304,6 +307,16 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 .download-card__title { font-weight: 700; font-size: .95rem; margin-bottom: .35rem; }
 .download-card__desc { font-size: .8rem; color: var(--stone-500); line-height: 1.55; margin-bottom: .875rem; }
 
+/* ============================================================ MOBILE FLOATING ACTION BAR */
+.mobile-float-bar { display: none; }
+@media (max-width: 768px) {
+  .mobile-float-bar { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 98; box-shadow: 0 -4px 16px rgba(28,25,23,.12); }
+  .mobile-float-bar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: .4rem; padding: .95rem .5rem; font-size: .875rem; font-weight: 700; color: white; }
+  .mobile-float-bar a.call-btn { background: var(--indigo-900); }
+  .mobile-float-bar a.wa-btn { background: #25D366; }
+  body { padding-bottom: 58px; }
+}
+
 /* ============================================================ RENTAL AGREEMENT TOOL */
 .nav-badge { background: var(--green-600); color: white; font-size: .6rem; font-weight: 700; padding: .12rem .4rem; border-radius: 4px; margin-left: .35rem; vertical-align: middle; letter-spacing: .04em; }
 .promo-strip { background: linear-gradient(90deg, var(--gold), #E8B830); color: var(--stone-900); text-align: center; padding: .65rem 1rem; font-size: .875rem; font-weight: 600; }
@@ -492,6 +505,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <a href="/vaastu.html" class="nav__link">Vastu Planner</a>
         <a href="#contact" class="nav__link">Contact</a>
       </div>
+      <a href="tel:+919742801802" class="nav__link" style="display:flex;align-items:center;" title="Call Now">📞 Call</a>
       <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="nav__cta">📱 Free Site Visit</a>
       <button class="nav__mobile-toggle" id="mobileToggle" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -513,19 +527,18 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <a href="#about" class="nav__drawer-link">👥 About Us</a>
       <a href="/vaastu.html" class="nav__drawer-link">🧭 Vastu Planner</a>
       <a href="#contact" class="nav__drawer-link">📞 Contact</a>
-      <div style="margin-top:1rem;">
+      <div style="margin-top:1rem;display:flex;flex-direction:column;gap:.6rem;">
         <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg" style="width:100%;justify-content:center;">📱 WhatsApp Us Now</a>
+        <a href="tel:+919742801802" class="btn btn--secondary btn--lg" style="width:100%;justify-content:center;">📞 Call +91 97428 01802</a>
       </div>
     </div>
   </div>
 </nav>
 
-<!-- ============================================================ PROMO STRIP -->
-<div class="promo-strip">
-  <div class="container promo-strip__inner">
-    <span>🎉 NEW &amp; 100% FREE: Rental / Lease Agreement Generator — owner-friendly, ready in 2 minutes.</span>
-    <a href="#rental-agreement" onclick="scrollToSection('#rental-agreement');return false;">Create yours now →</a>
-  </div>
+<!-- ============================================================ MOBILE STICKY CALL/WHATSAPP BAR -->
+<div class="mobile-float-bar">
+  <a href="tel:+919742801802" class="call-btn">📞 Call Now</a>
+  <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="wa-btn">📱 WhatsApp</a>
 </div>
 
 <!-- ============================================================ PAGE TAB NAV -->
@@ -556,9 +569,11 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <span class="hero__eyebrow">Hoskote · Bengaluru Rural</span>
         <h1 class="hero__title">Build your home in Hoskote with <em>full transparency</em></h1>
         <p class="hero__lead">See exactly what it costs. Know every step of the process. Track every brick on WhatsApp. We've built homes for families across Hoskote — and yours can be next.</p>
+        <p class="hero__lead-kn">ಹೊಸಕೋಟೆಯಲ್ಲಿ ಮನೆ ಕಟ್ಟಿಸ್ತಿದ್ದೀರಾ? ಪಾರದರ್ಶಕ ಬೆಲೆ, ಪ್ರತಿ ಹಂತದ ವಾಟ್ಸಾಪ್ ಅಪ್‌ಡೇಟ್ — ಉಚಿತ ಅಂದಾಜು ಪಡೆಯಿರಿ.</p>
         <div class="btn-group">
           <a href="#calculator" class="btn btn--primary btn--lg">🧮 Get Free Cost Estimate</a>
           <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg">📱 Book Free Site Visit</a>
+          <a href="tel:+919742801802" class="btn btn--secondary btn--lg">📞 Call Now</a>
         </div>
         <div class="hero__trust">
           <div class="hero__stat"><div class="hero__stat-num">₹1,800</div><div class="hero__stat-label">Starting / sq ft</div></div>
@@ -609,6 +624,14 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   </div>
 </div>
 
+<!-- ============================================================ PROMO STRIP -->
+<div class="promo-strip">
+  <div class="container promo-strip__inner">
+    <span>🎉 Also free: Rental / Lease Agreement Generator for Hoskote landlords.</span>
+    <a href="#rental-agreement" onclick="scrollToSection('#rental-agreement');return false;">Create yours in 2 min →</a>
+  </div>
+</div>
+
 <!-- ============================================================ ANSWER THE BIG QUESTIONS -->
 <section class="section" id="big-questions">
   <div class="container">
@@ -641,7 +664,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <a href="#process" class="answer-card__link">See timeline →</a>
       </div>
       <div class="answer-card">
-        <div class="answer-card__icon" style="background:#F0FDF4);">🚀</div>
+        <div class="answer-card__icon" style="background:#F0FDF4;">🚀</div>
         <div class="answer-card__q">How do I get started? What's the first step?</div>
         <div class="answer-card__a">The first step is a free site visit — no cost, no commitment. We come to your plot, assess the soil and access, discuss your requirements, and give you a written estimate within 24 hours. WhatsApp us or call to book. We respond within 2 hours on working days.</div>
         <a href="#contact" class="answer-card__link">Book site visit →</a>
@@ -2080,8 +2103,8 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 <section class="section" id="testimonials">
   <div class="container">
     <span class="eyebrow">What Hoskote Families Say</span>
-    <h2 style="margin-bottom:.75rem;">These are real people, real homes, right here in Hoskote</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">We'll connect you with any of these families if you want to verify. No anonymous reviews.</p>
+    <h2 style="margin-bottom:.75rem;">Feedback from families we've built for in Hoskote</h2>
+    <p class="lead" style="margin-bottom:2.5rem;">Ask us and we'll do our best to connect you with recent clients who are open to speaking with new customers before you decide.</p>
 
     <div class="grid-3" style="margin-bottom:2.5rem;">
       <div class="testimonial-card">
