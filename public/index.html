@@ -517,6 +517,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <a href="#pricing" class="nav__link">Pricing</a>
         <a href="#faq" class="nav__link">FAQ</a>
         <a href="#rental-agreement" class="nav__link">Rental<span class="nav-badge">FREE</span></a>
+        <a href="#construction-agreement" class="nav__link">Construction Agreement<span class="nav-badge">FREE</span></a>
         <a href="/vaastu.html" class="nav__link">Vastu</a>
         <a href="#contact" class="nav__link">Contact</a>
       </div>
@@ -539,6 +540,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <a href="#loan" class="nav__drawer-link">🏦 Home Loan Help</a>
       <a href="#faq" class="nav__drawer-link">❓ FAQ (50+ Questions)</a>
       <a href="#rental-agreement" class="nav__drawer-link">📄 Rental Agreement Generator <span class="nav-badge">FREE</span></a>
+      <a href="#construction-agreement" class="nav__drawer-link">🧾 Construction Agreement Generator <span class="nav-badge">FREE</span></a>
       <a href="#testimonials" class="nav__drawer-link">⭐ Reviews</a>
       <a href="#about" class="nav__drawer-link">👥 About Us</a>
       <a href="/vaastu.html" class="nav__drawer-link">🧭 Vastu Planner</a>
@@ -571,6 +573,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
     <button class="page-tab-btn" onclick="scrollToSection('#guide')">Construction Guide</button>
     <button class="page-tab-btn" onclick="scrollToSection('#faq')">50+ FAQs</button>
     <button class="page-tab-btn" onclick="scrollToSection('#rental-agreement')">🆓 Rental Agreement</button>
+    <button class="page-tab-btn" onclick="scrollToSection('#construction-agreement')">🆓 Construction Agreement</button>
     <button class="page-tab-btn" onclick="scrollToSection('#testimonials')">Reviews</button>
     <button class="page-tab-btn" onclick="scrollToSection('#about')">About Us</button>
     <button class="page-tab-btn" onclick="scrollToSection('#contact')">Contact</button>
@@ -1434,6 +1437,14 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       </div>
       <a href="/blog/floor-vibration-structural-audit-guide" style="background:var(--stone-900);color:#fff;padding:.7rem 1.4rem;border-radius:8px;font-size:.875rem;font-weight:600;white-space:nowrap;">Read the Guide →</a>
     </div>
+
+    <div style="background:white;border:1.5px solid var(--red-100,#FEE2E2);border-radius:var(--radius);padding:1.5rem 1.75rem;margin-top:1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+      <div>
+        <h4 style="margin-bottom:.35rem;">⚠️ Worried about getting cheated during construction?</h4>
+        <p style="font-size:.875rem;color:var(--stone-700);margin:0;">We've seen it happen to families in Hoskote — advances taken and abandoned, "material price increase" demands mid-project, no paperwork. Here's how to spot it before you sign, and how our free Construction Agreement Generator protects you.</p>
+      </div>
+      <a href="/blog/construction-contractor-fraud-hoskote-guide" style="background:var(--red-600,#DC2626);color:#fff;padding:.7rem 1.4rem;border-radius:8px;font-size:.875rem;font-weight:600;white-space:nowrap;">Read the Guide →</a>
+    </div>
   </div>
 </section>
 
@@ -1713,6 +1724,129 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
           <button class="btn btn--primary" onclick="printAgreement()">🖨️ Print / Save as PDF</button>
           <button class="btn btn--secondary" onclick="copyAgreementText()">📋 Copy Text</button>
           <a href="https://wa.me/919742801802?text=Hi%2C%20I%20used%20the%20free%20Rental%20Agreement%20Generator%20and%20need%20help%20reviewing%20it" class="btn btn--whatsapp">📱 Get It Reviewed on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CONSTRUCTION AGREEMENT GENERATOR -->
+<section class="section" id="construction-agreement" style="background:linear-gradient(180deg,#FFFBEF 0%,var(--stone-50) 100%);">
+  <div class="container">
+    <span class="eyebrow">100% Free Tool · No Signup · No Email</span>
+    <h2 style="margin-bottom:.75rem;">Free House Construction Agreement Generator</h2>
+    <p class="lead" style="margin-bottom:1rem;">Starting your house construction? Get everything in writing before a single brick is laid — total cost, payment milestones, what happens if material prices change, and what happens if the builder delays or disappears with your money. Free for anyone to use, not just our clients — because a written agreement is the single biggest protection against being cheated.</p>
+
+    <div class="callout" style="background:var(--red-100,#FEE2E2);border-left:4px solid var(--red-600,#DC2626);border-radius:0 12px 12px 0;padding:1.1rem 1.3rem;margin-bottom:1.75rem;">
+      <p style="margin:0;color:var(--stone-700);font-size:.95rem;"><strong style="color:var(--red-600,#DC2626);">Why this matters in Hoskote:</strong> we've personally seen and rebuilt houses for families whose earlier contractor took a large advance, did partial work, and vanished — or kept demanding "extra" money mid-construction with nothing on paper to hold them to the original quote. A signed agreement with milestones and a fixed-cost clause is what stops that. Don't hand over money on a verbal promise, however trustworthy the builder seems.</p>
+    </div>
+
+    <div class="grid-2" style="gap:2rem;align-items:start;">
+      <!-- FORM -->
+      <div class="tool-shell">
+        <h3>Step 1 · Enter Details</h3>
+        <div style="display:flex;flex-direction:column;gap:1.1rem;">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ca-owner">Owner / Client Full Name</label>
+              <input type="text" id="ca-owner" placeholder="e.g. Ramesh K." oninput="generateConstructionAgreement()">
+            </div>
+            <div class="form-group">
+              <label for="ca-builder">Builder / Contractor Name</label>
+              <input type="text" id="ca-builder" placeholder="e.g. HoskoteConstruction" value="HoskoteConstruction" oninput="generateConstructionAgreement()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ca-owner-addr">Owner's Permanent Address</label>
+              <input type="text" id="ca-owner-addr" placeholder="Full address" oninput="generateConstructionAgreement()">
+            </div>
+            <div class="form-group">
+              <label for="ca-builder-addr">Builder's Registered/Office Address</label>
+              <input type="text" id="ca-builder-addr" placeholder="Office address, UDYAM/GST no. if any" oninput="generateConstructionAgreement()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ca-site">Construction Site Address (full)</label>
+            <input type="text" id="ca-site" placeholder="Site/plot no., survey no., Hoskote, Bengaluru Rural" oninput="generateConstructionAgreement()">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ca-area">Built-up Area (sq ft)</label>
+              <input type="number" id="ca-area" placeholder="1800" oninput="generateConstructionAgreement()">
+            </div>
+            <div class="form-group">
+              <label for="ca-floors">No. of Floors (e.g. G+1)</label>
+              <input type="text" id="ca-floors" placeholder="G+1" oninput="generateConstructionAgreement()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ca-costtype">Contract Type</label>
+              <select id="ca-costtype" onchange="generateConstructionAgreement()">
+                <option value="fixed">Fixed Total Cost (Turnkey)</option>
+                <option value="persqft">Per Sq Ft Rate</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ca-cost">Total Contract Value (₹) / Rate per Sq Ft</label>
+              <input type="number" id="ca-cost" placeholder="e.g. 3200000 or 1750" oninput="generateConstructionAgreement()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ca-advance">Advance / Booking Amount (₹)</label>
+              <input type="number" id="ca-advance" placeholder="200000" oninput="generateConstructionAgreement()">
+            </div>
+            <div class="form-group">
+              <label for="ca-startdate">Work Start Date</label>
+              <input type="date" id="ca-startdate" oninput="generateConstructionAgreement()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ca-duration">Expected Completion (months from start)</label>
+              <select id="ca-duration" onchange="generateConstructionAgreement()">
+                <option value="6">6 Months</option>
+                <option value="8">8 Months</option>
+                <option value="10">10 Months</option>
+                <option value="12">12 Months</option>
+                <option value="18">18 Months</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ca-delaypenalty">Penalty if Builder Delays Beyond Deadline</label>
+              <select id="ca-delaypenalty" onchange="generateConstructionAgreement()">
+                <option value="0.5% of the contract value per week of delay">0.5% of contract value / week delay</option>
+                <option value="1% of the contract value per week of delay">1% of contract value / week delay</option>
+                <option value="a mutually agreed fixed compensation per month of delay">Fixed compensation / month delay</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ca-city">City / Jurisdiction</label>
+            <input type="text" id="ca-city" value="Hoskote, Bengaluru Rural, Karnataka" oninput="generateConstructionAgreement()">
+          </div>
+        </div>
+        <div class="consequence-box">
+          <h4>🔒 Material Price Protection Clause (built in automatically)</h4>
+          <p>Once a Fixed Total Cost is agreed and signed, this generator adds a clause stating the builder bears any increase in material cost (cement, steel, sand, etc.) during construction — the client's payable amount does not change mid-project because prices went up. This is the exact protection against builders who quote low and then demand "extra" money once work has started.</p>
+        </div>
+        <div class="consequence-box" style="background:var(--indigo-100,#E0E7FF);">
+          <h4>📑 Documents &amp; Disclosures Provided Upfront (built in automatically)</h4>
+          <p>The generated agreement also lists, as a Schedule, every document the client is entitled to receive before and during construction — the approved plan, cost break-up, payment milestone schedule, and material brand/quality specification — so nothing is verbal and nothing is a surprise later.</p>
+        </div>
+        <div class="legal-disclaimer">This tool generates a general-purpose template for common use. It is not a substitute for legal advice. For high-value contracts, please get the agreement reviewed by a local advocate and printed on the correct value stamp paper for your state, then notarised or registered as required.</div>
+      </div>
+
+      <!-- LIVE PREVIEW -->
+      <div>
+        <h3 style="margin-bottom:1.25rem;">Step 2 · Preview &amp; Download</h3>
+        <div class="agreement-doc" id="printable-construction-agreement"></div>
+        <div class="btn-group" style="margin-top:1.25rem;">
+          <button class="btn btn--primary" onclick="printConstructionAgreement()">🖨️ Print / Save as PDF</button>
+          <button class="btn btn--secondary" onclick="copyConstructionAgreementText()">📋 Copy Text</button>
+          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20used%20the%20free%20Construction%20Agreement%20Generator%20and%20need%20help%20reviewing%20it" class="btn btn--whatsapp">📱 Get It Reviewed on WhatsApp</a>
         </div>
       </div>
     </div>
@@ -2326,6 +2460,13 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
               <span>Every project tracked with daily photos from Day 1 to handover</span>
             </div>
           </div>
+          <div class="credential-item">
+            <div class="credential-item__icon">🔒</div>
+            <div class="credential-item__text">
+              <strong>End-to-End Service, Documents Upfront — No Mid-Project Surprises</strong>
+              <span>Approved plan, cost break-up, payment milestones, and material specification handed over before work starts. We've rebuilt homes for families cheated elsewhere at the same quoted cost, even when material prices rose — that risk is ours, not yours. <a href="/blog/construction-contractor-fraud-hoskote-guide" style="color:var(--terracotta);font-weight:600;">Read why this matters →</a></span>
+            </div>
+          </div>
         </div>
       </div>
       <div>
@@ -2491,6 +2632,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
           <li><a href="/blog/construction-loan-process-guide-hoskote">Construction Loan Guide</a></li>
           <li><a href="/blog/sqft-to-sqmeter-site-dimensions-guide">Sqft to Sqm Guide</a></li>
           <li><a href="/blog/floor-vibration-structural-audit-guide">Structural Audit Guide</a></li>
+          <li><a href="/blog/construction-contractor-fraud-hoskote-guide">Avoid Construction Fraud — Guide</a></li>
           <li><a href="#downloads">Free Downloads</a></li>
         </ul>
       </div>
@@ -2796,6 +2938,104 @@ function copyAgreementText() {
   });
 }
 generateAgreement();
+
+function generateConstructionAgreement() {
+  const owner = document.getElementById('ca-owner').value.trim() || '[Owner / Client Name]';
+  const builder = document.getElementById('ca-builder').value.trim() || '[Builder / Contractor Name]';
+  const ownerAddr = document.getElementById('ca-owner-addr').value.trim() || "[Owner's Address]";
+  const builderAddr = document.getElementById('ca-builder-addr').value.trim() || "[Builder's Registered/Office Address]";
+  const site = document.getElementById('ca-site').value.trim() || '[Full Construction Site Address, Hoskote]';
+  const area = document.getElementById('ca-area').value || '[Built-up Area]';
+  const floors = document.getElementById('ca-floors').value.trim() || '[No. of Floors]';
+  const costtype = document.getElementById('ca-costtype').value;
+  const costRaw = document.getElementById('ca-cost').value;
+  const advance = document.getElementById('ca-advance').value;
+  const startdate = document.getElementById('ca-startdate').value;
+  const duration = parseInt(document.getElementById('ca-duration').value);
+  const delaypenalty = document.getElementById('ca-delaypenalty').value;
+  const city = document.getElementById('ca-city').value.trim() || 'Hoskote, Bengaluru Rural, Karnataka';
+  const startTxt = fmtDate(startdate);
+  const endTxt = addMonths(startdate, duration);
+  const costLine = costtype === 'persqft'
+    ? `a rate of <strong>₹${costRaw || '[Rate]'} per sq. ft.</strong>, amounting to an estimated total of <strong>${inWords(costRaw && area ? costRaw * area : '')}</strong> for ${area} sq. ft. of built-up area (final amount to be settled on actual measured area)`
+    : `a fixed total contract value of <strong>${inWords(costRaw)}</strong> for the complete construction described in Clause 1, payable strictly as per the milestone schedule below`;
+
+  const html = `
+    <h4>HOUSE CONSTRUCTION AGREEMENT</h4>
+    <div class="doc-sub">${floors} · ${area} sq. ft. built-up area · ${costtype === 'persqft' ? 'Per Sq Ft Contract' : 'Fixed Cost (Turnkey) Contract'}</div>
+    <p>This Construction Agreement is made and executed on <strong>${startTxt}</strong> at <strong>${city}</strong>, between:</p>
+    <p><strong>${owner}</strong>, residing at ${ownerAddr}, hereinafter referred to as the <strong>"OWNER / CLIENT"</strong> (which expression shall, unless repugnant to the context, include their heirs, legal representatives, and assigns) of the ONE PART;</p>
+    <p>AND</p>
+    <p><strong>${builder}</strong>, having office/registered address at ${builderAddr}, hereinafter referred to as the <strong>"BUILDER / CONTRACTOR"</strong> (which expression shall, unless repugnant to the context, include its partners, representatives, and assigns) of the OTHER PART.</p>
+
+    <div class="clause-title">1. Scope of Work</div>
+    <p>The Builder agrees to construct a <strong>${floors}</strong> residential structure of approximately <strong>${area} sq. ft.</strong> built-up area at <strong>${site}</strong> ("the Site"), as per the plan approved by the local Panchayat/BMRDA authority and the specifications mutually agreed and annexed as Schedule A to this Agreement, using quality materials and workmanship consistent with standard construction practice.</p>
+
+    <div class="clause-title">2. Contract Value &amp; Payment</div>
+    <p>The Owner shall pay the Builder ${costLine}.</p>
+    <p>An advance/booking amount of <strong>${inWords(advance)}</strong> has been paid by the Owner to the Builder on signing this Agreement, receipt of which is hereby acknowledged. The balance amount shall be paid strictly in stage-wise milestones (foundation, plinth, each floor's slab, brickwork, plastering, flooring, finishing, and handover) as detailed in Schedule B, released only on satisfactory completion and joint inspection of each stage — not in advance of work done.</p>
+
+    <div class="clause-title warn">3. Material Price Protection (No Mid-Project Cost Increase)</div>
+    <p>${costtype === 'persqft'
+      ? 'The per sq. ft. rate agreed in Clause 2 is fixed for the duration of this Agreement. The Builder shall not demand any additional amount from the Owner on account of an increase in the price of cement, steel, sand, or any other construction material during the currency of this Agreement, except for any change requested in writing by the Owner that alters the approved scope or specification.'
+      : 'The fixed total contract value agreed in Clause 2 shall remain unchanged for the full duration of this Agreement, regardless of any increase in the market price of cement, steel, sand, or any other construction material during construction. The Builder bears this price risk and shall not raise any additional demand on this account. The only exception is a change of scope, design, or specification requested in writing by the Owner, which shall be costed and agreed separately before being carried out.'}</p>
+
+    <div class="clause-title">4. Timeline &amp; Completion</div>
+    <p>Construction shall commence on <strong>${startTxt}</strong> and shall be completed within <strong>${duration} months</strong>, i.e. on or before <strong>${endTxt}</strong>, subject to reasonable extension for delays directly caused by the Owner, force majeure events, or authority-mandated stoppages, which shall be recorded in writing by mutual consent.</p>
+
+    <div class="clause-title warn">5. Consequence of Delay by Builder</div>
+    <p>If the Builder fails to complete construction by the date in Clause 4 for reasons within the Builder's control, the Builder shall be liable to pay the Owner compensation at <strong>${delaypenalty}</strong>, without prejudice to the Owner's right to terminate this Agreement and engage another contractor to complete the remaining work at the Builder's cost, if the delay is unreasonable or the Builder abandons the Site.</p>
+
+    <div class="clause-title">6. Documents &amp; Disclosures Provided Upfront (Schedule A)</div>
+    <p>The Builder shall provide the Owner, before commencement of work and as a condition of this Agreement, all of the following in writing:</p>
+    <p>(a) the approved building plan and a copy of the Panchayat/BMRDA plan sanction;</p>
+    <p>(b) a detailed cost break-up / Bill of Quantities for the contract value in Clause 2;</p>
+    <p>(c) the stage-wise payment milestone schedule (Schedule B);</p>
+    <p>(d) the brand and quality specification for cement, steel (TMT bars with grade), sand, bricks/blocks, plumbing, electrical, and finishing materials to be used;</p>
+    <p>(e) copies of any relevant licenses, UDYAM/GST registration, or engineer/architect credentials of the Builder's team.</p>
+    <p>No verbal commitment shall override what is recorded in this Agreement and its Schedules.</p>
+
+    <div class="clause-title">7. Quality, Inspection &amp; Rectification</div>
+    <p>The Owner or their appointed engineer may inspect work at each milestone before releasing payment. Any work found not conforming to the agreed specification shall be rectified by the Builder at no additional cost to the Owner before the next stage begins.</p>
+
+    <div class="clause-title">8. Statutory Compliance</div>
+    <p>The Builder shall ensure construction complies with the sanctioned plan, local building bye-laws, and applicable safety norms, and shall be responsible for the safety and statutory compliance (labour, safety equipment) of workers engaged at the Site.</p>
+
+    <div class="clause-title">9. Termination</div>
+    <p>Either party may terminate this Agreement for material breach by the other, after giving 15 days' written notice to cure the breach. On termination, the Owner shall pay only for work actually completed and verified as per Schedule B, and any amount paid in excess of completed work shall be refunded by the Builder within 15 days.</p>
+
+    <div class="clause-title">10. Governing Law &amp; Jurisdiction</div>
+    <p>This Agreement shall be governed by the laws of India, and courts/authorities in <strong>${city}</strong> shall have exclusive jurisdiction over any dispute arising from this Agreement.</p>
+
+    <p style="margin-top:1.5rem;">IN WITNESS WHEREOF, the parties have set their hands on the day, month, and year first above written.</p>
+
+    <div class="sig-row">
+      <div class="sig-box">OWNER / CLIENT<br>${owner}</div>
+      <div class="sig-box">BUILDER / CONTRACTOR<br>${builder}</div>
+    </div>
+    <div class="sig-row">
+      <div class="sig-box">WITNESS 1<br>Name &amp; Signature</div>
+      <div class="sig-box">WITNESS 2<br>Name &amp; Signature</div>
+    </div>
+  `;
+  document.getElementById('printable-construction-agreement').innerHTML = html;
+}
+
+function printConstructionAgreement() {
+  generateConstructionAgreement();
+  window.print();
+}
+
+function copyConstructionAgreementText() {
+  generateConstructionAgreement();
+  const text = document.getElementById('printable-construction-agreement').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Agreement text copied! Paste it into WhatsApp, Word, or an email.');
+  }).catch(() => {
+    alert('Could not copy automatically — please select and copy the text manually.');
+  });
+}
+generateConstructionAgreement();
 </script>
 
 </body>
