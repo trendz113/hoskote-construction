@@ -143,8 +143,9 @@ p{color:var(--stone-700);}
     <div class="form-panel">
       <h3>1 · Tell us about your project</h3>
       <div class="form-group">
-        <label for="pp-area">Built-up Area (sq ft)</label>
+        <label for="pp-area">Built-up Area per Floor (sq ft)</label>
         <input type="number" id="pp-area" value="1400" min="300" oninput="renderPlan()">
+        <div class="form-hint">Enter the area of ONE floor — total area is calculated automatically for all your floors below.</div>
       </div>
       <div class="form-group">
         <label for="pp-floors">No. of Floors</label>
@@ -178,8 +179,9 @@ p{color:var(--stone-700);}
       <div class="summary-band">
         <div class="summary-grid">
           <div class="summary-band__stat">
-            <div class="summary-band__label">Estimated Total Cost</div>
+            <div class="summary-band__label">Estimated Construction Cost</div>
             <div class="summary-band__value" id="pp-cost">—</div>
+            <div style="font-size:.78rem;color:rgba(255,255,255,.55);margin-top:.25rem;" id="pp-cost-sub">—</div>
           </div>
           <div class="summary-band__stat">
             <div class="summary-band__label">Total Duration</div>
@@ -190,6 +192,9 @@ p{color:var(--stone-700);}
             <div class="summary-band__value" id="pp-handover">—</div>
           </div>
         </div>
+      </div>
+      <div class="callout" style="margin-top:-1rem;">
+        <strong>This figure is construction cost only.</strong> BMRDA building plan approval, the mandatory temporary electricity connection, borewell, compound wall, permanent BESCOM connection, and interiors (modular kitchen, wardrobes, furniture) are all separate — see the relevant stages below and the <a href="/#calculator" style="color:var(--terracotta-dark);font-weight:700;">full cost calculator</a> for typical ranges on each.
       </div>
 
       <h2>2 · Your Journey — Stage by Stage</h2>
@@ -235,13 +240,16 @@ p{color:var(--stone-700);}
 const STAGES = [
   { title: "Free Site Visit & Detailed Estimate", body: "We visit your plot, assess soil type and access conditions, discuss your requirements, and hand you a written cost estimate. No charge, no obligation.", pct: 0, days: 3, payLabel: "No payment due" },
   { title: "Written Agreement & Floor Plan", body: "Your Construction Agreement is signed — cost, materials, timeline, and payment milestones locked in writing — and your floor plan is finalized before any work starts.", pct: 10, days: 7, payLabel: "Advance / booking amount" },
-  { title: "Panchayat / BMRDA Plan Approval", body: "We submit your building plan for Panchayat/BMRDA sanction. Mandatory before construction begins. We handle the documentation and follow-up.", pct: 0, days: 30, payLabel: "No payment due" },
+  { title: "BMRDA Building Plan Approval", body: "We submit your building plan for BMRDA sanction. This is mandatory before construction begins, and required if you're taking a construction loan. Approval fee (₹20,000–₹80,000) is separate from your construction cost — not included in the total above.", pct: 0, days: 30, payLabel: "Separate cost — not in total" },
+  { title: "Temporary Electricity Connection", body: "A temporary power connection is mandatory before construction can start — it runs site lighting, mixers, vibrators, and welding equipment. Usually arranged in parallel with plan approval. This is a separate cost, not part of the construction package.", pct: 0, days: 10, payLabel: "Separate cost — not in total (₹15K–₹40K)" },
   { title: "Foundation & Excavation", body: "Soil excavation, PCC bed, footing, and foundation walls. You get Day-1 photos on WhatsApp; payment is requested only after you approve the completed stage.", pct: 15, days: 28, payLabel: "Stage 1 payment" },
-  { title: "RCC Structure — Pillars, Beams & Slab", body: "The skeleton of your home, built with M20/M25 concrete and TMT Fe500D steel. Weekly photos; slab casting is a milestone you inspect before the next payment.", pct: 30, days: 56, payLabel: "Stage 2 payment" },
-  { title: "Walls, Plumbing & Electrical", body: "Brick/AAC block walls, concealed plumbing, and electrical wiring — all routed and verifiable before plastering begins.", pct: 25, days: 56, payLabel: "Stage 3 payment" },
-  { title: "Plastering, Flooring & Finishing", body: "Internal/external plaster, tiles, doors, windows, painting, fittings. Daily WhatsApp photos so you can flag anything you'd like changed.", pct: 18, days: 56, payLabel: "Stage 4 payment" },
+  { title: "RCC Structure — Pillars, Beams & Slab (all floors)", body: "The skeleton of your home across every floor, built with M20/M25 concrete and TMT Fe500D steel. Weekly photos; each floor's slab casting is a milestone you inspect before the next payment.", pct: 30, days: 56, payLabel: "Stage 2 payment" },
+  { title: "Walls, Plumbing & Electrical (all floors)", body: "Brick/AAC block walls, concealed plumbing, and electrical wiring on every floor — all routed and verifiable before plastering begins.", pct: 25, days: 56, payLabel: "Stage 3 payment" },
+  { title: "Plastering, Flooring & Finishing (all floors)", body: "Internal/external plaster, tiles, doors, windows, painting, and basic fittings across all floors. Daily WhatsApp photos so you can flag anything you'd like changed. Modular kitchen, wardrobes, and other interior work are quoted and billed separately.", pct: 18, days: 56, payLabel: "Stage 4 payment" },
   { title: "Walk-through, Documents & Key Handover", body: "A full walk-through together, any snags addressed, and every document handed over: completion certificate, electrical/plumbing test reports, warranty letter.", pct: 2, days: 5, payLabel: "Final payment" },
 ];
+
+const FLOOR_MULTIPLIER = { "G": 1, "G+1": 2, "G+2": 3, "G+3": 4 };
 
 function fmtINR(n) {
   if (!n || isNaN(n)) return '—';
@@ -257,13 +265,19 @@ function addDays(date, days) {
 }
 
 function renderPlan() {
-  const area = parseFloat(document.getElementById('pp-area').value) || 1400;
+  const areaPerFloor = parseFloat(document.getElementById('pp-area').value) || 1400;
+  const floorsKey = document.getElementById('pp-floors').value;
+  const floorCount = FLOOR_MULTIPLIER[floorsKey] || 1;
+  const totalArea = areaPerFloor * floorCount;
   const rate = parseFloat(document.getElementById('pp-pkg').value) || 2000;
   const startInput = document.getElementById('pp-startdate').value;
   const startDate = startInput ? new Date(startInput) : new Date();
-  const totalCost = area * rate;
+  const totalCost = totalArea * rate;
 
   document.getElementById('pp-cost').textContent = fmtINR(totalCost);
+  document.getElementById('pp-cost-sub').textContent = floorCount > 1
+    ? `${areaPerFloor.toLocaleString('en-IN')} sqft × ${floorCount} floors = ${totalArea.toLocaleString('en-IN')} sqft total`
+    : `${totalArea.toLocaleString('en-IN')} sqft total built-up area`;
 
   let cursor = new Date(startDate);
   let totalDays = 0;
@@ -298,7 +312,7 @@ function renderPlan() {
   document.getElementById('pp-duration').textContent = `~${months} months`;
   document.getElementById('pp-handover').textContent = fmtDateShort(cursor);
 
-  const waText = encodeURIComponent(`Hi, I used the AI Project Planner: ${area} sqft, ${document.getElementById('pp-floors').value}, ₹${rate}/sqft package, estimated cost ${fmtINR(totalCost)}, target start ${fmtDateShort(startDate)}. Please review my plan.`);
+  const waText = encodeURIComponent(`Hi, I used the AI Project Planner: ${areaPerFloor} sqft/floor × ${floorCount} floors (${floorsKey}) = ${totalArea} sqft total, ₹${rate}/sqft package, estimated construction cost ${fmtINR(totalCost)}, target start ${fmtDateShort(startDate)}. Please review my plan.`);
   document.getElementById('pp-wa-link').href = `https://wa.me/919742801802?text=${waText}`;
 }
 
