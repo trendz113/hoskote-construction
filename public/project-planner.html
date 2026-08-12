@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Project Planner — Your Personalized House Construction Timeline | HoskoteConstruction</title>
+<meta name="description" content="Free AI-powered project planner for house construction in Hoskote. Enter your plot size, package, and start date to get a personalized, dated, step-by-step plan from site visit to key handover — with cost and payment milestones at every stage.">
+<meta name="keywords" content="construction project planner Hoskote, house construction timeline generator, construction schedule calculator, AI construction planner, step by step house building plan Hoskote">
+<link rel="canonical" href="https://hoskoteconstruction.in/project-planner">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI Project Planner — Your Personalized House Construction Timeline">
+<meta property="og:description" content="Enter your plot size and start date, get a dated, step-by-step construction plan from first site visit to key handover.">
+<meta property="og:url" content="https://hoskoteconstruction.in/project-planner">
+<meta property="og:image" content="https://hoskoteconstruction.in/og-image.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%231E1B4B'/><text y='.9em' font-size='72' x='12'>🤖</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --stone-50: #FAFAF8; --stone-100: #F4F2EE; --stone-200: #E8E4DC; --stone-300: #D4CEC2;
+  --stone-500: #8C857A; --stone-700: #4A4540; --stone-900: #1C1917;
+  --indigo-900: #1E1B4B; --indigo-800: #312E81; --indigo-600: #4F46E5; --indigo-100: #E0E7FF;
+  --terracotta: #C25E3B; --terracotta-light: #F7EAE4; --terracotta-dark: #9B3E22;
+  --green-600: #16A34A; --green-100: #DCFCE7; --gold: #D4A017; --gold-light: #FEF3C7;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --container: 980px; --radius: 12px; --radius-lg: 20px;
+  --shadow-sm: 0 1px 3px rgba(28,25,23,.08), 0 1px 2px rgba(28,25,23,.06);
+  --shadow-md: 0 4px 16px rgba(28,25,23,.10), 0 2px 6px rgba(28,25,23,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:var(--font-body);background:var(--stone-50);color:var(--stone-900);line-height:1.65;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+.container{max-width:var(--container);margin:0 auto;padding:0 1.5rem;}
+h1,h2,h3{font-family:var(--font-display);line-height:1.22;color:var(--indigo-900);}
+h1{font-size:clamp(1.7rem,4vw,2.5rem);}
+h2{font-size:1.4rem;margin-bottom:.5rem;}
+p{color:var(--stone-700);}
+.eyebrow{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);font-weight:600;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem;}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--green-600);display:inline-block;animation:pulse 1.6s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.lead{font-size:1.05rem;color:var(--stone-500);line-height:1.7;max-width:640px;}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--stone-200);}
+.nav__inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;gap:1.5rem;height:64px;}
+.nav__logo{font-family:var(--font-display);font-size:1.3rem;color:var(--indigo-900);margin-right:auto;}
+.nav__logo span{color:var(--terracotta);}
+.nav__links{display:flex;gap:1.25rem;font-size:.9rem;font-weight:500;color:var(--stone-700);}
+.nav__links a:hover{color:var(--terracotta);}
+.nav__cta{background:var(--terracotta);color:#fff;padding:.55rem 1.2rem;border-radius:7px;font-size:.88rem;font-weight:600;}
+.nav__cta:hover{background:var(--terracotta-dark);}
+@media(max-width:760px){.nav__links{display:none;}}
+
+.hero{padding:2.25rem 0 1.5rem;}
+.crumb{font-size:.82rem;color:var(--stone-500);margin-bottom:.75rem;}
+.crumb a{color:var(--terracotta);}
+
+/* Form panel */
+.planner-shell{display:grid;grid-template-columns:340px 1fr;gap:2rem;align-items:start;margin-top:1.5rem;}
+@media(max-width:900px){.planner-shell{grid-template-columns:1fr;}}
+.form-panel{background:#fff;border:1.5px solid var(--stone-200);border-radius:var(--radius-lg);padding:1.75rem;box-shadow:var(--shadow-sm);position:sticky;top:80px;}
+.form-panel h3{font-size:1.05rem;margin-bottom:1.1rem;color:var(--stone-900);font-family:var(--font-body);font-weight:700;}
+.form-group{margin-bottom:1.1rem;}
+.form-group label{display:block;font-size:.82rem;font-weight:600;color:var(--stone-700);margin-bottom:.4rem;}
+.form-group input,.form-group select{width:100%;padding:.65rem .8rem;border:1.5px solid var(--stone-200);border-radius:8px;font-size:.92rem;font-family:inherit;background:var(--stone-50);color:var(--stone-900);}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--terracotta);}
+.form-hint{font-size:.76rem;color:var(--stone-500);margin-top:.3rem;}
+.form-panel .btn--generate{width:100%;justify-content:center;margin-top:.5rem;}
+
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.5rem;border-radius:8px;font-weight:600;font-size:.9rem;transition:all .2s;border:none;cursor:pointer;font-family:inherit;}
+.btn--primary{background:var(--terracotta);color:#fff;}
+.btn--primary:hover{background:var(--terracotta-dark);}
+.btn--whatsapp{background:#25D366;color:#fff;}
+.btn--whatsapp:hover{background:#128C7E;}
+.btn--ghost{background:transparent;color:var(--indigo-900);border:1.5px solid var(--stone-300);}
+.btn--ghost:hover{border-color:var(--indigo-900);}
+.btn-row{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:1.5rem;}
+
+/* Result summary */
+.summary-band{background:var(--indigo-900);border-radius:var(--radius-lg);padding:1.75rem 2rem;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.25rem;margin-bottom:1.75rem;}
+.summary-band__stat{}
+.summary-band__label{font-size:.75rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem;}
+.summary-band__value{font-family:var(--font-display);font-size:1.6rem;}
+.summary-grid{display:flex;gap:2.25rem;flex-wrap:wrap;}
+
+/* Timeline */
+.plan-timeline{position:relative;padding-left:2rem;}
+.plan-timeline::before{content:'';position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--stone-200);}
+.plan-stage{position:relative;background:#fff;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.25rem 1.4rem;margin-bottom:1rem;box-shadow:var(--shadow-sm);}
+.plan-stage::before{content:attr(data-num);position:absolute;left:-2rem;top:1.3rem;width:24px;height:24px;border-radius:50%;background:var(--terracotta);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);}
+.plan-stage--done::before{background:var(--green-600);}
+.plan-stage__top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;}
+.plan-stage__title{font-weight:700;font-size:1rem;color:var(--stone-900);}
+.plan-stage__dates{font-family:var(--font-mono);font-size:.78rem;color:var(--terracotta);background:var(--terracotta-light);padding:.25rem .6rem;border-radius:6px;white-space:nowrap;}
+.plan-stage__body{font-size:.88rem;color:var(--stone-500);margin-top:.5rem;line-height:1.6;}
+.plan-stage__foot{display:flex;justify-content:space-between;align-items:center;margin-top:.75rem;font-size:.82rem;flex-wrap:wrap;gap:.5rem;}
+.plan-stage__payment{color:var(--stone-700);font-weight:600;}
+.plan-stage__duration{color:var(--stone-500);}
+
+.callout{background:var(--gold-light);border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:1rem 1.25rem;margin:1.5rem 0;font-size:.9rem;color:var(--stone-700);}
+.callout strong{color:var(--stone-900);}
+
+.footer{background:var(--stone-900);color:rgba(255,255,255,.55);padding:2.5rem 0;margin-top:3.5rem;text-align:center;font-size:.82rem;}
+.footer a{color:rgba(255,255,255,.75);}
+.footer a:hover{color:#fff;}
+
+@media(max-width:600px){
+  .summary-band{flex-direction:column;align-items:flex-start;}
+  .form-panel{position:static;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo">Hoskote<span>Construction</span></a>
+    <div class="nav__links">
+      <a href="/#calculator">Cost Calculator</a>
+      <a href="/#construction-agreement">Agreement Generator</a>
+      <a href="/blog/">Blog</a>
+      <a href="/#contact">Contact</a>
+    </div>
+    <a href="https://wa.me/919742801802?text=Hi%2C%20I%20used%20the%20AI%20Project%20Planner%20and%20want%20a%20free%20site%20visit" class="nav__cta">Free Site Visit</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="hero">
+    <div class="crumb"><a href="/">Home</a> / AI Project Planner</div>
+    <span class="eyebrow"><span class="dot"></span>AI Project Planner · Free · No signup</span>
+    <h1>Your Personalized, Step-by-Step Construction Plan</h1>
+    <p class="lead">Enter your plot size and preferred start date. The planner instantly builds your entire construction journey — every stage dated on a real calendar, with the cost and payment due at each step, from your first site visit to the day you get your keys.</p>
+  </div>
+
+  <div class="planner-shell">
+    <!-- FORM -->
+    <div class="form-panel">
+      <h3>1 · Tell us about your project</h3>
+      <div class="form-group">
+        <label for="pp-area">Built-up Area (sq ft)</label>
+        <input type="number" id="pp-area" value="1400" min="300" oninput="renderPlan()">
+      </div>
+      <div class="form-group">
+        <label for="pp-floors">No. of Floors</label>
+        <select id="pp-floors" onchange="renderPlan()">
+          <option value="G">Ground Only</option>
+          <option value="G+1" selected>G+1</option>
+          <option value="G+2">G+2</option>
+          <option value="G+3">G+3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="pp-pkg">Construction Package</label>
+        <select id="pp-pkg" onchange="renderPlan()">
+          <option value="1800">Comfortable — ₹1,800/sqft</option>
+          <option value="2000" selected>Better-Living — ₹2,000/sqft</option>
+          <option value="2200">Dream Home — ₹2,200/sqft</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="pp-startdate">Preferred Start Date</label>
+        <input type="date" id="pp-startdate" oninput="renderPlan()">
+        <div class="form-hint">Leave blank to start from today's date.</div>
+      </div>
+      <div class="btn-row" style="margin-top:.25rem;">
+        <a id="pp-wa-link" href="#" class="btn btn--whatsapp" style="width:100%;justify-content:center;">📱 Get This Plan Reviewed</a>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="pp-results">
+      <div class="summary-band">
+        <div class="summary-grid">
+          <div class="summary-band__stat">
+            <div class="summary-band__label">Estimated Total Cost</div>
+            <div class="summary-band__value" id="pp-cost">—</div>
+          </div>
+          <div class="summary-band__stat">
+            <div class="summary-band__label">Total Duration</div>
+            <div class="summary-band__value" id="pp-duration">—</div>
+          </div>
+          <div class="summary-band__stat">
+            <div class="summary-band__label">Estimated Handover</div>
+            <div class="summary-band__value" id="pp-handover">—</div>
+          </div>
+        </div>
+      </div>
+
+      <h2>2 · Your Journey — Stage by Stage</h2>
+      <p class="lead" style="margin-bottom:1.25rem;">Each stage below is dated from your chosen start date. Payment is due only after you've inspected and approved that stage — never before.</p>
+
+      <div class="plan-timeline" id="pp-timeline"></div>
+
+      <div class="callout">
+        <strong>Next step:</strong> once you're happy with this plan, generate your free, signed <a href="/#construction-agreement" style="color:var(--terracotta-dark);font-weight:700;">Construction Agreement</a> — it locks in this exact cost, timeline, and payment schedule in writing, including a clause protecting you from mid-project material price increases.
+      </div>
+
+      <div class="btn-row">
+        <a href="/#construction-agreement" class="btn btn--primary">📝 Generate My Construction Agreement</a>
+        <a href="/documents" class="btn btn--ghost">📐 Documents & Approvals Guide</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p><a href="/">HoskoteConstruction.in</a> · <a href="/#construction-agreement">Free Agreement Generator</a> · <a href="/blog/">Guides</a> · <a href="/#contact">Contact</a></p>
+    <p style="margin-top:.5rem;">© 2026 HoskoteConstruction.in · Hoskote, Karnataka · UDYAM-KR-02-0127051</p>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI Project Planner",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "url": "https://hoskoteconstruction.in/project-planner",
+  "description": "Free tool that generates a personalized, dated, step-by-step house construction plan for Hoskote — from site visit to key handover — with cost and payment milestones.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+  "provider": { "@type": "Organization", "name": "HoskoteConstruction" }
+}
+</script>
+
+<script>
+// Stage template: [title, description, % of total cost, duration in days]
+const STAGES = [
+  { title: "Free Site Visit & Detailed Estimate", body: "We visit your plot, assess soil type and access conditions, discuss your requirements, and hand you a written cost estimate. No charge, no obligation.", pct: 0, days: 3, payLabel: "No payment due" },
+  { title: "Written Agreement & Floor Plan", body: "Your Construction Agreement is signed — cost, materials, timeline, and payment milestones locked in writing — and your floor plan is finalized before any work starts.", pct: 10, days: 7, payLabel: "Advance / booking amount" },
+  { title: "Panchayat / BMRDA Plan Approval", body: "We submit your building plan for Panchayat/BMRDA sanction. Mandatory before construction begins. We handle the documentation and follow-up.", pct: 0, days: 30, payLabel: "No payment due" },
+  { title: "Foundation & Excavation", body: "Soil excavation, PCC bed, footing, and foundation walls. You get Day-1 photos on WhatsApp; payment is requested only after you approve the completed stage.", pct: 15, days: 28, payLabel: "Stage 1 payment" },
+  { title: "RCC Structure — Pillars, Beams & Slab", body: "The skeleton of your home, built with M20/M25 concrete and TMT Fe500D steel. Weekly photos; slab casting is a milestone you inspect before the next payment.", pct: 30, days: 56, payLabel: "Stage 2 payment" },
+  { title: "Walls, Plumbing & Electrical", body: "Brick/AAC block walls, concealed plumbing, and electrical wiring — all routed and verifiable before plastering begins.", pct: 25, days: 56, payLabel: "Stage 3 payment" },
+  { title: "Plastering, Flooring & Finishing", body: "Internal/external plaster, tiles, doors, windows, painting, fittings. Daily WhatsApp photos so you can flag anything you'd like changed.", pct: 18, days: 56, payLabel: "Stage 4 payment" },
+  { title: "Walk-through, Documents & Key Handover", body: "A full walk-through together, any snags addressed, and every document handed over: completion certificate, electrical/plumbing test reports, warranty letter.", pct: 2, days: 5, payLabel: "Final payment" },
+];
+
+function fmtINR(n) {
+  if (!n || isNaN(n)) return '—';
+  return '₹' + Math.round(n).toLocaleString('en-IN');
+}
+function fmtDateShort(d) {
+  return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function addDays(date, days) {
+  const d = new Date(date);
+  d.setDate(d.getDate() + days);
+  return d;
+}
+
+function renderPlan() {
+  const area = parseFloat(document.getElementById('pp-area').value) || 1400;
+  const rate = parseFloat(document.getElementById('pp-pkg').value) || 2000;
+  const startInput = document.getElementById('pp-startdate').value;
+  const startDate = startInput ? new Date(startInput) : new Date();
+  const totalCost = area * rate;
+
+  document.getElementById('pp-cost').textContent = fmtINR(totalCost);
+
+  let cursor = new Date(startDate);
+  let totalDays = 0;
+  const timelineEl = document.getElementById('pp-timeline');
+  timelineEl.innerHTML = '';
+
+  STAGES.forEach((stage, i) => {
+    const stageStart = new Date(cursor);
+    const stageEnd = addDays(cursor, stage.days);
+    cursor = stageEnd;
+    totalDays += stage.days;
+    const amount = totalCost * (stage.pct / 100);
+
+    const el = document.createElement('div');
+    el.className = 'plan-stage';
+    el.setAttribute('data-num', i + 1);
+    el.innerHTML = `
+      <div class="plan-stage__top">
+        <div class="plan-stage__title">${stage.title}</div>
+        <div class="plan-stage__dates">${fmtDateShort(stageStart)} → ${fmtDateShort(stageEnd)}</div>
+      </div>
+      <div class="plan-stage__body">${stage.body}</div>
+      <div class="plan-stage__foot">
+        <span class="plan-stage__payment">${stage.pct > 0 ? stage.payLabel + ': ' + fmtINR(amount) + ' (' + stage.pct + '%)' : stage.payLabel}</span>
+        <span class="plan-stage__duration">~${stage.days} days</span>
+      </div>
+    `;
+    timelineEl.appendChild(el);
+  });
+
+  const months = Math.round(totalDays / 30 * 10) / 10;
+  document.getElementById('pp-duration').textContent = `~${months} months`;
+  document.getElementById('pp-handover').textContent = fmtDateShort(cursor);
+
+  const waText = encodeURIComponent(`Hi, I used the AI Project Planner: ${area} sqft, ${document.getElementById('pp-floors').value}, ₹${rate}/sqft package, estimated cost ${fmtINR(totalCost)}, target start ${fmtDateShort(startDate)}. Please review my plan.`);
+  document.getElementById('pp-wa-link').href = `https://wa.me/919742801802?text=${waText}`;
+}
+
+renderPlan();
+</script>
+
+</body>
+</html>

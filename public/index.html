@@ -375,6 +375,21 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 .consequence-box h4 { color: var(--terracotta-dark); margin-bottom: .5rem; }
 .consequence-box p { font-size: .875rem; color: var(--stone-700); }
 .legal-disclaimer { background: var(--stone-100); border-left: 3px solid var(--stone-500); padding: 1rem 1.25rem; font-size: .78rem; color: var(--stone-500); border-radius: 0 8px 8px 0; margin-top: 1.5rem; }
+.roadmap-summary { background: var(--indigo-900); border-radius: var(--radius-lg); padding: 1.75rem 2rem; color: white; display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.roadmap-summary__stat { text-align: center; }
+.roadmap-summary__num { font-family: var(--font-display); font-size: 1.6rem; }
+.roadmap-summary__lbl { font-size: .75rem; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: .05em; margin-top: .15rem; }
+.roadmap-next { background: var(--gold-light); border: 1.5px solid var(--gold); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+.roadmap-next strong { color: var(--terracotta-dark); }
+.roadmap-list { display: flex; flex-direction: column; gap: 0; }
+.roadmap-step { display: flex; gap: 1.1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--stone-200); }
+.roadmap-step:last-child { border-bottom: none; }
+.roadmap-step__num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--indigo-900); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: .85rem; }
+.roadmap-step__body h4 { font-size: .98rem; margin-bottom: .3rem; color: var(--stone-900); }
+.roadmap-step__body p { font-size: .85rem; color: var(--stone-500); margin-bottom: .25rem; }
+.roadmap-step__dur { font-family: var(--font-mono); font-size: .72rem; color: var(--terracotta); text-transform: uppercase; letter-spacing: .04em; }
+.roadmap-ongoing-note { background: var(--terracotta-light); border-left: 4px solid var(--terracotta); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.25rem 1.5rem; }
+.roadmap-ongoing-note h4 { color: var(--terracotta-dark); margin-bottom: .5rem; }
 .blog-article h3 { margin-top: 2.25rem; margin-bottom: .75rem; }
 .blog-article h3:first-child { margin-top: 0; }
 .blog-article p { color: var(--stone-700); font-size: .9375rem; line-height: 1.8; margin-bottom: 1rem; }
@@ -546,6 +561,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <a href="#properties" class="nav__link">Properties<span class="nav-badge">NEW</span></a>
         <a href="#calculator" class="nav__link">Cost Calculator</a>
         <a href="#process" class="nav__link">Process</a>
+        <a href="/project-planner" class="nav__link">AI Planner<span class="nav-badge">NEW</span></a>
         <a href="#projects" class="nav__link">Projects</a>
         <a href="#pricing" class="nav__link">Pricing</a>
         <a href="#faq" class="nav__link">FAQ</a>
@@ -568,6 +584,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <a href="#properties" class="nav__drawer-link">🏘️ Properties for Sale <span class="nav-badge">NEW</span></a>
       <a href="#calculator" class="nav__drawer-link">🧮 Cost Calculator</a>
       <a href="#process" class="nav__drawer-link">📋 How It Works</a>
+      <a href="/project-planner" class="nav__drawer-link">🤖 AI Project Planner <span class="nav-badge">NEW</span></a>
       <a href="#projects" class="nav__drawer-link">🏗️ Our Projects</a>
       <a href="#pricing" class="nav__drawer-link">💰 Packages & Pricing</a>
       <a href="#materials" class="nav__drawer-link">🧱 Materials Guide</a>
@@ -887,6 +904,65 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   </div>
 </section>
 
+<!-- ============================================================ AI-GUIDED PROJECT PLANNER -->
+<section class="section section--alt" id="ai-planner">
+  <div class="container">
+    <span class="eyebrow">🤖 Free Tool · Personalised for Your Project</span>
+    <h2 style="margin-bottom:.75rem;">AI-Guided Project Planner — Your Step-by-Step Journey</h2>
+    <p class="lead" style="margin-bottom:2rem;">Tell us where you're starting from, and this tool builds your exact roadmap — every stage, what happens at each one, and a realistic timeline — so nothing about your project is a surprise later.</p>
+
+    <div class="tool-shell" style="margin-bottom:2rem;">
+      <h3>Step 1 · About Your Project</h3>
+      <div class="calc-grid" style="margin-top:1rem;">
+        <div class="form-group">
+          <label for="ai-sqft">Built-up Area (sq ft)</label>
+          <input type="number" id="ai-sqft" value="1200" min="300" max="10000" oninput="generateAIPlan()">
+        </div>
+        <div class="form-group">
+          <label for="ai-floors">Number of Floors</label>
+          <select id="ai-floors" onchange="generateAIPlan()">
+            <option value="1">Ground Floor (G)</option>
+            <option value="2" selected>G+1 (Two floors)</option>
+            <option value="3">G+2 (Three floors)</option>
+            <option value="4">G+3 (Four floors)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ai-budget">Approximate Budget</label>
+          <select id="ai-budget" onchange="generateAIPlan()">
+            <option value="Under ₹20 Lakhs">Under ₹20 Lakhs</option>
+            <option value="₹20L – ₹35L" selected>₹20L – ₹35L</option>
+            <option value="₹35L – ₹50L">₹35L – ₹50L</option>
+            <option value="₹50L+">₹50L+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ai-timeline">When do you want to start?</label>
+          <select id="ai-timeline" onchange="generateAIPlan()">
+            <option value="asap">As soon as possible</option>
+            <option value="soon">Within 1–3 months</option>
+            <option value="exploring">Just exploring / planning ahead</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:1.1rem;">
+        <label for="ai-stage">Where are you right now?</label>
+        <select id="ai-stage" onchange="generateAIPlan()">
+          <option value="new">Just starting — plot not finalised yet</option>
+          <option value="planready">Have a plot, plan/approval still pending</option>
+          <option value="approved">Plan approved, ready to start construction</option>
+          <option value="ongoing">Already under construction — want a review</option>
+        </select>
+      </div>
+    </div>
+
+    <h3 style="margin-bottom:1.1rem;">Step 2 · Your Personalised Roadmap</h3>
+    <div id="ai-plan-output"></div>
+
+    <p style="font-size:.8rem;color:var(--stone-500);margin-top:1.5rem;">This roadmap is auto-generated from your answers to give you a realistic, honest picture — timelines are indicative and depend on Panchayat/BMRDA approval speed, weather, and site conditions. It isn't a substitute for a site visit and formal quote.</p>
+  </div>
+</section>
+
 <!-- ============================================================ PROCESS -->
 <section class="section section--alt" id="process">
   <div class="container">
@@ -991,6 +1067,14 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
               <div style="display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--stone-500);"><span style="width:12px;height:12px;border-radius:3px;background:var(--green-600);display:inline-block;"></span>Handover</div>
             </div>
           </div>
+        </div>
+
+        <div style="background:linear-gradient(135deg,var(--indigo-900),#312E81);border-radius:var(--radius);padding:1.5rem 1.75rem;margin-top:1.5rem;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+          <div>
+            <h4 style="color:#fff;margin-bottom:.35rem;">🤖 Want this personalized to your exact plot and dates?</h4>
+            <p style="font-size:.875rem;color:rgba(255,255,255,.75);margin:0;">The AI Project Planner builds your entire journey — every stage on a real calendar from your chosen start date, with the exact cost and payment due at each step.</p>
+          </div>
+          <a href="/project-planner" style="background:var(--terracotta);color:#fff;padding:.7rem 1.4rem;border-radius:8px;font-size:.875rem;font-weight:600;white-space:nowrap;">Build My Plan →</a>
         </div>
 
         <!-- Warranty Banner -->
@@ -2669,6 +2753,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
           <li><a href="/blog/sqft-to-sqmeter-site-dimensions-guide">Sqft to Sqm Guide</a></li>
           <li><a href="/blog/floor-vibration-structural-audit-guide">Structural Audit Guide</a></li>
           <li><a href="/blog/construction-contractor-fraud-hoskote-guide">Avoid Construction Fraud — Guide</a></li>
+          <li><a href="/project-planner">🤖 AI Project Planner</a></li>
           <li><a href="/documents">Sqft/Sqm Converter & Documents Guide</a></li>
           <li><a href="/blog/">All Guides</a></li>
           <li><a href="#downloads">Free Downloads</a></li>
