@@ -1471,9 +1471,10 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div style="background:white;border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow-sm);border:1.5px solid var(--stone-200);">
           <div style="display:flex;flex-direction:column;gap:1.25rem;margin-bottom:1.5rem;">
             <div class="form-group">
-              <label for="loan-amt">Loan Amount (₹ Lakhs)</label>
-              <input type="number" id="loan-amt" value="30" min="5" max="200" step="1" placeholder="e.g. 30 for ₹30 Lakhs" oninput="calcLoan()" onblur="clampLoanInputs()">
-              <div id="loan-amt-warning" style="display:none;color:#DC2626;font-size:.78rem;margin-top:.35rem;">Enter an amount between ₹5L and ₹200L — for ₹37,00,000 type "37", not "3700000".</div>
+              <label for="loan-amt">Loan Amount (₹)</label>
+              <input type="number" id="loan-amt" value="3000000" min="500000" max="20000000" step="100000" placeholder="e.g. 3000000" oninput="calcLoan()" onblur="clampLoanInputs()">
+              <div id="loan-amt-readout" style="font-size:.78rem;color:var(--stone-500);margin-top:.35rem;">= ₹30.0 Lakhs</div>
+              <div id="loan-amt-warning" style="display:none;color:#DC2626;font-size:.78rem;margin-top:.35rem;">Enter an amount between ₹5,00,000 and ₹2,00,00,000.</div>
             </div>
             <div class="form-group">
               <label for="loan-rate">Interest Rate (% per year)</label>
@@ -2781,20 +2782,25 @@ function calcLoan() {
   const rateEl = document.getElementById('loan-rate');
   const amtWarning = document.getElementById('loan-amt-warning');
   const rateWarning = document.getElementById('loan-rate-warning');
+  const amtReadout = document.getElementById('loan-amt-readout');
+
+  const MIN_AMT = 500000;    // ₹5,00,000
+  const MAX_AMT = 20000000;  // ₹2,00,00,000
 
   const rawAmt = parseFloat(amtEl.value);
   const rawRate = parseFloat(rateEl.value);
 
-  const amtOutOfRange = isNaN(rawAmt) || rawAmt < 5 || rawAmt > 200;
+  const amtOutOfRange = isNaN(rawAmt) || rawAmt < MIN_AMT || rawAmt > MAX_AMT;
   const rateOutOfRange = isNaN(rawRate) || rawRate < 6 || rawRate > 15;
   amtWarning.style.display = amtOutOfRange && amtEl.value !== '' ? 'block' : 'none';
   rateWarning.style.display = rateOutOfRange && rateEl.value !== '' ? 'block' : 'none';
 
   // Always calculate with clamped values so the result is never nonsensical, even before blur corrects the field
-  const amt = isNaN(rawAmt) ? 30 : Math.min(Math.max(rawAmt, 5), 200);
+  const P = isNaN(rawAmt) ? 3000000 : Math.min(Math.max(rawAmt, MIN_AMT), MAX_AMT);
   const rate = isNaN(rawRate) ? 8.75 : Math.min(Math.max(rawRate, 6), 15);
 
-  const P = amt * 100000;
+  amtReadout.textContent = `= ₹${(P/100000).toFixed(1)} Lakhs`;
+
   const r = rate / 1200;
   const n = (parseInt(document.getElementById('loan-term').value) || 20) * 12;
   const emi = P * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
@@ -2809,7 +2815,7 @@ function clampLoanInputs() {
   const rateEl = document.getElementById('loan-rate');
   const rawAmt = parseFloat(amtEl.value);
   const rawRate = parseFloat(rateEl.value);
-  if (!isNaN(rawAmt)) amtEl.value = Math.min(Math.max(rawAmt, 5), 200);
+  if (!isNaN(rawAmt)) amtEl.value = Math.min(Math.max(rawAmt, 500000), 20000000);
   if (!isNaN(rawRate)) rateEl.value = Math.min(Math.max(rawRate, 6), 15);
   calcLoan();
 }
