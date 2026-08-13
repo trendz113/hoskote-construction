@@ -75,6 +75,14 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
 .status-badge{font-size:0.72rem;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;}
 .status-badge.completed{background:#14532d22;color:#4ade80;}
 .status-badge.ongoing{background:#78350f22;color:#fbbf24;}
+.status-badge.pending{background:#78350f22;color:#fbbf24;}
+.status-badge.approved{background:#14532d22;color:#4ade80;}
+.status-badge.rejected{background:#7f1d1d22;color:#f87171;}
+.ctr-photos{display:flex;gap:6px;margin:10px 0;}
+.ctr-photos img{width:72px;height:54px;object-fit:cover;border-radius:6px;}
+.ctr-detail-row{display:flex;gap:8px;font-size:0.85rem;color:#999;margin-bottom:4px;}
+.ctr-detail-row strong{color:#ccc;min-width:110px;flex-shrink:0;}
+.ctr-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid #2a2a2a;}
 .project-body{display:none;padding:20px;border-top:1px solid #2a2a2a;}
 .project-body.open{display:block;}
 .stages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px;}
@@ -136,6 +144,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
     <div class="tabs">
       <div class="tab active" onclick="switchTab('upload')">📤 Upload Photo</div>
       <div class="tab" onclick="switchTab('projects')">🏠 Manage Projects</div>
+      <div class="tab" onclick="switchTab('contractors')">📋 Contractor Listings <span id="pendingBadge" style="display:none;background:#B5562C;color:#fff;font-size:0.68rem;padding:2px 6px;border-radius:10px;margin-left:4px;"></span></div>
     </div>
 
     <!-- UPLOAD TAB -->
@@ -195,12 +204,27 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
       </div>
     </div>
 
+    <!-- CONTRACTOR LISTINGS TAB -->
+    <div id="tabContractors" style="display:none;">
+      <div style="display:flex;gap:8px;margin-bottom:20px;">
+        <div class="tab ctr-filter active" onclick="filterContractors('pending')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Pending</div>
+        <div class="tab ctr-filter" onclick="filterContractors('approved')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Approved</div>
+        <div class="tab ctr-filter" onclick="filterContractors('rejected')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Rejected</div>
+        <div class="tab ctr-filter" onclick="filterContractors('all')" style="background:#1a1a1a;border:1px solid #2a2a2a;">All</div>
+      </div>
+      <div class="projects-list" id="contractorsList">
+        <div style="text-align:center;padding:40px;color:#555;">Loading applications...</div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
 let adminPassword = '';
 let projectsData = [];
+let contractorsData = [];
+let contractorFilter = 'pending';
 
 // ─── LOGIN ───
 async function login() {
@@ -218,6 +242,7 @@ async function login() {
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('mainApp').style.display = 'block';
       loadProjects();
+      loadContractors();
     } else {
       showMsg(msg, 'Wrong password', 'error');
     }
@@ -267,9 +292,11 @@ function populateProjectSelect() {
 
 // ─── TABS ───
 function switchTab(tab) {
-  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === (tab === 'upload' ? 0 : 1)));
+  document.querySelectorAll('.tabs > .tab').forEach((t, i) => t.classList.toggle('active', i === (tab === 'upload' ? 0 : tab === 'projects' ? 1 : 2)));
   document.getElementById('tabUpload').style.display = tab === 'upload' ? 'block' : 'none';
   document.getElementById('tabProjects').style.display = tab === 'projects' ? 'block' : 'none';
+  document.getElementById('tabContractors').style.display = tab === 'contractors' ? 'block' : 'none';
+  if (tab === 'contractors' && !contractorsData.length) loadContractors();
 }
 
 // ─── FILE PREVIEW ───
@@ -474,6 +501,100 @@ function showMsg(el, text, type) {
   el.className = `msg ${type}`;
   el.style.display = 'block';
   setTimeout(() => { el.style.display = 'none'; }, 4000);
+}
+
+// ─── CONTRACTOR LISTINGS ───
+async function loadContractors() {
+  try {
+    const res = await fetch('/api/contractors/all', { headers: { 'x-admin-password': adminPassword } });
+    const data = await res.json();
+    contractorsData = data.contractors || [];
+    const pendingCount = contractorsData.filter(c => c.status === 'pending').length;
+    const badge = document.getElementById('pendingBadge');
+    if (pendingCount > 0) { badge.textContent = pendingCount; badge.style.display = 'inline-block'; }
+    else { badge.style.display = 'none'; }
+    renderContractorsList();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function filterContractors(filter) {
+  contractorFilter = filter;
+  document.querySelectorAll('.ctr-filter').forEach(el => el.classList.remove('active'));
+  event.target.classList.add('active');
+  renderContractorsList();
+}
+
+function renderContractorsList() {
+  const list = document.getElementById('contractorsList');
+  const filtered = contractorFilter === 'all' ? contractorsData : contractorsData.filter(c => c.status === contractorFilter);
+
+  if (!filtered.length) {
+    list.innerHTML = `<div style="text-align:center;padding:40px;color:#555;">No ${contractorFilter === 'all' ? '' : contractorFilter} applications.</div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map(c => `
+    <div class="project-row">
+      <div class="project-header" onclick="toggleProject('ctr_${c.id}')">
+        <div>
+          <div class="project-title">${c.businessName}</div>
+          <div class="project-meta">${c.serviceArea} · ${c.plan} plan · Applied ${new Date(c.submittedAt).toLocaleDateString('en-IN')}</div>
+        </div>
+        <span class="status-badge ${c.status}">${c.status}${c.paid ? ' · paid' : ''}</span>
+      </div>
+      <div class="project-body" id="body_ctr_${c.id}">
+        <div class="ctr-detail-row"><strong>Owner</strong> ${c.ownerName || '—'}</div>
+        <div class="ctr-detail-row"><strong>Phone</strong> ${c.phone} ${c.whatsapp && c.whatsapp !== c.phone ? '(WA: ' + c.whatsapp + ')' : ''}</div>
+        <div class="ctr-detail-row"><strong>Experience</strong> ${c.yearsExperience ? c.yearsExperience + ' years' : '—'}</div>
+        <div class="ctr-detail-row"><strong>Specialties</strong> ${c.specialties || '—'}</div>
+        <div class="ctr-detail-row"><strong>UDYAM/GST</strong> ${c.udyam || '—'}</div>
+        <div class="ctr-detail-row"><strong>Description</strong> ${c.description || '—'}</div>
+        <div class="ctr-detail-row"><strong>Expires</strong> ${c.expiresAt ? new Date(c.expiresAt).toLocaleDateString('en-IN') : 'not set'}</div>
+        ${c.photos && c.photos.length ? `<div class="ctr-photos">${c.photos.map(p => `<img src="${p.url}" alt="">`).join('')}</div>` : ''}
+
+        <div class="ctr-actions">
+          ${c.status !== 'approved' ? `<button class="btn btn-primary" onclick="updateContractor('${c.id}', {status:'approved'})">✓ Approve</button>` : ''}
+          ${c.status !== 'rejected' ? `<button class="btn btn-danger" onclick="updateContractor('${c.id}', {status:'rejected'})">✕ Reject</button>` : ''}
+          ${!c.paid ? `<button class="btn btn-secondary" onclick="markPaidAndExpiry('${c.id}', '${c.plan}')">💰 Mark Paid</button>` : `<button class="btn btn-secondary" onclick="updateContractor('${c.id}', {paid:false})">Mark Unpaid</button>`}
+          <a class="btn btn-secondary" href="https://wa.me/91${c.phone.replace(/\D/g,'').slice(-10)}" target="_blank" rel="noopener">📱 WhatsApp</a>
+          <button class="btn btn-danger" onclick="deleteContractorListing('${c.id}')">🗑️ Delete</button>
+        </div>
+        <span class="msg" id="ctrMsg_${c.id}" style="display:inline-block;margin-top:10px;"></span>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function updateContractor(id, patch) {
+  try {
+    const res = await fetch(`/api/contractors/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': adminPassword },
+      body: JSON.stringify(patch),
+    });
+    if (res.ok) { loadContractors(); }
+    else { alert('Update failed'); }
+  } catch { alert('Update failed'); }
+}
+
+function markPaidAndExpiry(id, plan) {
+  const days = plan === 'annual' ? 365 : 30;
+  const expiresAt = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toISOString();
+  updateContractor(id, { paid: true, expiresAt });
+}
+
+async function deleteContractorListing(id) {
+  if (!confirm('Delete this application permanently?')) return;
+  try {
+    const res = await fetch(`/api/contractors/${id}`, {
+      method: 'DELETE',
+      headers: { 'x-admin-password': adminPassword },
+    });
+    if (res.ok) { loadContractors(); }
+    else { alert('Delete failed'); }
+  } catch { alert('Delete failed'); }
 }
 </script>
 </body>
