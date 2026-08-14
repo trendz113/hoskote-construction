@@ -83,6 +83,25 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
 .ctr-detail-row{display:flex;gap:8px;font-size:0.85rem;color:#999;margin-bottom:4px;}
 .ctr-detail-row strong{color:#ccc;min-width:110px;flex-shrink:0;}
 .ctr-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid #2a2a2a;}
+
+.cld-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;}
+.cld-modal{background:#151515;border:1px solid #2a2a2a;border-radius:12px;width:100%;max-width:720px;max-height:85vh;display:flex;flex-direction:column;}
+.cld-modal__header{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid #2a2a2a;}
+.cld-modal__header h3{margin:0;font-size:1.05rem;color:#eee;}
+.cld-modal__close{cursor:pointer;color:#888;font-size:1.1rem;}
+.cld-modal__close:hover{color:#fff;}
+.cld-modal__body{padding:18px 22px;overflow-y:auto;flex:1;}
+.cld-modal__footer{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-top:1px solid #2a2a2a;}
+.cld-picker-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.cld-picker-row select,.cld-picker-row input{background:#1a1a1a;border:1px solid #2a2a2a;color:#eee;border-radius:6px;padding:8px 10px;font-size:0.85rem;}
+.cld-picker-row select{min-width:180px;}
+.cld-picker-row input{flex:1;min-width:220px;}
+.cld-image-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;}
+.cld-thumb{position:relative;aspect-ratio:4/3;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;}
+.cld-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.cld-thumb.selected{border-color:#B5562C;}
+.cld-thumb__check{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;}
+.cld-thumb.selected .cld-thumb__check{background:#B5562C;}
 .project-body{display:none;padding:20px;border-top:1px solid #2a2a2a;}
 .project-body.open{display:block;}
 .stages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px;}
@@ -217,6 +236,30 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- CLOUDINARY PICKER MODAL -->
+<div id="cldModal" class="cld-modal-overlay" style="display:none;">
+  <div class="cld-modal">
+    <div class="cld-modal__header">
+      <h3>📁 Attach Photos from Cloudinary</h3>
+      <span class="cld-modal__close" onclick="closeCloudinaryPicker()">✕</span>
+    </div>
+    <div class="cld-modal__body">
+      <div class="cld-picker-row">
+        <select id="cldFolderSelect" onchange="cldFolderChanged()">
+          <option value="">Select a folder…</option>
+        </select>
+        <input type="text" id="cldManualFolder" placeholder="or type an exact folder path, e.g. hoskote-construction/contractor-listings" oninput="cldDebouncedManualLoad()">
+      </div>
+      <div id="cldImages" class="cld-image-grid"></div>
+      <div id="cldEmptyMsg" style="display:none;color:#777;padding:20px;text-align:center;">No images found in this folder.</div>
+    </div>
+    <div class="cld-modal__footer">
+      <span id="cldSelectedCount" style="color:#999;font-size:0.85rem;">0 selected (max 3)</span>
+      <button class="btn btn-primary" onclick="attachSelectedPhotos()">Attach Selected</button>
+    </div>
   </div>
 </div>
 
@@ -558,6 +601,7 @@ function renderContractorsList() {
           ${c.status !== 'approved' ? `<button class="btn btn-primary" onclick="updateContractor('${c.id}', {status:'approved'})">✓ Approve</button>` : ''}
           ${c.status !== 'rejected' ? `<button class="btn btn-danger" onclick="updateContractor('${c.id}', {status:'rejected'})">✕ Reject</button>` : ''}
           ${!c.paid ? `<button class="btn btn-secondary" onclick="markPaidAndExpiry('${c.id}', '${c.plan}')">💰 Mark Paid</button>` : `<button class="btn btn-secondary" onclick="updateContractor('${c.id}', {paid:false})">Mark Unpaid</button>`}
+          <button class="btn btn-secondary" onclick="openCloudinaryPicker('${c.id}')">📁 Attach from Cloudinary</button>
           <a class="btn btn-secondary" href="https://wa.me/91${c.phone.replace(/\D/g,'').slice(-10)}" target="_blank" rel="noopener">📱 WhatsApp</a>
           <button class="btn btn-danger" onclick="deleteContractorListing('${c.id}')">🗑️ Delete</button>
         </div>
@@ -595,6 +639,108 @@ async function deleteContractorListing(id) {
     if (res.ok) { loadContractors(); }
     else { alert('Delete failed'); }
   } catch { alert('Delete failed'); }
+}
+
+// ─── CLOUDINARY PICKER ───
+let cldTargetContractorId = null;
+let cldSelectedImages = [];
+let cldManualTimer = null;
+
+async function openCloudinaryPicker(contractorId) {
+  cldTargetContractorId = contractorId;
+  const existing = contractorsData.find(c => c.id === contractorId);
+  cldSelectedImages = (existing && existing.photos) ? existing.photos.slice(0, 3) : [];
+  document.getElementById('cldImages').innerHTML = '';
+  document.getElementById('cldEmptyMsg').style.display = 'none';
+  document.getElementById('cldManualFolder').value = '';
+  updateCldSelectedCount();
+  document.getElementById('cldModal').style.display = 'flex';
+  await loadCloudinaryFolders();
+}
+
+function closeCloudinaryPicker() {
+  document.getElementById('cldModal').style.display = 'none';
+  cldTargetContractorId = null;
+}
+
+async function loadCloudinaryFolders(parent) {
+  const select = document.getElementById('cldFolderSelect');
+  try {
+    const url = parent ? `/api/cloudinary/folders?parent=${encodeURIComponent(parent)}` : '/api/cloudinary/folders';
+    const res = await fetch(url, { headers: { 'x-admin-password': adminPassword } });
+    const data = await res.json();
+    select.innerHTML = '<option value="">Select a folder…</option>' +
+      (data.folders || []).map(f => `<option value="${f.path}">${f.path}</option>`).join('');
+  } catch {
+    select.innerHTML = '<option value="">Could not load folders — type a path instead</option>';
+  }
+}
+
+function cldFolderChanged() {
+  const folder = document.getElementById('cldFolderSelect').value;
+  if (folder) {
+    document.getElementById('cldManualFolder').value = folder;
+    loadCloudinaryImages(folder);
+  }
+}
+
+function cldDebouncedManualLoad() {
+  clearTimeout(cldManualTimer);
+  cldManualTimer = setTimeout(() => {
+    const folder = document.getElementById('cldManualFolder').value.trim();
+    if (folder) loadCloudinaryImages(folder);
+  }, 500);
+}
+
+async function loadCloudinaryImages(folder) {
+  const grid = document.getElementById('cldImages');
+  const emptyMsg = document.getElementById('cldEmptyMsg');
+  grid.innerHTML = '<div style="color:#777;padding:10px;">Loading…</div>';
+  emptyMsg.style.display = 'none';
+  try {
+    const res = await fetch(`/api/cloudinary/images?folder=${encodeURIComponent(folder)}`, { headers: { 'x-admin-password': adminPassword } });
+    const data = await res.json();
+    const images = data.images || [];
+    if (!images.length) {
+      grid.innerHTML = '';
+      emptyMsg.style.display = 'block';
+      return;
+    }
+    grid.innerHTML = images.map(img => `
+      <div class="cld-thumb${cldSelectedImages.some(i => i.url === img.url) ? ' selected' : ''}" data-url="${img.url}" data-public-id="${img.publicId}" onclick="toggleCldImage(this)">
+        <img src="${img.url}" alt="">
+        <div class="cld-thumb__check">✓</div>
+      </div>
+    `).join('');
+  } catch {
+    grid.innerHTML = '<div style="color:#f87171;padding:10px;">Could not load images.</div>';
+  }
+}
+
+function toggleCldImage(el) {
+  const url = el.dataset.url;
+  const publicId = el.dataset.publicId;
+  const idx = cldSelectedImages.findIndex(i => i.url === url);
+  if (idx > -1) {
+    cldSelectedImages.splice(idx, 1);
+    el.classList.remove('selected');
+  } else {
+    if (cldSelectedImages.length >= 3) { alert('You can attach up to 3 photos.'); return; }
+    cldSelectedImages.push({ url, publicId });
+    el.classList.add('selected');
+  }
+  updateCldSelectedCount();
+}
+
+function updateCldSelectedCount() {
+  document.getElementById('cldSelectedCount').textContent = `${cldSelectedImages.length} selected (max 3)`;
+}
+
+async function attachSelectedPhotos() {
+  if (!cldTargetContractorId) return;
+  if (!cldSelectedImages.length) { alert('Select at least one photo first.'); return; }
+  await updateContractor(cldTargetContractorId, { photos: cldSelectedImages });
+  closeCloudinaryPicker();
 }
 </script>
 </body>

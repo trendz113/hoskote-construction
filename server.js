@@ -337,13 +337,46 @@ app.get('/api/contractors/all', adminAuth, (req, res) => {
   res.json({ contractors: list });
 });
 
+// ─── API: ADMIN — browse Cloudinary folders (for attaching existing photos without re-upload) ───
+app.get('/api/cloudinary/folders', adminAuth, async (req, res) => {
+  try {
+    const parent = req.query.parent;
+    const result = parent
+      ? await cloudinary.api.sub_folders(parent)
+      : await cloudinary.api.root_folders();
+    res.json({ folders: result.folders.map(f => ({ name: f.name, path: f.path })) });
+  } catch (err) {
+    res.status(500).json({ error: err.message || 'Could not load folders' });
+  }
+});
+
+// ─── API: ADMIN — list images in a Cloudinary folder ───
+app.get('/api/cloudinary/images', adminAuth, async (req, res) => {
+  try {
+    const folder = req.query.folder;
+    if (!folder) return res.status(400).json({ error: 'folder is required' });
+    const result = await cloudinary.api.resources({
+      type: 'upload',
+      prefix: folder,
+      max_results: 100,
+    });
+    const images = result.resources
+      .filter(r => r.public_id.startsWith(folder + '/') || r.folder === folder)
+      .map(r => ({ url: r.secure_url, publicId: r.public_id, createdAt: r.created_at }))
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    res.json({ images });
+  } catch (err) {
+    res.status(500).json({ error: err.message || 'Could not load images' });
+  }
+});
+
 // ─── API: ADMIN — update a listing (approve, mark paid, set expiry, edit fields, reject) ───
 app.patch('/api/contractors/:id', adminAuth, (req, res) => {
   const list = readContractors();
   const entry = list.find(c => c.id === req.params.id);
   if (!entry) return res.status(404).json({ error: 'Listing not found' });
 
-  const allowed = ['businessName', 'ownerName', 'phone', 'whatsapp', 'serviceArea', 'specialties', 'yearsExperience', 'udyam', 'description', 'plan', 'status', 'paid', 'expiresAt'];
+  const allowed = ['businessName', 'ownerName', 'phone', 'whatsapp', 'serviceArea', 'specialties', 'yearsExperience', 'udyam', 'description', 'plan', 'status', 'paid', 'expiresAt', 'photos'];
   allowed.forEach(key => {
     if (req.body[key] !== undefined) entry[key] = req.body[key];
   });
