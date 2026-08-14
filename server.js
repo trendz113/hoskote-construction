@@ -76,6 +76,31 @@ function writeContractors(list) {
   }
 }
 
+// ─── LEADS (quote/site-visit requests): FILE-BASED STORAGE ───
+const LEADS_FILE = path.join(__dirname, 'data', 'leads.json');
+
+function readLeads() {
+  try {
+    if (!fs.existsSync(LEADS_FILE)) return [];
+    const raw = fs.readFileSync(LEADS_FILE, 'utf8');
+    return raw.trim() ? JSON.parse(raw) : [];
+  } catch (err) {
+    console.error('Failed to read leads.json', err);
+    return [];
+  }
+}
+
+function writeLeads(list) {
+  try {
+    fs.mkdirSync(path.dirname(LEADS_FILE), { recursive: true });
+    fs.writeFileSync(LEADS_FILE, JSON.stringify(list, null, 2));
+    return true;
+  } catch (err) {
+    console.error('Failed to write leads.json', err);
+    return false;
+  }
+}
+
 // ─── PROJECTS DATA ───
 // Static project definitions — stages get populated from Cloudinary
 const PROJECTS = [
@@ -392,6 +417,68 @@ app.delete('/api/contractors/:id', adminAuth, (req, res) => {
   const next = list.filter(c => c.id !== req.params.id);
   if (next.length === list.length) return res.status(404).json({ error: 'Listing not found' });
   if (!writeContractors(next)) return res.status(500).json({ error: 'Save failed' });
+  res.json({ success: true });
+});
+
+// ══════════════════════════════════════════════════════════════════════════════════════════════
+
+// ══════════════════════════════════════════════ LEADS (quote / site visit requests) ══════════════════════════════════════════════
+
+// ─── API: SUBMIT LEAD (public) ───
+app.post('/api/leads', (req, res) => {
+  const { name, phone, area, size, budget, type, message } = req.body;
+
+  if (!name || !phone) {
+    return res.status(400).json({ error: 'Name and phone are required' });
+  }
+
+  const list = readLeads();
+  const entry = {
+    id: 'lead_' + Date.now() + '_' + crypto.randomBytes(3).toString('hex'),
+    name: String(name).trim(),
+    phone: String(phone).trim(),
+    area: String(area || '').trim(),
+    size: String(size || '').trim(),
+    budget: String(budget || '').trim(),
+    type: String(type || '').trim(),
+    message: String(message || '').trim(),
+    status: 'new',   // new | contacted | site-visit-booked | won | lost
+    submittedAt: new Date().toISOString(),
+  };
+  list.push(entry);
+  if (!writeLeads(list)) {
+    return res.status(500).json({ error: 'Could not save — please try WhatsApp directly' });
+  }
+  res.json({ success: true, id: entry.id });
+});
+
+// ─── API: ADMIN — full leads list ───
+app.get('/api/leads', adminAuth, (req, res) => {
+  const list = readLeads().sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+  res.json({ leads: list });
+});
+
+// ─── API: ADMIN — update lead status ───
+app.patch('/api/leads/:id', adminAuth, (req, res) => {
+  const list = readLeads();
+  const entry = list.find(l => l.id === req.params.id);
+  if (!entry) return res.status(404).json({ error: 'Lead not found' });
+
+  const allowed = ['name', 'phone', 'area', 'size', 'budget', 'type', 'message', 'status'];
+  allowed.forEach(key => {
+    if (req.body[key] !== undefined) entry[key] = req.body[key];
+  });
+
+  if (!writeLeads(list)) return res.status(500).json({ error: 'Save failed' });
+  res.json({ success: true, lead: entry });
+});
+
+// ─── API: ADMIN — delete a lead ───
+app.delete('/api/leads/:id', adminAuth, (req, res) => {
+  const list = readLeads();
+  const next = list.filter(l => l.id !== req.params.id);
+  if (next.length === list.length) return res.status(404).json({ error: 'Lead not found' });
+  if (!writeLeads(next)) return res.status(500).json({ error: 'Save failed' });
   res.json({ success: true });
 });
 

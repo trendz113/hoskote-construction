@@ -2559,7 +2559,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
             <textarea id="cf-msg" placeholder="Tell us about your project — BHK needed, timeline, special requirements..."></textarea>
           </div>
         </div>
-        <button class="btn btn--primary btn--lg" style="width:100%;justify-content:center;margin-top:1rem;" onclick="submitForm()">Send My Request →</button>
+        <button class="btn btn--primary btn--lg" id="cf-submit-btn" style="width:100%;justify-content:center;margin-top:1rem;" onclick="submitForm()">Send My Request →</button>
         <p style="font-size:.78rem;color:var(--stone-500);margin-top:.875rem;text-align:center;">Or WhatsApp directly: <a href="https://wa.me/919742801802" style="color:var(--terracotta);font-weight:600;">+91 97428 01802</a></p>
       </div>
 
@@ -2859,8 +2859,8 @@ function toggleFaq(el) {
   if (!isOpen) item.classList.add('open');
 }
 
-// Contact form submit (demo — opens WhatsApp)
-function submitForm() {
+// Contact form submit — saves the lead server-side first, then hands off to WhatsApp
+async function submitForm() {
   const name = document.getElementById('cf-name').value.trim();
   const phone = document.getElementById('cf-phone').value.trim();
   const area = document.getElementById('cf-area').value.trim();
@@ -2874,6 +2874,19 @@ function submitForm() {
     return;
   }
 
+  const btn = document.getElementById('cf-submit-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+  try {
+    await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, area, size, budget, type, message: msg }),
+    });
+  } catch (err) {
+    console.error('Lead save failed, continuing to WhatsApp anyway', err);
+  }
+
   const waText = encodeURIComponent(
     `Hi! I'm ${name}.\n\nRequest: ${type}\nPhone: ${phone}\nPlot area: ${area || 'Not specified'}\nPlot size: ${size || 'Not specified'}\nBudget: ${budget}\n${msg ? 'Details: ' + msg : ''}`
   );
@@ -2881,6 +2894,7 @@ function submitForm() {
 
   document.getElementById('contact-success').style.display = 'block';
   document.getElementById('contact-success').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  if (btn) { btn.disabled = false; btn.textContent = 'Send My Request →'; }
 }
 
 // ============================================================ RENTAL AGREEMENT GENERATOR

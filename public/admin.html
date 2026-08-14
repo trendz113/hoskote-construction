@@ -78,6 +78,11 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
 .status-badge.pending{background:#78350f22;color:#fbbf24;}
 .status-badge.approved{background:#14532d22;color:#4ade80;}
 .status-badge.rejected{background:#7f1d1d22;color:#f87171;}
+.status-badge.new{background:#1e3a8a22;color:#60a5fa;}
+.status-badge.contacted{background:#78350f22;color:#fbbf24;}
+.status-badge.site-visit-booked{background:#581c8722;color:#c084fc;}
+.status-badge.won{background:#14532d22;color:#4ade80;}
+.status-badge.lost{background:#7f1d1d22;color:#f87171;}
 .ctr-photos{display:flex;gap:6px;margin:10px 0;}
 .ctr-photos img{width:72px;height:54px;object-fit:cover;border-radius:6px;}
 .ctr-detail-row{display:flex;gap:8px;font-size:0.85rem;color:#999;margin-bottom:4px;}
@@ -163,6 +168,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
     <div class="tabs">
       <div class="tab active" onclick="switchTab('upload')">📤 Upload Photo</div>
       <div class="tab" onclick="switchTab('projects')">🏠 Manage Projects</div>
+      <div class="tab" onclick="switchTab('leads')">📞 Leads <span id="newLeadsBadge" style="display:none;background:#16A34A;color:#fff;font-size:0.68rem;padding:2px 6px;border-radius:10px;margin-left:4px;"></span></div>
       <div class="tab" onclick="switchTab('contractors')">📋 Contractor Listings <span id="pendingBadge" style="display:none;background:#B5562C;color:#fff;font-size:0.68rem;padding:2px 6px;border-radius:10px;margin-left:4px;"></span></div>
     </div>
 
@@ -223,6 +229,21 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
       </div>
     </div>
 
+    <!-- LEADS TAB -->
+    <div id="tabLeads" style="display:none;">
+      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+        <div class="tab lead-filter active" onclick="filterLeads('new')" style="background:#1a1a1a;border:1px solid #2a2a2a;">New</div>
+        <div class="tab lead-filter" onclick="filterLeads('contacted')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Contacted</div>
+        <div class="tab lead-filter" onclick="filterLeads('site-visit-booked')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Site Visit Booked</div>
+        <div class="tab lead-filter" onclick="filterLeads('won')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Won</div>
+        <div class="tab lead-filter" onclick="filterLeads('lost')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Lost</div>
+        <div class="tab lead-filter" onclick="filterLeads('all')" style="background:#1a1a1a;border:1px solid #2a2a2a;">All</div>
+      </div>
+      <div class="projects-list" id="leadsList">
+        <div style="text-align:center;padding:40px;color:#555;">Loading leads...</div>
+      </div>
+    </div>
+
     <!-- CONTRACTOR LISTINGS TAB -->
     <div id="tabContractors" style="display:none;">
       <div style="display:flex;gap:8px;margin-bottom:20px;">
@@ -268,6 +289,8 @@ let adminPassword = '';
 let projectsData = [];
 let contractorsData = [];
 let contractorFilter = 'pending';
+let leadsData = [];
+let leadFilter = 'new';
 
 // ─── LOGIN ───
 async function login() {
@@ -285,6 +308,7 @@ async function login() {
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('mainApp').style.display = 'block';
       loadProjects();
+      loadLeads();
       loadContractors();
     } else {
       showMsg(msg, 'Wrong password', 'error');
@@ -335,11 +359,14 @@ function populateProjectSelect() {
 
 // ─── TABS ───
 function switchTab(tab) {
-  document.querySelectorAll('.tabs > .tab').forEach((t, i) => t.classList.toggle('active', i === (tab === 'upload' ? 0 : tab === 'projects' ? 1 : 2)));
+  const idx = { upload: 0, projects: 1, leads: 2, contractors: 3 }[tab];
+  document.querySelectorAll('.tabs > .tab').forEach((t, i) => t.classList.toggle('active', i === idx));
   document.getElementById('tabUpload').style.display = tab === 'upload' ? 'block' : 'none';
   document.getElementById('tabProjects').style.display = tab === 'projects' ? 'block' : 'none';
+  document.getElementById('tabLeads').style.display = tab === 'leads' ? 'block' : 'none';
   document.getElementById('tabContractors').style.display = tab === 'contractors' ? 'block' : 'none';
   if (tab === 'contractors' && !contractorsData.length) loadContractors();
+  if (tab === 'leads' && !leadsData.length) loadLeads();
 }
 
 // ─── FILE PREVIEW ───
@@ -544,6 +571,92 @@ function showMsg(el, text, type) {
   el.className = `msg ${type}`;
   el.style.display = 'block';
   setTimeout(() => { el.style.display = 'none'; }, 4000);
+}
+
+// ─── LEADS ───
+const LEAD_STATUS_LABELS = { new: 'new', contacted: 'contacted', 'site-visit-booked': 'site visit booked', won: 'won', lost: 'lost' };
+
+async function loadLeads() {
+  try {
+    const res = await fetch('/api/leads', { headers: { 'x-admin-password': adminPassword } });
+    const data = await res.json();
+    leadsData = data.leads || [];
+    const newCount = leadsData.filter(l => l.status === 'new').length;
+    const badge = document.getElementById('newLeadsBadge');
+    if (newCount > 0) { badge.textContent = newCount; badge.style.display = 'inline-block'; }
+    else { badge.style.display = 'none'; }
+    renderLeadsList();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function filterLeads(filter) {
+  leadFilter = filter;
+  document.querySelectorAll('.lead-filter').forEach(el => el.classList.remove('active'));
+  event.target.classList.add('active');
+  renderLeadsList();
+}
+
+function renderLeadsList() {
+  const list = document.getElementById('leadsList');
+  const filtered = leadFilter === 'all' ? leadsData : leadsData.filter(l => l.status === leadFilter);
+
+  if (!filtered.length) {
+    list.innerHTML = `<div style="text-align:center;padding:40px;color:#555;">No ${leadFilter === 'all' ? '' : LEAD_STATUS_LABELS[leadFilter] || leadFilter} leads.</div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map(l => `
+    <div class="project-row">
+      <div class="project-header" onclick="toggleProject('lead_${l.id}')">
+        <div>
+          <div class="project-title">${l.name} — ${l.type || 'General Query'}</div>
+          <div class="project-meta">${l.phone} · ${l.area || 'Area not specified'} · ${new Date(l.submittedAt).toLocaleString('en-IN')}</div>
+        </div>
+        <span class="status-badge ${l.status}">${LEAD_STATUS_LABELS[l.status] || l.status}</span>
+      </div>
+      <div class="project-body" id="body_lead_${l.id}">
+        <div class="ctr-detail-row"><strong>Plot Size</strong> ${l.size || '—'}</div>
+        <div class="ctr-detail-row"><strong>Budget</strong> ${l.budget || '—'}</div>
+        <div class="ctr-detail-row"><strong>Message</strong> ${l.message || '—'}</div>
+
+        <div class="ctr-actions">
+          <a class="btn btn-secondary" href="https://wa.me/91${l.phone.replace(/\D/g,'').slice(-10)}" target="_blank" rel="noopener">📱 WhatsApp</a>
+          <a class="btn btn-secondary" href="tel:+91${l.phone.replace(/\D/g,'').slice(-10)}">📞 Call</a>
+          ${l.status !== 'contacted' ? `<button class="btn btn-secondary" onclick="updateLead('${l.id}', {status:'contacted'})">Mark Contacted</button>` : ''}
+          ${l.status !== 'site-visit-booked' ? `<button class="btn btn-secondary" onclick="updateLead('${l.id}', {status:'site-visit-booked'})">Site Visit Booked</button>` : ''}
+          ${l.status !== 'won' ? `<button class="btn btn-primary" onclick="updateLead('${l.id}', {status:'won'})">✓ Won</button>` : ''}
+          ${l.status !== 'lost' ? `<button class="btn btn-danger" onclick="updateLead('${l.id}', {status:'lost'})">✕ Lost</button>` : ''}
+          <button class="btn btn-danger" onclick="deleteLead('${l.id}')">🗑️ Delete</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function updateLead(id, patch) {
+  try {
+    const res = await fetch(`/api/leads/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': adminPassword },
+      body: JSON.stringify(patch),
+    });
+    if (res.ok) { loadLeads(); }
+    else { alert('Update failed'); }
+  } catch { alert('Update failed'); }
+}
+
+async function deleteLead(id) {
+  if (!confirm('Delete this lead permanently?')) return;
+  try {
+    const res = await fetch(`/api/leads/${id}`, {
+      method: 'DELETE',
+      headers: { 'x-admin-password': adminPassword },
+    });
+    if (res.ok) { loadLeads(); }
+    else { alert('Delete failed'); }
+  } catch { alert('Delete failed'); }
 }
 
 // ─── CONTRACTOR LISTINGS ───
