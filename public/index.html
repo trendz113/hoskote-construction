@@ -186,6 +186,15 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 .nav__call { width: 36px; height: 36px; border-radius: 50%; background: var(--stone-100); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; transition: background .15s; }
 .nav__call:hover { background: var(--stone-200); }
 .nav__cta { background: var(--terracotta); color: white; padding: .5rem 1.1rem; border-radius: 7px; font-size: .85rem; font-weight: 600; transition: all .2s; white-space: nowrap; flex-shrink: 0; }
+.lang-toggle { background: var(--stone-50); border: 1.5px solid var(--stone-200); border-radius: 7px; padding: .5rem .9rem; font-size: .82rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; white-space: nowrap; flex-shrink: 0; color: var(--stone-700); }
+.lang-toggle:hover { border-color: var(--terracotta); }
+[data-lang="kn"] { display: none; }
+body.kn [data-lang="en"] { display: none; }
+body.kn [data-lang="kn"] { display: block; }
+body.kn span[data-lang="kn"] { display: inline; }
+body.kn span[data-lang="en"] { display: none; }
+span[data-lang="kn"] { display: none; }
+[data-lang="kn"] { font-family: 'Noto Sans Kannada', 'Inter', sans-serif; }
 .nav__cta:hover { background: var(--terracotta-dark); }
 .nav__mobile-toggle { display: none; flex-direction: column; gap: 5px; padding: .5rem; }
 .nav__mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--stone-700); border-radius: 2px; transition: all .3s; }
@@ -573,6 +582,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <a href="#contact" class="nav__link">Contact</a>
       </div>
       <a href="tel:+919742801802" class="nav__call" title="Call Now">📞</a>
+      <button class="lang-toggle" onclick="toggleLang()" id="langBtn">🇮🇳 ಕನ್ನಡ</button>
       <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="nav__cta">📱 Free Site Visit</a>
       <button class="nav__mobile-toggle" id="mobileToggle" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -639,20 +649,19 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   <div class="container">
     <div class="hero__grid">
       <div>
-        <span class="hero__eyebrow">Hoskote · Bengaluru Rural</span>
-        <h1 class="hero__title">Build your home in Hoskote with <em>full transparency</em></h1>
-        <p class="hero__lead">See exactly what it costs. Know every step of the process. Track every brick on WhatsApp. We've built homes for families across Hoskote — and yours can be next.</p>
-        <p class="hero__lead-kn">ಹೊಸಕೋಟೆಯಲ್ಲಿ ಮನೆ ಕಟ್ಟಿಸ್ತಿದ್ದೀರಾ? ಪಾರದರ್ಶಕ ಬೆಲೆ, ಪ್ರತಿ ಹಂತದ ವಾಟ್ಸಾಪ್ ಅಪ್‌ಡೇಟ್ — ಉಚಿತ ಅಂದಾಜು ಪಡೆಯಿರಿ.</p>
+        <span class="hero__eyebrow"><span data-lang="en">Hoskote · Bengaluru Rural</span><span data-lang="kn">ಹೊಸಕೋಟೆ · ಬೆಂಗಳೂರು ಗ್ರಾಮಾಂತರ</span></span>
+        <h1 class="hero__title"><span data-lang="en">Build your home in Hoskote with <em>full transparency</em></span><span data-lang="kn">ಹೊಸಕೋಟೆಯಲ್ಲಿ <em>ಸಂಪೂರ್ಣ ಪಾರದರ್ಶಕತೆ</em>ಯೊಂದಿಗೆ ನಿಮ್ಮ ಮನೆ ಕಟ್ಟಿಸಿ</span></h1>
+        <p class="hero__lead"><span data-lang="en">See exactly what it costs. Know every step of the process. Track every brick on WhatsApp. We've built homes for families across Hoskote — and yours can be next.</span><span data-lang="kn">ಎಷ್ಟು ಖರ್ಚಾಗುತ್ತದೆ ಎಂದು ನಿಖರವಾಗಿ ತಿಳಿಯಿರಿ. ಪ್ರತಿ ಹಂತವನ್ನೂ ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ. ಪ್ರತಿ ಇಟ್ಟಿಗೆಯನ್ನೂ ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಟ್ರ್ಯಾಕ್ ಮಾಡಿ. ಹೊಸಕೋಟೆಯ ಅನೇಕ ಕುಟುಂಬಗಳಿಗೆ ಮನೆ ಕಟ್ಟಿಕೊಟ್ಟಿದ್ದೇವೆ — ಮುಂದಿನದು ನಿಮ್ಮದಾಗಬಹುದು.</span></p>
         <div class="btn-group">
-          <a href="#calculator" class="btn btn--primary btn--lg">🧮 Get Free Cost Estimate</a>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg">📱 Book Free Site Visit</a>
-          <a href="tel:+919742801802" class="btn btn--secondary btn--lg">📞 Call Now</a>
+          <a href="#calculator" class="btn btn--primary btn--lg"><span data-lang="en">🧮 Get Free Cost Estimate</span><span data-lang="kn">🧮 ಉಚಿತ ವೆಚ್ಚ ಅಂದಾಜು ಪಡೆಯಿರಿ</span></a>
+          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg"><span data-lang="en">📱 Book Free Site Visit</span><span data-lang="kn">📱 ಉಚಿತ ಸೈಟ್ ವಿಸಿಟ್ ಬುಕ್ ಮಾಡಿ</span></a>
+          <a href="tel:+919742801802" class="btn btn--secondary btn--lg"><span data-lang="en">📞 Call Now</span><span data-lang="kn">📞 ಈಗಲೇ ಕರೆ ಮಾಡಿ</span></a>
         </div>
         <div class="hero__trust">
-          <div class="hero__stat"><div class="hero__stat-num">₹1,800</div><div class="hero__stat-label">Starting / sq ft</div></div>
-          <div class="hero__stat"><div class="hero__stat-num">100%</div><div class="hero__stat-label">Hoskote Team</div></div>
-          <div class="hero__stat"><div class="hero__stat-num">Daily</div><div class="hero__stat-label">WhatsApp Updates</div></div>
-          <div class="hero__stat"><div class="hero__stat-num">Stage</div><div class="hero__stat-label">Wise Payments</div></div>
+          <div class="hero__stat"><div class="hero__stat-num">₹1,800</div><div class="hero__stat-label"><span data-lang="en">Starting / sq ft</span><span data-lang="kn">ಪ್ರಾರಂಭ / ಚದರ ಅಡಿ</span></div></div>
+          <div class="hero__stat"><div class="hero__stat-num"><span data-lang="en">100%</span><span data-lang="kn">100%</span></div><div class="hero__stat-label"><span data-lang="en">Hoskote Team</span><span data-lang="kn">ಹೊಸಕೋಟೆ ತಂಡ</span></div></div>
+          <div class="hero__stat"><div class="hero__stat-num"><span data-lang="en">Daily</span><span data-lang="kn">ಪ್ರತಿದಿನ</span></div><div class="hero__stat-label"><span data-lang="en">WhatsApp Updates</span><span data-lang="kn">ವಾಟ್ಸಾಪ್ ಅಪ್‌ಡೇಟ್</span></div></div>
+          <div class="hero__stat"><div class="hero__stat-num"><span data-lang="en">Stage</span><span data-lang="kn">ಹಂತ</span></div><div class="hero__stat-label"><span data-lang="en">Wise Payments</span><span data-lang="kn">ವಾರು ಪಾವತಿ</span></div></div>
         </div>
       </div>
       <div class="hero__image-card">
@@ -792,74 +801,74 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 <!-- ============================================================ COST CALCULATOR -->
 <section class="section section--alt" id="calculator">
   <div class="container">
-    <span class="eyebrow">Free Interactive Tool</span>
-    <h2 style="margin-bottom:.75rem;">Construction Cost Calculator — Hoskote 2026</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">Enter your requirements below to get an instant cost estimate based on current Hoskote market rates.</p>
+    <span class="eyebrow"><span data-lang="en">Free Interactive Tool</span><span data-lang="kn">ಉಚಿತ ಇಂಟರಾಕ್ಟಿವ್ ಟೂಲ್</span></span>
+    <h2 style="margin-bottom:.75rem;"><span data-lang="en">Construction Cost Calculator — Hoskote 2026</span><span data-lang="kn">ನಿರ್ಮಾಣ ವೆಚ್ಚ ಕ್ಯಾಲ್ಕುಲೇಟರ್ — ಹೊಸಕೋಟೆ 2026</span></h2>
+    <p class="lead" style="margin-bottom:2.5rem;"><span data-lang="en">Enter your requirements below to get an instant cost estimate based on current Hoskote market rates.</span><span data-lang="kn">ಪ್ರಸ್ತುತ ಹೊಸಕೋಟೆ ಮಾರುಕಟ್ಟೆ ದರಗಳ ಆಧಾರದ ಮೇಲೆ ತಕ್ಷಣದ ವೆಚ್ಚ ಅಂದಾಜು ಪಡೆಯಲು ಕೆಳಗೆ ನಿಮ್ಮ ಅಗತ್ಯಗಳನ್ನು ನಮೂದಿಸಿ.</span></p>
 
     <div class="calc-wrapper">
       <div class="calc-header">
-        <h3>Your Personalised Estimate</h3>
-        <p style="color:rgba(255,255,255,.65);font-size:.9rem;margin-top:.35rem;">Based on current material and labour costs in Hoskote (updated June 2026)</p>
+        <h3><span data-lang="en">Your Personalised Estimate</span><span data-lang="kn">ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಅಂದಾಜು</span></h3>
+        <p style="color:rgba(255,255,255,.65);font-size:.9rem;margin-top:.35rem;"><span data-lang="en">Based on current material and labour costs in Hoskote (updated June 2026)</span><span data-lang="kn">ಹೊಸಕೋಟೆಯ ಪ್ರಸ್ತುತ ವಸ್ತು ಮತ್ತು ಕಾರ್ಮಿಕ ವೆಚ್ಚಗಳ ಆಧಾರದ ಮೇಲೆ (ಜೂನ್ 2026ರಂತೆ ನವೀಕರಿಸಲಾಗಿದೆ)</span></p>
       </div>
       <div class="calc-body">
         <div class="calc-grid">
           <div class="form-group">
-            <label for="sqft">Built-up Area (sq ft)</label>
+            <label for="sqft"><span data-lang="en">Built-up Area (sq ft)</span><span data-lang="kn">ನಿರ್ಮಿತ ವಿಸ್ತೀರ್ಣ (ಚದರ ಅಡಿ)</span></label>
             <input type="number" id="sqft" value="1200" min="400" max="10000" oninput="calcCost()">
           </div>
           <div class="form-group">
-            <label for="floors">Number of Floors</label>
-            <select id="floors" onchange="calcCost()">
-              <option value="1">Ground Floor (G)</option>
-              <option value="1.85">G+1 (Two floors)</option>
-              <option value="2.6">G+2 (Three floors)</option>
-              <option value="3.3">G+3 (Four floors)</option>
+            <label for="floors"><span data-lang="en">Number of Floors</span><span data-lang="kn">ಮಹಡಿಗಳ ಸಂಖ್ಯೆ</span></label>
+            <select id="floors" onchange="calcCost()" data-i18n-select>
+              <option value="1" data-en="Ground Floor (G)" data-kn="ನೆಲ ಮಹಡಿ (G)">Ground Floor (G)</option>
+              <option value="1.85" data-en="G+1 (Two floors)" data-kn="G+1 (ಎರಡು ಮಹಡಿ)">G+1 (Two floors)</option>
+              <option value="2.6" data-en="G+2 (Three floors)" data-kn="G+2 (ಮೂರು ಮಹಡಿ)">G+2 (Three floors)</option>
+              <option value="3.3" data-en="G+3 (Four floors)" data-kn="G+3 (ನಾಲ್ಕು ಮಹಡಿ)">G+3 (Four floors)</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="bhk">Configuration</label>
-            <select id="bhk" onchange="calcCost()">
-              <option value="1">1 BHK</option>
-              <option value="2" selected>2 BHK</option>
-              <option value="3">3 BHK</option>
-              <option value="4">4 BHK</option>
+            <label for="bhk"><span data-lang="en">Configuration</span><span data-lang="kn">ಕಾನ್ಫಿಗರೇಶನ್</span></label>
+            <select id="bhk" onchange="calcCost()" data-i18n-select>
+              <option value="1" data-en="1 BHK" data-kn="1 ಬಿಎಚ್‌ಕೆ">1 BHK</option>
+              <option value="2" selected data-en="2 BHK" data-kn="2 ಬಿಎಚ್‌ಕೆ">2 BHK</option>
+              <option value="3" data-en="3 BHK" data-kn="3 ಬಿಎಚ್‌ಕೆ">3 BHK</option>
+              <option value="4" data-en="4 BHK" data-kn="4 ಬಿಎಚ್‌ಕೆ">4 BHK</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="pkg">Finish Level</label>
-            <select id="pkg" onchange="calcCost()">
-              <option value="1800">Comfortable — ₹1,800/sqft</option>
-              <option value="2000" selected>Better-Living — ₹2,000/sqft</option>
-              <option value="2200">Dream Home — ₹2,200/sqft</option>
+            <label for="pkg"><span data-lang="en">Finish Level</span><span data-lang="kn">ಫಿನಿಶ್ ಮಟ್ಟ</span></label>
+            <select id="pkg" onchange="calcCost()" data-i18n-select>
+              <option value="1800" data-en="Comfortable — ₹1,800/sqft" data-kn="ಕಂಫರ್ಟಬಲ್ — ₹1,800/ಚದರ ಅಡಿ">Comfortable — ₹1,800/sqft</option>
+              <option value="2000" selected data-en="Better-Living — ₹2,000/sqft" data-kn="ಬೆಟರ್-ಲಿವಿಂಗ್ — ₹2,000/ಚದರ ಅಡಿ">Better-Living — ₹2,000/sqft</option>
+              <option value="2200" data-en="Dream Home — ₹2,200/sqft" data-kn="ಡ್ರೀಮ್ ಹೋಮ್ — ₹2,200/ಚದರ ಅಡಿ">Dream Home — ₹2,200/sqft</option>
             </select>
           </div>
         </div>
 
         <div class="calc-result">
           <div class="calc-result__main">
-            <div class="calc-result__label">Estimated Construction Cost</div>
+            <div class="calc-result__label"><span data-lang="en">Estimated Construction Cost</span><span data-lang="kn">ಅಂದಾಜು ನಿರ್ಮಾಣ ವೆಚ್ಚ</span></div>
             <div class="calc-result__amount" id="calc-amount">₹29.4 L</div>
             <div class="calc-result__range" id="calc-range">Range: ₹27L – ₹32L</div>
           </div>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20exact%20quote%20for%20my%20construction%20in%20Hoskote" class="btn btn--whatsapp btn--lg">📱 Get Exact Quote in 24hrs</a>
+          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20exact%20quote%20for%20my%20construction%20in%20Hoskote" class="btn btn--whatsapp btn--lg"><span data-lang="en">📱 Get Exact Quote in 24hrs</span><span data-lang="kn">📱 24 ಗಂಟೆಯೊಳಗೆ ನಿಖರ ಕೋಟ್ ಪಡೆಯಿರಿ</span></a>
         </div>
 
         <div class="calc-breakdown" id="calc-breakdown">
           <div class="calc-breakdown-item">
             <div class="val" id="bd-structure">₹14.7L</div>
-            <div class="lbl">Structure & RCC</div>
+            <div class="lbl"><span data-lang="en">Structure & RCC</span><span data-lang="kn">ಸ್ಟ್ರಕ್ಚರ್ ಮತ್ತು RCC</span></div>
           </div>
           <div class="calc-breakdown-item">
             <div class="val" id="bd-finishing">₹9.8L</div>
-            <div class="lbl">Finishing & Tiles</div>
+            <div class="lbl"><span data-lang="en">Finishing & Tiles</span><span data-lang="kn">ಫಿನಿಶಿಂಗ್ ಮತ್ತು ಟೈಲ್ಸ್</span></div>
           </div>
           <div class="calc-breakdown-item">
             <div class="val" id="bd-mep">₹4.9L</div>
-            <div class="lbl">Plumbing & Electrical</div>
+            <div class="lbl"><span data-lang="en">Plumbing & Electrical</span><span data-lang="kn">ಪ್ಲಂಬಿಂಗ್ ಮತ್ತು ಎಲೆಕ್ಟ್ರಿಕಲ್</span></div>
           </div>
         </div>
 
-        <p style="font-size:.78rem;color:var(--stone-500);margin-top:1.25rem;">* This estimate covers construction cost only. BMRDA building plan approval (₹20k–₹80k), temporary electricity connection (mandatory before construction starts, ₹15k–₹40k), borewell (₹60k–₹1.2L), compound wall, permanent BESCOM connection, and interiors are all separate. Land cost not included.</p>
+        <p style="font-size:.78rem;color:var(--stone-500);margin-top:1.25rem;"><span data-lang="en">* This estimate covers construction cost only. BMRDA building plan approval (₹20k–₹80k), temporary electricity connection (mandatory before construction starts, ₹15k–₹40k), borewell (₹60k–₹1.2L), compound wall, permanent BESCOM connection, and interiors are all separate. Land cost not included.</span><span data-lang="kn">* ಈ ಅಂದಾಜು ಕೇವಲ ನಿರ್ಮಾಣ ವೆಚ್ಚವನ್ನು ಮಾತ್ರ ಒಳಗೊಂಡಿದೆ. BMRDA ಪ್ಲಾನ್ ಅಪ್ರೂವಲ್ (₹20 ಸಾವಿರ–₹80 ಸಾವಿರ), ತಾತ್ಕಾಲಿಕ ವಿದ್ಯುತ್ ಸಂಪರ್ಕ (ನಿರ್ಮಾಣ ಆರಂಭಕ್ಕೂ ಮುನ್ನ ಕಡ್ಡಾಯ, ₹15 ಸಾವಿರ–₹40 ಸಾವಿರ), ಕೊಳವೆ ಬಾವಿ (₹60 ಸಾವಿರ–₹1.2 ಲಕ್ಷ), ಕಾಂಪೌಂಡ್ ಗೋಡೆ, ಶಾಶ್ವತ BESCOM ಸಂಪರ್ಕ, ಮತ್ತು ಒಳಾಂಗಣ ಎಲ್ಲವೂ ಪ್ರತ್ಯೇಕ. ಭೂಮಿಯ ವೆಚ್ಚ ಸೇರಿಲ್ಲ.</span></p>
       </div>
     </div>
   </div>
@@ -1467,33 +1476,33 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 
     <div class="grid-2" style="gap:3rem;align-items:start;">
       <div>
-        <h3 style="margin-bottom:1.5rem;">Construction Loan EMI Calculator</h3>
+        <h3 style="margin-bottom:1.5rem;"><span data-lang="en">Construction Loan EMI Calculator</span><span data-lang="kn">ನಿರ್ಮಾಣ ಸಾಲ EMI ಕ್ಯಾಲ್ಕುಲೇಟರ್</span></h3>
         <div style="background:white;border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow-sm);border:1.5px solid var(--stone-200);">
           <div style="display:flex;flex-direction:column;gap:1.25rem;margin-bottom:1.5rem;">
             <div class="form-group">
-              <label for="loan-amt">Loan Amount (₹)</label>
+              <label for="loan-amt"><span data-lang="en">Loan Amount (₹)</span><span data-lang="kn">ಸಾಲದ ಮೊತ್ತ (₹)</span></label>
               <input type="number" id="loan-amt" value="3000000" min="500000" max="20000000" step="100000" placeholder="e.g. 3000000" oninput="calcLoan()" onblur="clampLoanInputs()">
               <div id="loan-amt-readout" style="font-size:.78rem;color:var(--stone-500);margin-top:.35rem;">= ₹30.0 Lakhs</div>
-              <div id="loan-amt-warning" style="display:none;color:#DC2626;font-size:.78rem;margin-top:.35rem;">Enter an amount between ₹5,00,000 and ₹2,00,00,000.</div>
+              <div id="loan-amt-warning" style="display:none;color:#DC2626;font-size:.78rem;margin-top:.35rem;"><span data-lang="en">Enter an amount between ₹5,00,000 and ₹2,00,00,000.</span><span data-lang="kn">₹5,00,000 ಮತ್ತು ₹2,00,00,000 ನಡುವಿನ ಮೊತ್ತವನ್ನು ನಮೂದಿಸಿ.</span></div>
             </div>
             <div class="form-group">
-              <label for="loan-rate">Interest Rate (% per year)</label>
+              <label for="loan-rate"><span data-lang="en">Interest Rate (% per year)</span><span data-lang="kn">ಬಡ್ಡಿ ದರ (% ವಾರ್ಷಿಕ)</span></label>
               <input type="number" id="loan-rate" value="8.75" step="0.05" min="6" max="15" oninput="calcLoan()" onblur="clampLoanInputs()">
-              <div id="loan-rate-warning" style="display:none;color:#DC2626;font-size:.78rem;margin-top:.35rem;">Enter a rate between 6% and 15%.</div>
+              <div id="loan-rate-warning" style="display:none;color:#DC2626;font-size:.78rem;margin-top:.35rem;"><span data-lang="en">Enter a rate between 6% and 15%.</span><span data-lang="kn">6% ಮತ್ತು 15% ನಡುವಿನ ದರವನ್ನು ನಮೂದಿಸಿ.</span></div>
             </div>
             <div class="form-group">
-              <label for="loan-term">Loan Tenure (Years)</label>
-              <select id="loan-term" onchange="calcLoan()">
-                <option value="10">10 Years</option>
-                <option value="15">15 Years</option>
-                <option value="20" selected>20 Years</option>
-                <option value="25">25 Years</option>
-                <option value="30">30 Years</option>
+              <label for="loan-term"><span data-lang="en">Loan Tenure (Years)</span><span data-lang="kn">ಸಾಲದ ಅವಧಿ (ವರ್ಷಗಳು)</span></label>
+              <select id="loan-term" onchange="calcLoan()" data-i18n-select>
+                <option value="10" data-en="10 Years" data-kn="10 ವರ್ಷ">10 Years</option>
+                <option value="15" data-en="15 Years" data-kn="15 ವರ್ಷ">15 Years</option>
+                <option value="20" selected data-en="20 Years" data-kn="20 ವರ್ಷ">20 Years</option>
+                <option value="25" data-en="25 Years" data-kn="25 ವರ್ಷ">25 Years</option>
+                <option value="30" data-en="30 Years" data-kn="30 ವರ್ಷ">30 Years</option>
               </select>
             </div>
           </div>
           <div style="background:var(--indigo-900);border-radius:var(--radius);padding:1.5rem;text-align:center;">
-            <div style="font-family:var(--font-mono);font-size:.7rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Monthly EMI</div>
+            <div style="font-family:var(--font-mono);font-size:.7rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;"><span data-lang="en">Monthly EMI</span><span data-lang="kn">ಮಾಸಿಕ EMI</span></div>
             <div id="emi-result" style="font-family:var(--font-display);font-size:2.25rem;color:white;">₹26,400</div>
             <div id="emi-total" style="font-size:.8rem;color:rgba(255,255,255,.6);margin-top:.35rem;">Total Payable: ₹63.4L · Interest: ₹33.4L</div>
           </div>
@@ -2505,70 +2514,70 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 <!-- ============================================================ CONTACT -->
 <section class="section section--alt" id="contact">
   <div class="container">
-    <span class="eyebrow">Get Started — No Obligation</span>
-    <h2 style="margin-bottom:.75rem;">Book your free site visit or get an estimate</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">Fill in the form below or WhatsApp us directly. We respond within 2 hours on working days.</p>
+    <span class="eyebrow"><span data-lang="en">Get Started — No Obligation</span><span data-lang="kn">ಪ್ರಾರಂಭಿಸಿ — ಯಾವುದೇ ಬಾಧ್ಯತೆ ಇಲ್ಲ</span></span>
+    <h2 style="margin-bottom:.75rem;"><span data-lang="en">Book your free site visit or get an estimate</span><span data-lang="kn">ಉಚಿತ ಸೈಟ್ ವಿಸಿಟ್ ಬುಕ್ ಮಾಡಿ ಅಥವಾ ಅಂದಾಜು ಪಡೆಯಿರಿ</span></h2>
+    <p class="lead" style="margin-bottom:2.5rem;"><span data-lang="en">Fill in the form below or WhatsApp us directly. We respond within 2 hours on working days.</span><span data-lang="kn">ಕೆಳಗಿನ ಫಾರ್ಮ್ ಭರ್ತಿ ಮಾಡಿ ಅಥವಾ ನೇರವಾಗಿ ವಾಟ್ಸಾಪ್ ಮಾಡಿ. ಕೆಲಸದ ದಿನಗಳಲ್ಲಿ 2 ಗಂಟೆಯೊಳಗೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತೇವೆ.</span></p>
 
     <div class="grid-2" style="gap:3rem;align-items:start;">
       <div class="contact-form" id="contactFormWrap">
-        <h3 style="margin-bottom:1.5rem;">Send us your requirements</h3>
+        <h3 style="margin-bottom:1.5rem;"><span data-lang="en">Send us your requirements</span><span data-lang="kn">ನಿಮ್ಮ ಅಗತ್ಯಗಳನ್ನು ನಮಗೆ ಕಳುಹಿಸಿ</span></h3>
         <div id="contact-success" class="form-success">
-          <h4>✅ Message sent!</h4>
-          <p style="font-size:.875rem;color:var(--stone-700);">We'll reach out within 2 hours. Check WhatsApp for a confirmation message.</p>
+          <h4>✅ <span data-lang="en">Message sent!</span><span data-lang="kn">ಸಂದೇಶ ಕಳುಹಿಸಲಾಗಿದೆ!</span></h4>
+          <p style="font-size:.875rem;color:var(--stone-700);"><span data-lang="en">We'll reach out within 2 hours. Check WhatsApp for a confirmation message.</span><span data-lang="kn">2 ಗಂಟೆಯೊಳಗೆ ಸಂಪರ್ಕಿಸುತ್ತೇವೆ. ದೃಢೀಕರಣ ಸಂದೇಶಕ್ಕಾಗಿ ವಾಟ್ಸಾಪ್ ನೋಡಿ.</span></p>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="cf-name">Your Name *</label>
+            <label for="cf-name"><span data-lang="en">Your Name *</span><span data-lang="kn">ನಿಮ್ಮ ಹೆಸರು *</span></label>
             <input type="text" id="cf-name" placeholder="Ramesh Kumar">
           </div>
           <div class="form-group">
-            <label for="cf-phone">Phone / WhatsApp *</label>
+            <label for="cf-phone"><span data-lang="en">Phone / WhatsApp *</span><span data-lang="kn">ಫೋನ್ / ವಾಟ್ಸಾಪ್ *</span></label>
             <input type="tel" id="cf-phone" placeholder="+91 98XXX XXXXX">
           </div>
           <div class="form-group">
-            <label for="cf-area">Plot Location</label>
+            <label for="cf-area"><span data-lang="en">Plot Location</span><span data-lang="kn">ನಿವೇಶನದ ಸ್ಥಳ</span></label>
             <input type="text" id="cf-area" placeholder="Sulibele, Hoskote...">
           </div>
           <div class="form-group">
-            <label for="cf-size">Plot Size (sq ft)</label>
+            <label for="cf-size"><span data-lang="en">Plot Size (sq ft)</span><span data-lang="kn">ನಿವೇಶನದ ಗಾತ್ರ (ಚದರ ಅಡಿ)</span></label>
             <input type="text" id="cf-size" placeholder="30×40, 1,200 sqft...">
           </div>
           <div class="form-group">
-            <label for="cf-budget">Budget Range</label>
-            <select id="cf-budget">
-              <option>Under ₹25 lakhs</option>
-              <option>₹25–40 lakhs</option>
-              <option>₹40–70 lakhs</option>
-              <option>₹70L – ₹1 Cr</option>
-              <option>Above ₹1 Cr</option>
+            <label for="cf-budget"><span data-lang="en">Budget Range</span><span data-lang="kn">ಬಜೆಟ್ ವ್ಯಾಪ್ತಿ</span></label>
+            <select id="cf-budget" data-i18n-select>
+              <option data-en="Under ₹25 lakhs" data-kn="₹25 ಲಕ್ಷಕ್ಕಿಂತ ಕಡಿಮೆ">Under ₹25 lakhs</option>
+              <option data-en="₹25–40 lakhs" data-kn="₹25–40 ಲಕ್ಷ">₹25–40 lakhs</option>
+              <option data-en="₹40–70 lakhs" data-kn="₹40–70 ಲಕ್ಷ">₹40–70 lakhs</option>
+              <option data-en="₹70L – ₹1 Cr" data-kn="₹70 ಲಕ್ಷ – ₹1 ಕೋಟಿ">₹70L – ₹1 Cr</option>
+              <option data-en="Above ₹1 Cr" data-kn="₹1 ಕೋಟಿಗಿಂತ ಹೆಚ್ಚು">Above ₹1 Cr</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="cf-type">What do you need?</label>
-            <select id="cf-type">
-              <option>Free Site Visit</option>
-              <option>Cost Estimate</option>
-              <option>Floor Plan Discussion</option>
-              <option>Home Loan Help</option>
-              <option>Plan Approval Help</option>
-              <option>General Query</option>
+            <label for="cf-type"><span data-lang="en">What do you need?</span><span data-lang="kn">ನಿಮಗೆ ಏನು ಬೇಕು?</span></label>
+            <select id="cf-type" data-i18n-select>
+              <option data-en="Free Site Visit" data-kn="ಉಚಿತ ಸೈಟ್ ವಿಸಿಟ್">Free Site Visit</option>
+              <option data-en="Cost Estimate" data-kn="ವೆಚ್ಚ ಅಂದಾಜು">Cost Estimate</option>
+              <option data-en="Floor Plan Discussion" data-kn="ಫ್ಲೋರ್ ಪ್ಲಾನ್ ಚರ್ಚೆ">Floor Plan Discussion</option>
+              <option data-en="Home Loan Help" data-kn="ಹೋಮ್ ಲೋನ್ ಸಹಾಯ">Home Loan Help</option>
+              <option data-en="Plan Approval Help" data-kn="ಪ್ಲಾನ್ ಅಪ್ರೂವಲ್ ಸಹಾಯ">Plan Approval Help</option>
+              <option data-en="General Query" data-kn="ಸಾಮಾನ್ಯ ಪ್ರಶ್ನೆ">General Query</option>
             </select>
           </div>
           <div class="form-group form-group--full">
-            <label for="cf-msg">Any other details</label>
+            <label for="cf-msg"><span data-lang="en">Any other details</span><span data-lang="kn">ಇತರ ವಿವರಗಳು</span></label>
             <textarea id="cf-msg" placeholder="Tell us about your project — BHK needed, timeline, special requirements..."></textarea>
           </div>
         </div>
-        <button class="btn btn--primary btn--lg" id="cf-submit-btn" style="width:100%;justify-content:center;margin-top:1rem;" onclick="submitForm()">Send My Request →</button>
-        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.875rem;text-align:center;">Or WhatsApp directly: <a href="https://wa.me/919742801802" style="color:var(--terracotta);font-weight:600;">+91 97428 01802</a></p>
+        <button class="btn btn--primary btn--lg" id="cf-submit-btn" style="width:100%;justify-content:center;margin-top:1rem;" onclick="submitForm()"><span data-lang="en">Send My Request →</span><span data-lang="kn">ನನ್ನ ವಿನಂತಿಯನ್ನು ಕಳುಹಿಸಿ →</span></button>
+        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.875rem;text-align:center;"><span data-lang="en">Or WhatsApp directly:</span><span data-lang="kn">ಅಥವಾ ನೇರವಾಗಿ ವಾಟ್ಸಾಪ್ ಮಾಡಿ:</span> <a href="https://wa.me/919742801802" style="color:var(--terracotta);font-weight:600;">+91 97428 01802</a></p>
       </div>
 
       <div>
-        <h3 style="margin-bottom:1.5rem;">Three ways to reach us</h3>
+        <h3 style="margin-bottom:1.5rem;"><span data-lang="en">Three ways to reach us</span><span data-lang="kn">ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಲು ಮೂರು ವಿಧಾನಗಳು</span></h3>
 
         <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
           <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg" style="justify-content:center;">📱 WhatsApp: +91 97428 01802</a>
-          <a href="tel:+919742801802" class="btn btn--secondary btn--lg" style="justify-content:center;">📞 Call: +91 97428 01802</a>
+          <a href="tel:+919742801802" class="btn btn--secondary btn--lg" style="justify-content:center;">📞 <span data-lang="en">Call:</span><span data-lang="kn">ಕರೆ ಮಾಡಿ:</span> +91 97428 01802</a>
           <a href="mailto:hello@hoskoteconstruction.in" class="btn btn--secondary btn--lg" style="justify-content:center;">✉️ hello@hoskoteconstruction.in</a>
         </div>
 
@@ -2703,6 +2712,18 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 
 <!-- ============================================================ SCRIPTS -->
 <script>
+// ─── LANGUAGE TOGGLE ───
+let currentLang = 'en';
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'kn' : 'en';
+  document.body.classList.toggle('kn', currentLang === 'kn');
+  document.getElementById('langBtn').textContent = currentLang === 'en' ? '🇮🇳 ಕನ್ನಡ' : '🇮🇳 English';
+  document.querySelectorAll('select[data-i18n-select] option').forEach(opt => {
+    const text = currentLang === 'kn' ? opt.getAttribute('data-kn') : opt.getAttribute('data-en');
+    if (text) opt.textContent = text;
+  });
+}
+
 // Mobile nav toggle
 const mobileToggle = document.getElementById('mobileToggle');
 const mobileDrawer = document.getElementById('mobileDrawer');
