@@ -1995,6 +1995,16 @@ span[data-lang="kn"] { display: none; }
           </div>
           <div class="form-row">
             <div class="form-group">
+              <label for="le-desired-loan">Target Loan Amount (₹) — optional</label>
+              <input type="number" id="le-desired-loan" placeholder="e.g. 5000000" oninput="generateLoanEstimate()">
+            </div>
+            <div class="form-group">
+              <label for="le-ltv">Bank's Typical Funding % (LTV)</label>
+              <input type="number" id="le-ltv" value="70" min="50" max="90" oninput="generateLoanEstimate()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
               <label for="le-approvalno">Plan Approval Reference No. (if in hand)</label>
               <input type="text" id="le-approvalno" placeholder="e.g. BMRDA/2026/XXXX" oninput="generateLoanEstimate()">
             </div>
@@ -2005,10 +2015,14 @@ span[data-lang="kn"] { display: none; }
           </div>
         </div>
         <div class="consequence-box">
-          <h4>📊 Stage-wise Break-up (built in automatically)</h4>
-          <p>The estimate splits your total cost into the same construction stages most Karnataka banks use for disbursement — foundation, plinth, slab-wise structure, brickwork &amp; plastering, and finishing/handover — with the percentage and cumulative amount for each, so bank and construction milestones line up exactly.</p>
+          <h4>📊 BOQ-style Trade Break-up (built in automatically)</h4>
+          <p>The estimate splits your total cost into standard Bill-of-Quantities work categories — earthwork, concrete, form work, steel, masonry, plastering, painting, doors &amp; windows, flooring, electrification, plumbing — the format banks' technical valuers are most familiar with.</p>
         </div>
-        <div class="legal-disclaimer">This is a general-purpose cost estimate for loan submission, not a certified engineering valuation. Some banks require the estimate to be signed by a licensed civil engineer/architect — we can arrange this certification for you on request.</div>
+        <div class="consequence-box" style="background:var(--indigo-100,#E0E7FF);">
+          <h4>💡 Applying for a specific loan amount?</h4>
+          <p>Enter your target loan amount and your bank's typical funding percentage (usually 70–80% of declared project cost) — the tool checks whether your estimate's total actually supports that loan, and tells you how much genuine additional scope (interiors, compound wall, sump, etc.) you may need to include if it falls short. Never pad rates or quantities beyond real cost — that's misrepresentation to the lender, not scope planning.</p>
+        </div>
+        <div class="legal-disclaimer">This is a general-purpose cost estimate for loan submission, not a certified engineering valuation. Some banks require the estimate to be signed by a licensed civil engineer/architect — we can arrange this certification for you on request. Download our <a href="/HoskoteConstruction-Cost-Estimate-Template.docx">detailed BOQ estimate template (Word)</a> for the full itemised version with Part B (Interiors).</div>
       </div>
 
       <!-- LIVE PREVIEW -->
@@ -3290,24 +3304,46 @@ function generateLoanEstimate() {
   const area = parseFloat(document.getElementById('le-area').value) || 0;
   const rate = parseFloat(document.getElementById('le-rate').value) || 1800;
   const approvalno = document.getElementById('le-approvalno').value.trim();
+  const desiredLoanEl = document.getElementById('le-desired-loan');
+  const desiredLoan = desiredLoanEl ? parseFloat(desiredLoanEl.value) || 0 : 0;
+  const ltvEl = document.getElementById('le-ltv');
+  const ltv = ltvEl ? parseFloat(ltvEl.value) || 70 : 70;
   const dateTxt = fmtDate(document.getElementById('le-date').value) || fmtDate(new Date().toISOString().slice(0,10));
   const total = area * rate;
 
-  const stages = [
-    { name: 'Foundation & Plinth', pct: 15 },
-    { name: 'Ground Floor Slab (RCC Structure)', pct: 20 },
-    { name: 'Upper Floor Slabs (if applicable)', pct: 15 },
-    { name: 'Brickwork / AAC Block Walls', pct: 15 },
-    { name: 'Plumbing, Electrical & Plastering', pct: 15 },
-    { name: 'Flooring, Tiling & Finishing', pct: 15 },
-    { name: 'Handover & Snag Rectification', pct: 5 },
+  // BOQ-style trade-category break-up, based on typical proportions for a G+1 residential build in Bengaluru Rural
+  const categories = [
+    { name: 'Earthwork (Excavation)', pct: 2 },
+    { name: 'Concrete (RCC — columns, slabs, beams, footing)', pct: 12 },
+    { name: 'Form Work (Shuttering)', pct: 14 },
+    { name: 'Steel (Fe500/Fe500D reinforcement)', pct: 9 },
+    { name: 'Masonry (Foundation stone + brick/block work)', pct: 12 },
+    { name: 'Plastering', pct: 15 },
+    { name: 'Painting', pct: 10 },
+    { name: 'Doors & Windows', pct: 1 },
+    { name: 'Flooring & Dadoing', pct: 5 },
+    { name: 'Miscellaneous (waterproofing, sump, compound wall, etc.)', pct: 8 },
+    { name: 'Electrification', pct: 6 },
+    { name: 'Plumbing', pct: 6 },
   ];
-  let cumulative = 0;
-  const rows = stages.map(s => {
-    const amt = Math.round(total * s.pct / 100);
-    cumulative += amt;
-    return `<tr><td>${s.name}</td><td class="num">${s.pct}%</td><td class="num">₹${amt.toLocaleString('en-IN')}</td><td class="num">₹${cumulative.toLocaleString('en-IN')}</td></tr>`;
+  const boqRows = categories.map(c => {
+    const amt = Math.round(total * c.pct / 100);
+    return `<tr><td>${c.name}</td><td class="num">${c.pct}%</td><td class="num">₹${amt.toLocaleString('en-IN')}</td></tr>`;
   }).join('');
+
+  // Loan sizing guidance: banks typically fund a percentage (LTV) of the DECLARED total project cost, not the amount requested
+  let loanGuidance = '';
+  if (desiredLoan > 0) {
+    const requiredEstimate = Math.round(desiredLoan * 100 / ltv);
+    const shortfall = requiredEstimate > total ? requiredEstimate - total : 0;
+    loanGuidance = `
+    <div class="clause-title">4. Loan Sizing Check</div>
+    <p>You've indicated a target loan amount of <strong>₹${desiredLoan.toLocaleString('en-IN')}</strong>. Most banks fund around <strong>${ltv}%</strong> of your total declared project cost (Loan-to-Value), not the amount you apply for. Working backwards, your submitted estimate needs to reflect a genuine total project cost of at least <strong>₹${requiredEstimate.toLocaleString('en-IN')}</strong> for the bank's ${ltv}% funding to reach your target.</p>
+    ${shortfall > 0
+      ? `<p style="color:var(--red-600,#DC2626);"><strong>Your current estimate (₹${total.toLocaleString('en-IN')}) is short by about ₹${shortfall.toLocaleString('en-IN')}.</strong> This should almost always be closed by including every <em>genuine</em> cost head you're actually incurring — interiors, compound wall, sump, landscaping, elevation design — not by inflating rates or quantities beyond real cost. Under-declaring scope is the single biggest reason people get less loan than they actually need; over-declaring beyond real cost is loan misrepresentation and should never be done. Use the Part B (Interiors) section of our full BOQ estimate template to capture the genuine additional scope.</p>`
+      : `<p style="color:var(--green-600,#16A34A);"><strong>Your current estimate already supports this loan target.</strong> Make sure every cost head in it reflects work you're genuinely planning to carry out — banks and their valuers do verify declared scope against the site.</p>`}
+    `;
+  }
 
   const html = `
     <h4>ESTIMATE OF COST OF CONSTRUCTION</h4>
@@ -3321,18 +3357,18 @@ function generateLoanEstimate() {
     <div class="clause-title">1. Basis of Estimate</div>
     <p>This estimate is prepared at a rate of <strong>₹${rate.toLocaleString('en-IN')} per sq. ft.</strong>, inclusive of structure (RCC, brickwork), plumbing, electrical, flooring, and standard finishing, for a total built-up area of <strong>${area || '[Area]'} sq. ft.</strong>, arriving at an estimated total construction cost of <strong>${inWords(total)}</strong>.</p>
 
-    <div class="clause-title">2. Stage-wise Cost Break-up (for Disbursement Schedule)</div>
+    <div class="clause-title">2. Trade-wise Cost Break-up (Bill of Quantities basis)</div>
     <div class="tbl-wrap" style="margin:1rem 0;">
       <table>
-        <thead><tr><th>Construction Stage</th><th class="num">% of Total</th><th class="num">Stage Amount</th><th class="num">Cumulative</th></tr></thead>
-        <tbody>${rows}</tbody>
-        <tfoot><tr><td><strong>Total Estimated Cost</strong></td><td></td><td></td><td class="num"><strong>₹${total.toLocaleString('en-IN')}</strong></td></tr></tfoot>
+        <thead><tr><th>Work Category</th><th class="num">% of Total</th><th class="num">Amount</th></tr></thead>
+        <tbody>${boqRows}</tbody>
+        <tfoot><tr><td><strong>Total Estimated Cost</strong></td><td></td><td class="num"><strong>₹${total.toLocaleString('en-IN')}</strong></td></tr></tfoot>
       </table>
     </div>
-    <p style="font-size:.88rem;color:var(--stone-500,#8C857A);">Banks typically release each disbursement tranche after a site inspection confirms the corresponding stage is complete — this schedule is structured to match that process directly.</p>
-
-    <div class="clause-title">3. Materials & Specification Basis</div>
-    <p>This estimate assumes branded cement (Ultratech/ACC, OPC 53 Grade), Fe500D TMT steel, M20 grade concrete (minimum) for structural elements, and standard-quality flooring, plumbing, and electrical fittings. A detailed material specification is available on request and can be annexed to this estimate for the bank's technical appraisal.</p>
+    <p style="font-size:.88rem;color:var(--stone-500,#8C857A);">This category structure mirrors a standard civil BOQ (earthwork, concrete, steel, masonry, plastering, painting, etc.) — the format banks and their technical valuers are most familiar with, rather than a simple payment-stage split.</p>
+    ${loanGuidance}
+    <div class="clause-title">${desiredLoan > 0 ? '5' : '3'}. Materials & Specification Basis</div>
+    <p>This estimate assumes branded cement (Ultratech/ACC, OPC 53 Grade), Fe500D TMT steel, M20–M25 grade concrete for structural elements, and standard-quality flooring, plumbing, and electrical fittings. A detailed material specification is available on request and can be annexed to this estimate for the bank's technical appraisal.</p>
 
     <p style="margin-top:1.5rem;">Prepared by: <strong>HoskoteConstruction</strong>, Balaji Gold City, Hoskote, Karnataka · UDYAM-KR-02-0127051</p>
 
