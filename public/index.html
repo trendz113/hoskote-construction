@@ -642,6 +642,7 @@ span[data-lang="kn"] { display: none; }
       <a href="#faq" class="nav__drawer-link">❓ FAQ (50+ Questions)</a>
       <a href="#rental-agreement" class="nav__drawer-link">📄 Rental Agreement Generator <span class="nav-badge">FREE</span></a>
       <a href="#construction-agreement" class="nav__drawer-link">🧾 Construction Agreement Generator <span class="nav-badge">FREE</span></a>
+      <a href="#loan-estimate" class="nav__drawer-link">🏦 Bank Loan Cost Estimate Generator <span class="nav-badge">FREE</span></a>
       <a href="#testimonials" class="nav__drawer-link">⭐ Reviews</a>
       <a href="#about" class="nav__drawer-link">👥 About Us</a>
       <a href="/vaastu.html" class="nav__drawer-link">🧭 Vastu Planner</a>
@@ -1411,6 +1412,25 @@ span[data-lang="kn"] { display: none; }
         </ul>
       </div>
     </div>
+
+    <div style="background:var(--green-100,#DCFCE7);border:1.5px solid var(--green-600,#16A34A);border-radius:var(--radius);padding:1.5rem;margin-top:1.25rem;">
+      <h4 style="color:#0f5c30;margin-bottom:.75rem;">✅ Precautions We Take So This Doesn't Happen to You</h4>
+      <div class="grid-2">
+        <ul style="font-size:.875rem;color:#0f5c30;line-height:2;list-style:none;">
+          <li>✔️ Only 10% advance to start — never 30-50% upfront</li>
+          <li>✔️ Every payment tied to a stage you've seen and approved</li>
+          <li>✔️ Exact material brands (Ultratech/ACC, Fe500D steel) written into your agreement</li>
+          <li>✔️ You or your engineer can inspect any delivery or stage before paying</li>
+        </ul>
+        <ul style="font-size:.875rem;color:#0f5c30;line-height:2;list-style:none;">
+          <li>✔️ Written agreement before a single brick is laid — nothing verbal</li>
+          <li>✔️ Fixed-cost clause — material price rises are our risk, not yours</li>
+          <li>✔️ Physical office in Hoskote, UDYAM registered — we're not anonymous</li>
+          <li>✔️ Daily WhatsApp progress photos, every stage, no exceptions</li>
+        </ul>
+      </div>
+      <p style="font-size:.85rem;color:#0f5c30;margin-top:1rem;margin-bottom:0;">Full details: <a href="/blog/construction-contractor-fraud-hoskote-guide" style="color:#0f5c30;text-decoration:underline;font-weight:600;">read our complete guide to avoiding construction fraud in Hoskote →</a></p>
+    </div>
   </div>
 </section>
 
@@ -1565,6 +1585,7 @@ span[data-lang="kn"] { display: none; }
         </div>
         <p style="font-size:.8rem;color:var(--stone-500);margin-top:.875rem;">We work regularly with SBI and HDFC for construction loans in Hoskote. We can connect you with the right branch officer and help prepare your file.</p>
         <a href="https://wa.me/919742801802?text=Hi%2C%20I%20need%20help%20getting%20a%20home%20loan%20for%20construction%20in%20Hoskote" class="btn btn--primary btn--sm" style="margin-top:1rem;">Help Me Get a Construction Loan</a>
+        <a href="#loan-estimate" class="btn btn--ghost btn--sm" style="margin-top:1rem;margin-left:.5rem;background:#fff;">📊 Get a Bank-Ready Cost Estimate</a>
       </div>
 
       <div>
@@ -1916,6 +1937,88 @@ span[data-lang="kn"] { display: none; }
           <button class="btn btn--primary" onclick="printConstructionAgreement()">🖨️ Print / Save as PDF</button>
           <button class="btn btn--secondary" onclick="copyConstructionAgreementText()">📋 Copy Text</button>
           <a href="https://wa.me/919742801802?text=Hi%2C%20I%20used%20the%20free%20Construction%20Agreement%20Generator%20and%20need%20help%20reviewing%20it" class="btn btn--whatsapp">📱 Get It Reviewed on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ BANK LOAN COST ESTIMATE GENERATOR -->
+<section class="section" id="loan-estimate">
+  <div class="container">
+    <span class="eyebrow">Free Tool · For Loan Submission</span>
+    <h2 style="margin-bottom:.75rem;">Bank Loan Cost Estimate Generator</h2>
+    <p class="lead" style="margin-bottom:1rem;">Banks won't sanction or disburse a construction loan on a verbal number. They need two things in writing: your <strong>Panchayat/BMRDA-approved building plan</strong>, and a <strong>certified estimate of construction cost</strong> with a stage-wise break-up that matches their disbursement schedule. This tool generates that estimate document — ready to submit alongside your approved plan.</p>
+
+    <div class="callout callout--indigo" style="background:var(--indigo-100,#E0E7FF);border-left:4px solid var(--indigo-600,#4F46E5);border-radius:0 12px 12px 0;padding:1.1rem 1.3rem;margin-bottom:1.75rem;">
+      <p style="margin:0;color:var(--stone-700);font-size:.95rem;"><strong style="color:var(--indigo-900,#1E1B4B);">Why banks ask for this:</strong> loan-to-value is calculated on the estimated construction cost (typically 75–80% of it), and disbursement happens in stages that match physical progress — foundation, plinth, each slab, brickwork, and finishing. Without a stage-wise cost estimate, the bank has no basis to release your next tranche on time.</p>
+    </div>
+
+    <div class="grid-2" style="gap:2rem;align-items:start;">
+      <!-- FORM -->
+      <div class="tool-shell">
+        <h3>Step 1 · Enter Details</h3>
+        <div style="display:flex;flex-direction:column;gap:1.1rem;">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="le-applicant">Applicant / Loan Borrower Name</label>
+              <input type="text" id="le-applicant" placeholder="e.g. Ramesh K." oninput="generateLoanEstimate()">
+            </div>
+            <div class="form-group">
+              <label for="le-bank">Bank / Lender (optional)</label>
+              <input type="text" id="le-bank" placeholder="e.g. SBI, HDFC, Canara Bank" oninput="generateLoanEstimate()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="le-site">Construction Site Address (as per Khata/plan)</label>
+            <input type="text" id="le-site" placeholder="Site/plot no., survey no., Hoskote, Bengaluru Rural" oninput="generateLoanEstimate()">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="le-plotarea">Plot / Site Area (sq ft)</label>
+              <input type="number" id="le-plotarea" placeholder="1200" oninput="generateLoanEstimate()">
+            </div>
+            <div class="form-group">
+              <label for="le-floors">No. of Floors (e.g. G+1)</label>
+              <input type="text" id="le-floors" placeholder="G+1" oninput="generateLoanEstimate()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="le-area">Total Built-up Area (sq ft, all floors)</label>
+              <input type="number" id="le-area" placeholder="1800" oninput="generateLoanEstimate()">
+            </div>
+            <div class="form-group">
+              <label for="le-rate">Rate per Sq Ft (₹)</label>
+              <input type="number" id="le-rate" placeholder="1800" value="1800" oninput="generateLoanEstimate()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="le-approvalno">Plan Approval Reference No. (if in hand)</label>
+              <input type="text" id="le-approvalno" placeholder="e.g. BMRDA/2026/XXXX" oninput="generateLoanEstimate()">
+            </div>
+            <div class="form-group">
+              <label for="le-date">Estimate Date</label>
+              <input type="date" id="le-date" oninput="generateLoanEstimate()">
+            </div>
+          </div>
+        </div>
+        <div class="consequence-box">
+          <h4>📊 Stage-wise Break-up (built in automatically)</h4>
+          <p>The estimate splits your total cost into the same construction stages most Karnataka banks use for disbursement — foundation, plinth, slab-wise structure, brickwork &amp; plastering, and finishing/handover — with the percentage and cumulative amount for each, so bank and construction milestones line up exactly.</p>
+        </div>
+        <div class="legal-disclaimer">This is a general-purpose cost estimate for loan submission, not a certified engineering valuation. Some banks require the estimate to be signed by a licensed civil engineer/architect — we can arrange this certification for you on request.</div>
+      </div>
+
+      <!-- LIVE PREVIEW -->
+      <div>
+        <h3 style="margin-bottom:1.25rem;">Step 2 · Preview &amp; Download</h3>
+        <div class="agreement-doc" id="printable-loan-estimate"></div>
+        <div class="btn-group" style="margin-top:1.25rem;">
+          <button class="btn btn--primary" onclick="printLoanEstimate()">🖨️ Print / Save as PDF</button>
+          <button class="btn btn--secondary" onclick="copyLoanEstimateText()">📋 Copy Text</button>
+          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20used%20the%20Bank%20Loan%20Cost%20Estimate%20Generator%20and%20need%20it%20certified%20by%20an%20engineer" class="btn btn--whatsapp">📱 Get It Certified on WhatsApp</a>
         </div>
       </div>
     </div>
@@ -3177,6 +3280,85 @@ function copyConstructionAgreementText() {
   });
 }
 generateConstructionAgreement();
+
+function generateLoanEstimate() {
+  const applicant = document.getElementById('le-applicant').value.trim() || '[Applicant Name]';
+  const bank = document.getElementById('le-bank').value.trim();
+  const site = document.getElementById('le-site').value.trim() || '[Construction Site Address, Hoskote]';
+  const plotarea = document.getElementById('le-plotarea').value || '[Plot Area]';
+  const floors = document.getElementById('le-floors').value.trim() || '[No. of Floors]';
+  const area = parseFloat(document.getElementById('le-area').value) || 0;
+  const rate = parseFloat(document.getElementById('le-rate').value) || 1800;
+  const approvalno = document.getElementById('le-approvalno').value.trim();
+  const dateTxt = fmtDate(document.getElementById('le-date').value) || fmtDate(new Date().toISOString().slice(0,10));
+  const total = area * rate;
+
+  const stages = [
+    { name: 'Foundation & Plinth', pct: 15 },
+    { name: 'Ground Floor Slab (RCC Structure)', pct: 20 },
+    { name: 'Upper Floor Slabs (if applicable)', pct: 15 },
+    { name: 'Brickwork / AAC Block Walls', pct: 15 },
+    { name: 'Plumbing, Electrical & Plastering', pct: 15 },
+    { name: 'Flooring, Tiling & Finishing', pct: 15 },
+    { name: 'Handover & Snag Rectification', pct: 5 },
+  ];
+  let cumulative = 0;
+  const rows = stages.map(s => {
+    const amt = Math.round(total * s.pct / 100);
+    cumulative += amt;
+    return `<tr><td>${s.name}</td><td class="num">${s.pct}%</td><td class="num">₹${amt.toLocaleString('en-IN')}</td><td class="num">₹${cumulative.toLocaleString('en-IN')}</td></tr>`;
+  }).join('');
+
+  const html = `
+    <h4>ESTIMATE OF COST OF CONSTRUCTION</h4>
+    <div class="doc-sub">${bank ? `Prepared for submission to ${bank} · ` : ''}${floors} · ${area || '[Area]'} sq. ft. built-up area</div>
+    <p>Date: <strong>${dateTxt}</strong></p>
+    <p><strong>Applicant / Borrower:</strong> ${applicant}</p>
+    <p><strong>Construction Site:</strong> ${site}</p>
+    <p><strong>Plot / Site Area:</strong> ${plotarea} sq. ft. &nbsp;|&nbsp; <strong>Proposed Structure:</strong> ${floors}, ${area || '[Area]'} sq. ft. total built-up area</p>
+    ${approvalno ? `<p><strong>Plan Approval Reference:</strong> ${approvalno}</p>` : ''}
+
+    <div class="clause-title">1. Basis of Estimate</div>
+    <p>This estimate is prepared at a rate of <strong>₹${rate.toLocaleString('en-IN')} per sq. ft.</strong>, inclusive of structure (RCC, brickwork), plumbing, electrical, flooring, and standard finishing, for a total built-up area of <strong>${area || '[Area]'} sq. ft.</strong>, arriving at an estimated total construction cost of <strong>${inWords(total)}</strong>.</p>
+
+    <div class="clause-title">2. Stage-wise Cost Break-up (for Disbursement Schedule)</div>
+    <div class="tbl-wrap" style="margin:1rem 0;">
+      <table>
+        <thead><tr><th>Construction Stage</th><th class="num">% of Total</th><th class="num">Stage Amount</th><th class="num">Cumulative</th></tr></thead>
+        <tbody>${rows}</tbody>
+        <tfoot><tr><td><strong>Total Estimated Cost</strong></td><td></td><td></td><td class="num"><strong>₹${total.toLocaleString('en-IN')}</strong></td></tr></tfoot>
+      </table>
+    </div>
+    <p style="font-size:.88rem;color:var(--stone-500,#8C857A);">Banks typically release each disbursement tranche after a site inspection confirms the corresponding stage is complete — this schedule is structured to match that process directly.</p>
+
+    <div class="clause-title">3. Materials & Specification Basis</div>
+    <p>This estimate assumes branded cement (Ultratech/ACC, OPC 53 Grade), Fe500D TMT steel, M20 grade concrete (minimum) for structural elements, and standard-quality flooring, plumbing, and electrical fittings. A detailed material specification is available on request and can be annexed to this estimate for the bank's technical appraisal.</p>
+
+    <p style="margin-top:1.5rem;">Prepared by: <strong>HoskoteConstruction</strong>, Balaji Gold City, Hoskote, Karnataka · UDYAM-KR-02-0127051</p>
+
+    <div class="sig-row">
+      <div class="sig-box">PREPARED BY<br>HoskoteConstruction</div>
+      <div class="sig-box">CERTIFIED BY<br>Civil Engineer (Name, License No. & Signature)</div>
+    </div>
+  `;
+  document.getElementById('printable-loan-estimate').innerHTML = html;
+}
+
+function printLoanEstimate() {
+  generateLoanEstimate();
+  window.print();
+}
+
+function copyLoanEstimateText() {
+  generateLoanEstimate();
+  const text = document.getElementById('printable-loan-estimate').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Estimate text copied! Paste it into WhatsApp, Word, or an email.');
+  }).catch(() => {
+    alert('Could not copy automatically — please select and copy the text manually.');
+  });
+}
+generateLoanEstimate();
 </script>
 
 </body>
