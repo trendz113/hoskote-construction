@@ -191,6 +191,15 @@ tr:hover td { background:var(--stone-50); }
 .disclaimer { font-size:.8rem; color:var(--stone-500); border-top:1px solid var(--stone-200); padding-top:1rem; margin-top:2.5rem; }
 .author { display:flex; gap:.75rem; align-items:center; margin-top:2.25rem; padding-top:1.25rem; border-top:1px solid var(--stone-200); }
 .author .av { width:40px; height:40px; border-radius:50%; background:var(--indigo-900); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); }
+
+.read-next{margin:3rem 0 2rem;}
+.read-next h3{font-family:var(--font-display,serif);font-size:1.3rem;color:var(--indigo-900,#1E1B4B);margin-bottom:1rem;}
+.read-next-grid{display:grid;grid-template-columns:1fr;gap:.9rem;}
+@media(min-width:640px){.read-next-grid{grid-template-columns:1fr 1fr 1fr;}}
+.read-next-card{display:block;background:#fff;border:1px solid var(--stone-200,#E8E4DC);border-radius:10px;padding:1.1rem 1.25rem;font-size:.88rem;color:var(--stone-700,#4A4540);font-weight:600;transition:border-color .15s;}
+.read-next-card:hover{border-color:var(--terracotta,#C25E3B);}
+.read-next-card span{display:block;font-weight:400;font-size:.78rem;color:var(--terracotta,#C25E3B);margin-top:.4rem;}
+
 </style>
 </head>
 <body>
@@ -418,6 +427,18 @@ tr:hover td { background:var(--stone-50); }
     </div>
   </div>
 </main>
+
+
+<div class="container">
+  <div class="read-next">
+    <h3>Read Next</h3>
+    <div class="read-next-grid">
+      <a href="/blog/home-loan-hidden-costs-cibil-emi-guide" class="read-next-card">Home Loan Hidden Costs, CIBIL & EMI Guide<span>Read guide →</span></a>
+      <a href="/blog/ec-ekhata-property-registration-hoskote-guide" class="read-next-card">EC, E-Khata & Property Registration Guide<span>Read guide →</span></a>
+      <a href="/blog/construction-contractor-fraud-hoskote-guide" class="read-next-card">How to Avoid Construction Fraud in Hoskote<span>Read guide →</span></a>
+    </div>
+  </div>
+</div>
 
 <footer class="footer">
   <div class="container" style="max-width:1200px;">
