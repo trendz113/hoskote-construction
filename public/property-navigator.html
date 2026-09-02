@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Karnataka Property Portal Navigator | HoskoteConstruction</title>
+<meta name="description" content="Step-by-step guide to Karnataka property government portals — e-Swathu, e-Aasthi, property tax, khata, encumbrance certificate and building approval — by HoskoteConstruction.">
+<link rel="canonical" href="https://hoskoteconstruction.in/property-navigator">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230b5d52'/><text y='.9em' font-size='72' x='12'>🗺️</text></svg>">
+<style>
+  :root{
+    --teal:#0b5d52; --teal-dark:#083f38; --teal-light:#e3f2ef;
+    --ink:#1c2320; --sub:#5a6560; --muted:#8b9490;
+    --border:#dde3e0; --bg:#f6f7f5; --card:#ffffff;
+    --warn-bg:#fdf3e3; --warn-border:#e8c477; --warn-ink:#6b4a06;
+    --good-bg:#eef7ed; --good-border:#a9d4a2; --good-ink:#2e5c28;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.55;
+  }
+  header{
+    background:var(--teal); color:#fff; padding:20px 24px;
+  }
+  header h1{margin:0 0 4px; font-size:19px; font-weight:600;}
+  header p{margin:0; font-size:13px; color:#cfe7e2;}
+  .wrap{display:flex; max-width:1000px; margin:0 auto; min-height:calc(100vh - 78px);}
+  nav{
+    width:260px; flex-shrink:0; background:var(--card); border-right:1px solid var(--border);
+    padding:14px 10px; overflow-y:auto;
+  }
+  #search{
+    width:100%; padding:9px 10px; border:1px solid var(--border); border-radius:6px;
+    font-size:13px; margin-bottom:10px; background:var(--bg);
+  }
+  .group-label{
+    font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted);
+    margin:14px 8px 6px; font-weight:600;
+  }
+  .nav-item{
+    display:block; width:100%; text-align:left; background:none; border:none;
+    padding:9px 10px; border-radius:6px; font-size:13.5px; color:var(--ink);
+    cursor:pointer; margin-bottom:2px;
+  }
+  .nav-item:hover{background:var(--teal-light);}
+  .nav-item.active{background:var(--teal); color:#fff;}
+  .nav-item .tag{display:block; font-size:11px; color:var(--sub); margin-top:1px;}
+  .nav-item.active .tag{color:#cfe7e2;}
+  main{flex:1; padding:24px 28px; min-width:0;}
+  .task-title{font-size:20px; font-weight:600; margin:0 0 2px;}
+  .task-sub{font-size:13.5px; color:var(--sub); margin:0 0 18px;}
+  .linkbox{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:var(--teal-light); border:1px solid #bfe0d9; border-radius:8px;
+    padding:10px 14px; margin-bottom:18px; font-size:13.5px;
+  }
+  .linkbox a{color:var(--teal-dark); font-weight:600; word-break:break-all;}
+  .section{margin-bottom:20px;}
+  .section h3{font-size:13px; text-transform:uppercase; letter-spacing:.03em; color:var(--sub); margin:0 0 8px;}
+  ol.steps{margin:0; padding-left:20px;}
+  ol.steps li{margin-bottom:8px; font-size:14px;}
+  table.fields{width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.fields th, table.fields td{text-align:left; padding:7px 10px; border-bottom:1px solid var(--border);}
+  table.fields th{color:var(--sub); font-weight:600; font-size:12px; text-transform:uppercase;}
+  .note{
+    border-radius:8px; padding:10px 14px; font-size:13.5px; margin-bottom:10px;
+  }
+  .note.warn{background:var(--warn-bg); border:1px solid var(--warn-border); color:var(--warn-ink);}
+  .note.good{background:var(--good-bg); border:1px solid var(--good-border); color:var(--good-ink);}
+  #mynotes{
+    width:100%; min-height:70px; border:1px solid var(--border); border-radius:8px;
+    padding:10px; font-size:13.5px; font-family:inherit; resize:vertical;
+  }
+  .footer-hint{font-size:12px; color:var(--muted); margin-top:6px;}
+  @media(max-width:720px){
+    .wrap{flex-direction:column;}
+    nav{width:100%; border-right:none; border-bottom:1px solid var(--border);}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Karnataka Property Portal Navigator</h1>
+  <p>By <a href="/" style="color:#cfe7e2;">HoskoteConstruction</a> — Hoskote / Bengaluru Rural property paperwork, one screen at a time</p>
+</header>
+
+<div class="wrap">
+  <nav>
+    <input id="search" placeholder="Search e.g. tax, EC, khata...">
+    <div id="navlist"></div>
+  </nav>
+  <main id="main"></main>
+</div>
+
+<script>
+const tasks = [
+  {
+    id: "eswathu-search",
+    group: "Search a property",
+    title: "Search property (e-Swathu)",
+    tag: "Village / Gram Panchayat properties",
+    url: "https://eswathu.karnataka.gov.in/",
+    sub: "Use this when the property is under a Gram Panchayat or town panchayat, not directly under a Municipal Council/Corporation.",
+    steps: [
+      "Open the e-Swathu site and go to the property search screen.",
+      "Select District &rarr; Taluk &rarr; Gram/Town Panchayat.",
+      "Enter the property number, or search by owner name if you don't have it.",
+      "Write down the Property ID / Property Number shown on the result &mdash; you'll need it again for tax and khata."
+    ],
+    fields: [
+      ["ಜಿಲ್ಲೆ", "District"],
+      ["ತಾಲ್ಲೂಕು / ಪಂಚಾಯತ್", "Taluk / Panchayat"],
+      ["ಸ್ವತ್ತಿನ ಸಂಖ್ಯೆ", "Property number"]
+    ],
+    notes: [
+      {type:"good", text:"e-Swathu also gives you Form 9 (A-Khata) and Form 11 (Non-Agriculture land details) from the same search."}
+    ]
+  },
+  {
+    id: "eaasthi-search",
+    group: "Search a property",
+    title: "Search property (e-Aasthi)",
+    tag: "Urban / Municipal Council (ULB) properties",
+    url: "https://eaasthi.karnataka.gov.in/",
+    sub: "Use this when the property falls under a Municipal Council / Corporation (ULB) limit, e.g. Hoskote town Municipal Council area.",
+    steps: [
+      "Open e-Aasthi and go to Search Property Details.",
+      "Select ಜಿಲ್ಲೆ (District) &mdash; e.g. Bengaluru Rural.",
+      "Select ನಗರ ಸ್ಥಳೀಯ ಸಂಸ್ಥೆ (Urban Local Body) &mdash; e.g. Hoskote.",
+      "Enter ಸ್ವತ್ತಿನ ಸಂಖ್ಯೆ (Property number/ID), e.g. 24-567-1064.",
+      "Click Search &mdash; the result panel shows Property Code, District Code, ULB Code/Name, Assessment Number, Address, Property Type, Checkbandi (boundary) North/South/East/West, Site Area, Plinth Area, Block/Ward/Street details, and current-year tax payment status."
+    ],
+    fields: [
+      ["ಜಿಲ್ಲೆ", "District"],
+      ["ನಗರ ಸ್ಥಳೀಯ ಸಂಸ್ಥೆ", "Urban Local Body (ULB) name"],
+      ["ಸ್ವತ್ತಿನ ಸಂಖ್ಯೆ", "Property number"]
+    ],
+    notes: [
+      {type:"good", text:"This is the same page as 'Search Kaveri Properties' (frmSearchKaveriProperties.aspx). Entering the property number here shows it's linked in the background to the tax portal &mdash; useful for tracing which tax record matches this property."}
+    ]
+  },
+  {
+    id: "eswathu-khata",
+    group: "Get a khata",
+    title: "Download / print new khata (e-Swathu)",
+    tag: "Rural / panchayat properties",
+    url: "https://eswathu.karnataka.gov.in/",
+    sub: "For A-Khata (Form 9) copies on properties registered under e-Swathu.",
+    steps: [
+      "Search your property on e-Swathu (see the search task).",
+      "Click the 'New Print Khata' option against your property record.",
+      "You'll be redirected to a Bapuji Seva Kendra payment page carrying your Property ID.",
+      "Complete the payment there.",
+      "Return to e-Swathu to print/download the khata copy."
+    ],
+    notes: [
+      {type:"warn", text:"Clicking 'New Print Khata' does NOT download the file directly &mdash; it first sends you to pay at Bapuji Seva Kendra against your Property ID. Don't assume the click failed if a payment page opens instead."},
+      {type:"good", text:"If the application is rejected, you don't need to start over: open the rejection reason, edit or replace the flagged document, and reapply on the same application."}
+    ]
+  },
+  {
+    id: "eaasthi-khata",
+    group: "Get a khata",
+    title: "Khata application rejected (e-Aasthi)",
+    tag: "Urban properties",
+    url: "https://eaasthi.karnataka.gov.in/",
+    sub: "What to do if your e-Aasthi khata application is rejected.",
+    notes: [
+      {type:"warn", text:"Unlike e-Swathu, e-Aasthi has no edit-and-resubmit option. A rejected application must be filed again from scratch."}
+    ]
+  },
+  {
+    id: "tax-calc",
+    group: "Pay property tax",
+    title: "Estimate tax (Hoskote calculator)",
+    tag: "Before you pay",
+    url: "http://www.hosakotecity.mrc.gov.in/ptaxcalculator/PtaxCal.htm?finyr",
+    sub: "Use this to work out the expected tax amount for the financial year before going to pay.",
+    steps: [
+      "Open the Hoskote City ptaxcalculator page.",
+      "Enter property details / financial year as prompted.",
+      "Note the estimated amount, then proceed to one of the payment options below."
+    ]
+  },
+  {
+    id: "mrc-site",
+    group: "Pay property tax",
+    title: "Municipal website (MRC)",
+    tag: "General portal / starting point",
+    url: "http://www.mrc.gov.in/",
+    sub: "Main municipal site &mdash; use this if you need to find a linked service you don't have a direct URL for."
+  },
+  {
+    id: "mrc-epay",
+    group: "Pay property tax",
+    title: "Pay via MRC epay (challan)",
+    tag: "Direct online challan payment",
+    url: "http://www.mrc.gov.in/epay/welcome.htm",
+    sub: "Pay your property tax challan online and download the receipt afterwards.",
+    steps: [
+      "Open the MRC epay portal.",
+      "Enter your property/assessment number to pull up the due amount.",
+      "Complete the payment.",
+      "Download and save the receipt immediately after payment &mdash; keep a copy for your records."
+    ]
+  },
+  {
+    id: "billdesk",
+    group: "Pay property tax",
+    title: "Pay via BillDesk / Setu",
+    tag: "Alternate payment gateway",
+    url: "https://billpay.setu.co/2028777325142738386/biller-form/DIRE00000KARZ0?isInitialRedirect=true&listRestrictionRedirect=true",
+    sub: "An alternate online billing gateway for the same challan payment, when the MRC epay link doesn't work or times out.",
+    notes: [
+      {type:"warn", text:"This link carries a biller ID that may change over time &mdash; if it stops working, search 'Hoskote City Municipal Council BillDesk payment' to find the current link."}
+    ]
+  },
+  {
+    id: "bsk-tax",
+    group: "Pay property tax",
+    title: "Pay via BSK (18-digit number)",
+    tag: "Rural Development & Panchayat Raj Dept",
+    url: "https://bsk.karnataka.gov.in/BSK/cs/loadPropertyTax",
+    sub: "If you already have the 18-digit property number, this lets you pay directly without going through the search flow.",
+    steps: [
+      "Open the BSK property tax page.",
+      "Enter the 18-digit property number directly.",
+      "Verify the property details shown match before paying.",
+      "Complete payment and save the receipt."
+    ]
+  },
+  {
+    id: "bhu-yojane",
+    group: "Building & approvals",
+    title: "Verify building plan approval status",
+    tag: "Bhu-Yojane / Nirmana",
+    url: "https://bhu-yojane.karnataka.gov.in/",
+    sub: "Check whether a building plan has been approved or rejected.",
+    notes: [
+      {type:"warn", text:"The direct link you had includes a long session token (q3t=...) that expires &mdash; if it doesn't open, go to bhu-yojane.karnataka.gov.in directly and navigate to Nirmana &rarr; plan status search instead of reusing the old link."}
+    ]
+  },
+  {
+    id: "kaveri-ec",
+    group: "Encumbrance Certificate",
+    title: "Apply / download EC",
+    tag: "Kaveri Online",
+    url: "https://kaveri.karnataka.gov.in/",
+    sub: "Apply for and pay for an Encumbrance Certificate.",
+    steps: [
+      "Open Kaveri Online and go to the EC application section.",
+      "Enter property details and the period you need the EC for.",
+      "Pay the applicable fee.",
+      "Download the EC once generated."
+    ],
+    notes: [
+      {type:"warn", text:"For registration or loan purposes, get the EC dated within the last 15 days &mdash; an older EC is often not accepted."}
+    ]
+  }
+];
+
+const navlist = document.getElementById("navlist");
+const main = document.getElementById("main");
+const search = document.getElementById("search");
+let activeId = tasks[0].id;
+
+function renderNav(filter=""){
+  navlist.innerHTML = "";
+  const f = filter.trim().toLowerCase();
+  const groups = [...new Set(tasks.map(t=>t.group))];
+  groups.forEach(g=>{
+    const items = tasks.filter(t=>t.group===g && (
+      !f || t.title.toLowerCase().includes(f) || t.tag.toLowerCase().includes(f) || g.toLowerCase().includes(f)
+    ));
+    if(!items.length) return;
+    const label = document.createElement("div");
+    label.className = "group-label";
+    label.textContent = g;
+    navlist.appendChild(label);
+    items.forEach(t=>{
+      const btn = document.createElement("button");
+      btn.className = "nav-item" + (t.id===activeId ? " active" : "");
+      btn.innerHTML = t.title + '<span class="tag">' + t.tag + '</span>';
+      btn.onclick = () => { activeId = t.id; renderNav(search.value); renderMain(t); };
+      navlist.appendChild(btn);
+    });
+  });
+}
+
+function renderMain(t){
+  let html = `
+    <p class="task-title">${t.title}</p>
+    <p class="task-sub">${t.sub || ""}</p>
+    <div class="linkbox">
+      <span>Open portal</span>
+      <a href="${t.url}" target="_blank" rel="noopener">${t.url}</a>
+    </div>
+  `;
+
+  if(t.steps){
+    html += `<div class="section"><h3>Steps</h3><ol class="steps">`;
+    t.steps.forEach(s => html += `<li>${s}</li>`);
+    html += `</ol></div>`;
+  }
+
+  if(t.fields){
+    html += `<div class="section"><h3>Fields you'll see on screen</h3><table class="fields">
+      <tr><th>Kannada label</th><th>Meaning</th></tr>`;
+    t.fields.forEach(([kn,en]) => html += `<tr><td>${kn}</td><td>${en}</td></tr>`);
+    html += `</table></div>`;
+  }
+
+  if(t.notes){
+    html += `<div class="section">`;
+    t.notes.forEach(n => html += `<div class="note ${n.type}">${n.text}</div>`);
+    html += `</div>`;
+  }
+
+  html += `
+    <div class="section">
+      <h3>My notes for this task</h3>
+      <textarea id="mynotes" placeholder="Jot property IDs, receipt numbers, or anything you want to remember here..."></textarea>
+      <p class="footer-hint">Not saved between visits &mdash; copy anything important elsewhere before closing this page.</p>
+    </div>
+  `;
+
+  main.innerHTML = html;
+}
+
+search.addEventListener("input", () => renderNav(search.value));
+renderNav();
+renderMain(tasks[0]);
+</script>
+
+</body>
+</html>
