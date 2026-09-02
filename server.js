@@ -489,6 +489,11 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
+// ─── REDIRECT OLD SITEREADY URL ───
+app.get('/siteready', (req, res) => {
+  res.redirect(301, '/property-document-service-hoskote');
+});
+
 // ─── SERVE INDEX ───
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
