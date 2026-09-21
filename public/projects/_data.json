@@ -142,5 +142,29 @@
     "sqft_est": 2400,
     "cost_low": 41.0,
     "cost_high": 45.4
+  },
+  {
+    "slug": "blue-white-duplex-house-malur",
+    "family": "Venkatesh",
+    "title": "Blue-and-White Duplex Home \u2014 Malur",
+    "floors": "Duplex",
+    "floor_count": 2,
+    "plot": null,
+    "plot_sqft": null,
+    "location": "Malur",
+    "package": "Better-Living",
+    "rate": 2000,
+    "tag_desc": "Better-Living Package",
+    "challenge": "A duplex of about 2,000 sqft needs a front elevation that looks confident from the road, stays easy to maintain, and still feels warm rather than heavy.",
+    "approach": "We kept a simple blue-and-white palette with wood accents and let a few details carry the design: a jaali terrace screen, a glass balcony railing, concealed facade lighting and a slatted gate that repeats the facade's diagonal pattern.",
+    "outcome": "Delivered as a 2,000 sqft duplex in Malur in 8 months, with a jaali terrace screen, glass balcony railing, warm facade lighting, covered car porch, wooden-slat gate and blue-based compound wall.",
+    "img": "blue-white-duplex-house-malur.jpg",
+    "imgalt": "Blue-and-white 2,000 sqft duplex house in Malur at dusk, with a jaali terrace parapet, glass balcony railing and a lit car porch",
+    "floors_desc_short": "ground floor plus first floor",
+    "per_floor_sqft": 1000,
+    "timeline": "8 months",
+    "sqft_est": 2000,
+    "cost_low": 38.0,
+    "cost_high": 42.0
   }
 ]
