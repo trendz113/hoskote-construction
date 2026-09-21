@@ -7,6 +7,7 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
+const compression = require('compression');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,9 +20,20 @@ cloudinary.config({
 });
 
 // ─── MIDDLEWARE ───
+app.disable('x-powered-by');
+app.use(compression());
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
+app.use(express.static(path.join(__dirname, 'public'), {
+  extensions: ['html'],
+  setHeaders(res, filePath) {
+    const base = path.basename(filePath);
+    // keep the admin page and internal data files out of Google
+    if (base === 'admin.html' || base.startsWith('_')) res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+    // images and icons change rarely: let browsers cache them for a week
+    if (/\.(jpe?g|png|webp|svg|ico|woff2?)$/i.test(base)) res.setHeader('Cache-Control', 'public, max-age=604800');
+  },
+}));
 
 // ─── CLOUDINARY MULTER STORAGE ───
 const storage = new CloudinaryStorage({
@@ -497,6 +509,12 @@ app.get('/siteready', (req, res) => {
 // ─── SERVE INDEX ───
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// --- 404 (after every real route) ---
+app.use((req, res) => {
+  if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Not found' });
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
 app.listen(PORT, () => {
