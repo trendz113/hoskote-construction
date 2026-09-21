@@ -94,18 +94,8 @@ ul.bullet li{margin-bottom:.4rem;}
 .footer{background:var(--stone-900);color:rgba(255,255,255,.55);padding:2.5rem 0;margin-top:3rem;text-align:center;font-size:.82rem;}
 .footer a{color:rgba(255,255,255,.75);}
 
-.photo{position:relative;margin:1.5rem 0 .9rem;}
+.photo{margin:1.5rem 0 1.75rem;}
 .photo .hero-img{margin:0;display:block;height:auto;}
-.hot{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;border:2px solid #fff;background:var(--terracotta);color:#fff;font:700 1rem/1 var(--font-body);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;padding:0;}
-.hot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(255,255,255,.75);opacity:0;}
-@media(prefers-reduced-motion:no-preference){.hot::after{animation:ring 2.4s ease-out 3;}}
-@keyframes ring{0%{transform:scale(.7);opacity:.9;}100%{transform:scale(1.55);opacity:0;}}
-.hot[aria-pressed="true"]{background:var(--indigo-900);}
-.hot:focus-visible{outline:3px solid var(--indigo-600);outline-offset:3px;}
-@media(max-width:600px){.hot{width:26px;height:26px;font-size:.9rem;}}
-.hot-note{background:#fff;border:1px solid var(--stone-200);border-radius:var(--radius);padding:.9rem 1.1rem;margin-bottom:1.75rem;min-height:5rem;}
-.hot-note strong{display:block;font-family:var(--font-display);font-weight:400;font-size:1.1rem;color:var(--indigo-900);margin-bottom:.1rem;}
-.hot-note span{font-size:.92rem;color:var(--stone-700);}
 .small-note{font-size:.82rem;color:var(--stone-500);margin-top:-.5rem;}
 </style>
 </head>
@@ -129,15 +119,7 @@ ul.bullet li{margin-bottom:.4rem;}
 
   <div class="photo" id="photo">
     <img class="hero-img" src="/projects/images/blue-white-duplex-house-malur.jpg" width="1280" height="960" alt="Blue-and-white 2,000 sqft duplex house in Malur at dusk, with a jaali terrace parapet, glass balcony railing and a lit car porch" loading="eager">
-    <button type="button" class="hot" style="left:42%;top:17%;" data-i="0" aria-pressed="false" aria-label="Jaali screen on the terrace">+</button>
-    <button type="button" class="hot" style="left:47%;top:27%;" data-i="1" aria-pressed="false" aria-label="Warm cove lighting">+</button>
-    <button type="button" class="hot" style="left:53%;top:39%;" data-i="2" aria-pressed="false" aria-label="Glass balcony railing">+</button>
-    <button type="button" class="hot" style="left:73%;top:44%;" data-i="3" aria-pressed="false" aria-label="Covered car porch">+</button>
-    <button type="button" class="hot" style="left:60%;top:61%;" data-i="4" aria-pressed="false" aria-label="Wooden-slat gate">+</button>
-    <button type="button" class="hot" style="left:22%;top:66%;" data-i="5" aria-pressed="false" aria-label="Blue-based compound wall">+</button>
   </div>
-  <div class="hot-note" id="hotNote" role="status" aria-live="polite"><strong>Tap a dot on the photo</strong><span>Six details worth a closer look.</span></div>
-
   <div class="tag-row">
     <span class="tag">DUPLEX</span>
     <span class="tag">2,000 SQFT</span>
@@ -207,23 +189,6 @@ ul.bullet li{margin-bottom:.4rem;}
     <p style="margin-top:.5rem;">© 2026 HoskoteConstruction.in · Hoskote, Karnataka · UDYAM-KR-02-0127051</p>
   </div>
 </footer>
-
-<script>
-(function () {
-  var items = [{"t": "Jaali screen on the terrace", "d": "A decorative jaali screen runs along the terrace parapet. It gives the roofline a pattern and some privacy, and still lets air through."}, {"t": "Warm cove lighting", "d": "Concealed warm lighting under the first-floor slab makes the balcony and porch glow at dusk, so the house looks welcoming after dark."}, {"t": "Glass balcony railing", "d": "A glass railing keeps the first-floor balcony open, so the view is not blocked and the facade stays light."}, {"t": "Covered car porch", "d": "A covered porch with accent-lit pillars gives the car and two-wheelers shade at the front of the house."}, {"t": "Wooden-slat gate", "d": "The slatted gate uses a diagonal pattern that echoes the geometry of the facade."}, {"t": "Blue-based compound wall", "d": "The compound wall carries the house colours out to the street, so the plot reads as one design."}];
-  var note = document.getElementById('hotNote');
-  var btns = document.querySelectorAll('.hot');
-  btns.forEach(function (b) {
-    b.addEventListener('click', function () {
-      var it = items[+b.getAttribute('data-i')];
-      btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-      note.innerHTML = '<strong></strong><span></span>';
-      note.querySelector('strong').textContent = it.t;
-      note.querySelector('span').textContent = it.d;
-    });
-  });
-})();
-</script>
 
 <script type="application/ld+json">
 {
