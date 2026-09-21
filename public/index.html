@@ -423,10 +423,11 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 .blog-article table { width: 100%; border-collapse: collapse; font-size: .85rem; margin-bottom: 1.25rem; }
 .blog-article th { background: var(--indigo-900); color: white; padding: .7rem .9rem; text-align: left; font-size: .75rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .05em; }
 .blog-article td { padding: .7rem .9rem; border-bottom: 1px solid var(--stone-200); }
+#print-holder { display: none; }
 @media print {
-  body * { visibility: hidden; }
-  #printable-agreement, #printable-agreement * { visibility: visible; }
-  #printable-agreement { position: absolute; top: 0; left: 0; width: 100%; max-height: none; overflow: visible; border: none; padding: 0; }
+  body.printing-doc > *:not(#print-holder) { display: none !important; }
+  #print-holder { display: block; }
+  #print-holder .agreement-doc { max-height: none; overflow: visible; border: none; padding: 0; box-shadow: none; }
 }
 
 /* ============================================================ ABOUT */
@@ -2897,6 +2898,27 @@ async function submitForm() {
 }
 
 // ============================================================ DOCUMENT HELPERS (shared by the agreement / estimate tools)
+// Print one document: copy it into a temporary holder and hide everything else while printing
+function printDocById(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const old = document.getElementById('print-holder');
+  if (old) old.remove();
+  const holder = document.createElement('div');
+  holder.id = 'print-holder';
+  const clone = el.cloneNode(true);
+  clone.removeAttribute('id');
+  holder.appendChild(clone);
+  document.body.appendChild(holder);
+  document.body.classList.add('printing-doc');
+  window.addEventListener('afterprint', function cleanup() {
+    document.body.classList.remove('printing-doc');
+    holder.remove();
+    window.removeEventListener('afterprint', cleanup);
+  });
+  window.print();
+}
+
 function fmtDate(d) {
   if (!d) return '[Start Date]';
   const dt = new Date(d + 'T00:00:00');
@@ -3002,7 +3024,7 @@ function generateConstructionAgreement() {
 
 function printConstructionAgreement() {
   generateConstructionAgreement();
-  window.print();
+  printDocById('printable-construction-agreement');
 }
 
 function copyConstructionAgreementText() {
@@ -3103,7 +3125,7 @@ function generateLoanEstimate() {
 
 function printLoanEstimate() {
   generateLoanEstimate();
-  window.print();
+  printDocById('printable-loan-estimate');
 }
 
 function copyLoanEstimateText() {
