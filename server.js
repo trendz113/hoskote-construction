@@ -190,17 +190,37 @@ const STAGES = [
 ];
 
 // ─── ADMIN AUTH MIDDLEWARE ───
+// Fails closed: if ADMIN_PASSWORD is not set, nobody gets in (previously an unset
+// variable let requests with no password through). Header only — a password in the
+// URL ends up in logs and browser history.
+function passwordMatches(candidate) {
+  const expected = process.env.ADMIN_PASSWORD;
+  if (!expected || typeof candidate !== 'string') return false;
+  const a = crypto.createHash('sha256').update(candidate).digest();
+  const b = crypto.createHash('sha256').update(expected).digest();
+  return crypto.timingSafeEqual(a, b);
+}
+
 function adminAuth(req, res, next) {
-  const pass = req.headers['x-admin-password'] || req.query.password;
-  if (pass !== process.env.ADMIN_PASSWORD) {
+  if (!passwordMatches(req.headers['x-admin-password'])) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   next();
 }
 
+// ─── SHORT-LIVED CACHE FOR PROJECT PHOTOS ───
+// /api/projects runs ~30 Cloudinary searches per call; cache for 60s and clear on upload/delete.
+let projectsCache = null;
+let projectsCacheAt = 0;
+const PROJECTS_TTL_MS = 60 * 1000;
+function clearProjectsCache() { projectsCache = null; projectsCacheAt = 0; }
+
 // ─── API: GET ALL PROJECTS WITH PHOTOS ───
 app.get('/api/projects', async (req, res) => {
   try {
+    if (projectsCache && Date.now() - projectsCacheAt < PROJECTS_TTL_MS) {
+      return res.json(projectsCache);
+    }
     const projectsWithPhotos = await Promise.all(
       PROJECTS.map(async (project) => {
         const stages = {};
@@ -228,7 +248,9 @@ app.get('/api/projects', async (req, res) => {
         return { ...project, stages };
       })
     );
-    res.json({ projects: projectsWithPhotos, stages: STAGES });
+    projectsCache = { projects: projectsWithPhotos, stages: STAGES };
+    projectsCacheAt = Date.now();
+    res.json(projectsCache);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to fetch projects' });
@@ -268,6 +290,7 @@ app.get('/api/projects/:id', async (req, res) => {
 // ─── API: UPLOAD PHOTO (admin only) ───
 app.post('/api/upload', adminAuth, upload.single('photo'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+  clearProjectsCache();
   res.json({
     success: true,
     url: req.file.path,
@@ -283,6 +306,7 @@ app.delete('/api/photo', adminAuth, async (req, res) => {
   if (!publicId) return res.status(400).json({ error: 'publicId required' });
   try {
     await cloudinary.uploader.destroy(publicId);
+    clearProjectsCache();
     res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: 'Delete failed' });
@@ -297,13 +321,14 @@ app.patch('/api/projects/:id', adminAuth, (req, res) => {
   allowed.forEach(key => {
     if (req.body[key] !== undefined) project[key] = req.body[key];
   });
+  clearProjectsCache();
   res.json({ success: true, project });
 });
 
 // ─── API: VERIFY ADMIN ───
 app.post('/api/admin/verify', (req, res) => {
-  const { password } = req.body;
-  if (password === process.env.ADMIN_PASSWORD) {
+  const { password } = req.body || {};
+  if (passwordMatches(password)) {
     res.json({ success: true });
   } else {
     res.status(401).json({ error: 'Wrong password' });
