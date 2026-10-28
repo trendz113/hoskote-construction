@@ -83,3 +83,14 @@ Then redeploy. Upload photos via `/admin`.
 
 ## WhatsApp Number
 Search for `XXXXXXXXXX` in `public/index.html` and replace with real number.
+
+## Keeping leads and contractor applications safe (important)
+
+Leads and contractor applications are saved as JSON files. Railway wipes the app folder on every
+deploy, so without a Volume they are **lost on each redeploy**.
+
+1. In Railway, open your service, then **Volumes**, then **New Volume**. Mount path: `/data`.
+2. Under **Variables**, add `DATA_DIR=/data`.
+3. Redeploy. The server logs a warning on startup if `DATA_DIR` is missing.
+
+Also set `ADMIN_PASSWORD` in Variables. The admin area stays locked until it is set.

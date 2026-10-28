@@ -107,7 +107,14 @@ const contractorStorage = new CloudinaryStorage({
 const uploadContractorPhotos = multer({ storage: contractorStorage, limits: { files: 3, fileSize: 8 * 1024 * 1024 } });
 
 // ─── CONTRACTOR LISTINGS: FILE-BASED STORAGE ───
-const CONTRACTORS_FILE = path.join(__dirname, 'data', 'contractors.json');
+// Where leads and contractor listings are saved. Set DATA_DIR to a folder on a Railway Volume
+// (for example /data) so they survive redeploys. Without it they live inside the app folder,
+// which Railway resets on every deploy.
+const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.join(__dirname, 'data');
+if (!process.env.DATA_DIR && (process.env.RAILWAY_ENVIRONMENT || process.env.RAILWAY_PROJECT_ID)) {
+  console.warn('WARNING: DATA_DIR is not set. Leads and contractor applications will be LOST on the next deploy. Attach a Railway Volume and set DATA_DIR to its mount path.');
+}
+const CONTRACTORS_FILE = path.join(DATA_DIR, 'contractors.json');
 
 function readContractors() {
   try {
@@ -123,7 +130,9 @@ function readContractors() {
 function writeContractors(list) {
   try {
     fs.mkdirSync(path.dirname(CONTRACTORS_FILE), { recursive: true });
-    fs.writeFileSync(CONTRACTORS_FILE, JSON.stringify(list, null, 2));
+    const tmp = CONTRACTORS_FILE + '.tmp';
+    fs.writeFileSync(tmp, JSON.stringify(list, null, 2));
+    fs.renameSync(tmp, CONTRACTORS_FILE);
     return true;
   } catch (err) {
     console.error('Failed to write contractors.json', err);
@@ -132,7 +141,7 @@ function writeContractors(list) {
 }
 
 // ─── LEADS (quote/site-visit requests): FILE-BASED STORAGE ───
-const LEADS_FILE = path.join(__dirname, 'data', 'leads.json');
+const LEADS_FILE = path.join(DATA_DIR, 'leads.json');
 
 function readLeads() {
   try {
@@ -148,7 +157,9 @@ function readLeads() {
 function writeLeads(list) {
   try {
     fs.mkdirSync(path.dirname(LEADS_FILE), { recursive: true });
-    fs.writeFileSync(LEADS_FILE, JSON.stringify(list, null, 2));
+    const tmp = LEADS_FILE + '.tmp';
+    fs.writeFileSync(tmp, JSON.stringify(list, null, 2));
+    fs.renameSync(tmp, LEADS_FILE);
     return true;
   } catch (err) {
     console.error('Failed to write leads.json', err);
@@ -575,6 +586,21 @@ app.delete('/api/leads/:id', adminAuth, (req, res) => {
 });
 
 // ══════════════════════════════════════════════════════════════════════════════════════════════
+
+// ─── UPLOAD / BODY ERRORS: return clean JSON instead of a stack-trace page ───
+app.use((err, req, res, next) => {
+  if (!err) return next();
+  if (err.name === 'MulterError') {
+    const msg = err.code === 'LIMIT_FILE_SIZE' ? 'Photo is too large (max 8 MB each).'
+      : (err.code === 'LIMIT_UNEXPECTED_FILE' || err.code === 'LIMIT_FILE_COUNT') ? 'Too many photos (max 3).'
+      : 'Upload failed.';
+    return res.status(400).json({ error: msg });
+  }
+  if (err.type === 'entity.too.large') return res.status(413).json({ error: 'Request too large.' });
+  if (err.type === 'entity.parse.failed') return res.status(400).json({ error: 'Invalid request.' });
+  console.error(err);
+  res.status(500).json({ error: 'Something went wrong.' });
+});
 
 // ─── SERVE ADMIN PAGE ───
 app.get('/admin', (req, res) => {

@@ -33,7 +33,7 @@
   "image": "https://hoskoteconstruction.in/og-image.jpg",
   "logo": "https://hoskoteconstruction.in/og-image.jpg",
   "url": "https://hoskoteconstruction.in/",
-  "telephone": "+91-97428-01802",
+  "telephone": "+91-78926-69947",
   "email": "hello@hoskoteconstruction.in",
   "priceRange": "₹₹",
   "address": {
@@ -109,7 +109,7 @@
   --stone-100: #F4F2EE;
   --stone-200: #E8E4DC;
   --stone-300: #D4CEC2;
-  --stone-500: #8C857A;
+  --stone-500: #6E685E;
   --stone-700: #4A4540;
   --stone-900: #1C1917;
 
@@ -118,11 +118,11 @@
   --indigo-600: #4F46E5;
   --indigo-100: #E0E7FF;
 
-  --terracotta: #C25E3B;
+  --terracotta: #AE4F2D;
   --terracotta-light: #F7EAE4;
-  --terracotta-dark: #9B3E22;
+  --terracotta-dark: #8A3B20;
 
-  --green-600: #16A34A;
+  --green-600: #15803D;
   --green-100: #DCFCE7;
 
   --gold: #D4A017;
@@ -190,7 +190,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 .btn--primary:hover { background: var(--terracotta-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(194,94,59,.35); }
 .btn--secondary { background: white; color: var(--stone-900); border: 1.5px solid var(--stone-200); }
 .btn--secondary:hover { border-color: var(--stone-300); box-shadow: var(--shadow-sm); }
-.btn--whatsapp { background: #25D366; color: white; }
+.btn--whatsapp { background: #15803D; color: white; }
 .btn--whatsapp:hover { background: #128C7E; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,211,102,.35); }
 .btn--ghost { color: var(--terracotta); border: 1.5px solid var(--terracotta); background: transparent; }
 .btn--ghost:hover { background: var(--terracotta-light); }
@@ -385,12 +385,14 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   .mobile-float-bar { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 98; box-shadow: 0 -4px 16px rgba(28,25,23,.12); }
   .mobile-float-bar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: .4rem; padding: .95rem .5rem; font-size: .875rem; font-weight: 700; color: white; }
   .mobile-float-bar a.call-btn { background: var(--indigo-900); }
-  .mobile-float-bar a.wa-btn { background: #25D366; }
+  .mobile-float-bar a.wa-btn { background: #15803D; }
   .wa-float { display: none !important; } /* the sticky bar already has WhatsApp; the round button overlapped it */
   body { padding-bottom: 58px; }
 }
 
 /* ============================================================ RENTAL AGREEMENT TOOL */
+.skip-link { position: absolute; left: -9999px; top: 0; background: #1c1917; color: #fff; padding: .6rem 1rem; z-index: 1000; border-radius: 0 0 8px 0; }
+.skip-link:focus { left: 0; }
 .nav-badge { background: var(--green-600); color: white; font-size: .6rem; font-weight: 700; padding: .12rem .4rem; border-radius: 4px; margin-left: .35rem; vertical-align: middle; letter-spacing: .04em; }
 .promo-strip { background: linear-gradient(90deg, var(--gold), #E8B830); color: var(--stone-900); text-align: center; padding: .65rem 1rem; font-size: .875rem; font-weight: 600; }
 .promo-strip a { text-decoration: underline; font-weight: 700; }
@@ -590,6 +592,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 <body>
 
 <!-- ============================================================ NAV -->
+<a href="#main" class="skip-link">Skip to main content</a>
 <nav class="nav" id="top-nav">
   <div class="container">
     <div class="nav__inner">
@@ -620,7 +623,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <a href="#about" class="nav__link">About Us</a>
         <a href="#contact" class="nav__link">Contact</a>
       </div>
-      <a href="tel:+919742801802" class="nav__call" title="Call Now">📞</a>
+      <a href="tel:+917892669947" class="nav__call" title="Call Now">📞</a>
       <a href="https://instagram.com/hoskoteconstruction" target="_blank" rel="noopener" class="nav__call" title="Follow on Instagram">📸</a>
       <a href="#contact" class="nav__cta">Get Free Estimate</a>
       <button class="nav__mobile-toggle" id="mobileToggle" aria-label="Menu">
@@ -663,8 +666,8 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <a href="#about" class="nav__drawer-link">👥 About Us</a>
       <a href="#contact" class="nav__drawer-link">📞 Contact</a>
       <div style="margin-top:1rem;display:flex;flex-direction:column;gap:.6rem;">
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg" style="width:100%;justify-content:center;">📱 WhatsApp Us Now</a>
-        <a href="tel:+919742801802" class="btn btn--secondary btn--lg" style="width:100%;justify-content:center;">📞 Call +91 97428 01802</a>
+        <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg" style="width:100%;justify-content:center;">📱 WhatsApp Us Now</a>
+        <a href="tel:+917892669947" class="btn btn--secondary btn--lg" style="width:100%;justify-content:center;">📞 Call +91 78926 69947</a>
       </div>
     </div>
   </div>
@@ -672,8 +675,8 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 
 <!-- ============================================================ MOBILE STICKY CALL/WHATSAPP BAR -->
 <div class="mobile-float-bar">
-  <a href="tel:+919742801802" class="call-btn">📞 Call Now</a>
-  <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="wa-btn">📱 WhatsApp</a>
+  <a href="tel:+917892669947" class="call-btn">📞 Call Now</a>
+  <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="wa-btn">📱 WhatsApp</a>
 </div>
 
 <!-- ============================================================ PAGE TAB NAV -->
@@ -692,6 +695,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   </div>
 </div>
 
+<main id="main">
 <!-- ============================================================ HERO -->
 <section class="hero" id="home">
   <div class="container">
@@ -702,8 +706,8 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <p class="hero__lead">See clearly what your house will cost. Know every step of the process. Follow your build through WhatsApp photo updates. Written agreement and stage-wise payments, before you commit.</p>
         <div class="btn-group">
           <a href="#calculator" class="btn btn--primary btn--lg">🧮 Get Free Cost Estimate</a>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg">📱 Book Free Site Visit</a>
-          <a href="tel:+919742801802" class="btn btn--secondary btn--lg">📞 Call Now</a>
+          <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg">📱 Book Free Site Visit</a>
+          <a href="tel:+917892669947" class="btn btn--secondary btn--lg">📞 Call Now</a>
         </div>
         <div class="hero__trust">
           <div class="hero__stat"><div class="hero__stat-num">₹1,800+</div><div class="hero__stat-label">Construction / sq ft</div></div>
@@ -901,7 +905,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
     </div>
 
     <div style="text-align:center;">
-      <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20to%20see%20more%20completed%20project%20photos" class="btn btn--whatsapp">📱 See More Projects on WhatsApp</a>
+      <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20to%20see%20more%20completed%20project%20photos" class="btn btn--whatsapp">📱 See More Projects on WhatsApp</a>
       <p style="font-size:.8rem;color:var(--stone-500);margin-top:.875rem;">We have photos from foundation to finish for every project. Ask us.</p>
     </div>
   </div>
@@ -931,7 +935,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
           <li>Weekly WhatsApp photo updates</li>
           <li>Written agreement + GST invoice</li>
         </ul>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%20Comfortable%20Home%20package" class="btn btn--ghost" style="width:100%;justify-content:center;">Ask on WhatsApp</a>
+        <a href="https://wa.me/917892669947?text=Hi%2C%20I%27m%20interested%20in%20the%20Comfortable%20Home%20package" class="btn btn--ghost" style="width:100%;justify-content:center;">Ask on WhatsApp</a>
       </div>
 
       <div class="pricing-card pricing-card--popular">
@@ -949,7 +953,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
           <li><strong>Daily</strong> WhatsApp photo + video updates</li>
           <li>You approve each stage before paying</li>
         </ul>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%20Better-Living%20Home%20package" class="btn btn--primary" style="width:100%;justify-content:center;">Get Started</a>
+        <a href="https://wa.me/917892669947?text=Hi%2C%20I%27m%20interested%20in%20the%20Better-Living%20Home%20package" class="btn btn--primary" style="width:100%;justify-content:center;">Get Started</a>
       </div>
 
       <div class="pricing-card">
@@ -967,12 +971,12 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
           <li>Daily updates + weekly video walkthroughs</li>
           <li>Dedicated site supervisor assigned</li>
         </ul>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%20Dream%20Home%20package" class="btn btn--ghost" style="width:100%;justify-content:center;">Ask on WhatsApp</a>
+        <a href="https://wa.me/917892669947?text=Hi%2C%20I%27m%20interested%20in%20the%20Dream%20Home%20package" class="btn btn--ghost" style="width:100%;justify-content:center;">Ask on WhatsApp</a>
       </div>
     </div>
 
     <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-top:1.5rem;">
-      <h4 style="margin-bottom:.5rem;">Not included in the per sq ft rate</h4>
+      <h4 role="heading" aria-level="3" style="margin-bottom:.5rem;">Not included in the per sq ft rate</h4>
       <p style="font-size:.875rem;color:var(--stone-700);">Compound wall, gate, borewell, BMRDA approval fees, temporary electricity connection, permanent BESCOM connection, interiors, and land cost. Costs are shown below so you can plan your total budget.</p>
       <p style="font-size:.8rem;color:var(--stone-500);margin-top:.6rem;">Rates are indicative, apply to construction cost only, and are confirmed in your written quote after a site visit. Ask us how built-up area is measured and how GST is applied to your quote before you sign.</p>
     </div>
@@ -1091,7 +1095,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
                 <h4 style="color:white;margin-bottom:.25rem;">Typical G+1 House — Hoskote</h4>
                 <p style="font-size:.8rem;color:rgba(255,255,255,.6);">2 BHK · Better-Living package · 1,400 sqft</p>
               </div>
-              <select onchange="updateTimeline(this.value)" style="background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:.4rem .75rem;font-size:.8rem;">
+              <select aria-label="Choose number of floors for the timeline" onchange="updateTimeline(this.value)" style="background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:.4rem .75rem;font-size:.8rem;">
                 <option value="g">Ground Floor Only</option>
                 <option value="g1" selected>G+1 (Two floors)</option>
                 <option value="g2">G+2 (Three floors)</option>
@@ -1239,7 +1243,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 
     <div style="background:var(--stone-100);border-radius:var(--radius-lg);padding:2rem;text-align:center;">
       <p style="font-size:.9rem;color:var(--stone-500);margin-bottom:1rem;">Want to speak to any of these families before making your decision?</p>
-      <a href="https://wa.me/919742801802?text=Hi%2C%20I%27d%20like%20to%20speak%20to%20your%20past%20customers%20before%20deciding" class="btn btn--primary">📱 Request Customer References</a>
+      <a href="https://wa.me/917892669947?text=Hi%2C%20I%27d%20like%20to%20speak%20to%20your%20past%20customers%20before%20deciding" class="btn btn--primary">📱 Request Customer References</a>
     </div>
   </div>
 </section>
@@ -1739,7 +1743,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
     <div style="background:var(--indigo-900);border-radius:var(--radius-lg);padding:2rem;text-align:center;margin-top:2rem;">
       <h3 style="color:white;margin-bottom:.75rem;">Still have a question not answered here?</h3>
       <p style="color:rgba(255,255,255,.65);margin-bottom:1.5rem;">We typically respond within 2 hours on WhatsApp. Ask anything — no question is too basic.</p>
-      <a href="https://wa.me/919742801802?text=Hi%2C%20I%20have%20a%20question%20about%20construction%20in%20Hoskote" class="btn btn--whatsapp btn--lg">📱 Ask on WhatsApp</a>
+      <a href="https://wa.me/917892669947?text=Hi%2C%20I%20have%20a%20question%20about%20construction%20in%20Hoskote" class="btn btn--whatsapp btn--lg">📱 Ask on WhatsApp</a>
     </div>
   </div>
 </section>
@@ -1831,20 +1835,20 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         </div>
         <p style="font-size:.78rem;color:var(--stone-500);margin-top:.75rem;">By sending this form you agree that we may use your details only to contact you about your enquiry. We do not sell or publish them.</p>
         <button class="btn btn--primary btn--lg" id="cf-submit-btn" style="width:100%;justify-content:center;margin-top:1rem;" onclick="submitForm()">Send My Request →</button>
-        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.875rem;text-align:center;">Or WhatsApp directly: <a href="https://wa.me/919742801802" style="color:var(--terracotta);font-weight:600;">+91 97428 01802</a></p>
+        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.875rem;text-align:center;">Or WhatsApp directly: <a href="https://wa.me/917892669947" style="color:var(--terracotta);font-weight:600;">+91 78926 69947</a></p>
       </div>
 
       <div>
         <h3 style="margin-bottom:1.5rem;">Three ways to reach us</h3>
 
         <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg" style="justify-content:center;">📱 WhatsApp: +91 97428 01802</a>
-          <a href="tel:+919742801802" class="btn btn--secondary btn--lg" style="justify-content:center;">📞 Call: +91 97428 01802</a>
+          <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg" style="justify-content:center;">📱 WhatsApp: +91 78926 69947</a>
+          <a href="tel:+917892669947" class="btn btn--secondary btn--lg" style="justify-content:center;">📞 Call: +91 78926 69947</a>
           <a href="mailto:hello@hoskoteconstruction.in" class="btn btn--secondary btn--lg" style="justify-content:center;">✉️ hello@hoskoteconstruction.in</a>
         </div>
 
         <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem;">
-          <h4 style="margin-bottom:1rem;">Office Location</h4>
+          <h4 role="heading" aria-level="3" style="margin-bottom:1rem;">Office Location</h4>
           <p style="font-size:.875rem;color:var(--stone-700);line-height:1.75;">
             Balaji Gold City<br>
             Hoskote, Bengaluru Rural<br>
@@ -1953,7 +1957,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div class="answer-card__a">The first step is a free site visit — no cost, no commitment. We come to your plot, assess the soil and access, discuss your requirements, and give you a written estimate within 24 hours. WhatsApp us or call to book. We respond within 2 hours on working days.</div>
         <a href="#contact" class="answer-card__link">Book site visit →</a>
       </div>
-      <div class="answer-card" style="background:var(--indigo-900); border-color:var(--indigo-900); cursor:pointer;" onclick="location.href = 'https://wa.me/919742801802?text=Hi%2C%20I%20have%20a%20question%20about%20building%20in%20Hoskote'">
+      <div class="answer-card" style="background:var(--indigo-900); border-color:var(--indigo-900); cursor:pointer;" onclick="location.href = 'https://wa.me/917892669947?text=Hi%2C%20I%20have%20a%20question%20about%20building%20in%20Hoskote'">
         <div class="answer-card__icon" style="background:rgba(255,255,255,.12);">💬</div>
         <div class="answer-card__q" style="color:white;">Have a different question?</div>
         <div class="answer-card__a" style="color:rgba(255,255,255,.65);">We typically respond within 2 hours on WhatsApp. No call centres, no scripts — you talk to the actual team building in Hoskote.</div>
@@ -1975,21 +1979,21 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div class="answer-card__icon" style="background:var(--gold-light);">📍</div>
         <div class="answer-card__q">1,400 sqft West-Facing Plot for Sale — Hoskote</div>
         <div class="answer-card__a">1,400 sqft west-facing plot in a <strong>BMRDA-approved layout</strong> with all amenities, available for <strong>immediate sale</strong>. Price: <strong>₹6,500 per sqft</strong> (about ₹91 lakh), negotiable. Contact us for the exact location, documents and a site visit.</div>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%201400%20sqft%20west-facing%20plot%20for%20sale%20in%20Hoskote" class="answer-card__link">Enquire on WhatsApp →</a>
+        <a href="https://wa.me/917892669947?text=Hi%2C%20I%27m%20interested%20in%20the%201400%20sqft%20west-facing%20plot%20for%20sale%20in%20Hoskote" class="answer-card__link">Enquire on WhatsApp →</a>
       </div>
       <div class="answer-card">
         <div class="answer-card__icon" style="background:var(--terracotta-light);">🏢</div>
         <div class="answer-card__q">New 2BHK Flat for Sale — Hoskote</div>
         <div class="answer-card__a">Brand new 2BHK flat, ready to move. <strong>₹70 Lakhs, all inclusive</strong>. Prices are increasing, so enquire early. Ideal for families or first-time buyers looking to move in without construction wait time.</div>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%202BHK%20flat%20for%20sale%20-%2070%20Lakhs" class="answer-card__link">Enquire on WhatsApp →</a>
+        <a href="https://wa.me/917892669947?text=Hi%2C%20I%27m%20interested%20in%20the%202BHK%20flat%20for%20sale%20-%2070%20Lakhs" class="answer-card__link">Enquire on WhatsApp →</a>
       </div>
       <div class="answer-card">
         <div class="answer-card__icon" style="background:var(--green-100);">📐</div>
         <div class="answer-card__q">Open Plots for Sale — Best Sizes in Hoskote</div>
         <div class="answer-card__a">Residential plots ranging from <strong>3,000 to 4,000 sqft</strong>, well-located for building your own home. Pricing shared on request based on exact size and location.</div>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20plots%20for%20sale%20in%20Hoskote%20%283000-4000%20sqft%29" class="answer-card__link">Ask for Plot Price →</a>
+        <a href="https://wa.me/917892669947?text=Hi%2C%20I%27m%20interested%20in%20plots%20for%20sale%20in%20Hoskote%20%283000-4000%20sqft%29" class="answer-card__link">Ask for Plot Price →</a>
       </div>
-      <div class="answer-card" style="background:var(--indigo-900); border-color:var(--indigo-900); cursor:pointer;" onclick="location.href = 'https://wa.me/919742801802?text=Hi%2C%20I%20need%20home%20loan%20assistance%20for%20a%20property%20purchase'">
+      <div class="answer-card" style="background:var(--indigo-900); border-color:var(--indigo-900); cursor:pointer;" onclick="location.href = 'https://wa.me/917892669947?text=Hi%2C%20I%20need%20home%20loan%20assistance%20for%20a%20property%20purchase'">
         <div class="answer-card__icon" style="background:rgba(255,255,255,.12);">🏦</div>
         <div class="answer-card__q" style="color:white;">Home Loan Assistance — Best Rate, Fast Release</div>
         <div class="answer-card__a" style="color:rgba(255,255,255,.65);">We help you get the best possible rate based on your CIBIL score, with fast-tracked processing for quick loan release. Works alongside SBI, HDFC, Canara Bank, Karnataka Bank and more.</div>
@@ -2114,7 +2118,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
     </div>
 
     <div style="background:var(--gold-light);border:1.5px solid #D97706;border-radius:var(--radius);padding:1.5rem;margin-top:2rem;">
-      <h4 style="color:#92400E;margin-bottom:.75rem;">⚠️ Red Flags to Watch For in Any Contractor</h4>
+      <h4 role="heading" aria-level="3" style="color:#92400E;margin-bottom:.75rem;">⚠️ Red Flags to Watch For in Any Contractor</h4>
       <div class="grid-2">
         <ul style="font-size:.875rem;color:#78350F;line-height:2;list-style:none;">
           <li>❌ No brand names mentioned for cement or steel</li>
@@ -2162,7 +2166,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 
     <div class="grid-2" style="gap:2rem;">
       <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.75rem;">
-        <h4 style="margin-bottom:1rem;">🏗️ Before You Start Construction</h4>
+        <h4 role="heading" aria-level="3" style="margin-bottom:1rem;">🏗️ Before You Start Construction</h4>
         <ul style="font-size:.875rem;color:var(--stone-700);line-height:2;list-style:none;">
           <li>1. Verify your title deed is clean (no disputes, encumbrances)</li>
           <li>2. Get a soil test done on your plot (₹5,000–₹15,000)</li>
@@ -2177,7 +2181,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         </ul>
       </div>
       <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.75rem;">
-        <h4 style="margin-bottom:1rem;">🔍 During Construction — What to Monitor</h4>
+        <h4 role="heading" aria-level="3" style="margin-bottom:1rem;">🔍 During Construction — What to Monitor</h4>
         <ul style="font-size:.875rem;color:var(--stone-700);line-height:2;list-style:none;">
           <li>1. Verify cement and steel brands at delivery — check bags</li>
           <li>2. Foundation depth should match structural drawings</li>
@@ -2192,7 +2196,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         </ul>
       </div>
       <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.75rem;">
-        <h4 style="margin-bottom:1rem;">💡 Smart Decisions to Save Money</h4>
+        <h4 role="heading" aria-level="3" style="margin-bottom:1rem;">💡 Smart Decisions to Save Money</h4>
         <ul style="font-size:.875rem;color:var(--stone-700);line-height:2;list-style:none;">
           <li>• Go for AAC blocks instead of red bricks — lighter, better insulation</li>
           <li>• Size your house to standard tile dimensions — reduces tile cutting waste</li>
@@ -2204,7 +2208,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         </ul>
       </div>
       <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.75rem;">
-        <h4 style="margin-bottom:1rem;">📍 Hoskote-Specific Considerations</h4>
+        <h4 role="heading" aria-level="3" style="margin-bottom:1rem;">📍 Hoskote-Specific Considerations</h4>
         <ul style="font-size:.875rem;color:var(--stone-700);line-height:2;list-style:none;">
           <li>• Hoskote is in Seismic Zone II — use Fe500D ductile steel</li>
           <li>• Hard water from borewells — CPVC pipes, not PVC</li>
@@ -2326,7 +2330,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
           <div class="bank-chip">LIC Housing Finance</div>
         </div>
         <p style="font-size:.8rem;color:var(--stone-500);margin-top:.875rem;">We work regularly with SBI and HDFC for construction loans in Hoskote. We can connect you with the right branch officer and help prepare your file.</p>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%20need%20help%20getting%20a%20home%20loan%20for%20construction%20in%20Hoskote" class="btn btn--primary btn--sm" style="margin-top:1rem;">Help Me Get a Construction Loan</a>
+        <a href="https://wa.me/917892669947?text=Hi%2C%20I%20need%20help%20getting%20a%20home%20loan%20for%20construction%20in%20Hoskote" class="btn btn--primary btn--sm" style="margin-top:1rem;">Help Me Get a Construction Loan</a>
         <a href="#loan-estimate" class="btn btn--ghost btn--sm" style="margin-top:1rem;margin-left:.5rem;background:#fff;">📊 Get a Bank-Ready Cost Estimate</a>
       </div>
 
@@ -2386,7 +2390,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div>
           <div class="download-card__title">Construction Budget Planner</div>
           <div class="download-card__desc">A detailed Excel sheet covering all cost heads: construction, approvals, utilities, contingency. Fill in your numbers and see your total project budget clearly.</div>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20the%20free%20Construction%20Budget%20Planner" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
+          <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20the%20free%20Construction%20Budget%20Planner" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
         </div>
       </div>
       <div class="download-card">
@@ -2394,7 +2398,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div>
           <div class="download-card__title">Site Visit Checklist (PDF)</div>
           <div class="download-card__desc">22-point checklist for when you visit any construction site. What to look at, what questions to ask, and which red flags mean you should walk away.</div>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20the%20free%20Site%20Visit%20Checklist" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
+          <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20the%20free%20Site%20Visit%20Checklist" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
         </div>
       </div>
       <div class="download-card">
@@ -2402,7 +2406,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div>
           <div class="download-card__title">Contractor Selection Checklist</div>
           <div class="download-card__desc">18 things to verify before signing any construction contract. Legal checks, material specification questions, and payment structure red flags.</div>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20the%20free%20Contractor%20Selection%20Checklist" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
+          <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20the%20free%20Contractor%20Selection%20Checklist" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
         </div>
       </div>
       <div class="download-card">
@@ -2410,7 +2414,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div>
           <div class="download-card__title">Sample Construction Agreement</div>
           <div class="download-card__desc">See what a proper written agreement looks like — milestone payments, material brands, timeline clauses, warranty terms. Know what you should be signing.</div>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20to%20see%20a%20sample%20construction%20agreement" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
+          <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20to%20see%20a%20sample%20construction%20agreement" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
         </div>
       </div>
       <div class="download-card">
@@ -2418,7 +2422,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div>
           <div class="download-card__title">Home Loan Document Checklist</div>
           <div class="download-card__desc">Every document SBI and HDFC ask for when processing a construction loan in Hoskote. Prepare early and avoid back-and-forth trips to the bank.</div>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20the%20Home%20Loan%20Document%20Checklist" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
+          <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20the%20Home%20Loan%20Document%20Checklist" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
         </div>
       </div>
       <div class="download-card">
@@ -2426,7 +2430,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div>
           <div class="download-card__title">25 Mistakes Hoskote Families Make</div>
           <div class="download-card__desc">The most common, costly mistakes we've seen homeowners make — from paying too much advance to skipping the approval. Learn from others' expensive errors.</div>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20the%2025%20Mistakes%20checklist" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
+          <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20the%2025%20Mistakes%20checklist" class="btn btn--whatsapp btn--sm">📱 Get on WhatsApp</a>
         </div>
       </div>
     </div>
@@ -2549,7 +2553,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div class="btn-group" style="margin-top:1.25rem;">
           <button class="btn btn--primary" onclick="printConstructionAgreement()">🖨️ Print / Save as PDF</button>
           <button class="btn btn--secondary" onclick="copyConstructionAgreementText()">📋 Copy Text</button>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20used%20the%20free%20Construction%20Agreement%20Generator%20and%20need%20help%20reviewing%20it" class="btn btn--whatsapp">📱 Get It Reviewed on WhatsApp</a>
+          <a href="https://wa.me/917892669947?text=Hi%2C%20I%20used%20the%20free%20Construction%20Agreement%20Generator%20and%20need%20help%20reviewing%20it" class="btn btn--whatsapp">📱 Get It Reviewed on WhatsApp</a>
         </div>
       </div>
     </div>
@@ -2645,12 +2649,14 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div class="btn-group" style="margin-top:1.25rem;">
           <button class="btn btn--primary" onclick="printLoanEstimate()">🖨️ Print / Save as PDF</button>
           <button class="btn btn--secondary" onclick="copyLoanEstimateText()">📋 Copy Text</button>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20used%20the%20Bank%20Loan%20Cost%20Estimate%20Generator%20and%20need%20it%20certified%20by%20an%20engineer" class="btn btn--whatsapp">📱 Get It Certified on WhatsApp</a>
+          <a href="https://wa.me/917892669947?text=Hi%2C%20I%20used%20the%20Bank%20Loan%20Cost%20Estimate%20Generator%20and%20need%20it%20certified%20by%20an%20engineer" class="btn btn--whatsapp">📱 Get It Certified on WhatsApp</a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ============================================================ CTA BAR -->
 <div class="cta-bar">
@@ -2661,7 +2667,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <p>Start with a free site visit — no cost, no obligation, no pressure.</p>
       </div>
       <div class="btn-group">
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg">📱 Book Free Site Visit</a>
+        <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg">📱 Book Free Site Visit</a>
         <a href="#calculator" class="btn btn--secondary btn--lg">🧮 Calculate My Cost</a>
       </div>
     </div>
@@ -2693,7 +2699,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div class="footer__logo">Hoskote<span>Construction</span></div>
         <p class="footer__tagline">Hyperlocal house construction for Hoskote and Bengaluru Rural. Real projects, transparent pricing, daily WhatsApp updates. Starting ₹1,800/sqft.</p>
         <div class="footer__contact-item"><span>📍</span> Balaji Gold City, Hoskote 562114</div>
-        <div class="footer__contact-item"><span>📞</span> <a href="tel:+919742801802">+91 97428 01802</a></div>
+        <div class="footer__contact-item"><span>📞</span> <a href="tel:+917892669947">+91 78926 69947</a></div>
         <div class="footer__contact-item"><span>✉️</span> <a href="mailto:hello@hoskoteconstruction.in">hello@hoskoteconstruction.in</a></div>
         <div class="footer__contact-item"><span>🏢</span> UDYAM-KR-02-0127051</div>
         <div class="footer__contact-item"><span>📸</span> <a href="https://instagram.com/hoskoteconstruction" target="_blank" rel="noopener">@hoskoteconstruction</a></div>
@@ -2754,7 +2760,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 <!-- ============================================================ WHATSAPP FLOAT -->
 <div class="wa-float">
   <div class="wa-float__label">Chat with us</div>
-  <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20to%20know%20about%20construction%20in%20Hoskote" class="wa-float__btn" aria-label="WhatsApp us">
+  <a href="https://wa.me/917892669947?text=Hi%2C%20I%20want%20to%20know%20about%20construction%20in%20Hoskote" class="wa-float__btn" aria-label="WhatsApp us">
     <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.486 2 2 6.486 2 12c0 1.847.5 3.58 1.37 5.08L2 22l5.05-1.348A9.954 9.954 0 0012 22c5.514 0 10-4.486 10-10S17.514 2 12 2zm0 18a7.952 7.952 0 01-4.252-1.228l-.306-.181-3.155.842.842-3.07-.198-.318A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
   </a>
 </div>
@@ -3071,7 +3077,7 @@ async function submitForm() {
     return;
   } catch (err) {
     console.error('Lead submit failed', err);
-    const wa = 'https://wa.me/919742801802?text=' + encodeURIComponent(
+    const wa = 'https://wa.me/917892669947?text=' + encodeURIComponent(
       `Hi! I'm ${name}.\nRequest: ${payload.type}\nPhone: ${phone}\nLocation: ${payload.area || 'Not specified'}\nSize: ${payload.size || 'Not specified'}\n${payload.message ? 'Details: ' + payload.message : ''}`);
     errBox.innerHTML = '';
     errBox.append((err.message || 'We could not save your request.') + ' Your request was NOT sent. Please try again, or ');
