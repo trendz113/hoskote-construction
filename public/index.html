@@ -386,6 +386,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   .mobile-float-bar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: .4rem; padding: .95rem .5rem; font-size: .875rem; font-weight: 700; color: white; }
   .mobile-float-bar a.call-btn { background: var(--indigo-900); }
   .mobile-float-bar a.wa-btn { background: #25D366; }
+  .wa-float { display: none !important; } /* the sticky bar already has WhatsApp; the round button overlapped it */
   body { padding-bottom: 58px; }
 }
 
@@ -682,11 +683,12 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
     <button class="page-tab-btn" onclick="scrollToSection('#projects')">Projects</button>
     <button class="page-tab-btn" onclick="scrollToSection('#pricing')">Packages &amp; Pricing</button>
     <button class="page-tab-btn" onclick="scrollToSection('#process')">Process</button>
-    <button class="page-tab-btn" onclick="scrollToSection('#calculator')">Cost Calculator</button>
     <button class="page-tab-btn" onclick="scrollToSection('#testimonials')">Reviews</button>
-    <button class="page-tab-btn" onclick="scrollToSection('#faq')">FAQs</button>
+    <button class="page-tab-btn" onclick="scrollToSection('#calculator')">Cost Calculator</button>
     <button class="page-tab-btn" onclick="scrollToSection('#about')">About Us</button>
+    <button class="page-tab-btn" onclick="scrollToSection('#faq')">FAQs</button>
     <button class="page-tab-btn" onclick="scrollToSection('#contact')">Contact</button>
+    <button class="page-tab-btn" onclick="scrollToSection('#resources')">Tools &amp; Guides</button>
   </div>
 </div>
 
@@ -704,14 +706,14 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
           <a href="tel:+919742801802" class="btn btn--secondary btn--lg">📞 Call Now</a>
         </div>
         <div class="hero__trust">
-          <div class="hero__stat"><div class="hero__stat-num">₹1,800</div><div class="hero__stat-label">Starting / sq ft (construction only)</div></div>
+          <div class="hero__stat"><div class="hero__stat-num">₹1,800+</div><div class="hero__stat-label">Construction / sq ft</div></div>
           <div class="hero__stat"><div class="hero__stat-num">Hoskote</div><div class="hero__stat-label">Local Office</div></div>
           <div class="hero__stat"><div class="hero__stat-num">WhatsApp</div><div class="hero__stat-label">Project Updates</div></div>
           <div class="hero__stat"><div class="hero__stat-num">Stage</div><div class="hero__stat-label">Wise Payments</div></div>
         </div>
       </div>
       <div class="hero__image-card">
-        <img src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1781875175/WhatsApp_Image_2026-06-19_at_12.54.59_pubyuv.jpg" alt="Completed house in Hoskote built by HoskoteConstruction" loading="eager">
+        <img decoding="async" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1781875175/WhatsApp_Image_2026-06-19_at_12.54.59_pubyuv.jpg" alt="Completed house in Hoskote built by HoskoteConstruction" loading="eager" fetchpriority="high">
         <div class="hero__image-caption">
           <span class="hero__live-badge">✓ COMPLETED</span>
           <div class="hero__image-text">
@@ -763,7 +765,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <!-- Project 7: Malur duplex -->
       <div class="project-card">
         <div class="project-card__img-wrap">
-          <img class="project-card__img" src="/projects/images/blue-white-duplex-house-malur.jpg" alt="Blue-and-white 2,000 sqft duplex house in Malur at dusk, with a jaali terrace parapet, glass balcony railing and a lit car porch" loading="lazy">
+          <img decoding="async" class="project-card__img" src="/projects/images/blue-white-duplex-house-malur.jpg" alt="Blue-and-white 2,000 sqft duplex house in Malur at dusk, with a jaali terrace parapet, glass balcony railing and a lit car porch" loading="lazy">
           <span class="project-card__badge">✓ COMPLETED</span>
         </div>
         <div class="project-card__body">
@@ -783,7 +785,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <!-- Project 1 -->
       <div class="project-card">
         <div class="project-card__img-wrap">
-          <img class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665760/project1_geometric_blue_grey_gnbouy.jpg" alt="G+1 geometric blue-grey house Hoskote Town" loading="lazy">
+          <img decoding="async" class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665760/project1_geometric_blue_grey_gnbouy.jpg" alt="G+1 geometric blue-grey house Hoskote Town" loading="lazy">
           <span class="project-card__badge">✓ COMPLETED</span>
         </div>
         <div class="project-card__body">
@@ -803,7 +805,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <!-- Project 2 -->
       <div class="project-card">
         <div class="project-card__img-wrap">
-          <img class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665760/project2_night_wood_facade_indtre.jpg" alt="G+2 premium wood and stone facade villa Hoskote, night view" loading="lazy">
+          <img decoding="async" class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665760/project2_night_wood_facade_indtre.jpg" alt="G+2 premium wood and stone facade villa Hoskote, night view" loading="lazy">
           <span class="project-card__badge">✓ COMPLETED</span>
         </div>
         <div class="project-card__body">
@@ -823,7 +825,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <!-- Project 3 -->
       <div class="project-card">
         <div class="project-card__img-wrap">
-          <img class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665760/project3_tower_navy_trim_ig3loh.jpg" alt="G+2 navy trim tower home Hoskote, narrow plot" loading="lazy">
+          <img decoding="async" class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665760/project3_tower_navy_trim_ig3loh.jpg" alt="G+2 navy trim tower home Hoskote, narrow plot" loading="lazy">
           <span class="project-card__badge">✓ COMPLETED</span>
         </div>
         <div class="project-card__body">
@@ -842,7 +844,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <!-- Project 4 -->
       <div class="project-card">
         <div class="project-card__img-wrap">
-          <img class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665760/project4_housewarming_stone_riwaq5.jpg" alt="G+3 commercial and residential stone-clad building Hoskote, housewarming" loading="lazy">
+          <img decoding="async" class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665760/project4_housewarming_stone_riwaq5.jpg" alt="G+3 commercial and residential stone-clad building Hoskote, housewarming" loading="lazy">
           <span class="project-card__badge">✓ COMPLETED</span>
         </div>
         <div class="project-card__body">
@@ -862,7 +864,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <!-- Project 5 -->
       <div class="project-card">
         <div class="project-card__img-wrap">
-          <img class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665761/project5_cream_stone_accent_hxt0tz.jpg" alt="G+1 cream house with brown stone accent panel Hoskote" loading="lazy">
+          <img decoding="async" class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665761/project5_cream_stone_accent_hxt0tz.jpg" alt="G+1 cream house with brown stone accent panel Hoskote" loading="lazy">
           <span class="project-card__badge">✓ COMPLETED</span>
         </div>
         <div class="project-card__body">
@@ -881,7 +883,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <!-- Project 6 -->
       <div class="project-card">
         <div class="project-card__img-wrap">
-          <img class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665760/project6_geometric_offwhite_lfmkgu.jpg" alt="G+1 off-white house with grey vertical accent Hoskote" loading="lazy">
+          <img decoding="async" class="project-card__img" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_700,h_525,c_fill,g_auto,q_auto,f_auto/v1782665760/project6_geometric_offwhite_lfmkgu.jpg" alt="G+1 off-white house with grey vertical accent Hoskote" loading="lazy">
           <span class="project-card__badge">✓ COMPLETED</span>
         </div>
         <div class="project-card__body">
@@ -905,341 +907,115 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   </div>
 </section>
 
-<!-- ============================================================ TESTIMONIALS -->
-<section class="section" id="testimonials">
+<!-- ============================================================ PRICING -->
+<section class="section section--alt" id="pricing">
   <div class="container">
-    <span class="eyebrow">What Hoskote Families Say</span>
-    <h2 style="margin-bottom:.75rem;">Feedback from families we've built for in Hoskote</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">Ask us and we'll do our best to connect you with recent clients who are open to speaking with new customers before you decide.</p>
+    <span class="eyebrow">Clear Pricing — Know What Is Included and What Is Not</span>
+    <h2 style="margin-bottom:.75rem;">Three packages for every budget</h2>
+    <p class="lead" style="margin-bottom:2.5rem;">Each rate below covers the construction work listed in its package. Items that are not part of the rate are listed under the packages, so you can budget for them before you decide. Final terms are written into your agreement.</p>
 
-    <div class="grid-3" style="margin-bottom:2.5rem;">
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">★★★★★</div>
-        <div class="testimonial-card__body">I was working in Bangalore and could not visit the site more than twice a month. They sent me photos every single working day. Foundation, slab, walls — I saw everything on WhatsApp before making each payment. I never worried once. The house turned out exactly as planned.</div>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">K</div>
-          <div>
-            <div class="testimonial-card__name">Kumar Raghavendra</div>
-            <div class="testimonial-card__location">📍 Channasandra, Hoskote</div>
-            <div class="testimonial-card__project">G+2 · Dream Home · Completed Nov 2024</div>
-          </div>
-        </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-card__name">Comfortable Home</div>
+        <div class="pricing-card__price">₹1,800</div>
+        <div class="pricing-card__unit">per sq ft · construction cost</div>
+        <ul class="pricing-card__includes">
+          <li>M20 concrete + TMT Fe500D steel (JSW/Jindal)</li>
+          <li>Ultratech / ACC cement throughout</li>
+          <li>Standard vitrified floor tiles</li>
+          <li>Aluminium windows, flush doors</li>
+          <li>Ashirvad plumbing, Finolex wiring</li>
+          <li>Standard Anchor/Roma switches</li>
+          <li>Bathroom fittings — Cera standard range</li>
+          <li>Economy interior emulsion paint</li>
+          <li>Weekly WhatsApp photo updates</li>
+          <li>Written agreement + GST invoice</li>
+        </ul>
+        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%20Comfortable%20Home%20package" class="btn btn--ghost" style="width:100%;justify-content:center;">Ask on WhatsApp</a>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">★★★★★</div>
-        <div class="testimonial-card__body">Construction completed in exactly 9 months as promised in the agreement. Written contract, GST bill, stage payments — everything was proper. No surprises, no extra demands at the end. The quality is outstanding. I've recommended them to three neighbours already.</div>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">R</div>
-          <div>
-            <div class="testimonial-card__name">Ramesh Babu</div>
-            <div class="testimonial-card__location">📍 Sulibele, Hoskote</div>
-            <div class="testimonial-card__project">G+1 · Better-Living · Completed Jan 2025</div>
-          </div>
-        </div>
+      <div class="pricing-card pricing-card--popular">
+        <div class="pricing-card__name">Better-Living Home</div>
+        <div class="pricing-card__price">₹2,000</div>
+        <div class="pricing-card__unit">per sq ft · construction cost</div>
+        <ul class="pricing-card__includes">
+          <li>Everything in Comfortable, plus:</li>
+          <li>Premium vitrified tiles + full-height bathroom tiles</li>
+          <li>UPVC windows, moulded flush doors</li>
+          <li>Mid-range Jaquar/Cera fittings</li>
+          <li>Modular switches (Anchor Penta)</li>
+          <li>Weather coat exterior paint</li>
+          <li>Tractor emulsion interior paint</li>
+          <li><strong>Daily</strong> WhatsApp photo + video updates</li>
+          <li>You approve each stage before paying</li>
+        </ul>
+        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%20Better-Living%20Home%20package" class="btn btn--primary" style="width:100%;justify-content:center;">Get Started</a>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">★★★★★</div>
-        <div class="testimonial-card__body">My husband and I were very scared — ₹35 lakh is our entire savings. But the written agreement and seeing every payment tied to a milestone gave us the confidence to proceed. The house is beautiful and we have complete peace of mind.</div>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">S</div>
-          <div>
-            <div class="testimonial-card__name">Savitha & Nagaraj M.</div>
-            <div class="testimonial-card__location">📍 Anugondanahalli, Hoskote</div>
-            <div class="testimonial-card__project">G+1 · Comfortable · Completed Dec 2024</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">★★★★★</div>
-        <div class="testimonial-card__body">I asked to see other homes they built before signing. They took me to three completed houses in Hoskote and I spoke directly to those families. That gave me 100% confidence. My own house came out even better than what I saw.</div>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">V</div>
-          <div>
-            <div class="testimonial-card__name">Venkatesh Nayak</div>
-            <div class="testimonial-card__location">📍 Kannamangala, Hoskote</div>
-            <div class="testimonial-card__project">G · Comfortable · Completed Mar 2025</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">★★★★★</div>
-        <div class="testimonial-card__body">We were funding this with an SBI construction loan, so disbursements came in stages. Their stage-payment system matched the bank disbursement schedule perfectly — no cash flow issues at all. I wish more contractors operated like this.</div>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">P</div>
-          <div>
-            <div class="testimonial-card__name">Pradeep & Latha K.</div>
-            <div class="testimonial-card__location">📍 Hoskote Town</div>
-            <div class="testimonial-card__project">G+2 · Better-Living · Completed Apr 2025</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testimonial-card__stars">★★★★★</div>
-        <div class="testimonial-card__body">One crack appeared near a window three months after we moved in. I sent them a photo on WhatsApp. They came and fixed it the very next day, no questions asked. That's the kind of after-service you need when your biggest asset is a newly built home.</div>
-        <div class="testimonial-card__author">
-          <div class="testimonial-card__avatar">M</div>
-          <div>
-            <div class="testimonial-card__name">Manjunath Gowda</div>
-            <div class="testimonial-card__location">📍 Nandagudi, Hoskote</div>
-            <div class="testimonial-card__project">G+1 · Dream Home · Completed Feb 2025</div>
-          </div>
-        </div>
+      <div class="pricing-card">
+        <div class="pricing-card__name">Dream Home</div>
+        <div class="pricing-card__price">₹2,200</div>
+        <div class="pricing-card__unit">per sq ft · construction cost</div>
+        <ul class="pricing-card__includes">
+          <li>Everything in Better-Living, plus:</li>
+          <li>Marble or premium wooden flooring option</li>
+          <li>Modular kitchen fully included</li>
+          <li>Premium Legrand/Schneider switches</li>
+          <li>Designer exterior cladding / façade work</li>
+          <li>Smart home wiring pre-installed</li>
+          <li>Premium Jaquar/Kohler fittings</li>
+          <li>Daily updates + weekly video walkthroughs</li>
+          <li>Dedicated site supervisor assigned</li>
+        </ul>
+        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%20Dream%20Home%20package" class="btn btn--ghost" style="width:100%;justify-content:center;">Ask on WhatsApp</a>
       </div>
     </div>
 
-    <div style="background:var(--stone-100);border-radius:var(--radius-lg);padding:2rem;text-align:center;">
-      <p style="font-size:.9rem;color:var(--stone-500);margin-bottom:1rem;">Want to speak to any of these families before making your decision?</p>
-      <a href="https://wa.me/919742801802?text=Hi%2C%20I%27d%20like%20to%20speak%20to%20your%20past%20customers%20before%20deciding" class="btn btn--primary">📱 Request Customer References</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ LATEST GUIDES PREVIEW -->
-<section class="section section--alt" id="latest-guides">
-  <div class="container">
-    <span class="eyebrow">Free Resources</span>
-    <h2 style="margin-bottom:.5rem;">Guides Worth Reading Before You Build</h2>
-    <p class="lead" style="margin-bottom:1.75rem;">Practical, Hoskote-specific answers — no fluff, no jargon.</p>
-    <div style="display:grid;grid-template-columns:1fr;gap:1rem;">
-      <a href="/blog/why-curing-watering-matters-hoskote-construction" style="display:block;background:#fff;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.25rem 1.5rem;">
-        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--terracotta);margin-bottom:.4rem;">Construction Quality</div>
-        <div style="font-weight:700;color:var(--stone-900);margin-bottom:.3rem;">Why Curing (Watering) Your House Every Day Matters More Than Almost Anything Else</div>
-        <div style="font-size:.85rem;color:var(--stone-500);">The step most unsupervised sites skip — and what it costs a family, sometimes for generations.</div>
-      </a>
-      <a href="/blog/construction-contractor-fraud-hoskote-guide" style="display:block;background:#fff;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.25rem 1.5rem;">
-        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--terracotta);margin-bottom:.4rem;">Buyer Protection</div>
-        <div style="font-weight:700;color:var(--stone-900);margin-bottom:.3rem;">How to Avoid Construction Fraud in Hoskote</div>
-        <div style="font-size:.85rem;color:var(--stone-500);">The exact patterns we've seen, and the questions that expose them before you sign anything.</div>
-      </a>
-      <a href="/blog/ec-ekhata-property-registration-hoskote-guide" style="display:block;background:#fff;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.25rem 1.5rem;">
-        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--terracotta);margin-bottom:.4rem;">Documents</div>
-        <div style="font-weight:700;color:var(--stone-900);margin-bottom:.3rem;">EC, E-Khata & Property Registration in Hoskote — Complete Guide</div>
-        <div style="font-size:.85rem;color:var(--stone-500);">Kaveri 2.0 steps, and why Hoskote uses a different e-Khata portal than Bengaluru city.</div>
-      </a>
-    </div>
-    <div style="text-align:center;margin-top:1.5rem;">
-      <a href="/blog/" class="btn btn--ghost" style="background:#fff;">See All Guides →</a>
+    <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-top:1.5rem;">
+      <h4 style="margin-bottom:.5rem;">Not included in the per sq ft rate</h4>
+      <p style="font-size:.875rem;color:var(--stone-700);">Compound wall, gate, borewell, BMRDA approval fees, temporary electricity connection, permanent BESCOM connection, interiors, and land cost. Costs are shown below so you can plan your total budget.</p>
+      <p style="font-size:.8rem;color:var(--stone-500);margin-top:.6rem;">Rates are indicative, apply to construction cost only, and are confirmed in your written quote after a site visit. Ask us how built-up area is measured and how GST is applied to your quote before you sign.</p>
     </div>
 
-    <div style="background:linear-gradient(135deg,#833AB4,#C13584,#E1306C);border-radius:var(--radius-lg);padding:1.75rem 2rem;margin-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.25rem;color:#fff;">
-      <div>
-        <div style="font-weight:700;font-size:1.1rem;margin-bottom:.3rem;">📸 See our sites in motion, not just photos</div>
-        <div style="font-size:.9rem;opacity:.9;">Daily construction updates, real site videos, and behind-the-scenes progress — on Instagram.</div>
-      </div>
-      <a href="https://instagram.com/hoskoteconstruction" target="_blank" rel="noopener" style="background:#fff;color:#C13584;padding:.7rem 1.4rem;border-radius:8px;font-size:.9rem;font-weight:700;white-space:nowrap;">Follow @hoskoteconstruction →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ ANSWER THE BIG QUESTIONS -->
-<section class="section" id="big-questions">
-  <div class="container">
-    <span class="eyebrow">Every Question Answered</span>
-    <h2 class="text-balance" style="margin-bottom:.75rem;">Everything you need to know — before you call</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">The five questions every Hoskote homeowner asks. Answered here, completely, right now.</p>
-    <div class="answer-grid">
-      <div class="answer-card">
-        <div class="answer-card__icon" style="background:var(--indigo-100);">💰</div>
-        <div class="answer-card__q">How much will my house cost to build in Hoskote?</div>
-        <div class="answer-card__a">Construction starts at ₹1,800/sqft for a solid home and goes up to ₹2,200/sqft for premium finishes. A 1,200 sqft ground-floor house typically costs ₹22–26 lakhs depending on your choices. Our calculator below gives you a personalised estimate in 30 seconds.</div>
-        <a href="#calculator" class="answer-card__link">Calculate mine →</a>
-      </div>
-      <div class="answer-card">
-        <div class="answer-card__icon" style="background:var(--terracotta-light);">📋</div>
-        <div class="answer-card__q">How does the construction process actually work?</div>
-        <div class="answer-card__a">We begin with a free site visit, then prepare a detailed estimate and written agreement. Construction moves through foundation → structure → walls → finishing → handover. You see photos at every stage and pay only after approving each milestone. Nothing moves forward without your sign-off.</div>
-        <a href="#process" class="answer-card__link">See full process →</a>
-      </div>
-      <div class="answer-card">
-        <div class="answer-card__icon" style="background:var(--green-100);">🤝</div>
-        <div class="answer-card__q">Can I trust this contractor — what if they take money and disappear?</div>
-        <div class="answer-card__a">We've built real homes in Hoskote with photos, addresses, and families who'll speak for us. We have a physical office at Balaji Gold City, Hoskote. UDYAM registration: UDYAM-KR-02-0127051. You never pay more than one milestone at a time. We cannot disappear — our livelihood is in this town.</div>
-        <a href="#about" class="answer-card__link">About our team →</a>
-      </div>
-      <div class="answer-card">
-        <div class="answer-card__icon" style="background:var(--gold-light);">⏱️</div>
-        <div class="answer-card__q">How long does construction take in Hoskote?</div>
-        <div class="answer-card__a">A typical G ground-floor house takes 6–8 months. G+1 takes 9–12 months. G+2 takes 14–18 months. Timelines depend on plot size, finishing choices, and monsoon delays. We give you a written timeline before starting and update you the moment anything changes.</div>
-        <a href="#process" class="answer-card__link">See timeline →</a>
-      </div>
-      <div class="answer-card">
-        <div class="answer-card__icon" style="background:#F0FDF4;">🚀</div>
-        <div class="answer-card__q">How do I get started? What's the first step?</div>
-        <div class="answer-card__a">The first step is a free site visit — no cost, no commitment. We come to your plot, assess the soil and access, discuss your requirements, and give you a written estimate within 24 hours. WhatsApp us or call to book. We respond within 2 hours on working days.</div>
-        <a href="#contact" class="answer-card__link">Book site visit →</a>
-      </div>
-      <div class="answer-card" style="background:var(--indigo-900); border-color:var(--indigo-900); cursor:pointer;" onclick="location.href = 'https://wa.me/919742801802?text=Hi%2C%20I%20have%20a%20question%20about%20building%20in%20Hoskote'">
-        <div class="answer-card__icon" style="background:rgba(255,255,255,.12);">💬</div>
-        <div class="answer-card__q" style="color:white;">Have a different question?</div>
-        <div class="answer-card__a" style="color:rgba(255,255,255,.65);">We typically respond within 2 hours on WhatsApp. No call centres, no scripts — you talk to the actual team building in Hoskote.</div>
-        <span style="font-size:.85rem;font-weight:700;color:#25D366;margin-top:.875rem;display:inline-block;">WhatsApp us now →</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ PROPERTIES FOR SALE -->
-<section class="section section--alt" id="properties">
-  <div class="container">
-    <span class="eyebrow">Verified Listings · Hoskote & Bengaluru Rural</span>
-    <h2 class="text-balance" style="margin-bottom:.75rem;">House, Flat & Plot for Sale in Hoskote</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">New flat and open plots — verified listings with BMRDA-approved documentation and home loan assistance up to 90%.</p>
-
-    <div class="answer-grid">
-      <div class="answer-card">
-        <div class="answer-card__icon" style="background:var(--gold-light);">📍</div>
-        <div class="answer-card__q">1,400 sqft West-Facing Plot for Sale — Hoskote</div>
-        <div class="answer-card__a">1,400 sqft west-facing plot in a <strong>BMRDA-approved layout</strong> with all amenities, available for <strong>immediate sale</strong>. Price: <strong>₹6,500 per sqft</strong> (about ₹91 lakh), negotiable. Contact us for the exact location, documents and a site visit.</div>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%201400%20sqft%20west-facing%20plot%20for%20sale%20in%20Hoskote" class="answer-card__link">Enquire on WhatsApp →</a>
-      </div>
-      <div class="answer-card">
-        <div class="answer-card__icon" style="background:var(--terracotta-light);">🏢</div>
-        <div class="answer-card__q">New 2BHK Flat for Sale — Hoskote</div>
-        <div class="answer-card__a">Brand new 2BHK flat, ready to move. <strong>₹70 Lakhs, all inclusive</strong>. Prices are increasing, so enquire early. Ideal for families or first-time buyers looking to move in without construction wait time.</div>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%202BHK%20flat%20for%20sale%20-%2070%20Lakhs" class="answer-card__link">Enquire on WhatsApp →</a>
-      </div>
-      <div class="answer-card">
-        <div class="answer-card__icon" style="background:var(--green-100);">📐</div>
-        <div class="answer-card__q">Open Plots for Sale — Best Sizes in Hoskote</div>
-        <div class="answer-card__a">Residential plots ranging from <strong>3,000 to 4,000 sqft</strong>, well-located for building your own home. Pricing shared on request based on exact size and location.</div>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20plots%20for%20sale%20in%20Hoskote%20%283000-4000%20sqft%29" class="answer-card__link">Ask for Plot Price →</a>
-      </div>
-      <div class="answer-card" style="background:var(--indigo-900); border-color:var(--indigo-900); cursor:pointer;" onclick="location.href = 'https://wa.me/919742801802?text=Hi%2C%20I%20need%20home%20loan%20assistance%20for%20a%20property%20purchase'">
-        <div class="answer-card__icon" style="background:rgba(255,255,255,.12);">🏦</div>
-        <div class="answer-card__q" style="color:white;">Home Loan Assistance — Best Rate, Fast Release</div>
-        <div class="answer-card__a" style="color:rgba(255,255,255,.65);">We help you get the best possible rate based on your CIBIL score, with fast-tracked processing for quick loan release. Works alongside SBI, HDFC, Canara Bank, Karnataka Bank and more.</div>
-        <span style="font-size:.85rem;font-weight:700;color:#25D366;margin-top:.875rem;display:inline-block;">Check my eligibility →</span>
-      </div>
-    </div>
-    <p style="font-size:.8rem;color:var(--stone-500);margin-top:1.5rem;">Prices indicative and subject to change. Contact us on WhatsApp for exact location, site visit, and latest availability.</p>
-  </div>
-</section>
-
-<!-- ============================================================ COST CALCULATOR -->
-<section class="section section--alt" id="calculator">
-  <div class="container">
-    <span class="eyebrow">Free Interactive Tool</span>
-    <h2 style="margin-bottom:.75rem;">Construction Cost Calculator — Hoskote 2026</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">Enter your plan details to see a preliminary estimate using the package rates shown on this page.</p>
-
-    <div class="calc-wrapper">
-      <div class="calc-header">
-        <h3>Your Personalised Estimate</h3>
-        <p style="color:rgba(255,255,255,.65);font-size:.9rem;margin-top:.35rem;">Uses the package rates listed under Packages &amp; Pricing</p>
-      </div>
-      <div class="calc-body">
-        <div class="calc-grid">
-          <div class="form-group">
-            <label for="sqft">Built-up area per floor (sq ft)</label>
-            <input type="number" id="sqft" value="600" min="300" max="5000" step="1" inputmode="numeric" oninput="calcCost()" aria-describedby="calc-error">
-          </div>
-          <div class="form-group">
-            <label for="floors">Number of floors</label>
-            <select id="floors" onchange="calcCost()">
-              <option value="1">Ground floor only (G)</option>
-              <option value="2" selected>G+1 (2 floors)</option>
-              <option value="3">G+2 (3 floors)</option>
-              <option value="4">G+3 (4 floors)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="bhk">Configuration (shared with your quote request)</label>
-            <select id="bhk" onchange="calcCost()">
-              <option value="1 BHK">1 BHK</option>
-              <option value="2 BHK" selected>2 BHK</option>
-              <option value="3 BHK">3 BHK</option>
-              <option value="4 BHK">4 BHK</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="pkg">Package</label>
-            <select id="pkg" onchange="calcCost()">
-              <option value="1800">Comfortable — ₹1,800/sq ft</option>
-              <option value="2000" selected>Better-Living — ₹2,000/sq ft</option>
-              <option value="2200">Dream Home — ₹2,200/sq ft</option>
-            </select>
-          </div>
+    <!-- Additional cost breakdown -->
+    <div style="background:white;border-radius:var(--radius-lg);padding:2rem;margin-top:3rem;border:1.5px solid var(--stone-200);">
+      <h3 style="margin-bottom:1.5rem;">Additional Costs to Budget For</h3>
+      <div class="grid-3">
+        <div>
+          <h4 style="margin-bottom:.75rem;">Plan Approval (BMRDA)</h4>
+          <p style="font-size:.875rem;color:var(--stone-500);">₹20,000 – ₹80,000 depending on plot size and BUA. Required before construction — and before a construction loan is sanctioned. We help with documentation.</p>
         </div>
-        <div id="calc-error" role="alert" style="display:none;color:#B91C1C;font-size:.85rem;margin-top:.75rem;"></div>
-
-        <div class="calc-result">
-          <div class="calc-result__main">
-            <div class="calc-result__label">Preliminary base construction estimate</div>
-            <div class="calc-result__amount" id="calc-amount">—</div>
-            <div class="calc-result__range" id="calc-range"></div>
-          </div>
-          <a href="#contact" id="calc-cta" class="btn btn--whatsapp btn--lg" onclick="calcRequestQuote(event)">📩 Request a detailed estimate</a>
+        <div>
+          <h4 style="margin-bottom:.75rem;">Temporary Electricity Connection</h4>
+          <p style="font-size:.875rem;color:var(--stone-500);">₹15,000–₹40,000. Mandatory before construction can begin — arranged alongside plan approval, separate from your permanent BESCOM connection.</p>
         </div>
-
-        <div class="calc-breakdown" id="calc-breakdown">
-          <div class="calc-breakdown-item">
-            <div class="val" id="bd-area">—</div>
-            <div class="lbl">Total built-up area</div>
-          </div>
-          <div class="calc-breakdown-item">
-            <div class="val" id="bd-rate">—</div>
-            <div class="lbl">Rate applied (per sq ft)</div>
-          </div>
-          <div class="calc-breakdown-item">
-            <div class="val" id="bd-floors">—</div>
-            <div class="lbl">Floors counted</div>
-          </div>
+        <div>
+          <h4 style="margin-bottom:.75rem;">Borewell & Water Sump</h4>
+          <p style="font-size:.875rem;color:var(--stone-500);">Borewell: ₹60,000–₹1,20,000. Sump construction: ₹35,000–₹70,000.</p>
         </div>
-
-        <p style="font-size:.8rem;color:var(--stone-700);margin-top:1.25rem;"><strong>How this is calculated:</strong> built-up area per floor × number of floors × the package rate. Confirm with us how balconies, staircases and utility areas are counted in your plan.</p>
-        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.5rem;">* This is a preliminary estimate, not a quotation. It covers base construction cost only. Not included: BMRDA building plan approval (₹20k–₹80k), temporary electricity connection (mandatory before construction starts, ₹15k–₹40k), borewell (₹60k–₹1.2L), compound wall and gate, permanent BESCOM connection, interiors, land cost and any applicable GST. Your written quote after a site visit is the binding figure.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ MATERIAL QUANTITY CALCULATOR -->
-<section class="section" id="qty-calc">
-  <div class="container">
-    <span class="eyebrow">Material Planning Tool</span>
-    <h2 style="margin-bottom:.75rem;">Material Quantity Calculator</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">Understand roughly how much cement, steel, bricks, and sand you'll need — so you can verify your contractor's procurement.</p>
-
-    <div class="qty-calc">
-      <div class="qty-calc-header">
-        <h3 style="color:white;">Material Quantity Estimator</h3>
-        <p style="color:rgba(255,255,255,.7);font-size:.875rem;margin-top:.3rem;">For a single-floor RCC framed structure — ground floor only</p>
-      </div>
-      <div class="qty-calc-body">
-        <div class="calc-grid">
-          <div class="form-group">
-            <label for="q-sqft">Built-up Area (sq ft)</label>
-            <input type="number" id="q-sqft" value="1000" min="300" max="5000" oninput="calcQty()">
-          </div>
-          <div class="form-group">
-            <label for="q-type">Construction Type</label>
-            <select id="q-type" onchange="calcQty()">
-              <option value="standard">Standard RCC Frame</option>
-              <option value="load">Load Bearing</option>
-            </select>
-          </div>
+        <div>
+          <h4 style="margin-bottom:.75rem;">Compound Wall & Gate</h4>
+          <p style="font-size:.875rem;color:var(--stone-500);">Compound wall: ₹400–₹650/running foot. Main gate: ₹25,000–₹80,000.</p>
         </div>
-        <div class="qty-result-grid" id="qty-results">
-          <div class="qty-result-card"><div class="qty-val" id="q-cement">520</div><div class="qty-unit">Bags (50kg)</div><div class="qty-mat">Cement</div></div>
-          <div class="qty-result-card"><div class="qty-val" id="q-steel">6.5</div><div class="qty-unit">Tonnes</div><div class="qty-mat">TMT Steel</div></div>
-          <div class="qty-result-card"><div class="qty-val" id="q-bricks">18,000</div><div class="qty-unit">Pieces</div><div class="qty-mat">Bricks / Blocks</div></div>
-          <div class="qty-result-card"><div class="qty-val" id="q-sand">310</div><div class="qty-unit">Cft</div><div class="qty-mat">M-Sand</div></div>
-          <div class="qty-result-card"><div class="qty-val" id="q-aggregate">420</div><div class="qty-unit">Cft</div><div class="qty-mat">Aggregate 20mm</div></div>
-          <div class="qty-result-card"><div class="qty-val" id="q-water">12,000</div><div class="qty-unit">Litres</div><div class="qty-mat">Water (curing)</div></div>
+        <div>
+          <h4 style="margin-bottom:.75rem;">Permanent BESCOM Connection</h4>
+          <p style="font-size:.875rem;color:var(--stone-500);">₹15,000–₹45,000 depending on load sanctioned and pole distance, arranged after construction is complete.</p>
         </div>
-        <p style="font-size:.78rem;color:var(--stone-500);margin-top:1.25rem;">* These are approximate quantities for planning purposes. Actual quantities depend on structural drawings, soil conditions, and waste factor. Always verify with a structural engineer.</p>
+        <div>
+          <h4 style="margin-bottom:.75rem;">Modular Kitchen (if not in package)</h4>
+          <p style="font-size:.875rem;color:var(--stone-500);">₹1,20,000–₹3,50,000 depending on size, material, and brand.</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom:.75rem;">Landscaping & Driveway</h4>
+          <p style="font-size:.875rem;color:var(--stone-500);">Optional. Paver driveway: ₹80–₹120/sqft. Garden landscaping: varies widely.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================ PROCESS -->
-<section class="section section--alt" id="process">
+<section class="section" id="process">
   <div class="container">
     <div class="grid-2" style="align-items:start;gap:4rem;">
       <div>
@@ -1374,115 +1150,898 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   </div>
 </section>
 
-<!-- ============================================================ PRICING -->
-<section class="section section--alt" id="pricing">
+<!-- ============================================================ TESTIMONIALS -->
+<section class="section section--alt" id="testimonials">
   <div class="container">
-    <span class="eyebrow">Clear Pricing — Know What Is Included and What Is Not</span>
-    <h2 style="margin-bottom:.75rem;">Three packages for every budget</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">Each rate below covers the construction work listed in its package. Items that are not part of the rate are listed under the packages, so you can budget for them before you decide. Final terms are written into your agreement.</p>
+    <span class="eyebrow">What Hoskote Families Say</span>
+    <h2 style="margin-bottom:.75rem;">Feedback from families we've built for in Hoskote</h2>
+    <p class="lead" style="margin-bottom:2.5rem;">Ask us and we'll do our best to connect you with recent clients who are open to speaking with new customers before you decide.</p>
 
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <div class="pricing-card__name">Comfortable Home</div>
-        <div class="pricing-card__price">₹1,800</div>
-        <div class="pricing-card__unit">per sq ft · construction cost</div>
-        <ul class="pricing-card__includes">
-          <li>M20 concrete + TMT Fe500D steel (JSW/Jindal)</li>
-          <li>Ultratech / ACC cement throughout</li>
-          <li>Standard vitrified floor tiles</li>
-          <li>Aluminium windows, flush doors</li>
-          <li>Ashirvad plumbing, Finolex wiring</li>
-          <li>Standard Anchor/Roma switches</li>
-          <li>Bathroom fittings — Cera standard range</li>
-          <li>Economy interior emulsion paint</li>
-          <li>Weekly WhatsApp photo updates</li>
-          <li>Written agreement + GST invoice</li>
-        </ul>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%20Comfortable%20Home%20package" class="btn btn--ghost" style="width:100%;justify-content:center;">Ask on WhatsApp</a>
+    <div class="grid-3" style="margin-bottom:2.5rem;">
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <div class="testimonial-card__body">I was working in Bangalore and could not visit the site more than twice a month. They sent me photos every single working day. Foundation, slab, walls — I saw everything on WhatsApp before making each payment. I never worried once. The house turned out exactly as planned.</div>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">K</div>
+          <div>
+            <div class="testimonial-card__name">Kumar Raghavendra</div>
+            <div class="testimonial-card__location">📍 Channasandra, Hoskote</div>
+            <div class="testimonial-card__project">G+2 · Dream Home · Completed Nov 2024</div>
+          </div>
+        </div>
       </div>
 
-      <div class="pricing-card pricing-card--popular">
-        <div class="pricing-card__name">Better-Living Home</div>
-        <div class="pricing-card__price">₹2,000</div>
-        <div class="pricing-card__unit">per sq ft · construction cost</div>
-        <ul class="pricing-card__includes">
-          <li>Everything in Comfortable, plus:</li>
-          <li>Premium vitrified tiles + full-height bathroom tiles</li>
-          <li>UPVC windows, moulded flush doors</li>
-          <li>Mid-range Jaquar/Cera fittings</li>
-          <li>Modular switches (Anchor Penta)</li>
-          <li>Weather coat exterior paint</li>
-          <li>Tractor emulsion interior paint</li>
-          <li><strong>Daily</strong> WhatsApp photo + video updates</li>
-          <li>You approve each stage before paying</li>
-        </ul>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%20Better-Living%20Home%20package" class="btn btn--primary" style="width:100%;justify-content:center;">Get Started</a>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <div class="testimonial-card__body">Construction completed in exactly 9 months as promised in the agreement. Written contract, GST bill, stage payments — everything was proper. No surprises, no extra demands at the end. The quality is outstanding. I've recommended them to three neighbours already.</div>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">R</div>
+          <div>
+            <div class="testimonial-card__name">Ramesh Babu</div>
+            <div class="testimonial-card__location">📍 Sulibele, Hoskote</div>
+            <div class="testimonial-card__project">G+1 · Better-Living · Completed Jan 2025</div>
+          </div>
+        </div>
       </div>
 
-      <div class="pricing-card">
-        <div class="pricing-card__name">Dream Home</div>
-        <div class="pricing-card__price">₹2,200</div>
-        <div class="pricing-card__unit">per sq ft · construction cost</div>
-        <ul class="pricing-card__includes">
-          <li>Everything in Better-Living, plus:</li>
-          <li>Marble or premium wooden flooring option</li>
-          <li>Modular kitchen fully included</li>
-          <li>Premium Legrand/Schneider switches</li>
-          <li>Designer exterior cladding / façade work</li>
-          <li>Smart home wiring pre-installed</li>
-          <li>Premium Jaquar/Kohler fittings</li>
-          <li>Daily updates + weekly video walkthroughs</li>
-          <li>Dedicated site supervisor assigned</li>
-        </ul>
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%20Dream%20Home%20package" class="btn btn--ghost" style="width:100%;justify-content:center;">Ask on WhatsApp</a>
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <div class="testimonial-card__body">My husband and I were very scared — ₹35 lakh is our entire savings. But the written agreement and seeing every payment tied to a milestone gave us the confidence to proceed. The house is beautiful and we have complete peace of mind.</div>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">S</div>
+          <div>
+            <div class="testimonial-card__name">Savitha & Nagaraj M.</div>
+            <div class="testimonial-card__location">📍 Anugondanahalli, Hoskote</div>
+            <div class="testimonial-card__project">G+1 · Comfortable · Completed Dec 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <div class="testimonial-card__body">I asked to see other homes they built before signing. They took me to three completed houses in Hoskote and I spoke directly to those families. That gave me 100% confidence. My own house came out even better than what I saw.</div>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">V</div>
+          <div>
+            <div class="testimonial-card__name">Venkatesh Nayak</div>
+            <div class="testimonial-card__location">📍 Kannamangala, Hoskote</div>
+            <div class="testimonial-card__project">G · Comfortable · Completed Mar 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <div class="testimonial-card__body">We were funding this with an SBI construction loan, so disbursements came in stages. Their stage-payment system matched the bank disbursement schedule perfectly — no cash flow issues at all. I wish more contractors operated like this.</div>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">P</div>
+          <div>
+            <div class="testimonial-card__name">Pradeep & Latha K.</div>
+            <div class="testimonial-card__location">📍 Hoskote Town</div>
+            <div class="testimonial-card__project">G+2 · Better-Living · Completed Apr 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <div class="testimonial-card__body">One crack appeared near a window three months after we moved in. I sent them a photo on WhatsApp. They came and fixed it the very next day, no questions asked. That's the kind of after-service you need when your biggest asset is a newly built home.</div>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">M</div>
+          <div>
+            <div class="testimonial-card__name">Manjunath Gowda</div>
+            <div class="testimonial-card__location">📍 Nandagudi, Hoskote</div>
+            <div class="testimonial-card__project">G+1 · Dream Home · Completed Feb 2025</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-top:1.5rem;">
-      <h4 style="margin-bottom:.5rem;">Not included in the per sq ft rate</h4>
-      <p style="font-size:.875rem;color:var(--stone-700);">Compound wall, gate, borewell, BMRDA approval fees, temporary electricity connection, permanent BESCOM connection, interiors, and land cost. Costs are shown below so you can plan your total budget.</p>
-      <p style="font-size:.8rem;color:var(--stone-500);margin-top:.6rem;">Rates are indicative, apply to construction cost only, and are confirmed in your written quote after a site visit. Ask us how built-up area is measured and how GST is applied to your quote before you sign.</p>
+    <div style="background:var(--stone-100);border-radius:var(--radius-lg);padding:2rem;text-align:center;">
+      <p style="font-size:.9rem;color:var(--stone-500);margin-bottom:1rem;">Want to speak to any of these families before making your decision?</p>
+      <a href="https://wa.me/919742801802?text=Hi%2C%20I%27d%20like%20to%20speak%20to%20your%20past%20customers%20before%20deciding" class="btn btn--primary">📱 Request Customer References</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ COST CALCULATOR -->
+<section class="section" id="calculator">
+  <div class="container">
+    <span class="eyebrow">Free Interactive Tool</span>
+    <h2 style="margin-bottom:.75rem;">Construction Cost Calculator — Hoskote 2026</h2>
+    <p class="lead" style="margin-bottom:2.5rem;">Enter your plan details to see a preliminary estimate using the package rates shown on this page.</p>
+
+    <div class="calc-wrapper">
+      <div class="calc-header">
+        <h3>Your Personalised Estimate</h3>
+        <p style="color:rgba(255,255,255,.65);font-size:.9rem;margin-top:.35rem;">Uses the package rates listed under Packages &amp; Pricing</p>
+      </div>
+      <div class="calc-body">
+        <div class="calc-grid">
+          <div class="form-group">
+            <label for="sqft">Built-up area per floor (sq ft)</label>
+            <input type="number" id="sqft" value="600" min="300" max="5000" step="1" inputmode="numeric" oninput="calcCost()" aria-describedby="calc-error">
+          </div>
+          <div class="form-group">
+            <label for="floors">Number of floors</label>
+            <select id="floors" onchange="calcCost()">
+              <option value="1">Ground floor only (G)</option>
+              <option value="2" selected>G+1 (2 floors)</option>
+              <option value="3">G+2 (3 floors)</option>
+              <option value="4">G+3 (4 floors)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="bhk">Configuration (shared with your quote request)</label>
+            <select id="bhk" onchange="calcCost()">
+              <option value="1 BHK">1 BHK</option>
+              <option value="2 BHK" selected>2 BHK</option>
+              <option value="3 BHK">3 BHK</option>
+              <option value="4 BHK">4 BHK</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pkg">Package</label>
+            <select id="pkg" onchange="calcCost()">
+              <option value="1800">Comfortable — ₹1,800/sq ft</option>
+              <option value="2000" selected>Better-Living — ₹2,000/sq ft</option>
+              <option value="2200">Dream Home — ₹2,200/sq ft</option>
+            </select>
+          </div>
+        </div>
+        <div id="calc-error" role="alert" style="display:none;color:#B91C1C;font-size:.85rem;margin-top:.75rem;"></div>
+
+        <div class="calc-result">
+          <div class="calc-result__main">
+            <div class="calc-result__label">Preliminary base construction estimate</div>
+            <div class="calc-result__amount" id="calc-amount">—</div>
+            <div class="calc-result__range" id="calc-range"></div>
+          </div>
+          <a href="#contact" id="calc-cta" class="btn btn--whatsapp btn--lg" onclick="calcRequestQuote(event)">📩 Request a detailed estimate</a>
+        </div>
+
+        <div class="calc-breakdown" id="calc-breakdown">
+          <div class="calc-breakdown-item">
+            <div class="val" id="bd-area">—</div>
+            <div class="lbl">Total built-up area</div>
+          </div>
+          <div class="calc-breakdown-item">
+            <div class="val" id="bd-rate">—</div>
+            <div class="lbl">Rate applied (per sq ft)</div>
+          </div>
+          <div class="calc-breakdown-item">
+            <div class="val" id="bd-floors">—</div>
+            <div class="lbl">Floors counted</div>
+          </div>
+        </div>
+
+        <p style="font-size:.8rem;color:var(--stone-700);margin-top:1.25rem;"><strong>How this is calculated:</strong> built-up area per floor × number of floors × the package rate. Confirm with us how balconies, staircases and utility areas are counted in your plan.</p>
+        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.5rem;">* This is a preliminary estimate, not a quotation. It covers base construction cost only. Not included: BMRDA building plan approval (₹20k–₹80k), temporary electricity connection (mandatory before construction starts, ₹15k–₹40k), borewell (₹60k–₹1.2L), compound wall and gate, permanent BESCOM connection, interiors, land cost and any applicable GST. Your written quote after a site visit is the binding figure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ ABOUT -->
+<section class="section section--alt" id="about">
+  <div class="container">
+    <div class="grid-2" style="gap:4rem;align-items:start;">
+      <div>
+        <span class="eyebrow">Who We Are</span>
+        <h2 style="margin-bottom:1rem;">A Hoskote team, building for Hoskote families</h2>
+        <p style="font-size:.9375rem;color:var(--stone-500);line-height:1.75;margin-bottom:1.25rem;">We are a construction company rooted in Hoskote, Bengaluru Rural. We're not a large faceless contractor — we are the people you'll actually call when you have a question at 8pm about your construction.</p>
+        <p style="font-size:.9375rem;color:var(--stone-500);line-height:1.75;margin-bottom:2rem;">Hoskote Construction has been active in Hoskote for years. We bring together local execution expertise with transparent, documented processes — because we believe the biggest problem in construction is not skill, it's trust.</p>
+
+        <h3 style="margin-bottom:1.25rem;">Our credentials</h3>
+        <div class="credential-list">
+          <div class="credential-item">
+            <div class="credential-item__icon">🏢</div>
+            <div class="credential-item__text">
+              <strong>UDYAM Registered Business</strong>
+              <span>UDYAM-KR-02-0127051 · Bengaluru Rural</span>
+            </div>
+          </div>
+          <div class="credential-item">
+            <div class="credential-item__icon">📍</div>
+            <div class="credential-item__text">
+              <strong>Physical Office in Hoskote</strong>
+              <span>Balaji Gold City, Hoskote, Karnataka 562114</span>
+            </div>
+          </div>
+          <div class="credential-item">
+            <div class="credential-item__icon">📋</div>
+            <div class="credential-item__text">
+              <strong>GST Registered</strong>
+              <span>Formal invoicing for every payment — legal compliance on every project</span>
+            </div>
+          </div>
+          <div class="credential-item">
+            <div class="credential-item__icon">📱</div>
+            <div class="credential-item__text">
+              <strong>Transparent Documentation System</strong>
+              <span>Every project tracked with daily photos from Day 1 to handover</span>
+            </div>
+          </div>
+          <div class="credential-item">
+            <div class="credential-item__icon">🔒</div>
+            <div class="credential-item__text">
+              <strong>End-to-End Service, Documents Upfront — No Mid-Project Surprises</strong>
+              <span>Approved plan, cost break-up, payment milestones, and material specification handed over before work starts. We've rebuilt homes for families cheated elsewhere at the same quoted cost, even when material prices rose — that risk is ours, not yours. <a href="/blog/construction-contractor-fraud-hoskote-guide" style="color:var(--terracotta);font-weight:600;">Read why this matters →</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="about-photo" style="margin-bottom:2rem;">
+          <img decoding="async" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_600,h_420,c_fill,g_auto,q_auto,f_auto/v1781876440/WhatsApp_Image_2026-06-19_at_12.57.10_1_nl6dg8.jpg" alt="HoskoteConstruction team at project site" loading="lazy">
+        </div>
+
+        <div style="background:var(--indigo-900);border-radius:var(--radius);padding:1.75rem;color:white;">
+          <h4 style="color:white;margin-bottom:.875rem;">Our Promise to You</h4>
+          <ul style="font-size:.875rem;color:rgba(255,255,255,.75);list-style:none;display:flex;flex-direction:column;gap:.65rem;">
+            <li>✓ We will never ask for money before showing you completed work</li>
+            <li>✓ We will always answer your calls and WhatsApp messages</li>
+            <li>✓ We will tell you when there's a problem — before you discover it yourself</li>
+            <li>✓ We will fix warranty issues without argument</li>
+            <li>✓ We will be honest if a project is outside our capacity</li>
+          </ul>
+        </div>
+
+        <!-- Map embed -->
+        <div style="margin-top:2rem;border-radius:var(--radius);overflow:hidden;height:200px;">
+          <iframe src="https://maps.google.com/maps?q=Balaji+Gold+City+Hoskote+Karnataka+562114&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" title="HoskoteConstruction Office Location"></iframe>
+        </div>
+        <p style="font-size:.8rem;color:var(--stone-500);margin-top:.5rem;text-align:center;">📍 Balaji Gold City, Hoskote 562114 · Mon–Sat 9AM–6PM</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SERVICE AREAS -->
+<section class="section" id="areas">
+  <div class="container">
+    <span class="eyebrow">Serving All of Hoskote</span>
+    <h2 style="margin-bottom:.75rem;">We build everywhere in the Hoskote area</h2>
+    <p class="lead" style="margin-bottom:2rem;">Our team knows the local roads, plot layouts, soil conditions, and suppliers across every area of Hoskote Taluk.</p>
+    <div class="area-grid">
+      <div class="area-chip">Hoskote Town<span class="area-note">Main area</span></div>
+      <a href="/house-construction-sulibele" class="area-chip" style="text-decoration:none;">Sulibele<span class="area-note">~8km</span></a>
+      <a href="/house-construction-malur" class="area-chip" style="text-decoration:none;">Malur<span class="area-note">our duplex</span></a>
+      <div class="area-chip">Anugondanahalli<span class="area-note">~6km</span></div>
+      <div class="area-chip">Kannamangala<span class="area-note">~10km</span></div>
+      <div class="area-chip">Channasandra<span class="area-note">~5km</span></div>
+      <div class="area-chip">Jadigenahalli<span class="area-note">~12km</span></div>
+      <div class="area-chip">Nandagudi<span class="area-note">~15km</span></div>
+      <div class="area-chip">Vijayapura<span class="area-note">~7km</span></div>
+      <div class="area-chip">Old Madras Road<span class="area-note">NH 48 side</span></div>
+      <div class="area-chip">Budigere Road<span class="area-note">~10km</span></div>
+      <div class="area-chip">Devanahalli Rd<span class="area-note">SH 104</span></div>
+      <div class="area-chip">KR Puram Edge<span class="area-note">~15km</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FAQ -->
+<section class="section section--alt" id="faq">
+  <div class="container">
+    <span class="eyebrow">50+ Questions Answered</span>
+    <h2 style="margin-bottom:.75rem;">Everything Hoskote homeowners ask us</h2>
+    <p class="lead" style="margin-bottom:2.5rem;">Compiled from real questions we've received from families across Hoskote, Sulibele, Anugondanahalli, Channasandra, and Kannamangala.</p>
+
+    <div class="faq-section">
+      <!-- CATEGORY 1: COST -->
+      <div class="faq-category">
+        <div class="faq-category-title"><span style="font-size:1.3rem;">💰</span> Cost & Pricing</div>
+
+        <div class="faq-item open">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q1</span> · What is the current construction cost per square foot in Hoskote?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>As of 2026, house construction in Hoskote costs ₹1,800–₹2,200 per square foot for a well-built RCC-framed house. ₹1,800/sqft gives you a solid, quality home (Comfortable package). ₹2,000/sqft gives you better finishes, premium tiles, and UPVC windows (Better-Living). ₹2,200/sqft gives you a premium home with modular kitchen, marble flooring, and designer elements (Dream Home). These rates include structure, walls, plumbing, electrical, flooring, doors, windows, and painting. They exclude land, Panchayat fees, borewell, compound wall, and BESCOM connection.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q2</span> · How much will a 30×40 site house cost to build in Hoskote?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>A 30×40 plot (1,200 sqft) with a ground-floor house of approximately 900–1,000 sqft built-up area will cost ₹16–22 lakhs depending on package. If you build G+1, the total construction area would be 1,600–1,800 sqft across both floors, costing ₹29–40 lakhs. Use our cost calculator above for your exact configuration.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q3</span> · What is NOT included in your construction rate?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Our per-sqft rate does not include: Panchayat plan approval fees (₹20,000–₹80,000), borewell drilling (₹60,000–₹1,20,000), underground water sump construction, compound wall and gate, BESCOM electrical connection charges, soil testing, modular kitchen (except in Dream Home package), landscaping, and interior furniture. We quote all of these separately so there are no surprises.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q4</span> · Why is your rate higher/lower than another contractor I spoke to?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Construction quotes that seem very low (below ₹1,500/sqft) usually cut corners on material brands — using unbranded cement, lower-grade steel, thin plaster, or cheap tiles. The cheapest quote is rarely the best value when it's your home. We specify exact material brands in writing before signing. If another contractor quotes lower, ask them to match our material specification sheet exactly — then compare. Also ask whether their rate includes what ours does.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q5</span> · Can I reduce costs by procuring materials myself?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>You can, but it requires time, transport, and vendor management. We can offer a material-only or civil-work-only arrangement where we handle labour and supervision while you source some materials. However, for most families with jobs in Bangalore, this adds considerable stress. If you prefer to supply certain items (tiles, fittings, paint), we can accommodate that and adjust the quote accordingly.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q6</span> · Do your rates include GST?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>For construction contracts above ₹7.5 lakhs where land and building are together, GST applies at 5% without ITC. For pure construction services (where you own the land), GST is 18% on the service portion. We explain the applicable GST structure during quotation and provide full GST invoices for every payment. We do not do cash-only work — every rupee is documented.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 2: PROCESS -->
+      <div class="faq-category">
+        <div class="faq-category-title"><span style="font-size:1.3rem;">📋</span> Process & Timeline</div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q7</span> · How long does it take to build a house in Hoskote?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>A typical ground-floor (G) house takes 6–8 months from agreement signing to handover. G+1 takes 9–12 months. G+2 takes 14–18 months. These timelines assume normal monsoon weather and materials availability. Delays can occur during June–September due to heavy rains slowing concrete curing and plastering. We build realistic timelines into every agreement and give written timeline milestones.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q8</span> · Can construction happen during the monsoon?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Structural work like foundation and RCC can proceed during light rain with proper curing management. Plastering, painting, and tile work must pause during heavy rain as moisture affects finishing quality. We plan construction schedules to front-load structural work before monsoon (June) and target finishing work for October–March. We never rush finishing work in wet conditions — it causes long-term problems like peeling paint and hollow tiles.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q9</span> · What happens if the project takes longer than the agreed timeline?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Our agreement includes a timeline with milestone dates. If delays are caused by us (not by weather, approvals, or client changes), we pay a penalty as defined in the agreement. We proactively inform you on WhatsApp when any delay is anticipated and why, rather than waiting for you to discover it. In our experience, honest communication about delays is far better than covering them up.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q10</span> · How does the stage-wise payment system work exactly?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Payments are tied to construction milestones. Typical breakdown: 10% mobilisation advance at agreement signing → 15% after foundation complete → 20% after ground floor slab → 15% after first floor slab (if applicable) → 15% after walls and MEP rough-in → 15% after tiling and plaster → 10% at handover. You receive photos and optionally visit the site before each payment is requested. You approve, then transfer. No payment is ever requested before the milestone is complete and you've seen it.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q11</span> · Do I need to be in Hoskote during construction?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>No. Many of our clients work in Bangalore or even in other cities. We send daily WhatsApp photos and videos so you see every development. Major decisions (tile choices, door designs, paint colours) are handled via video call or WhatsApp. You visit for the initial site meeting, possibly once or twice during key stages if you wish, and for the final walk-through. Everything else is managed remotely without compromising quality.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q12</span> · Can I make changes to the design after construction has started?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Minor changes (moving a switch position, adjusting room partition dimensions) are usually possible and sometimes free. Structural changes after foundation or slab is cast are expensive and sometimes impossible. Major design changes midway (adding a room, changing the floor plan) will require a variation order with revised cost and timeline. This is why we spend time getting the floor plan right before starting — changes after starting are always costlier than getting it right upfront.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 3: TRUST & PAYMENTS -->
+      <div class="faq-category">
+        <div class="faq-category-title"><span style="font-size:1.3rem;">🤝</span> Trust, Safety & Payments</div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q13</span> · What if you take my money and don't complete the project?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>This is the most important question you can ask any contractor, and we respect it. Three protections: (1) You never pay more than one milestone at a time — maximum exposure at any point is one stage's payment. (2) We have a physical office in Hoskote, UDYAM registration, GST registration — we're not anonymous. (3) Our business depends on Hoskote word-of-mouth — disappearing would destroy us permanently. We also provide a written agreement with your right to terminate and recover balance materials in case of default by us.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q14</span> · How much advance do you take before starting work?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>We take a mobilisation advance of 8–12% of the contract value. This covers initial material procurement and the first two weeks of labour. After this, every subsequent payment is milestone-based — you pay only after you see the completed stage and approve it. We never ask for large upfront payments. Any contractor asking for 30–50% advance before starting should be a red flag.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q15</span> · Do you provide a written agreement? What does it cover?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Yes — always, before any work starts. The agreement covers: total construction cost and payment schedule, construction scope (what's included and excluded), floor plan and elevation (attached as annexure), material specifications (exact brands and grades), construction timeline with milestone dates, warranty terms (1 year structural), dispute resolution process, and termination clauses for both parties. We send you the draft and encourage you to review it with a lawyer if you wish before signing.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q16</span> · What warranty do you provide after handover?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>We provide a 1-year comprehensive warranty from the date of handover. This covers: structural defects, terrace waterproofing failures, plumbing leaks, electrical faults, and tile delamination (hollow tiles). Warranty claims are addressed within 7 working days of notification. The warranty letter is given in writing at handover. Normal wear and tear, damage from third-party work, and cosmetic issues from misuse are not covered.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q17</span> · Can I see your previous projects and speak to past customers?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Absolutely. We encourage this. We can arrange for you to visit completed homes in Hoskote and speak directly to the families who live there. We also share photo documentation of projects from Day 1 through handover on WhatsApp. We have no reason to hide our work — it's standing in Hoskote right now. WhatsApp us and ask.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q18</span> · What if there's a dispute during construction?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Our agreement includes a dispute resolution clause. First step is a direct meeting with the team lead. If unresolved, we go to a neutral third-party engineer for technical disputes. Financial disputes are resolved via formal mediation. In three years of work in Hoskote, we have not had a formal dispute reach escalation — because our stage-payment system means problems are caught and fixed stage by stage, not discovered at the end.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 4: TECHNICAL -->
+      <div class="faq-category">
+        <div class="faq-category-title"><span style="font-size:1.3rem;">🏗️</span> Technical & Construction</div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q19</span> · Do I need a soil test before construction?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>We strongly recommend a soil bearing capacity test (SBC test) for plots where the soil type is unknown or visually soft, sandy, or near water bodies. Cost is ₹5,000–₹15,000 and takes 3–5 days. It determines whether you need a standard footing or a deeper/wider foundation. Skipping this and guessing wrong can mean under-designed foundations — a very costly problem to fix later. For plots with known good laterite or red soil, the risk is lower.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q20</span> · What concrete grade do you use?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>We use M20 concrete (1:1.5:3 ratio, 20 N/mm² compressive strength) as minimum for all structural elements: columns, beams, slabs, and foundations. For higher loads or G+3 buildings, we use M25. PCC (Plain Cement Concrete) for the bed layer uses M15. We use Ultratech or ACC OPC 53 Grade cement throughout. The exact mix design is specified in the structural drawings prepared by our engineer.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q21</span> · What type of bricks or blocks do you recommend for Hoskote?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>We primarily use AAC (Autoclaved Aerated Concrete) blocks for external walls. They're lighter than red bricks (reducing structural load), have better thermal insulation (keeping homes cooler in Hoskote's 35–38°C summers), and have good soundproofing. For load-bearing walls where higher strength is needed, we use fly ash bricks (IS 12894 compliant). We avoid ungraded or locally kiln-burnt red bricks as they have inconsistent quality.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q22</span> · How thick is the slab in your construction?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Standard RCC slabs in our construction are 115–125mm (4.5–5 inches) thick for residential floors — as per IS 456 and our structural engineer's design. Terrace slabs may be slightly thicker to accommodate waterproofing layer. We never go below 100mm regardless of cost pressure — thin slabs crack, deflect, and create long-term problems. The slab thickness and steel reinforcement design is documented in structural drawings provided to you.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q23</span> · What waterproofing do you use for the terrace?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>We use a two-stage waterproofing system on all terraces: a crystalline waterproofing compound applied to the slab surface (Dr. Fixit or Fosroc) followed by a polymer-modified mortar screed with slopes directing water to drain points. Hoskote receives significant rainfall, and terrace waterproofing failure is the single biggest post-construction complaint we hear about other contractors. We do not cut corners here.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q24</span> · Do you provide an architect or structural engineer?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>We work with empanelled civil engineers and licensed building designers. For Panchayat plan approval, structural drawings signed by a licensed engineer are mandatory. We arrange this as part of our service. If you already have an architect you want to work with, we can work under their design supervision. Architectural design fees (if applicable) are quoted separately — they typically range from ₹15 to ₹35 per sqft depending on complexity.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q25</span> · How do I know if the steel being used is genuine Fe500D?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Every TMT bar from reputed manufacturers (JSW, Jindal, SAIL) has the brand and grade rolled into the bar itself — you can see it physically. The delivery invoice also mentions grade and steel mill. Ask your contractor to let you see a bar and the delivery challan when steel arrives. Bars should be free of excessive rust, uniform in diameter, and have the characteristic ribbed surface of TMT bars. We encourage our clients to be present for steel deliveries.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q26</span> · What is the difference between AAC blocks and red bricks?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>AAC blocks are factory-made from cement, fly ash, lime, and aluminium powder — resulting in a lightweight, thermally insulating block. They're 3x larger than red bricks but 4x lighter, reducing dead load on the structure. Red bricks are traditional kiln-fired clay blocks — heavy, good compressive strength, but variable quality and poor insulation. In Hoskote's climate, AAC block walls keep interiors significantly cooler, reducing cooling costs. They also have better fire resistance. The main downside: cost is 15–20% higher than red bricks, but the structural savings often offset this.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 5: PANCHAYAT / LEGAL -->
+      <div class="faq-category">
+        <div class="faq-category-title"><span style="font-size:1.3rem;">📑</span> Approvals & Legal</div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q27</span> · Can I build without getting Panchayat approval first?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Technically some people do — but it's illegal and risky. Unapproved structures can receive demolition notices from the Panchayat. You'll also face problems getting BESCOM connection, home loan, and eventually property registration. Banks increasingly verify plan approval before disbursing construction loans. We never start construction without confirming approval is in place — it protects both you and us.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q28</span> · How long does Panchayat plan approval take in Hoskote?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Typically 15–45 days from submission of a complete application. Delays happen if documents are incomplete, if the plot has any Khata or survey number issues, or if the Panchayat has a backlog. By starting the approval process the moment you confirm you want to build, we can get approval done before your loan disbursal is ready — so construction isn't delayed waiting for paper work.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q29</span> · My plot is on agricultural land. Can I build a house?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Agricultural land must be converted to residential use (NA / Non-Agricultural) before building a house. This is a DC Conversion (Deputy Commissioner Conversion) process in Karnataka. Cost varies by plot size and location. Timeline is typically 3–6 months. This is separate from Panchayat plan approval. Without DC Conversion, Panchayat will not grant building permission, and banks will not give construction loans. We can refer you to a property lawyer who handles DC conversions in Hoskote Taluk.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q30</span> · Do I need a completion certificate after the house is built?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>An Occupancy Certificate (OC) or Completion Certificate from the Panchayat formally states that the building was constructed as per approved plans and is safe for occupation. It's not always enforced for individual houses in rural Panchayats, but it's important for future property sale, registration changes, and some bank loans. We prepare and submit the completion certificate application on your behalf after handover.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q31</span> · What is FAR/FSI and how does it affect my house design?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>FAR (Floor Area Ratio) or FSI (Floor Space Index) limits the total built-up area allowed as a multiple of your plot area. Under Hoskote Panchayat norms, FAR is typically 1.5–2.0 for residential. On a 1,200 sqft plot, with FAR 1.5, you can build up to 1,800 sqft total. Setbacks (minimum gaps from plot boundaries) also apply. Our building designer calculates the maximum permissible area before finalising your floor plan.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 6: HOME LOAN -->
+      <div class="faq-category">
+        <div class="faq-category-title"><span style="font-size:1.3rem;">🏦</span> Home Loans & Finance</div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q32</span> · Can I get a home loan for construction on my plot in Hoskote?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Yes. SBI, HDFC, Canara Bank, and Karnataka Bank all offer construction loans for plots in Hoskote. Requirements: clear title deed, Panchayat plan approval, construction agreement with a licensed contractor (that's us), estimated construction cost from a civil engineer, and income proof. Loan-to-value ratio is typically 75–80% of construction cost. Disbursement happens in stages — matching our stage-wise payment structure perfectly.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q33</span> · How is a construction loan different from a flat purchase loan?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>For flat purchase, the bank gives you one lump-sum amount against the developer's RERA-registered project. For construction loans, the bank releases money in tranches (stages) as construction progresses — verified by bank-appointed valuers who physically inspect the site before each disbursement. This means you don't pay EMI on the full amount from Day 1 — you pay on only the disbursed amount. Interest during construction (pre-EMI interest) is manageable if the construction moves quickly.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q34</span> · How much home loan can I get for construction in Hoskote?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Banks generally lend 75–80% of the total project cost (land + construction), subject to your income eligibility. If your total project cost is ₹60 lakhs and you can support a ₹45 lakh loan on your income (EMI should not exceed 40–45% of net monthly income), the bank will consider it. For a ₹45L loan at 8.75% over 20 years, the EMI is approximately ₹40,000/month. Use our EMI calculator on this page to model your scenario.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q35</span> · My CIBIL score is below 700 — can I still get a construction loan?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Most banks prefer CIBIL 750+. Below 700 makes it difficult but not impossible. Options: apply with a co-applicant with a higher score, use KSFC (Karnataka State Finance Corporation) which has different criteria, approach smaller cooperative banks like Karnataka Bank or district cooperative banks, or improve your score first (6–12 months of on-time payments and reducing credit utilisation). We can refer you to a loan consultant who specialises in Hoskote area construction loans.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 7: LOCAL HOSKOTE -->
+      <div class="faq-category">
+        <div class="faq-category-title"><span style="font-size:1.3rem;">📍</span> Local Hoskote Questions</div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q36</span> · Do you build in all areas around Hoskote — Sulibele, Anugondanahalli, Kannamangala?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Yes. We serve Hoskote Town, Sulibele, Anugondanahalli, Kannamangala, Channasandra, Devanahalli Road, Vijayapura, Jadigenahalli, Nandagudi, Budigere Road, Old Madras Road properties, and KR Puram outskirts up to about 15km from Hoskote. If your plot is outside these areas, WhatsApp us — we'll tell you honestly if we can serve you.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q37</span> · How is Hoskote soil — is it suitable for construction?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Most of Hoskote has red laterite soil or hard gravel soil — excellent for construction with good bearing capacity. Areas near the lake (Hoskote Lake and Bettakote Lake region) have softer alluvial deposits requiring deeper foundations. Agricultural areas with deep black cotton soil need special foundation design (well-foundation or raft). We assess soil conditions during the free site visit and recommend accordingly. A formal SBC test costs ₹5,000–₹15,000 for official documentation.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q38</span> · What is the Panchayat jurisdiction for my plot in Hoskote?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Hoskote area has multiple Grama Panchayats depending on the village survey number. Hoskote Town Panchayat, Anugondanahalli Grama Panchayat, Nandagudi Grama Panchayat, Sulibele Grama Panchayat, and Jadigenahalli Panchayat are the main ones. To confirm which Panchayat covers your specific plot, check your Khata certificate — it will mention the Panchayat name. We know the local procedure for each Panchayat office in the area.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q39</span> · Where can I find materials in Hoskote — hardware shops, tile showrooms?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Hoskote town has several hardware and building material shops on the main road near the bus stand and around the KIADB industrial area. For tiles, there are showrooms in Hoskote town. For better selection (especially premium tiles, modular kitchens, premium fittings), Whitefield and Electronic City in Bangalore are nearby. We have supplier relationships and can take you to our preferred vendors — you benefit from our volume pricing.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q40</span> · Property prices are rising in Hoskote — should I build now or wait?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Construction material costs (cement, steel) have been rising 6–10% per year. Labour costs rise similarly. Waiting 2 years means your same house could cost 12–18% more to build. If you have land and a clear plan, building sooner rather than later typically makes financial sense. The decision depends on your personal readiness, not market timing. What we do recommend: don't rush the contractor selection — take your time there.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 8: DESIGN & FEATURES -->
+      <div class="faq-category">
+        <div class="faq-category-title"><span style="font-size:1.3rem;">🏠</span> Design, Features & Choices</div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q41</span> · Can I ask for a customised floor plan, or do you have standard templates?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Every floor plan is customised to your plot dimensions, BHK requirement, family structure, and preferences. We discuss: number of bedrooms and bathrooms, puja room, parking, overhead tank position, kitchen ventilation, natural light direction (vastu if relevant to you), and future expansion plans. After the site visit, we prepare a preliminary plan and revise until you're happy — before signing anything.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q42</span> · Can you follow vastu shastra for the floor plan?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Yes. Many of our clients in Hoskote prefer vastu-compliant designs. We work with vastu principles as a design input while ensuring structural soundness and practical usability. Common requests: main door facing east or north, kitchen in south-east, master bedroom in south-west, puja room in north-east. We'll design within vastu guidelines as long as they're compatible with your plot orientation and structural requirements.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q43</span> · Should I get UPVC windows or aluminium windows?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>For Hoskote's climate, UPVC is better long-term. UPVC doesn't rust, corrode, or require painting, has better thermal insulation, and seals better against dust from the highway. Initial cost is 30–40% higher than aluminium. Aluminium is cheaper, lighter, and more widely available for repair/replacement locally. For the Better-Living and Dream Home packages, we specify UPVC. For Comfortable, we use aluminium — it's still a quality choice, just different.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q44</span> · What bathroom tiles do you recommend for longevity?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>For bathroom floors, we use anti-skid ceramic tiles (R10 or R11 rating) from Kajaria, Johnson, or Somany. For bathroom walls, full-height glazed ceramic tiles are best — they're moisture-proof, easy to clean, and reduce wall dampness over time. In the Comfortable package, we tile to 7ft height; in Better-Living and above, we tile full height. We recommend grout from Laticrete or Mapei — they're mould-resistant unlike cheap grout.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q45</span> · Should I build G+1 now or plan for future expansion?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>If your budget allows, building the structural framework for G+1 now (even if you only finish the ground floor) is far cheaper than adding later. Key: design the structural columns and beam spacing for eventual G+1 load from Day 1. Adding another floor to a structure not designed for it requires structural assessment and often costly retrofitting. We offer an option to design for future expansion at marginal additional structural cost now.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q46</span> · Can you build an independent room or small house first, and complete the main house later?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Yes — this is a common approach in Hoskote for families with limited budget initially. Build one wing or one floor structurally complete, move in, and add the remaining portions later. The key is designing the entire structure upfront so Phase 2 integrates seamlessly. We offer phased construction planning at no extra design charge when you engage us for both phases together.</p></div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 9: AFTER HANDOVER -->
+      <div class="faq-category">
+        <div class="faq-category-title"><span style="font-size:1.3rem;">🔑</span> After Handover & Maintenance</div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q47</span> · What should I do in the first year after moving in?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>New houses go through a curing and settling period. Normal hairline cracks may appear at plaster joins in the first monsoon — these are mostly cosmetic and expected in RCC structures. Check terrace drainage after the first heavy rain. Test all electrical points and plumbing annually. If any crack appears in structural elements (columns, beams), contact us immediately under warranty. Most cosmetic issues can be addressed in the first touch-up round, typically 6 months after handover.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q48</span> · How often should I repaint my house?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Exterior paint: every 5–7 years if weather coat was used, every 3–4 years for standard emulsion. Hoskote's combination of monsoon rain and summer sun accelerates exterior paint degradation compared to drier climates. Interior paint can last 7–10 years before repainting looks necessary. Before repainting, ensure there are no seepage or moisture issues causing paint to peel — fixing the source is more important than repainting on top of a damp surface.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q49</span> · Can I use your team for renovation or additional work after the main project?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Yes. Many families come back for additional rooms, second-floor construction, renovation, painting, or repairs. We maintain relationships with our clients because referrals are our primary business growth in Hoskote. Give us a WhatsApp — we'll visit, assess, and quote fairly.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q50</span> · What documents should I keep safely after my house is completed?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Keep these permanently: Original plot sale deed and registration document, Khata certificate and tax receipts, Panchayat building plan approval letter, Construction agreement (our signed copy), Completion/Occupancy certificate, Electrical test certificate, BESCOM meter connection papers, Borewell details and depth, All GST invoices from construction, Structural drawings (for future addition/renovation reference), and Warranty letter from contractor. We provide all construction-related documents in a WhatsApp folder at handover.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q51</span> · My house has a crack in the wall — when should I be worried?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>Hairline cracks (less than 0.3mm wide) in plaster at corners, above door frames, or at construction joints are normal in any concrete building and are cosmetic. These appear when the structure settles. Wide cracks (more than 1mm), diagonal cracks near column bases, cracks through columns or beams, or any crack that grows over time are structural warning signs — contact a structural engineer immediately. During our 1-year warranty, report any crack to us and we'll assess it.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q52</span> · Do you help with interior design and furniture after construction?</span><span class="arrow">▾</span></div>
+          <div class="faq-a"><p>We focus on construction and don't provide interior design services ourselves. However, we can refer you to trusted interior designers and modular kitchen vendors in the Hoskote–Whitefield area who we've worked with. For the Dream Home package, the modular kitchen is included in our scope. For other packages, we can do basic civil works related to kitchen (counter, dado) and you source the modular kitchen separately.</p></div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Additional cost breakdown -->
-    <div style="background:white;border-radius:var(--radius-lg);padding:2rem;margin-top:3rem;border:1.5px solid var(--stone-200);">
-      <h3 style="margin-bottom:1.5rem;">Additional Costs to Budget For</h3>
-      <div class="grid-3">
-        <div>
-          <h4 style="margin-bottom:.75rem;">Plan Approval (BMRDA)</h4>
-          <p style="font-size:.875rem;color:var(--stone-500);">₹20,000 – ₹80,000 depending on plot size and BUA. Required before construction — and before a construction loan is sanctioned. We help with documentation.</p>
+    <div style="background:var(--indigo-900);border-radius:var(--radius-lg);padding:2rem;text-align:center;margin-top:2rem;">
+      <h3 style="color:white;margin-bottom:.75rem;">Still have a question not answered here?</h3>
+      <p style="color:rgba(255,255,255,.65);margin-bottom:1.5rem;">We typically respond within 2 hours on WhatsApp. Ask anything — no question is too basic.</p>
+      <a href="https://wa.me/919742801802?text=Hi%2C%20I%20have%20a%20question%20about%20construction%20in%20Hoskote" class="btn btn--whatsapp btn--lg">📱 Ask on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <span class="eyebrow">Get Started — No Obligation</span>
+    <h2 style="margin-bottom:.75rem;">Book your free site visit or get an estimate</h2>
+    <p class="lead" style="margin-bottom:2.5rem;">Fill in the form below or WhatsApp us directly. We respond within 2 hours on working days.</p>
+
+    <div class="grid-2" style="gap:3rem;align-items:start;">
+      <div class="contact-form" id="contactFormWrap">
+        <h3 style="margin-bottom:1.5rem;">Send us your requirements</h3>
+        <div id="contact-success" class="form-success" role="status" aria-live="polite">
+          <h4>✅ Request received</h4>
+          <p style="font-size:.875rem;color:var(--stone-700);">Your details have been saved. We'll contact you on working days. You can also message us on WhatsApp to speed things up.</p>
         </div>
-        <div>
-          <h4 style="margin-bottom:.75rem;">Temporary Electricity Connection</h4>
-          <p style="font-size:.875rem;color:var(--stone-500);">₹15,000–₹40,000. Mandatory before construction can begin — arranged alongside plan approval, separate from your permanent BESCOM connection.</p>
+        <div id="contact-error" role="alert" style="display:none;background:#FEF2F2;border:1.5px solid #FCA5A5;color:#991B1B;border-radius:var(--radius);padding:.875rem 1rem;margin-bottom:1rem;font-size:.875rem;"></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cf-name">Your Name *</label>
+            <input type="text" id="cf-name" placeholder="Your name" autocomplete="name" maxlength="80" required>
+          </div>
+          <div class="form-group">
+            <label for="cf-phone">Phone / WhatsApp *</label>
+            <input type="tel" id="cf-phone" placeholder="98XXX XXXXX" autocomplete="tel" inputmode="tel" maxlength="20" required>
+          </div>
+          <div class="form-group">
+            <label for="cf-contact">Preferred contact method</label>
+            <select id="cf-contact">
+              <option>WhatsApp</option>
+              <option>Phone call</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cf-area">Construction location</label>
+            <input type="text" id="cf-area" placeholder="Sulibele, Hoskote..." maxlength="120">
+          </div>
+          <div class="form-group">
+            <label for="cf-size">Plot size or proposed built-up area</label>
+            <input type="text" id="cf-size" placeholder="30×40, 1,200 sq ft..." maxlength="60">
+          </div>
+          <div class="form-group">
+            <label for="cf-floors">Number of floors</label>
+            <select id="cf-floors">
+              <option value="">Not sure yet</option>
+              <option value="1">Ground floor only</option>
+              <option value="2">G+1</option>
+              <option value="3">G+2</option>
+              <option value="4">G+3</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cf-budget">Approximate budget (optional)</label>
+            <select id="cf-budget">
+              <option value="">Prefer not to say</option>
+              <option>Under ₹25 lakhs</option>
+              <option>₹25–40 lakhs</option>
+              <option>₹40–70 lakhs</option>
+              <option>₹70L – ₹1 Cr</option>
+              <option>Above ₹1 Cr</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cf-start">Expected start (optional)</label>
+            <input type="text" id="cf-start" placeholder="e.g. next 3 months" maxlength="40">
+          </div>
+          <div class="form-group">
+            <label for="cf-type">What do you need?</label>
+            <select id="cf-type">
+              <option>Free Site Visit</option>
+              <option>Cost Estimate</option>
+              <option>Floor Plan Discussion</option>
+              <option>Home Loan Help</option>
+              <option>Plan Approval Help</option>
+              <option>General Query</option>
+            </select>
+          </div>
+          <div class="form-group form-group--full">
+            <label for="cf-msg">Additional requirements (optional)</label>
+            <textarea id="cf-msg" maxlength="1000" placeholder="Tell us about your project: BHK needed, timeline, special requirements..."></textarea>
+          </div>
+          <!-- spam trap: hidden from people, bots fill it in -->
+          <div style="position:absolute;left:-9999px;" aria-hidden="true">
+            <label for="cf-website">Website</label>
+            <input type="text" id="cf-website" tabindex="-1" autocomplete="off">
+          </div>
         </div>
-        <div>
-          <h4 style="margin-bottom:.75rem;">Borewell & Water Sump</h4>
-          <p style="font-size:.875rem;color:var(--stone-500);">Borewell: ₹60,000–₹1,20,000. Sump construction: ₹35,000–₹70,000.</p>
+        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.75rem;">By sending this form you agree that we may use your details only to contact you about your enquiry. We do not sell or publish them.</p>
+        <button class="btn btn--primary btn--lg" id="cf-submit-btn" style="width:100%;justify-content:center;margin-top:1rem;" onclick="submitForm()">Send My Request →</button>
+        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.875rem;text-align:center;">Or WhatsApp directly: <a href="https://wa.me/919742801802" style="color:var(--terracotta);font-weight:600;">+91 97428 01802</a></p>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom:1.5rem;">Three ways to reach us</h3>
+
+        <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
+          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg" style="justify-content:center;">📱 WhatsApp: +91 97428 01802</a>
+          <a href="tel:+919742801802" class="btn btn--secondary btn--lg" style="justify-content:center;">📞 Call: +91 97428 01802</a>
+          <a href="mailto:hello@hoskoteconstruction.in" class="btn btn--secondary btn--lg" style="justify-content:center;">✉️ hello@hoskoteconstruction.in</a>
         </div>
-        <div>
-          <h4 style="margin-bottom:.75rem;">Compound Wall & Gate</h4>
-          <p style="font-size:.875rem;color:var(--stone-500);">Compound wall: ₹400–₹650/running foot. Main gate: ₹25,000–₹80,000.</p>
+
+        <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem;">
+          <h4 style="margin-bottom:1rem;">Office Location</h4>
+          <p style="font-size:.875rem;color:var(--stone-700);line-height:1.75;">
+            Balaji Gold City<br>
+            Hoskote, Bengaluru Rural<br>
+            Karnataka — 562114<br><br>
+            <strong>Mon–Sat:</strong> 9:00 AM – 6:00 PM<br>
+            <strong>Sunday:</strong> 10:00 AM – 2:00 PM (by appointment)
+          </p>
+          <a href="https://maps.app.goo.gl/KEeqWebvZqEvg2iFA" class="btn btn--ghost btn--sm" style="margin-top:1rem;" target="_blank">📍 Open in Google Maps</a>
         </div>
-        <div>
-          <h4 style="margin-bottom:.75rem;">Permanent BESCOM Connection</h4>
-          <p style="font-size:.875rem;color:var(--stone-500);">₹15,000–₹45,000 depending on load sanctioned and pole distance, arranged after construction is complete.</p>
-        </div>
-        <div>
-          <h4 style="margin-bottom:.75rem;">Modular Kitchen (if not in package)</h4>
-          <p style="font-size:.875rem;color:var(--stone-500);">₹1,20,000–₹3,50,000 depending on size, material, and brand.</p>
-        </div>
-        <div>
-          <h4 style="margin-bottom:.75rem;">Landscaping & Driveway</h4>
-          <p style="font-size:.875rem;color:var(--stone-500);">Optional. Paver driveway: ₹80–₹120/sqft. Garden landscaping: varies widely.</p>
+
+        <div style="background:var(--terracotta-light);border:1.5px solid var(--terracotta);border-radius:var(--radius);padding:1.25rem;">
+          <h4 style="color:var(--terracotta-dark);margin-bottom:.5rem;">What happens after you contact us</h4>
+          <ol style="font-size:.875rem;color:var(--stone-700);padding-left:1.25rem;display:flex;flex-direction:column;gap:.5rem;">
+            <li>We call or WhatsApp you within 2 hours</li>
+            <li>We schedule a free site visit at your convenience</li>
+            <li>We assess the plot and discuss your requirements (1–2 hours)</li>
+            <li>We send a detailed written estimate within 24 hours</li>
+            <li>No pressure — take your time to decide</li>
+          </ol>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ============================================================ MORE TOOLS AND GUIDES -->
+<section class="section" id="resources" style="padding-bottom:1rem;">
+  <div class="container">
+    <span class="eyebrow">Free Tools &amp; Guides</span>
+    <h2 style="margin-bottom:.75rem;">More tools, guides and property resources</h2>
+    <p class="lead">Helpful extras for planning your build: guides, material and loan calculators, agreement and document generators, and properties for sale in Hoskote.</p>
+  </div>
+</section>
+
+<!-- ============================================================ LATEST GUIDES PREVIEW -->
+<section class="section section--alt" id="latest-guides">
+  <div class="container">
+    <span class="eyebrow">Free Resources</span>
+    <h2 style="margin-bottom:.5rem;">Guides Worth Reading Before You Build</h2>
+    <p class="lead" style="margin-bottom:1.75rem;">Practical, Hoskote-specific answers — no fluff, no jargon.</p>
+    <div style="display:grid;grid-template-columns:1fr;gap:1rem;">
+      <a href="/blog/why-curing-watering-matters-hoskote-construction" style="display:block;background:#fff;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.25rem 1.5rem;">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--terracotta);margin-bottom:.4rem;">Construction Quality</div>
+        <div style="font-weight:700;color:var(--stone-900);margin-bottom:.3rem;">Why Curing (Watering) Your House Every Day Matters More Than Almost Anything Else</div>
+        <div style="font-size:.85rem;color:var(--stone-500);">The step most unsupervised sites skip — and what it costs a family, sometimes for generations.</div>
+      </a>
+      <a href="/blog/construction-contractor-fraud-hoskote-guide" style="display:block;background:#fff;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.25rem 1.5rem;">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--terracotta);margin-bottom:.4rem;">Buyer Protection</div>
+        <div style="font-weight:700;color:var(--stone-900);margin-bottom:.3rem;">How to Avoid Construction Fraud in Hoskote</div>
+        <div style="font-size:.85rem;color:var(--stone-500);">The exact patterns we've seen, and the questions that expose them before you sign anything.</div>
+      </a>
+      <a href="/blog/ec-ekhata-property-registration-hoskote-guide" style="display:block;background:#fff;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.25rem 1.5rem;">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--terracotta);margin-bottom:.4rem;">Documents</div>
+        <div style="font-weight:700;color:var(--stone-900);margin-bottom:.3rem;">EC, E-Khata & Property Registration in Hoskote — Complete Guide</div>
+        <div style="font-size:.85rem;color:var(--stone-500);">Kaveri 2.0 steps, and why Hoskote uses a different e-Khata portal than Bengaluru city.</div>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:1.5rem;">
+      <a href="/blog/" class="btn btn--ghost" style="background:#fff;">See All Guides →</a>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#833AB4,#C13584,#E1306C);border-radius:var(--radius-lg);padding:1.75rem 2rem;margin-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.25rem;color:#fff;">
+      <div>
+        <div style="font-weight:700;font-size:1.1rem;margin-bottom:.3rem;">📸 See our sites in motion, not just photos</div>
+        <div style="font-size:.9rem;opacity:.9;">Daily construction updates, real site videos, and behind-the-scenes progress — on Instagram.</div>
+      </div>
+      <a href="https://instagram.com/hoskoteconstruction" target="_blank" rel="noopener" style="background:#fff;color:#C13584;padding:.7rem 1.4rem;border-radius:8px;font-size:.9rem;font-weight:700;white-space:nowrap;">Follow @hoskoteconstruction →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ ANSWER THE BIG QUESTIONS -->
+<section class="section" id="big-questions">
+  <div class="container">
+    <span class="eyebrow">Every Question Answered</span>
+    <h2 class="text-balance" style="margin-bottom:.75rem;">Everything you need to know — before you call</h2>
+    <p class="lead" style="margin-bottom:2.5rem;">The five questions every Hoskote homeowner asks. Answered here, completely, right now.</p>
+    <div class="answer-grid">
+      <div class="answer-card">
+        <div class="answer-card__icon" style="background:var(--indigo-100);">💰</div>
+        <div class="answer-card__q">How much will my house cost to build in Hoskote?</div>
+        <div class="answer-card__a">Construction starts at ₹1,800/sqft for a solid home and goes up to ₹2,200/sqft for premium finishes. A 1,200 sqft ground-floor house typically costs ₹22–26 lakhs depending on your choices. Our calculator below gives you a personalised estimate in 30 seconds.</div>
+        <a href="#calculator" class="answer-card__link">Calculate mine →</a>
+      </div>
+      <div class="answer-card">
+        <div class="answer-card__icon" style="background:var(--terracotta-light);">📋</div>
+        <div class="answer-card__q">How does the construction process actually work?</div>
+        <div class="answer-card__a">We begin with a free site visit, then prepare a detailed estimate and written agreement. Construction moves through foundation → structure → walls → finishing → handover. You see photos at every stage and pay only after approving each milestone. Nothing moves forward without your sign-off.</div>
+        <a href="#process" class="answer-card__link">See full process →</a>
+      </div>
+      <div class="answer-card">
+        <div class="answer-card__icon" style="background:var(--green-100);">🤝</div>
+        <div class="answer-card__q">Can I trust this contractor — what if they take money and disappear?</div>
+        <div class="answer-card__a">We've built real homes in Hoskote with photos, addresses, and families who'll speak for us. We have a physical office at Balaji Gold City, Hoskote. UDYAM registration: UDYAM-KR-02-0127051. You never pay more than one milestone at a time. We cannot disappear — our livelihood is in this town.</div>
+        <a href="#about" class="answer-card__link">About our team →</a>
+      </div>
+      <div class="answer-card">
+        <div class="answer-card__icon" style="background:var(--gold-light);">⏱️</div>
+        <div class="answer-card__q">How long does construction take in Hoskote?</div>
+        <div class="answer-card__a">A typical G ground-floor house takes 6–8 months. G+1 takes 9–12 months. G+2 takes 14–18 months. Timelines depend on plot size, finishing choices, and monsoon delays. We give you a written timeline before starting and update you the moment anything changes.</div>
+        <a href="#process" class="answer-card__link">See timeline →</a>
+      </div>
+      <div class="answer-card">
+        <div class="answer-card__icon" style="background:#F0FDF4;">🚀</div>
+        <div class="answer-card__q">How do I get started? What's the first step?</div>
+        <div class="answer-card__a">The first step is a free site visit — no cost, no commitment. We come to your plot, assess the soil and access, discuss your requirements, and give you a written estimate within 24 hours. WhatsApp us or call to book. We respond within 2 hours on working days.</div>
+        <a href="#contact" class="answer-card__link">Book site visit →</a>
+      </div>
+      <div class="answer-card" style="background:var(--indigo-900); border-color:var(--indigo-900); cursor:pointer;" onclick="location.href = 'https://wa.me/919742801802?text=Hi%2C%20I%20have%20a%20question%20about%20building%20in%20Hoskote'">
+        <div class="answer-card__icon" style="background:rgba(255,255,255,.12);">💬</div>
+        <div class="answer-card__q" style="color:white;">Have a different question?</div>
+        <div class="answer-card__a" style="color:rgba(255,255,255,.65);">We typically respond within 2 hours on WhatsApp. No call centres, no scripts — you talk to the actual team building in Hoskote.</div>
+        <span style="font-size:.85rem;font-weight:700;color:#25D366;margin-top:.875rem;display:inline-block;">WhatsApp us now →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PROPERTIES FOR SALE -->
+<section class="section section--alt" id="properties">
+  <div class="container">
+    <span class="eyebrow">Verified Listings · Hoskote & Bengaluru Rural</span>
+    <h2 class="text-balance" style="margin-bottom:.75rem;">House, Flat & Plot for Sale in Hoskote</h2>
+    <p class="lead" style="margin-bottom:2.5rem;">New flat and open plots — verified listings with BMRDA-approved documentation and home loan assistance up to 90%.</p>
+
+    <div class="answer-grid">
+      <div class="answer-card">
+        <div class="answer-card__icon" style="background:var(--gold-light);">📍</div>
+        <div class="answer-card__q">1,400 sqft West-Facing Plot for Sale — Hoskote</div>
+        <div class="answer-card__a">1,400 sqft west-facing plot in a <strong>BMRDA-approved layout</strong> with all amenities, available for <strong>immediate sale</strong>. Price: <strong>₹6,500 per sqft</strong> (about ₹91 lakh), negotiable. Contact us for the exact location, documents and a site visit.</div>
+        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%201400%20sqft%20west-facing%20plot%20for%20sale%20in%20Hoskote" class="answer-card__link">Enquire on WhatsApp →</a>
+      </div>
+      <div class="answer-card">
+        <div class="answer-card__icon" style="background:var(--terracotta-light);">🏢</div>
+        <div class="answer-card__q">New 2BHK Flat for Sale — Hoskote</div>
+        <div class="answer-card__a">Brand new 2BHK flat, ready to move. <strong>₹70 Lakhs, all inclusive</strong>. Prices are increasing, so enquire early. Ideal for families or first-time buyers looking to move in without construction wait time.</div>
+        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20the%202BHK%20flat%20for%20sale%20-%2070%20Lakhs" class="answer-card__link">Enquire on WhatsApp →</a>
+      </div>
+      <div class="answer-card">
+        <div class="answer-card__icon" style="background:var(--green-100);">📐</div>
+        <div class="answer-card__q">Open Plots for Sale — Best Sizes in Hoskote</div>
+        <div class="answer-card__a">Residential plots ranging from <strong>3,000 to 4,000 sqft</strong>, well-located for building your own home. Pricing shared on request based on exact size and location.</div>
+        <a href="https://wa.me/919742801802?text=Hi%2C%20I%27m%20interested%20in%20plots%20for%20sale%20in%20Hoskote%20%283000-4000%20sqft%29" class="answer-card__link">Ask for Plot Price →</a>
+      </div>
+      <div class="answer-card" style="background:var(--indigo-900); border-color:var(--indigo-900); cursor:pointer;" onclick="location.href = 'https://wa.me/919742801802?text=Hi%2C%20I%20need%20home%20loan%20assistance%20for%20a%20property%20purchase'">
+        <div class="answer-card__icon" style="background:rgba(255,255,255,.12);">🏦</div>
+        <div class="answer-card__q" style="color:white;">Home Loan Assistance — Best Rate, Fast Release</div>
+        <div class="answer-card__a" style="color:rgba(255,255,255,.65);">We help you get the best possible rate based on your CIBIL score, with fast-tracked processing for quick loan release. Works alongside SBI, HDFC, Canara Bank, Karnataka Bank and more.</div>
+        <span style="font-size:.85rem;font-weight:700;color:#25D366;margin-top:.875rem;display:inline-block;">Check my eligibility →</span>
+      </div>
+    </div>
+    <p style="font-size:.8rem;color:var(--stone-500);margin-top:1.5rem;">Prices indicative and subject to change. Contact us on WhatsApp for exact location, site visit, and latest availability.</p>
+  </div>
+</section>
+
+<!-- ============================================================ MATERIAL QUANTITY CALCULATOR -->
+<section class="section" id="qty-calc">
+  <div class="container">
+    <span class="eyebrow">Material Planning Tool</span>
+    <h2 style="margin-bottom:.75rem;">Material Quantity Calculator</h2>
+    <p class="lead" style="margin-bottom:2.5rem;">Understand roughly how much cement, steel, bricks, and sand you'll need — so you can verify your contractor's procurement.</p>
+
+    <div class="qty-calc">
+      <div class="qty-calc-header">
+        <h3 style="color:white;">Material Quantity Estimator</h3>
+        <p style="color:rgba(255,255,255,.7);font-size:.875rem;margin-top:.3rem;">For a single-floor RCC framed structure — ground floor only</p>
+      </div>
+      <div class="qty-calc-body">
+        <div class="calc-grid">
+          <div class="form-group">
+            <label for="q-sqft">Built-up Area (sq ft)</label>
+            <input type="number" id="q-sqft" value="1000" min="300" max="5000" oninput="calcQty()">
+          </div>
+          <div class="form-group">
+            <label for="q-type">Construction Type</label>
+            <select id="q-type" onchange="calcQty()">
+              <option value="standard">Standard RCC Frame</option>
+              <option value="load">Load Bearing</option>
+            </select>
+          </div>
+        </div>
+        <div class="qty-result-grid" id="qty-results">
+          <div class="qty-result-card"><div class="qty-val" id="q-cement">520</div><div class="qty-unit">Bags (50kg)</div><div class="qty-mat">Cement</div></div>
+          <div class="qty-result-card"><div class="qty-val" id="q-steel">6.5</div><div class="qty-unit">Tonnes</div><div class="qty-mat">TMT Steel</div></div>
+          <div class="qty-result-card"><div class="qty-val" id="q-bricks">18,000</div><div class="qty-unit">Pieces</div><div class="qty-mat">Bricks / Blocks</div></div>
+          <div class="qty-result-card"><div class="qty-val" id="q-sand">310</div><div class="qty-unit">Cft</div><div class="qty-mat">M-Sand</div></div>
+          <div class="qty-result-card"><div class="qty-val" id="q-aggregate">420</div><div class="qty-unit">Cft</div><div class="qty-mat">Aggregate 20mm</div></div>
+          <div class="qty-result-card"><div class="qty-val" id="q-water">12,000</div><div class="qty-unit">Litres</div><div class="qty-mat">Water (curing)</div></div>
+        </div>
+        <p style="font-size:.78rem;color:var(--stone-500);margin-top:1.25rem;">* These are approximate quantities for planning purposes. Actual quantities depend on structural drawings, soil conditions, and waste factor. Always verify with a structural engineer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================================================ MATERIALS GUIDE -->
-<section class="section" id="materials">
+<section class="section section--alt" id="materials">
   <div class="container">
     <span class="eyebrow">Know What Goes Into Your Home</span>
     <h2 style="margin-bottom:.75rem;">Materials Guide — What We Use and Why</h2>
@@ -1874,331 +2433,8 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   </div>
 </section>
 
-<!-- ============================================================ FAQ -->
-<section class="section section--alt" id="faq">
-  <div class="container">
-    <span class="eyebrow">50+ Questions Answered</span>
-    <h2 style="margin-bottom:.75rem;">Everything Hoskote homeowners ask us</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">Compiled from real questions we've received from families across Hoskote, Sulibele, Anugondanahalli, Channasandra, and Kannamangala.</p>
-
-    <div class="faq-section">
-      <!-- CATEGORY 1: COST -->
-      <div class="faq-category">
-        <div class="faq-category-title"><span style="font-size:1.3rem;">💰</span> Cost & Pricing</div>
-
-        <div class="faq-item open">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q1</span> · What is the current construction cost per square foot in Hoskote?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>As of 2026, house construction in Hoskote costs ₹1,800–₹2,200 per square foot for a well-built RCC-framed house. ₹1,800/sqft gives you a solid, quality home (Comfortable package). ₹2,000/sqft gives you better finishes, premium tiles, and UPVC windows (Better-Living). ₹2,200/sqft gives you a premium home with modular kitchen, marble flooring, and designer elements (Dream Home). These rates include structure, walls, plumbing, electrical, flooring, doors, windows, and painting. They exclude land, Panchayat fees, borewell, compound wall, and BESCOM connection.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q2</span> · How much will a 30×40 site house cost to build in Hoskote?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>A 30×40 plot (1,200 sqft) with a ground-floor house of approximately 900–1,000 sqft built-up area will cost ₹16–22 lakhs depending on package. If you build G+1, the total construction area would be 1,600–1,800 sqft across both floors, costing ₹29–40 lakhs. Use our cost calculator above for your exact configuration.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q3</span> · What is NOT included in your construction rate?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Our per-sqft rate does not include: Panchayat plan approval fees (₹20,000–₹80,000), borewell drilling (₹60,000–₹1,20,000), underground water sump construction, compound wall and gate, BESCOM electrical connection charges, soil testing, modular kitchen (except in Dream Home package), landscaping, and interior furniture. We quote all of these separately so there are no surprises.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q4</span> · Why is your rate higher/lower than another contractor I spoke to?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Construction quotes that seem very low (below ₹1,500/sqft) usually cut corners on material brands — using unbranded cement, lower-grade steel, thin plaster, or cheap tiles. The cheapest quote is rarely the best value when it's your home. We specify exact material brands in writing before signing. If another contractor quotes lower, ask them to match our material specification sheet exactly — then compare. Also ask whether their rate includes what ours does.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q5</span> · Can I reduce costs by procuring materials myself?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>You can, but it requires time, transport, and vendor management. We can offer a material-only or civil-work-only arrangement where we handle labour and supervision while you source some materials. However, for most families with jobs in Bangalore, this adds considerable stress. If you prefer to supply certain items (tiles, fittings, paint), we can accommodate that and adjust the quote accordingly.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q6</span> · Do your rates include GST?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>For construction contracts above ₹7.5 lakhs where land and building are together, GST applies at 5% without ITC. For pure construction services (where you own the land), GST is 18% on the service portion. We explain the applicable GST structure during quotation and provide full GST invoices for every payment. We do not do cash-only work — every rupee is documented.</p></div>
-        </div>
-      </div>
-
-      <!-- CATEGORY 2: PROCESS -->
-      <div class="faq-category">
-        <div class="faq-category-title"><span style="font-size:1.3rem;">📋</span> Process & Timeline</div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q7</span> · How long does it take to build a house in Hoskote?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>A typical ground-floor (G) house takes 6–8 months from agreement signing to handover. G+1 takes 9–12 months. G+2 takes 14–18 months. These timelines assume normal monsoon weather and materials availability. Delays can occur during June–September due to heavy rains slowing concrete curing and plastering. We build realistic timelines into every agreement and give written timeline milestones.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q8</span> · Can construction happen during the monsoon?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Structural work like foundation and RCC can proceed during light rain with proper curing management. Plastering, painting, and tile work must pause during heavy rain as moisture affects finishing quality. We plan construction schedules to front-load structural work before monsoon (June) and target finishing work for October–March. We never rush finishing work in wet conditions — it causes long-term problems like peeling paint and hollow tiles.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q9</span> · What happens if the project takes longer than the agreed timeline?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Our agreement includes a timeline with milestone dates. If delays are caused by us (not by weather, approvals, or client changes), we pay a penalty as defined in the agreement. We proactively inform you on WhatsApp when any delay is anticipated and why, rather than waiting for you to discover it. In our experience, honest communication about delays is far better than covering them up.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q10</span> · How does the stage-wise payment system work exactly?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Payments are tied to construction milestones. Typical breakdown: 10% mobilisation advance at agreement signing → 15% after foundation complete → 20% after ground floor slab → 15% after first floor slab (if applicable) → 15% after walls and MEP rough-in → 15% after tiling and plaster → 10% at handover. You receive photos and optionally visit the site before each payment is requested. You approve, then transfer. No payment is ever requested before the milestone is complete and you've seen it.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q11</span> · Do I need to be in Hoskote during construction?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>No. Many of our clients work in Bangalore or even in other cities. We send daily WhatsApp photos and videos so you see every development. Major decisions (tile choices, door designs, paint colours) are handled via video call or WhatsApp. You visit for the initial site meeting, possibly once or twice during key stages if you wish, and for the final walk-through. Everything else is managed remotely without compromising quality.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q12</span> · Can I make changes to the design after construction has started?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Minor changes (moving a switch position, adjusting room partition dimensions) are usually possible and sometimes free. Structural changes after foundation or slab is cast are expensive and sometimes impossible. Major design changes midway (adding a room, changing the floor plan) will require a variation order with revised cost and timeline. This is why we spend time getting the floor plan right before starting — changes after starting are always costlier than getting it right upfront.</p></div>
-        </div>
-      </div>
-
-      <!-- CATEGORY 3: TRUST & PAYMENTS -->
-      <div class="faq-category">
-        <div class="faq-category-title"><span style="font-size:1.3rem;">🤝</span> Trust, Safety & Payments</div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q13</span> · What if you take my money and don't complete the project?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>This is the most important question you can ask any contractor, and we respect it. Three protections: (1) You never pay more than one milestone at a time — maximum exposure at any point is one stage's payment. (2) We have a physical office in Hoskote, UDYAM registration, GST registration — we're not anonymous. (3) Our business depends on Hoskote word-of-mouth — disappearing would destroy us permanently. We also provide a written agreement with your right to terminate and recover balance materials in case of default by us.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q14</span> · How much advance do you take before starting work?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>We take a mobilisation advance of 8–12% of the contract value. This covers initial material procurement and the first two weeks of labour. After this, every subsequent payment is milestone-based — you pay only after you see the completed stage and approve it. We never ask for large upfront payments. Any contractor asking for 30–50% advance before starting should be a red flag.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q15</span> · Do you provide a written agreement? What does it cover?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Yes — always, before any work starts. The agreement covers: total construction cost and payment schedule, construction scope (what's included and excluded), floor plan and elevation (attached as annexure), material specifications (exact brands and grades), construction timeline with milestone dates, warranty terms (1 year structural), dispute resolution process, and termination clauses for both parties. We send you the draft and encourage you to review it with a lawyer if you wish before signing.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q16</span> · What warranty do you provide after handover?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>We provide a 1-year comprehensive warranty from the date of handover. This covers: structural defects, terrace waterproofing failures, plumbing leaks, electrical faults, and tile delamination (hollow tiles). Warranty claims are addressed within 7 working days of notification. The warranty letter is given in writing at handover. Normal wear and tear, damage from third-party work, and cosmetic issues from misuse are not covered.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q17</span> · Can I see your previous projects and speak to past customers?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Absolutely. We encourage this. We can arrange for you to visit completed homes in Hoskote and speak directly to the families who live there. We also share photo documentation of projects from Day 1 through handover on WhatsApp. We have no reason to hide our work — it's standing in Hoskote right now. WhatsApp us and ask.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q18</span> · What if there's a dispute during construction?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Our agreement includes a dispute resolution clause. First step is a direct meeting with the team lead. If unresolved, we go to a neutral third-party engineer for technical disputes. Financial disputes are resolved via formal mediation. In three years of work in Hoskote, we have not had a formal dispute reach escalation — because our stage-payment system means problems are caught and fixed stage by stage, not discovered at the end.</p></div>
-        </div>
-      </div>
-
-      <!-- CATEGORY 4: TECHNICAL -->
-      <div class="faq-category">
-        <div class="faq-category-title"><span style="font-size:1.3rem;">🏗️</span> Technical & Construction</div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q19</span> · Do I need a soil test before construction?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>We strongly recommend a soil bearing capacity test (SBC test) for plots where the soil type is unknown or visually soft, sandy, or near water bodies. Cost is ₹5,000–₹15,000 and takes 3–5 days. It determines whether you need a standard footing or a deeper/wider foundation. Skipping this and guessing wrong can mean under-designed foundations — a very costly problem to fix later. For plots with known good laterite or red soil, the risk is lower.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q20</span> · What concrete grade do you use?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>We use M20 concrete (1:1.5:3 ratio, 20 N/mm² compressive strength) as minimum for all structural elements: columns, beams, slabs, and foundations. For higher loads or G+3 buildings, we use M25. PCC (Plain Cement Concrete) for the bed layer uses M15. We use Ultratech or ACC OPC 53 Grade cement throughout. The exact mix design is specified in the structural drawings prepared by our engineer.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q21</span> · What type of bricks or blocks do you recommend for Hoskote?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>We primarily use AAC (Autoclaved Aerated Concrete) blocks for external walls. They're lighter than red bricks (reducing structural load), have better thermal insulation (keeping homes cooler in Hoskote's 35–38°C summers), and have good soundproofing. For load-bearing walls where higher strength is needed, we use fly ash bricks (IS 12894 compliant). We avoid ungraded or locally kiln-burnt red bricks as they have inconsistent quality.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q22</span> · How thick is the slab in your construction?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Standard RCC slabs in our construction are 115–125mm (4.5–5 inches) thick for residential floors — as per IS 456 and our structural engineer's design. Terrace slabs may be slightly thicker to accommodate waterproofing layer. We never go below 100mm regardless of cost pressure — thin slabs crack, deflect, and create long-term problems. The slab thickness and steel reinforcement design is documented in structural drawings provided to you.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q23</span> · What waterproofing do you use for the terrace?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>We use a two-stage waterproofing system on all terraces: a crystalline waterproofing compound applied to the slab surface (Dr. Fixit or Fosroc) followed by a polymer-modified mortar screed with slopes directing water to drain points. Hoskote receives significant rainfall, and terrace waterproofing failure is the single biggest post-construction complaint we hear about other contractors. We do not cut corners here.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q24</span> · Do you provide an architect or structural engineer?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>We work with empanelled civil engineers and licensed building designers. For Panchayat plan approval, structural drawings signed by a licensed engineer are mandatory. We arrange this as part of our service. If you already have an architect you want to work with, we can work under their design supervision. Architectural design fees (if applicable) are quoted separately — they typically range from ₹15 to ₹35 per sqft depending on complexity.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q25</span> · How do I know if the steel being used is genuine Fe500D?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Every TMT bar from reputed manufacturers (JSW, Jindal, SAIL) has the brand and grade rolled into the bar itself — you can see it physically. The delivery invoice also mentions grade and steel mill. Ask your contractor to let you see a bar and the delivery challan when steel arrives. Bars should be free of excessive rust, uniform in diameter, and have the characteristic ribbed surface of TMT bars. We encourage our clients to be present for steel deliveries.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q26</span> · What is the difference between AAC blocks and red bricks?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>AAC blocks are factory-made from cement, fly ash, lime, and aluminium powder — resulting in a lightweight, thermally insulating block. They're 3x larger than red bricks but 4x lighter, reducing dead load on the structure. Red bricks are traditional kiln-fired clay blocks — heavy, good compressive strength, but variable quality and poor insulation. In Hoskote's climate, AAC block walls keep interiors significantly cooler, reducing cooling costs. They also have better fire resistance. The main downside: cost is 15–20% higher than red bricks, but the structural savings often offset this.</p></div>
-        </div>
-      </div>
-
-      <!-- CATEGORY 5: PANCHAYAT / LEGAL -->
-      <div class="faq-category">
-        <div class="faq-category-title"><span style="font-size:1.3rem;">📑</span> Approvals & Legal</div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q27</span> · Can I build without getting Panchayat approval first?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Technically some people do — but it's illegal and risky. Unapproved structures can receive demolition notices from the Panchayat. You'll also face problems getting BESCOM connection, home loan, and eventually property registration. Banks increasingly verify plan approval before disbursing construction loans. We never start construction without confirming approval is in place — it protects both you and us.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q28</span> · How long does Panchayat plan approval take in Hoskote?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Typically 15–45 days from submission of a complete application. Delays happen if documents are incomplete, if the plot has any Khata or survey number issues, or if the Panchayat has a backlog. By starting the approval process the moment you confirm you want to build, we can get approval done before your loan disbursal is ready — so construction isn't delayed waiting for paper work.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q29</span> · My plot is on agricultural land. Can I build a house?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Agricultural land must be converted to residential use (NA / Non-Agricultural) before building a house. This is a DC Conversion (Deputy Commissioner Conversion) process in Karnataka. Cost varies by plot size and location. Timeline is typically 3–6 months. This is separate from Panchayat plan approval. Without DC Conversion, Panchayat will not grant building permission, and banks will not give construction loans. We can refer you to a property lawyer who handles DC conversions in Hoskote Taluk.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q30</span> · Do I need a completion certificate after the house is built?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>An Occupancy Certificate (OC) or Completion Certificate from the Panchayat formally states that the building was constructed as per approved plans and is safe for occupation. It's not always enforced for individual houses in rural Panchayats, but it's important for future property sale, registration changes, and some bank loans. We prepare and submit the completion certificate application on your behalf after handover.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q31</span> · What is FAR/FSI and how does it affect my house design?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>FAR (Floor Area Ratio) or FSI (Floor Space Index) limits the total built-up area allowed as a multiple of your plot area. Under Hoskote Panchayat norms, FAR is typically 1.5–2.0 for residential. On a 1,200 sqft plot, with FAR 1.5, you can build up to 1,800 sqft total. Setbacks (minimum gaps from plot boundaries) also apply. Our building designer calculates the maximum permissible area before finalising your floor plan.</p></div>
-        </div>
-      </div>
-
-      <!-- CATEGORY 6: HOME LOAN -->
-      <div class="faq-category">
-        <div class="faq-category-title"><span style="font-size:1.3rem;">🏦</span> Home Loans & Finance</div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q32</span> · Can I get a home loan for construction on my plot in Hoskote?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Yes. SBI, HDFC, Canara Bank, and Karnataka Bank all offer construction loans for plots in Hoskote. Requirements: clear title deed, Panchayat plan approval, construction agreement with a licensed contractor (that's us), estimated construction cost from a civil engineer, and income proof. Loan-to-value ratio is typically 75–80% of construction cost. Disbursement happens in stages — matching our stage-wise payment structure perfectly.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q33</span> · How is a construction loan different from a flat purchase loan?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>For flat purchase, the bank gives you one lump-sum amount against the developer's RERA-registered project. For construction loans, the bank releases money in tranches (stages) as construction progresses — verified by bank-appointed valuers who physically inspect the site before each disbursement. This means you don't pay EMI on the full amount from Day 1 — you pay on only the disbursed amount. Interest during construction (pre-EMI interest) is manageable if the construction moves quickly.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q34</span> · How much home loan can I get for construction in Hoskote?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Banks generally lend 75–80% of the total project cost (land + construction), subject to your income eligibility. If your total project cost is ₹60 lakhs and you can support a ₹45 lakh loan on your income (EMI should not exceed 40–45% of net monthly income), the bank will consider it. For a ₹45L loan at 8.75% over 20 years, the EMI is approximately ₹40,000/month. Use our EMI calculator on this page to model your scenario.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q35</span> · My CIBIL score is below 700 — can I still get a construction loan?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Most banks prefer CIBIL 750+. Below 700 makes it difficult but not impossible. Options: apply with a co-applicant with a higher score, use KSFC (Karnataka State Finance Corporation) which has different criteria, approach smaller cooperative banks like Karnataka Bank or district cooperative banks, or improve your score first (6–12 months of on-time payments and reducing credit utilisation). We can refer you to a loan consultant who specialises in Hoskote area construction loans.</p></div>
-        </div>
-      </div>
-
-      <!-- CATEGORY 7: LOCAL HOSKOTE -->
-      <div class="faq-category">
-        <div class="faq-category-title"><span style="font-size:1.3rem;">📍</span> Local Hoskote Questions</div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q36</span> · Do you build in all areas around Hoskote — Sulibele, Anugondanahalli, Kannamangala?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Yes. We serve Hoskote Town, Sulibele, Anugondanahalli, Kannamangala, Channasandra, Devanahalli Road, Vijayapura, Jadigenahalli, Nandagudi, Budigere Road, Old Madras Road properties, and KR Puram outskirts up to about 15km from Hoskote. If your plot is outside these areas, WhatsApp us — we'll tell you honestly if we can serve you.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q37</span> · How is Hoskote soil — is it suitable for construction?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Most of Hoskote has red laterite soil or hard gravel soil — excellent for construction with good bearing capacity. Areas near the lake (Hoskote Lake and Bettakote Lake region) have softer alluvial deposits requiring deeper foundations. Agricultural areas with deep black cotton soil need special foundation design (well-foundation or raft). We assess soil conditions during the free site visit and recommend accordingly. A formal SBC test costs ₹5,000–₹15,000 for official documentation.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q38</span> · What is the Panchayat jurisdiction for my plot in Hoskote?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Hoskote area has multiple Grama Panchayats depending on the village survey number. Hoskote Town Panchayat, Anugondanahalli Grama Panchayat, Nandagudi Grama Panchayat, Sulibele Grama Panchayat, and Jadigenahalli Panchayat are the main ones. To confirm which Panchayat covers your specific plot, check your Khata certificate — it will mention the Panchayat name. We know the local procedure for each Panchayat office in the area.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q39</span> · Where can I find materials in Hoskote — hardware shops, tile showrooms?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Hoskote town has several hardware and building material shops on the main road near the bus stand and around the KIADB industrial area. For tiles, there are showrooms in Hoskote town. For better selection (especially premium tiles, modular kitchens, premium fittings), Whitefield and Electronic City in Bangalore are nearby. We have supplier relationships and can take you to our preferred vendors — you benefit from our volume pricing.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q40</span> · Property prices are rising in Hoskote — should I build now or wait?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Construction material costs (cement, steel) have been rising 6–10% per year. Labour costs rise similarly. Waiting 2 years means your same house could cost 12–18% more to build. If you have land and a clear plan, building sooner rather than later typically makes financial sense. The decision depends on your personal readiness, not market timing. What we do recommend: don't rush the contractor selection — take your time there.</p></div>
-        </div>
-      </div>
-
-      <!-- CATEGORY 8: DESIGN & FEATURES -->
-      <div class="faq-category">
-        <div class="faq-category-title"><span style="font-size:1.3rem;">🏠</span> Design, Features & Choices</div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q41</span> · Can I ask for a customised floor plan, or do you have standard templates?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Every floor plan is customised to your plot dimensions, BHK requirement, family structure, and preferences. We discuss: number of bedrooms and bathrooms, puja room, parking, overhead tank position, kitchen ventilation, natural light direction (vastu if relevant to you), and future expansion plans. After the site visit, we prepare a preliminary plan and revise until you're happy — before signing anything.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q42</span> · Can you follow vastu shastra for the floor plan?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Yes. Many of our clients in Hoskote prefer vastu-compliant designs. We work with vastu principles as a design input while ensuring structural soundness and practical usability. Common requests: main door facing east or north, kitchen in south-east, master bedroom in south-west, puja room in north-east. We'll design within vastu guidelines as long as they're compatible with your plot orientation and structural requirements.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q43</span> · Should I get UPVC windows or aluminium windows?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>For Hoskote's climate, UPVC is better long-term. UPVC doesn't rust, corrode, or require painting, has better thermal insulation, and seals better against dust from the highway. Initial cost is 30–40% higher than aluminium. Aluminium is cheaper, lighter, and more widely available for repair/replacement locally. For the Better-Living and Dream Home packages, we specify UPVC. For Comfortable, we use aluminium — it's still a quality choice, just different.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q44</span> · What bathroom tiles do you recommend for longevity?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>For bathroom floors, we use anti-skid ceramic tiles (R10 or R11 rating) from Kajaria, Johnson, or Somany. For bathroom walls, full-height glazed ceramic tiles are best — they're moisture-proof, easy to clean, and reduce wall dampness over time. In the Comfortable package, we tile to 7ft height; in Better-Living and above, we tile full height. We recommend grout from Laticrete or Mapei — they're mould-resistant unlike cheap grout.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q45</span> · Should I build G+1 now or plan for future expansion?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>If your budget allows, building the structural framework for G+1 now (even if you only finish the ground floor) is far cheaper than adding later. Key: design the structural columns and beam spacing for eventual G+1 load from Day 1. Adding another floor to a structure not designed for it requires structural assessment and often costly retrofitting. We offer an option to design for future expansion at marginal additional structural cost now.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q46</span> · Can you build an independent room or small house first, and complete the main house later?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Yes — this is a common approach in Hoskote for families with limited budget initially. Build one wing or one floor structurally complete, move in, and add the remaining portions later. The key is designing the entire structure upfront so Phase 2 integrates seamlessly. We offer phased construction planning at no extra design charge when you engage us for both phases together.</p></div>
-        </div>
-      </div>
-
-      <!-- CATEGORY 9: AFTER HANDOVER -->
-      <div class="faq-category">
-        <div class="faq-category-title"><span style="font-size:1.3rem;">🔑</span> After Handover & Maintenance</div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q47</span> · What should I do in the first year after moving in?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>New houses go through a curing and settling period. Normal hairline cracks may appear at plaster joins in the first monsoon — these are mostly cosmetic and expected in RCC structures. Check terrace drainage after the first heavy rain. Test all electrical points and plumbing annually. If any crack appears in structural elements (columns, beams), contact us immediately under warranty. Most cosmetic issues can be addressed in the first touch-up round, typically 6 months after handover.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q48</span> · How often should I repaint my house?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Exterior paint: every 5–7 years if weather coat was used, every 3–4 years for standard emulsion. Hoskote's combination of monsoon rain and summer sun accelerates exterior paint degradation compared to drier climates. Interior paint can last 7–10 years before repainting looks necessary. Before repainting, ensure there are no seepage or moisture issues causing paint to peel — fixing the source is more important than repainting on top of a damp surface.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q49</span> · Can I use your team for renovation or additional work after the main project?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Yes. Many families come back for additional rooms, second-floor construction, renovation, painting, or repairs. We maintain relationships with our clients because referrals are our primary business growth in Hoskote. Give us a WhatsApp — we'll visit, assess, and quote fairly.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q50</span> · What documents should I keep safely after my house is completed?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Keep these permanently: Original plot sale deed and registration document, Khata certificate and tax receipts, Panchayat building plan approval letter, Construction agreement (our signed copy), Completion/Occupancy certificate, Electrical test certificate, BESCOM meter connection papers, Borewell details and depth, All GST invoices from construction, Structural drawings (for future addition/renovation reference), and Warranty letter from contractor. We provide all construction-related documents in a WhatsApp folder at handover.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q51</span> · My house has a crack in the wall — when should I be worried?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>Hairline cracks (less than 0.3mm wide) in plaster at corners, above door frames, or at construction joints are normal in any concrete building and are cosmetic. These appear when the structure settles. Wide cracks (more than 1mm), diagonal cracks near column bases, cracks through columns or beams, or any crack that grows over time are structural warning signs — contact a structural engineer immediately. During our 1-year warranty, report any crack to us and we'll assess it.</p></div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span><span class="faq-num">Q52</span> · Do you help with interior design and furniture after construction?</span><span class="arrow">▾</span></div>
-          <div class="faq-a"><p>We focus on construction and don't provide interior design services ourselves. However, we can refer you to trusted interior designers and modular kitchen vendors in the Hoskote–Whitefield area who we've worked with. For the Dream Home package, the modular kitchen is included in our scope. For other packages, we can do basic civil works related to kitchen (counter, dado) and you source the modular kitchen separately.</p></div>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="background:var(--indigo-900);border-radius:var(--radius-lg);padding:2rem;text-align:center;margin-top:2rem;">
-      <h3 style="color:white;margin-bottom:.75rem;">Still have a question not answered here?</h3>
-      <p style="color:rgba(255,255,255,.65);margin-bottom:1.5rem;">We typically respond within 2 hours on WhatsApp. Ask anything — no question is too basic.</p>
-      <a href="https://wa.me/919742801802?text=Hi%2C%20I%20have%20a%20question%20about%20construction%20in%20Hoskote" class="btn btn--whatsapp btn--lg">📱 Ask on WhatsApp</a>
-    </div>
-  </div>
-</section>
-
 <!-- ============================================================ CONSTRUCTION AGREEMENT GENERATOR -->
-<section class="section" id="construction-agreement" style="background:linear-gradient(180deg,#FFFBEF 0%,var(--stone-50) 100%);">
+<section class="section section--alt" id="construction-agreement" style="background:linear-gradient(180deg,#FFFBEF 0%,var(--stone-50) 100%);">
   <div class="container">
     <span class="eyebrow">100% Free Tool · No Signup · No Email</span>
     <h2 style="margin-bottom:.75rem;">Free House Construction Agreement Generator</h2>
@@ -2410,231 +2646,6 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
           <button class="btn btn--primary" onclick="printLoanEstimate()">🖨️ Print / Save as PDF</button>
           <button class="btn btn--secondary" onclick="copyLoanEstimateText()">📋 Copy Text</button>
           <a href="https://wa.me/919742801802?text=Hi%2C%20I%20used%20the%20Bank%20Loan%20Cost%20Estimate%20Generator%20and%20need%20it%20certified%20by%20an%20engineer" class="btn btn--whatsapp">📱 Get It Certified on WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ SERVICE AREAS -->
-<section class="section section--alt" id="areas">
-  <div class="container">
-    <span class="eyebrow">Serving All of Hoskote</span>
-    <h2 style="margin-bottom:.75rem;">We build everywhere in the Hoskote area</h2>
-    <p class="lead" style="margin-bottom:2rem;">Our team knows the local roads, plot layouts, soil conditions, and suppliers across every area of Hoskote Taluk.</p>
-    <div class="area-grid">
-      <div class="area-chip">Hoskote Town<span class="area-note">Main area</span></div>
-      <a href="/house-construction-sulibele" class="area-chip" style="text-decoration:none;">Sulibele<span class="area-note">~8km</span></a>
-      <a href="/house-construction-malur" class="area-chip" style="text-decoration:none;">Malur<span class="area-note">our duplex</span></a>
-      <div class="area-chip">Anugondanahalli<span class="area-note">~6km</span></div>
-      <div class="area-chip">Kannamangala<span class="area-note">~10km</span></div>
-      <div class="area-chip">Channasandra<span class="area-note">~5km</span></div>
-      <div class="area-chip">Jadigenahalli<span class="area-note">~12km</span></div>
-      <div class="area-chip">Nandagudi<span class="area-note">~15km</span></div>
-      <div class="area-chip">Vijayapura<span class="area-note">~7km</span></div>
-      <div class="area-chip">Old Madras Road<span class="area-note">NH 48 side</span></div>
-      <div class="area-chip">Budigere Road<span class="area-note">~10km</span></div>
-      <div class="area-chip">Devanahalli Rd<span class="area-note">SH 104</span></div>
-      <div class="area-chip">KR Puram Edge<span class="area-note">~15km</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ ABOUT -->
-<section class="section" id="about">
-  <div class="container">
-    <div class="grid-2" style="gap:4rem;align-items:start;">
-      <div>
-        <span class="eyebrow">Who We Are</span>
-        <h2 style="margin-bottom:1rem;">A Hoskote team, building for Hoskote families</h2>
-        <p style="font-size:.9375rem;color:var(--stone-500);line-height:1.75;margin-bottom:1.25rem;">We are a construction company rooted in Hoskote, Bengaluru Rural. We're not a large faceless contractor — we are the people you'll actually call when you have a question at 8pm about your construction.</p>
-        <p style="font-size:.9375rem;color:var(--stone-500);line-height:1.75;margin-bottom:2rem;">Hoskote Construction has been active in Hoskote for years. We bring together local execution expertise with transparent, documented processes — because we believe the biggest problem in construction is not skill, it's trust.</p>
-
-        <h3 style="margin-bottom:1.25rem;">Our credentials</h3>
-        <div class="credential-list">
-          <div class="credential-item">
-            <div class="credential-item__icon">🏢</div>
-            <div class="credential-item__text">
-              <strong>UDYAM Registered Business</strong>
-              <span>UDYAM-KR-02-0127051 · Bengaluru Rural</span>
-            </div>
-          </div>
-          <div class="credential-item">
-            <div class="credential-item__icon">📍</div>
-            <div class="credential-item__text">
-              <strong>Physical Office in Hoskote</strong>
-              <span>Balaji Gold City, Hoskote, Karnataka 562114</span>
-            </div>
-          </div>
-          <div class="credential-item">
-            <div class="credential-item__icon">📋</div>
-            <div class="credential-item__text">
-              <strong>GST Registered</strong>
-              <span>Formal invoicing for every payment — legal compliance on every project</span>
-            </div>
-          </div>
-          <div class="credential-item">
-            <div class="credential-item__icon">📱</div>
-            <div class="credential-item__text">
-              <strong>Transparent Documentation System</strong>
-              <span>Every project tracked with daily photos from Day 1 to handover</span>
-            </div>
-          </div>
-          <div class="credential-item">
-            <div class="credential-item__icon">🔒</div>
-            <div class="credential-item__text">
-              <strong>End-to-End Service, Documents Upfront — No Mid-Project Surprises</strong>
-              <span>Approved plan, cost break-up, payment milestones, and material specification handed over before work starts. We've rebuilt homes for families cheated elsewhere at the same quoted cost, even when material prices rose — that risk is ours, not yours. <a href="/blog/construction-contractor-fraud-hoskote-guide" style="color:var(--terracotta);font-weight:600;">Read why this matters →</a></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="about-photo" style="margin-bottom:2rem;">
-          <img src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_600,h_420,c_fill,g_auto,q_auto,f_auto/v1781876440/WhatsApp_Image_2026-06-19_at_12.57.10_1_nl6dg8.jpg" alt="HoskoteConstruction team at project site" loading="lazy">
-        </div>
-
-        <div style="background:var(--indigo-900);border-radius:var(--radius);padding:1.75rem;color:white;">
-          <h4 style="color:white;margin-bottom:.875rem;">Our Promise to You</h4>
-          <ul style="font-size:.875rem;color:rgba(255,255,255,.75);list-style:none;display:flex;flex-direction:column;gap:.65rem;">
-            <li>✓ We will never ask for money before showing you completed work</li>
-            <li>✓ We will always answer your calls and WhatsApp messages</li>
-            <li>✓ We will tell you when there's a problem — before you discover it yourself</li>
-            <li>✓ We will fix warranty issues without argument</li>
-            <li>✓ We will be honest if a project is outside our capacity</li>
-          </ul>
-        </div>
-
-        <!-- Map embed -->
-        <div style="margin-top:2rem;border-radius:var(--radius);overflow:hidden;height:200px;">
-          <iframe src="https://maps.google.com/maps?q=Balaji+Gold+City+Hoskote+Karnataka+562114&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" title="HoskoteConstruction Office Location"></iframe>
-        </div>
-        <p style="font-size:.8rem;color:var(--stone-500);margin-top:.5rem;text-align:center;">📍 Balaji Gold City, Hoskote 562114 · Mon–Sat 9AM–6PM</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ CONTACT -->
-<section class="section section--alt" id="contact">
-  <div class="container">
-    <span class="eyebrow">Get Started — No Obligation</span>
-    <h2 style="margin-bottom:.75rem;">Book your free site visit or get an estimate</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">Fill in the form below or WhatsApp us directly. We respond within 2 hours on working days.</p>
-
-    <div class="grid-2" style="gap:3rem;align-items:start;">
-      <div class="contact-form" id="contactFormWrap">
-        <h3 style="margin-bottom:1.5rem;">Send us your requirements</h3>
-        <div id="contact-success" class="form-success" role="status" aria-live="polite">
-          <h4>✅ Request received</h4>
-          <p style="font-size:.875rem;color:var(--stone-700);">Your details have been saved. We'll contact you on working days. You can also message us on WhatsApp to speed things up.</p>
-        </div>
-        <div id="contact-error" role="alert" style="display:none;background:#FEF2F2;border:1.5px solid #FCA5A5;color:#991B1B;border-radius:var(--radius);padding:.875rem 1rem;margin-bottom:1rem;font-size:.875rem;"></div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="cf-name">Your Name *</label>
-            <input type="text" id="cf-name" placeholder="Your name" autocomplete="name" maxlength="80" required>
-          </div>
-          <div class="form-group">
-            <label for="cf-phone">Phone / WhatsApp *</label>
-            <input type="tel" id="cf-phone" placeholder="98XXX XXXXX" autocomplete="tel" inputmode="tel" maxlength="20" required>
-          </div>
-          <div class="form-group">
-            <label for="cf-contact">Preferred contact method</label>
-            <select id="cf-contact">
-              <option>WhatsApp</option>
-              <option>Phone call</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="cf-area">Construction location</label>
-            <input type="text" id="cf-area" placeholder="Sulibele, Hoskote..." maxlength="120">
-          </div>
-          <div class="form-group">
-            <label for="cf-size">Plot size or proposed built-up area</label>
-            <input type="text" id="cf-size" placeholder="30×40, 1,200 sq ft..." maxlength="60">
-          </div>
-          <div class="form-group">
-            <label for="cf-floors">Number of floors</label>
-            <select id="cf-floors">
-              <option value="">Not sure yet</option>
-              <option value="1">Ground floor only</option>
-              <option value="2">G+1</option>
-              <option value="3">G+2</option>
-              <option value="4">G+3</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="cf-budget">Approximate budget (optional)</label>
-            <select id="cf-budget">
-              <option value="">Prefer not to say</option>
-              <option>Under ₹25 lakhs</option>
-              <option>₹25–40 lakhs</option>
-              <option>₹40–70 lakhs</option>
-              <option>₹70L – ₹1 Cr</option>
-              <option>Above ₹1 Cr</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="cf-start">Expected start (optional)</label>
-            <input type="text" id="cf-start" placeholder="e.g. next 3 months" maxlength="40">
-          </div>
-          <div class="form-group">
-            <label for="cf-type">What do you need?</label>
-            <select id="cf-type">
-              <option>Free Site Visit</option>
-              <option>Cost Estimate</option>
-              <option>Floor Plan Discussion</option>
-              <option>Home Loan Help</option>
-              <option>Plan Approval Help</option>
-              <option>General Query</option>
-            </select>
-          </div>
-          <div class="form-group form-group--full">
-            <label for="cf-msg">Additional requirements (optional)</label>
-            <textarea id="cf-msg" maxlength="1000" placeholder="Tell us about your project: BHK needed, timeline, special requirements..."></textarea>
-          </div>
-          <!-- spam trap: hidden from people, bots fill it in -->
-          <div style="position:absolute;left:-9999px;" aria-hidden="true">
-            <label for="cf-website">Website</label>
-            <input type="text" id="cf-website" tabindex="-1" autocomplete="off">
-          </div>
-        </div>
-        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.75rem;">By sending this form you agree that we may use your details only to contact you about your enquiry. We do not sell or publish them.</p>
-        <button class="btn btn--primary btn--lg" id="cf-submit-btn" style="width:100%;justify-content:center;margin-top:1rem;" onclick="submitForm()">Send My Request →</button>
-        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.875rem;text-align:center;">Or WhatsApp directly: <a href="https://wa.me/919742801802" style="color:var(--terracotta);font-weight:600;">+91 97428 01802</a></p>
-      </div>
-
-      <div>
-        <h3 style="margin-bottom:1.5rem;">Three ways to reach us</h3>
-
-        <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg" style="justify-content:center;">📱 WhatsApp: +91 97428 01802</a>
-          <a href="tel:+919742801802" class="btn btn--secondary btn--lg" style="justify-content:center;">📞 Call: +91 97428 01802</a>
-          <a href="mailto:hello@hoskoteconstruction.in" class="btn btn--secondary btn--lg" style="justify-content:center;">✉️ hello@hoskoteconstruction.in</a>
-        </div>
-
-        <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem;">
-          <h4 style="margin-bottom:1rem;">Office Location</h4>
-          <p style="font-size:.875rem;color:var(--stone-700);line-height:1.75;">
-            Balaji Gold City<br>
-            Hoskote, Bengaluru Rural<br>
-            Karnataka — 562114<br><br>
-            <strong>Mon–Sat:</strong> 9:00 AM – 6:00 PM<br>
-            <strong>Sunday:</strong> 10:00 AM – 2:00 PM (by appointment)
-          </p>
-          <a href="https://maps.app.goo.gl/KEeqWebvZqEvg2iFA" class="btn btn--ghost btn--sm" style="margin-top:1rem;" target="_blank">📍 Open in Google Maps</a>
-        </div>
-
-        <div style="background:var(--terracotta-light);border:1.5px solid var(--terracotta);border-radius:var(--radius);padding:1.25rem;">
-          <h4 style="color:var(--terracotta-dark);margin-bottom:.5rem;">What happens after you contact us</h4>
-          <ol style="font-size:.875rem;color:var(--stone-700);padding-left:1.25rem;display:flex;flex-direction:column;gap:.5rem;">
-            <li>We call or WhatsApp you within 2 hours</li>
-            <li>We schedule a free site visit at your convenience</li>
-            <li>We assess the plot and discuss your requirements (1–2 hours)</li>
-            <li>We send a detailed written estimate within 24 hours</li>
-            <li>No pressure — take your time to decide</li>
-          </ol>
         </div>
       </div>
     </div>
