@@ -288,7 +288,7 @@ async function submitApplication(e) {
     if (!res.ok || !data.success) throw new Error(data.error || 'Submission failed');
 
     const waText = encodeURIComponent(`Hi, I just submitted a listing application for "${payload.businessName}" (${payload.plan} plan). Application ID: ${data.id}. Please review and send the payment link.`);
-    document.getElementById('waConfirmLink').href = `https://wa.me/917892669947?text=${waText}`;
+    document.getElementById('waConfirmLink').href = `https://wa.me/919742801802?text=${waText}`;
     document.getElementById('form-view').style.display = 'none';
     document.getElementById('successView').style.display = 'block';
   } catch (err) {
