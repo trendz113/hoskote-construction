@@ -21,9 +21,52 @@ cloudinary.config({
 
 // ─── MIDDLEWARE ───
 app.disable('x-powered-by');
+app.set('trust proxy', 1); // Railway sits behind a proxy; needed for correct client IPs
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  if (req.secure) res.setHeader('Strict-Transport-Security', 'max-age=31536000');
+  next();
+});
 app.use(compression());
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50kb' }));
+
+// ─── SIMPLE IN-MEMORY RATE LIMITER (no extra dependency) ───
+// Good enough to stop casual form spam on a single server; resets on restart.
+function rateLimit({ windowMs, max, message }) {
+  const hits = new Map();
+  setInterval(() => {
+    const cutoff = Date.now() - windowMs;
+    for (const [ip, arr] of hits) {
+      const fresh = arr.filter(t => t > cutoff);
+      if (fresh.length) hits.set(ip, fresh); else hits.delete(ip);
+    }
+  }, windowMs).unref();
+  return (req, res, next) => {
+    const now = Date.now();
+    const arr = (hits.get(req.ip) || []).filter(t => t > now - windowMs);
+    if (arr.length >= max) {
+      return res.status(429).json({ error: message || 'Too many requests — please try again later.' });
+    }
+    arr.push(now);
+    hits.set(req.ip, arr);
+    next();
+  };
+}
+const formLimiter = rateLimit({ windowMs: 10 * 60 * 1000, max: 8, message: 'Too many submissions from this connection. Please WhatsApp us directly.' });
+const uploadLimiter = rateLimit({ windowMs: 10 * 60 * 1000, max: 10, message: 'Too many uploads. Please try again later.' });
+const loginLimiter = rateLimit({ windowMs: 10 * 60 * 1000, max: 20, message: 'Too many attempts. Please wait and try again.' });
+
+// Indian mobile numbers: optional +91 / 91 / 0 prefix, then 10 digits starting 6-9.
+// Landlines and odd formats are still accepted if they contain 8-13 digits, so real enquiries are not rejected.
+function cleanPhone(raw) {
+  const digits = String(raw || '').replace(/[^\d]/g, '');
+  if (digits.length < 8 || digits.length > 13 || /^(\d)\1+$/.test(digits)) return null;
+  return String(raw).trim().slice(0, 20);
+}
 app.use(express.static(path.join(__dirname, 'public'), {
   extensions: ['html'],
   setHeaders(res, filePath) {
@@ -326,7 +369,7 @@ app.patch('/api/projects/:id', adminAuth, (req, res) => {
 });
 
 // ─── API: VERIFY ADMIN ───
-app.post('/api/admin/verify', (req, res) => {
+app.post('/api/admin/verify', loginLimiter, (req, res) => {
   const { password } = req.body || {};
   if (passwordMatches(password)) {
     res.json({ success: true });
@@ -338,7 +381,7 @@ app.post('/api/admin/verify', (req, res) => {
 // ══════════════════════════════════════ CONTRACTOR LISTINGS ══════════════════════════════════════
 
 // ─── API: UPLOAD APPLICATION PHOTOS (public — used during the apply form) ───
-app.post('/api/contractors/upload-photos', uploadContractorPhotos.array('photos', 3), (req, res) => {
+app.post('/api/contractors/upload-photos', uploadLimiter, uploadContractorPhotos.array('photos', 3), (req, res) => {
   if (!req.files || !req.files.length) return res.status(400).json({ error: 'No files uploaded' });
   res.json({
     success: true,
@@ -347,7 +390,7 @@ app.post('/api/contractors/upload-photos', uploadContractorPhotos.array('photos'
 });
 
 // ─── API: SUBMIT APPLICATION (public) ───
-app.post('/api/contractors/apply', (req, res) => {
+app.post('/api/contractors/apply', formLimiter, (req, res) => {
   const { businessName, ownerName, phone, whatsapp, serviceArea, specialties, yearsExperience, udyam, description, plan, photos } = req.body;
 
   if (!businessName || !phone || !serviceArea) {
@@ -462,23 +505,35 @@ app.delete('/api/contractors/:id', adminAuth, (req, res) => {
 // ══════════════════════════════════════════════ LEADS (quote / site visit requests) ══════════════════════════════════════════════
 
 // ─── API: SUBMIT LEAD (public) ───
-app.post('/api/leads', (req, res) => {
-  const { name, phone, area, size, budget, type, message } = req.body;
+app.post('/api/leads', formLimiter, (req, res) => {
+  const body = req.body || {};
+  const { name, phone, area, size, budget, type, message, floors, contactMethod, startDate } = body;
 
-  if (!name || !phone) {
+  // Honeypot: real visitors never fill this hidden field. Pretend success so bots don't retry.
+  if (body.website) return res.json({ success: true });
+
+  if (!name || !String(name).trim() || !phone) {
     return res.status(400).json({ error: 'Name and phone are required' });
   }
+  const cleanedPhone = cleanPhone(phone);
+  if (!cleanedPhone) {
+    return res.status(400).json({ error: 'Please enter a valid phone number' });
+  }
+  const clip = (v, n) => String(v || '').trim().slice(0, n);
 
   const list = readLeads();
   const entry = {
     id: 'lead_' + Date.now() + '_' + crypto.randomBytes(3).toString('hex'),
-    name: String(name).trim(),
-    phone: String(phone).trim(),
-    area: String(area || '').trim(),
-    size: String(size || '').trim(),
-    budget: String(budget || '').trim(),
-    type: String(type || '').trim(),
-    message: String(message || '').trim(),
+    name: clip(name, 80),
+    phone: cleanedPhone,
+    area: clip(area, 120),
+    size: clip(size, 60),
+    floors: clip(floors, 20),
+    budget: clip(budget, 60),
+    type: clip(type, 60),
+    contactMethod: clip(contactMethod, 20),
+    startDate: clip(startDate, 40),
+    message: clip(message, 1000),
     status: 'new',   // new | contacted | site-visit-booked | won | lost
     submittedAt: new Date().toISOString(),
   };
@@ -501,7 +556,7 @@ app.patch('/api/leads/:id', adminAuth, (req, res) => {
   const entry = list.find(l => l.id === req.params.id);
   if (!entry) return res.status(404).json({ error: 'Lead not found' });
 
-  const allowed = ['name', 'phone', 'area', 'size', 'budget', 'type', 'message', 'status'];
+  const allowed = ['name', 'phone', 'area', 'size', 'floors', 'budget', 'type', 'contactMethod', 'startDate', 'message', 'status'];
   allowed.forEach(key => {
     if (req.body[key] !== undefined) entry[key] = req.body[key];
   });

@@ -203,9 +203,17 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 .nav__inner { display: flex; align-items: center; gap: .85rem; height: 64px; }
 .nav__logo { font-family: var(--font-display); font-size: 1.2rem; color: var(--indigo-900); margin-right: auto; white-space: nowrap; flex-shrink: 0; }
 .nav__logo span { color: var(--terracotta); }
-.nav__links { display: flex; gap: .1rem; overflow-x: auto; scrollbar-width: none; }
+.nav__links { display: flex; gap: .1rem; align-items: center; }
 .nav__links::-webkit-scrollbar { display: none; }
 .nav__link { padding: .5rem .6rem; border-radius: 6px; font-size: .82rem; font-weight: 500; color: var(--stone-700); transition: all .15s; white-space: nowrap; flex-shrink: 0; }
+/* Free Tools dropdown (keyboard + hover accessible) */
+.nav__dd { position: relative; }
+.nav__dd-btn { background: none; border: 0; cursor: pointer; font-family: inherit; }
+.nav__dd-menu { display: none; position: absolute; top: 100%; left: 0; min-width: 270px; background: white; border: 1.5px solid var(--stone-200); border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.14); padding: .4rem; z-index: 300; }
+.nav__dd:hover .nav__dd-menu, .nav__dd:focus-within .nav__dd-menu, .nav__dd.open .nav__dd-menu { display: block; }
+.nav__dd.force-closed .nav__dd-menu { display: none !important; }
+.nav__dd-menu a { display: block; padding: .55rem .8rem; border-radius: 6px; font-size: .85rem; color: var(--stone-700); white-space: nowrap; }
+.nav__dd-menu a:hover, .nav__dd-menu a:focus { background: var(--stone-100); color: var(--stone-900); }
 .nav__link:hover { background: var(--stone-100); color: var(--stone-900); }
 .nav__link.active { color: var(--terracotta); }
 .nav__call { width: 36px; height: 36px; border-radius: 50%; background: var(--stone-100); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; transition: background .15s; }
@@ -587,25 +595,33 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <a href="#" class="nav__logo">Hoskote<span>Construction</span></a>
       <div class="nav__links">
         <a href="#home" class="nav__link active">Home</a>
-        <a href="/property-document-service-hoskote" class="nav__link">Property Documents<span class="nav-badge">NEW</span></a>
-        <a href="/property-navigator" class="nav__link">Portal Navigator</a>
-        <a href="#properties" class="nav__link">Properties<span class="nav-badge">NEW</span></a>
-        <a href="#calculator" class="nav__link">Cost Calculator</a>
-        <a href="#process" class="nav__link">Process</a>
-        <a href="/project-planner" class="nav__link">AI Planner<span class="nav-badge">NEW</span></a>
-        <a href="/contractors" class="nav__link">Contractors</a>
-        <a href="#projects" class="nav__link">Projects</a>
-        <a href="#pricing" class="nav__link">Pricing</a>
-        <a href="#faq" class="nav__link">FAQ</a>
-        <a href="/rental-agreement-generator-hoskote" class="nav__link">Rental<span class="nav-badge">FREE</span></a>
-        <a href="#construction-agreement" class="nav__link">Construction Agreement<span class="nav-badge">FREE</span></a>
-        <a href="/documents" class="nav__link">Documents Tool</a>
-        <a href="/vaastu.html" class="nav__link">Vastu</a>
+        <a href="#projects" class="nav__link">Our Projects</a>
+        <a href="#pricing" class="nav__link">Packages &amp; Pricing</a>
+        <a href="#process" class="nav__link">Construction Process</a>
+        <div class="nav__dd">
+          <button type="button" class="nav__link nav__dd-btn" aria-haspopup="true" aria-expanded="false" id="toolsBtn">Free Tools &amp; Resources <span aria-hidden="true">▾</span></button>
+          <div class="nav__dd-menu" id="toolsMenu">
+            <a href="#calculator">Cost Calculator</a>
+            <a href="/project-planner">AI Project Planner</a>
+            <a href="#construction-agreement">Construction Agreement Generator</a>
+            <a href="#loan-estimate">Bank Loan Cost Estimate</a>
+            <a href="/rental-agreement-generator-hoskote">Rental Agreement Generator</a>
+            <a href="/documents">Sqft/Sqm &amp; Documents Tool</a>
+            <a href="/vaastu.html">Vastu Planner</a>
+            <a href="/property-document-service-hoskote">Property Document Service</a>
+            <a href="/property-navigator">Property Portal Navigator</a>
+            <a href="#properties">Properties for Sale</a>
+            <a href="/contractors">Contractor Directory</a>
+            <a href="/blog/">Guides &amp; Articles</a>
+            <a href="#faq">FAQs</a>
+          </div>
+        </div>
+        <a href="#about" class="nav__link">About Us</a>
         <a href="#contact" class="nav__link">Contact</a>
       </div>
       <a href="tel:+919742801802" class="nav__call" title="Call Now">📞</a>
       <a href="https://instagram.com/hoskoteconstruction" target="_blank" rel="noopener" class="nav__call" title="Follow on Instagram">📸</a>
-      <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="nav__cta">📱 Free Site Visit</a>
+      <a href="#contact" class="nav__cta">Get Free Estimate</a>
       <button class="nav__mobile-toggle" id="mobileToggle" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -663,16 +679,12 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 <div class="page-tab-nav">
   <div class="page-tab-nav__inner container">
     <button class="page-tab-btn active" onclick="scrollToSection('#home')">Overview</button>
+    <button class="page-tab-btn" onclick="scrollToSection('#projects')">Projects</button>
+    <button class="page-tab-btn" onclick="scrollToSection('#pricing')">Packages &amp; Pricing</button>
+    <button class="page-tab-btn" onclick="scrollToSection('#process')">Process</button>
     <button class="page-tab-btn" onclick="scrollToSection('#calculator')">Cost Calculator</button>
-    <button class="page-tab-btn" onclick="scrollToSection('#process')">Process & Timeline</button>
-    <button class="page-tab-btn" onclick="scrollToSection('#projects')">Project Gallery</button>
-    <button class="page-tab-btn" onclick="scrollToSection('#pricing')">Packages</button>
-    <button class="page-tab-btn" onclick="scrollToSection('#materials')">Materials Guide</button>
-    <button class="page-tab-btn" onclick="scrollToSection('#loan')">Loan & Budget</button>
-    <button class="page-tab-btn" onclick="scrollToSection('#guide')">Construction Guide</button>
-    <button class="page-tab-btn" onclick="scrollToSection('#faq')">50+ FAQs</button>
-    <button class="page-tab-btn" onclick="scrollToSection('#construction-agreement')">🆓 Construction Agreement</button>
     <button class="page-tab-btn" onclick="scrollToSection('#testimonials')">Reviews</button>
+    <button class="page-tab-btn" onclick="scrollToSection('#faq')">FAQs</button>
     <button class="page-tab-btn" onclick="scrollToSection('#about')">About Us</button>
     <button class="page-tab-btn" onclick="scrollToSection('#contact')">Contact</button>
   </div>
@@ -685,16 +697,16 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <div>
         <span class="hero__eyebrow">Hoskote · Bengaluru Rural</span>
         <h1 class="hero__title">Build your home in Hoskote with <em>full transparency</em></h1>
-        <p class="hero__lead">See exactly what it costs. Know every step of the process. Track every brick on WhatsApp. We've built homes for families across Hoskote — and yours can be next.</p>
+        <p class="hero__lead">See clearly what your house will cost. Know every step of the process. Follow your build through WhatsApp photo updates. Written agreement and stage-wise payments, before you commit.</p>
         <div class="btn-group">
           <a href="#calculator" class="btn btn--primary btn--lg">🧮 Get Free Cost Estimate</a>
           <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg">📱 Book Free Site Visit</a>
           <a href="tel:+919742801802" class="btn btn--secondary btn--lg">📞 Call Now</a>
         </div>
         <div class="hero__trust">
-          <div class="hero__stat"><div class="hero__stat-num">₹1,800</div><div class="hero__stat-label">Starting / sq ft</div></div>
-          <div class="hero__stat"><div class="hero__stat-num">100%</div><div class="hero__stat-label">Hoskote Team</div></div>
-          <div class="hero__stat"><div class="hero__stat-num">Daily</div><div class="hero__stat-label">WhatsApp Updates</div></div>
+          <div class="hero__stat"><div class="hero__stat-num">₹1,800</div><div class="hero__stat-label">Starting / sq ft (construction only)</div></div>
+          <div class="hero__stat"><div class="hero__stat-num">Hoskote</div><div class="hero__stat-label">Local Office</div></div>
+          <div class="hero__stat"><div class="hero__stat-num">WhatsApp</div><div class="hero__stat-label">Project Updates</div></div>
           <div class="hero__stat"><div class="hero__stat-num">Stage</div><div class="hero__stat-label">Wise Payments</div></div>
         </div>
       </div>
@@ -726,7 +738,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       </div>
       <div class="trust-item">
         <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
-        Daily WhatsApp Photos & Videos
+        WhatsApp Photo Updates During Construction
       </div>
       <div class="trust-item">
         <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
@@ -1113,72 +1125,74 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
   <div class="container">
     <span class="eyebrow">Free Interactive Tool</span>
     <h2 style="margin-bottom:.75rem;">Construction Cost Calculator — Hoskote 2026</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">Enter your requirements below to get an instant cost estimate based on current Hoskote market rates.</p>
+    <p class="lead" style="margin-bottom:2.5rem;">Enter your plan details to see a preliminary estimate using the package rates shown on this page.</p>
 
     <div class="calc-wrapper">
       <div class="calc-header">
         <h3>Your Personalised Estimate</h3>
-        <p style="color:rgba(255,255,255,.65);font-size:.9rem;margin-top:.35rem;">Based on current material and labour costs in Hoskote (updated June 2026)</p>
+        <p style="color:rgba(255,255,255,.65);font-size:.9rem;margin-top:.35rem;">Uses the package rates listed under Packages &amp; Pricing</p>
       </div>
       <div class="calc-body">
         <div class="calc-grid">
           <div class="form-group">
-            <label for="sqft">Built-up Area (sq ft)</label>
-            <input type="number" id="sqft" value="1200" min="400" max="10000" oninput="calcCost()">
+            <label for="sqft">Built-up area per floor (sq ft)</label>
+            <input type="number" id="sqft" value="600" min="300" max="5000" step="1" inputmode="numeric" oninput="calcCost()" aria-describedby="calc-error">
           </div>
           <div class="form-group">
-            <label for="floors">Number of Floors</label>
+            <label for="floors">Number of floors</label>
             <select id="floors" onchange="calcCost()">
-              <option value="1">Ground Floor (G)</option>
-              <option value="1.85">G+1 (Two floors)</option>
-              <option value="2.6">G+2 (Three floors)</option>
-              <option value="3.3">G+3 (Four floors)</option>
+              <option value="1">Ground floor only (G)</option>
+              <option value="2" selected>G+1 (2 floors)</option>
+              <option value="3">G+2 (3 floors)</option>
+              <option value="4">G+3 (4 floors)</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="bhk">Configuration</label>
+            <label for="bhk">Configuration (shared with your quote request)</label>
             <select id="bhk" onchange="calcCost()">
-              <option value="1">1 BHK</option>
-              <option value="2" selected>2 BHK</option>
-              <option value="3">3 BHK</option>
-              <option value="4">4 BHK</option>
+              <option value="1 BHK">1 BHK</option>
+              <option value="2 BHK" selected>2 BHK</option>
+              <option value="3 BHK">3 BHK</option>
+              <option value="4 BHK">4 BHK</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="pkg">Finish Level</label>
+            <label for="pkg">Package</label>
             <select id="pkg" onchange="calcCost()">
-              <option value="1800">Comfortable — ₹1,800/sqft</option>
-              <option value="2000" selected>Better-Living — ₹2,000/sqft</option>
-              <option value="2200">Dream Home — ₹2,200/sqft</option>
+              <option value="1800">Comfortable — ₹1,800/sq ft</option>
+              <option value="2000" selected>Better-Living — ₹2,000/sq ft</option>
+              <option value="2200">Dream Home — ₹2,200/sq ft</option>
             </select>
           </div>
         </div>
+        <div id="calc-error" role="alert" style="display:none;color:#B91C1C;font-size:.85rem;margin-top:.75rem;"></div>
 
         <div class="calc-result">
           <div class="calc-result__main">
-            <div class="calc-result__label">Estimated Construction Cost</div>
-            <div class="calc-result__amount" id="calc-amount">₹29.4 L</div>
-            <div class="calc-result__range" id="calc-range">Range: ₹27L – ₹32L</div>
+            <div class="calc-result__label">Preliminary base construction estimate</div>
+            <div class="calc-result__amount" id="calc-amount">—</div>
+            <div class="calc-result__range" id="calc-range"></div>
           </div>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20exact%20quote%20for%20my%20construction%20in%20Hoskote" class="btn btn--whatsapp btn--lg">📱 Get Exact Quote in 24hrs</a>
+          <a href="#contact" id="calc-cta" class="btn btn--whatsapp btn--lg" onclick="calcRequestQuote(event)">📩 Request a detailed estimate</a>
         </div>
 
         <div class="calc-breakdown" id="calc-breakdown">
           <div class="calc-breakdown-item">
-            <div class="val" id="bd-structure">₹14.7L</div>
-            <div class="lbl">Structure & RCC</div>
+            <div class="val" id="bd-area">—</div>
+            <div class="lbl">Total built-up area</div>
           </div>
           <div class="calc-breakdown-item">
-            <div class="val" id="bd-finishing">₹9.8L</div>
-            <div class="lbl">Finishing & Tiles</div>
+            <div class="val" id="bd-rate">—</div>
+            <div class="lbl">Rate applied (per sq ft)</div>
           </div>
           <div class="calc-breakdown-item">
-            <div class="val" id="bd-mep">₹4.9L</div>
-            <div class="lbl">Plumbing & Electrical</div>
+            <div class="val" id="bd-floors">—</div>
+            <div class="lbl">Floors counted</div>
           </div>
         </div>
 
-        <p style="font-size:.78rem;color:var(--stone-500);margin-top:1.25rem;">* This estimate covers construction cost only. BMRDA building plan approval (₹20k–₹80k), temporary electricity connection (mandatory before construction starts, ₹15k–₹40k), borewell (₹60k–₹1.2L), compound wall, permanent BESCOM connection, and interiors are all separate. Land cost not included.</p>
+        <p style="font-size:.8rem;color:var(--stone-700);margin-top:1.25rem;"><strong>How this is calculated:</strong> built-up area per floor × number of floors × the package rate. Confirm with us how balconies, staircases and utility areas are counted in your plan.</p>
+        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.5rem;">* This is a preliminary estimate, not a quotation. It covers base construction cost only. Not included: BMRDA building plan approval (₹20k–₹80k), temporary electricity connection (mandatory before construction starts, ₹15k–₹40k), borewell (₹60k–₹1.2L), compound wall and gate, permanent BESCOM connection, interiors, land cost and any applicable GST. Your written quote after a site visit is the binding figure.</p>
       </div>
     </div>
   </div>
@@ -1363,15 +1377,15 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 <!-- ============================================================ PRICING -->
 <section class="section section--alt" id="pricing">
   <div class="container">
-    <span class="eyebrow">Transparent Pricing — No Hidden Extras</span>
-    <h2 style="margin-bottom:.75rem;">Three honest packages for every budget</h2>
-    <p class="lead" style="margin-bottom:2.5rem;">Every item listed below is included in the quoted rate, or clearly marked as optional. No surprise costs at the end.</p>
+    <span class="eyebrow">Clear Pricing — Know What Is Included and What Is Not</span>
+    <h2 style="margin-bottom:.75rem;">Three packages for every budget</h2>
+    <p class="lead" style="margin-bottom:2.5rem;">Each rate below covers the construction work listed in its package. Items that are not part of the rate are listed under the packages, so you can budget for them before you decide. Final terms are written into your agreement.</p>
 
     <div class="pricing-grid">
       <div class="pricing-card">
         <div class="pricing-card__name">Comfortable Home</div>
         <div class="pricing-card__price">₹1,800</div>
-        <div class="pricing-card__unit">per sq ft · all-inclusive</div>
+        <div class="pricing-card__unit">per sq ft · construction cost</div>
         <ul class="pricing-card__includes">
           <li>M20 concrete + TMT Fe500D steel (JSW/Jindal)</li>
           <li>Ultratech / ACC cement throughout</li>
@@ -1390,7 +1404,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <div class="pricing-card pricing-card--popular">
         <div class="pricing-card__name">Better-Living Home</div>
         <div class="pricing-card__price">₹2,000</div>
-        <div class="pricing-card__unit">per sq ft · all-inclusive</div>
+        <div class="pricing-card__unit">per sq ft · construction cost</div>
         <ul class="pricing-card__includes">
           <li>Everything in Comfortable, plus:</li>
           <li>Premium vitrified tiles + full-height bathroom tiles</li>
@@ -1408,7 +1422,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <div class="pricing-card">
         <div class="pricing-card__name">Dream Home</div>
         <div class="pricing-card__price">₹2,200</div>
-        <div class="pricing-card__unit">per sq ft · all-inclusive</div>
+        <div class="pricing-card__unit">per sq ft · construction cost</div>
         <ul class="pricing-card__includes">
           <li>Everything in Better-Living, plus:</li>
           <li>Marble or premium wooden flooring option</li>
@@ -1424,7 +1438,11 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       </div>
     </div>
 
-    <p style="text-align:center;font-size:.85rem;color:var(--stone-500);margin-top:1.5rem;">Rates cover construction cost only. Compound wall, gate, borewell, BMRDA approval fees, temporary electricity connection, permanent BESCOM connection, and interiors are separate.</p>
+    <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-top:1.5rem;">
+      <h4 style="margin-bottom:.5rem;">Not included in the per sq ft rate</h4>
+      <p style="font-size:.875rem;color:var(--stone-700);">Compound wall, gate, borewell, BMRDA approval fees, temporary electricity connection, permanent BESCOM connection, interiors, and land cost. Costs are shown below so you can plan your total budget.</p>
+      <p style="font-size:.8rem;color:var(--stone-500);margin-top:.6rem;">Rates are indicative, apply to construction cost only, and are confirmed in your written quote after a site visit. Ask us how built-up area is measured and how GST is applied to your quote before you sign.</p>
+    </div>
 
     <!-- Additional cost breakdown -->
     <div style="background:white;border-radius:var(--radius-lg);padding:2rem;margin-top:3rem;border:1.5px solid var(--stone-200);">
@@ -2507,36 +2525,59 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
     <div class="grid-2" style="gap:3rem;align-items:start;">
       <div class="contact-form" id="contactFormWrap">
         <h3 style="margin-bottom:1.5rem;">Send us your requirements</h3>
-        <div id="contact-success" class="form-success">
-          <h4>✅ Message sent!</h4>
-          <p style="font-size:.875rem;color:var(--stone-700);">We'll reach out within 2 hours. Check WhatsApp for a confirmation message.</p>
+        <div id="contact-success" class="form-success" role="status" aria-live="polite">
+          <h4>✅ Request received</h4>
+          <p style="font-size:.875rem;color:var(--stone-700);">Your details have been saved. We'll contact you on working days. You can also message us on WhatsApp to speed things up.</p>
         </div>
+        <div id="contact-error" role="alert" style="display:none;background:#FEF2F2;border:1.5px solid #FCA5A5;color:#991B1B;border-radius:var(--radius);padding:.875rem 1rem;margin-bottom:1rem;font-size:.875rem;"></div>
         <div class="form-row">
           <div class="form-group">
             <label for="cf-name">Your Name *</label>
-            <input type="text" id="cf-name" placeholder="Ramesh Kumar">
+            <input type="text" id="cf-name" placeholder="Your name" autocomplete="name" maxlength="80" required>
           </div>
           <div class="form-group">
             <label for="cf-phone">Phone / WhatsApp *</label>
-            <input type="tel" id="cf-phone" placeholder="+91 98XXX XXXXX">
+            <input type="tel" id="cf-phone" placeholder="98XXX XXXXX" autocomplete="tel" inputmode="tel" maxlength="20" required>
           </div>
           <div class="form-group">
-            <label for="cf-area">Plot Location</label>
-            <input type="text" id="cf-area" placeholder="Sulibele, Hoskote...">
+            <label for="cf-contact">Preferred contact method</label>
+            <select id="cf-contact">
+              <option>WhatsApp</option>
+              <option>Phone call</option>
+            </select>
           </div>
           <div class="form-group">
-            <label for="cf-size">Plot Size (sq ft)</label>
-            <input type="text" id="cf-size" placeholder="30×40, 1,200 sqft...">
+            <label for="cf-area">Construction location</label>
+            <input type="text" id="cf-area" placeholder="Sulibele, Hoskote..." maxlength="120">
           </div>
           <div class="form-group">
-            <label for="cf-budget">Budget Range</label>
+            <label for="cf-size">Plot size or proposed built-up area</label>
+            <input type="text" id="cf-size" placeholder="30×40, 1,200 sq ft..." maxlength="60">
+          </div>
+          <div class="form-group">
+            <label for="cf-floors">Number of floors</label>
+            <select id="cf-floors">
+              <option value="">Not sure yet</option>
+              <option value="1">Ground floor only</option>
+              <option value="2">G+1</option>
+              <option value="3">G+2</option>
+              <option value="4">G+3</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cf-budget">Approximate budget (optional)</label>
             <select id="cf-budget">
+              <option value="">Prefer not to say</option>
               <option>Under ₹25 lakhs</option>
               <option>₹25–40 lakhs</option>
               <option>₹40–70 lakhs</option>
               <option>₹70L – ₹1 Cr</option>
               <option>Above ₹1 Cr</option>
             </select>
+          </div>
+          <div class="form-group">
+            <label for="cf-start">Expected start (optional)</label>
+            <input type="text" id="cf-start" placeholder="e.g. next 3 months" maxlength="40">
           </div>
           <div class="form-group">
             <label for="cf-type">What do you need?</label>
@@ -2550,10 +2591,16 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
             </select>
           </div>
           <div class="form-group form-group--full">
-            <label for="cf-msg">Any other details</label>
-            <textarea id="cf-msg" placeholder="Tell us about your project — BHK needed, timeline, special requirements..."></textarea>
+            <label for="cf-msg">Additional requirements (optional)</label>
+            <textarea id="cf-msg" maxlength="1000" placeholder="Tell us about your project: BHK needed, timeline, special requirements..."></textarea>
+          </div>
+          <!-- spam trap: hidden from people, bots fill it in -->
+          <div style="position:absolute;left:-9999px;" aria-hidden="true">
+            <label for="cf-website">Website</label>
+            <input type="text" id="cf-website" tabindex="-1" autocomplete="off">
           </div>
         </div>
+        <p style="font-size:.78rem;color:var(--stone-500);margin-top:.75rem;">By sending this form you agree that we may use your details only to contact you about your enquiry. We do not sell or publish them.</p>
         <button class="btn btn--primary btn--lg" id="cf-submit-btn" style="width:100%;justify-content:center;margin-top:1rem;" onclick="submitForm()">Send My Request →</button>
         <p style="font-size:.78rem;color:var(--stone-500);margin-top:.875rem;text-align:center;">Or WhatsApp directly: <a href="https://wa.me/919742801802" style="color:var(--terracotta);font-weight:600;">+91 97428 01802</a></p>
       </div>
@@ -2739,19 +2786,69 @@ window.addEventListener('scroll', () => {
 });
 
 // Construction Cost Calculator
+// Base estimate = built-up area per floor x floors x package rate. No hidden rates, taxes or ranges.
+function formatINR(n) {
+  return '₹' + Math.round(n).toLocaleString('en-IN');
+}
+let lastCalc = null;
 function calcCost() {
-  const sqft = parseFloat(document.getElementById('sqft').value) || 1200;
-  const rate = parseFloat(document.getElementById('pkg').value) || 2000;
-  const total = sqft * rate;
-  const low = Math.round((total * 0.93) / 100000 * 10) / 10;
-  const high = Math.round((total * 1.08) / 100000 * 10) / 10;
-  const mid = Math.round(total / 100000 * 10) / 10;
+  const areaEl = document.getElementById('sqft');
+  const errEl = document.getElementById('calc-error');
+  const floors = parseInt(document.getElementById('floors').value, 10);
+  const rate = parseFloat(document.getElementById('pkg').value);
+  const area = parseFloat(areaEl.value);
+  const amountEl = document.getElementById('calc-amount');
 
-  document.getElementById('calc-amount').textContent = `₹${mid} L`;
-  document.getElementById('calc-range').textContent = `Range: ₹${low}L – ₹${high}L`;
-  document.getElementById('bd-structure').textContent = `₹${Math.round(mid * 0.5 * 10)/10}L`;
-  document.getElementById('bd-finishing').textContent = `₹${Math.round(mid * 0.33 * 10)/10}L`;
-  document.getElementById('bd-mep').textContent = `₹${Math.round(mid * 0.17 * 10)/10}L`;
+  let error = '';
+  if (areaEl.value.trim() === '') error = 'Enter the built-up area per floor to see an estimate.';
+  else if (!isFinite(area) || area <= 0) error = 'Area must be a positive number.';
+  else if (area < 300) error = 'For areas below 300 sq ft per floor, please contact us for a custom quote.';
+  else if (area > 5000) error = 'For areas above 5,000 sq ft per floor, please contact us for a custom quote.';
+  else if (!isFinite(floors) || !isFinite(rate)) error = 'Please choose floors and a package.';
+
+  if (error) {
+    errEl.textContent = error;
+    errEl.style.display = 'block';
+    amountEl.textContent = '—';
+    document.getElementById('calc-range').textContent = '';
+    document.getElementById('bd-area').textContent = '—';
+    document.getElementById('bd-rate').textContent = '—';
+    document.getElementById('bd-floors').textContent = '—';
+    lastCalc = null;
+    return;
+  }
+  errEl.style.display = 'none';
+  const totalArea = area * floors;
+  const total = totalArea * rate;
+  amountEl.textContent = formatINR(total);
+  document.getElementById('calc-range').textContent = `${totalArea.toLocaleString('en-IN')} sq ft × ₹${rate.toLocaleString('en-IN')} per sq ft`;
+  document.getElementById('bd-area').textContent = `${totalArea.toLocaleString('en-IN')} sq ft`;
+  document.getElementById('bd-rate').textContent = `₹${rate.toLocaleString('en-IN')}`;
+  document.getElementById('bd-floors').textContent = `${floors} × ${area.toLocaleString('en-IN')} sq ft`;
+  const pkgSel = document.getElementById('pkg');
+  lastCalc = {
+    area, floors, totalArea, rate, total,
+    pkg: pkgSel.options[pkgSel.selectedIndex].text.split(' — ')[0],
+    bhk: document.getElementById('bhk').value,
+  };
+}
+// Sends the visitor to the enquiry form with their calculator choices filled in.
+function calcRequestQuote(e) {
+  if (e) e.preventDefault();
+  if (lastCalc) {
+    const msg = document.getElementById('cf-msg');
+    const type = document.getElementById('cf-type');
+    const size = document.getElementById('cf-size');
+    const floors = document.getElementById('cf-floors');
+    if (type) type.value = 'Cost Estimate';
+    if (size && !size.value) size.value = `${lastCalc.totalArea} sq ft built-up`;
+    if (floors) floors.value = String(lastCalc.floors);
+    if (msg && !msg.value) {
+      msg.value = `Calculator: ${lastCalc.pkg}, ${lastCalc.bhk}, ${lastCalc.floors} floor(s) × ${lastCalc.area} sq ft = ${lastCalc.totalArea} sq ft. Preliminary base estimate ${formatINR(lastCalc.total)}.`;
+    }
+    trackEvent('calculator_completed');
+  }
+  scrollToSection('#contact');
 }
 calcCost();
 
@@ -2859,42 +2956,123 @@ function toggleFaq(el) {
   if (!isOpen) item.classList.add('open');
 }
 
-// Contact form submit — saves the lead server-side first, then hands off to WhatsApp
-async function submitForm() {
-  const name = document.getElementById('cf-name').value.trim();
-  const phone = document.getElementById('cf-phone').value.trim();
-  const area = document.getElementById('cf-area').value.trim();
-  const size = document.getElementById('cf-size').value.trim();
-  const budget = document.getElementById('cf-budget').value;
-  const type = document.getElementById('cf-type').value;
-  const msg = document.getElementById('cf-msg').value.trim();
+// Free Tools dropdown: keep aria-expanded in sync, close on outside click / Escape
+(function () {
+  const dd = document.querySelector('.nav__dd');
+  if (!dd) return;
+  const btn = dd.querySelector('.nav__dd-btn');
+  const setOpen = open => { dd.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); };
+  btn.addEventListener('click', () => setOpen(!dd.classList.contains('open')));
+  dd.addEventListener('mouseenter', () => btn.setAttribute('aria-expanded', 'true'));
+  dd.addEventListener('mouseleave', () => { if (!dd.classList.contains('open')) btn.setAttribute('aria-expanded', 'false'); });
+  document.addEventListener('click', e => { if (!dd.contains(e.target)) setOpen(false); });
+  // Escape must close the menu even while the pointer or keyboard focus is still inside it
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && (dd.classList.contains('open') || dd.matches(':hover, :focus-within'))) {
+      setOpen(false); dd.classList.add('force-closed'); btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  const reopenAllowed = () => dd.classList.remove('force-closed');
+  dd.addEventListener('mouseleave', reopenAllowed);
+  btn.addEventListener('click', reopenAllowed);
+  btn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') reopenAllowed(); });
+  dd.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { setOpen(false); dd.classList.add('force-closed'); }));
+})();
 
-  if (!name || !phone) {
-    alert('Please enter your name and phone number.');
-    return;
-  }
-
-  const btn = document.getElementById('cf-submit-btn');
-  if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
-
+// Analytics hook: only reports if an analytics tool is actually installed on the page.
+// Never sends names, phone numbers or other personal details.
+function trackEvent(name) {
   try {
-    await fetch('/api/leads', {
+    if (typeof gtag === 'function') gtag('event', name);
+    else if (typeof plausible === 'function') plausible(name);
+  } catch (e) { /* analytics must never break the page */ }
+}
+document.addEventListener('click', function (e) {
+  const a = e.target.closest && e.target.closest('a[href]');
+  if (!a) return;
+  const h = a.getAttribute('href') || '';
+  if (h.indexOf('wa.me/') !== -1) trackEvent('whatsapp_cta_clicked');
+  else if (h.indexOf('tel:') === 0) trackEvent('phone_cta_clicked');
+});
+let formStarted = false;
+document.addEventListener('input', function (e) {
+  if (!formStarted && e.target.id && e.target.id.indexOf('cf-') === 0) { formStarted = true; trackEvent('estimate_form_started'); }
+});
+
+// Lenient phone check (matches the server): 8-13 digits after removing spaces, dashes and +,
+// and not one repeated digit. Real Indian mobile, landline and +91 formats all pass.
+function phoneLooksValid(raw) {
+  const d = String(raw).replace(/[^\d]/g, '');
+  return d.length >= 8 && d.length <= 13 && !/^(\d)\1+$/.test(d);
+}
+
+let formSubmitting = false;
+// Contact form: saves the enquiry on the server and only says "received" if the server confirms it.
+async function submitForm() {
+  if (formSubmitting) return;
+  const v = id => (document.getElementById(id) || { value: '' }).value.trim();
+  const name = v('cf-name'), phone = v('cf-phone');
+  const errBox = document.getElementById('contact-error');
+  const okBox = document.getElementById('contact-success');
+  const btn = document.getElementById('cf-submit-btn');
+  const showError = (msg, field) => {
+    errBox.textContent = msg;
+    errBox.style.display = 'block';
+    okBox.style.display = 'none';
+    if (field) document.getElementById(field).focus();
+  };
+  errBox.style.display = 'none';
+
+  if (!name) return showError('Please enter your name.', 'cf-name');
+  if (!phone) return showError('Please enter your phone number.', 'cf-phone');
+  if (!phoneLooksValid(phone)) return showError('That phone number does not look right. Please check it, or WhatsApp us directly.', 'cf-phone');
+
+  const payload = {
+    name, phone,
+    contactMethod: v('cf-contact'),
+    area: v('cf-area'),
+    size: v('cf-size'),
+    floors: v('cf-floors'),
+    budget: v('cf-budget'),
+    startDate: v('cf-start'),
+    type: v('cf-type'),
+    message: v('cf-msg'),
+    website: v('cf-website'),
+  };
+
+  formSubmitting = true;
+  if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+  try {
+    const res = await fetch('/api/leads', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, phone, area, size, budget, type, message: msg }),
+      body: JSON.stringify(payload),
     });
+    let data = {};
+    try { data = await res.json(); } catch (e) { /* non-JSON error */ }
+    if (!res.ok || !data.success) {
+      throw new Error(data.error || 'We could not save your request.');
+    }
+    okBox.style.display = 'block';
+    okBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    trackEvent('estimate_form_submitted');
+    if (btn) btn.textContent = 'Request sent ✓';  // stays disabled to prevent accidental duplicates
+    return;
   } catch (err) {
-    console.error('Lead save failed, continuing to WhatsApp anyway', err);
+    console.error('Lead submit failed', err);
+    const wa = 'https://wa.me/919742801802?text=' + encodeURIComponent(
+      `Hi! I'm ${name}.\nRequest: ${payload.type}\nPhone: ${phone}\nLocation: ${payload.area || 'Not specified'}\nSize: ${payload.size || 'Not specified'}\n${payload.message ? 'Details: ' + payload.message : ''}`);
+    errBox.innerHTML = '';
+    errBox.append((err.message || 'We could not save your request.') + ' Your request was NOT sent. Please try again, or ');
+    const link = document.createElement('a');
+    link.href = wa; link.textContent = 'send it on WhatsApp'; link.style.fontWeight = '700'; link.style.textDecoration = 'underline';
+    errBox.append(link, '.');
+    errBox.style.display = 'block';
+    okBox.style.display = 'none';
+    if (btn) { btn.disabled = false; btn.textContent = 'Send My Request →'; }
+  } finally {
+    formSubmitting = false;
   }
-
-  const waText = encodeURIComponent(
-    `Hi! I'm ${name}.\n\nRequest: ${type}\nPhone: ${phone}\nPlot area: ${area || 'Not specified'}\nPlot size: ${size || 'Not specified'}\nBudget: ${budget}\n${msg ? 'Details: ' + msg : ''}`
-  );
-  location.href = `https://wa.me/919742801802?text=${waText}`;
-
-  document.getElementById('contact-success').style.display = 'block';
-  document.getElementById('contact-success').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  if (btn) { btn.disabled = false; btn.textContent = 'Send My Request →'; }
 }
 
 // ============================================================ DOCUMENT HELPERS (shared by the agreement / estimate tools)
