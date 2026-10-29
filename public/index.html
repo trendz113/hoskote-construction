@@ -150,6 +150,11 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 body { font-family: var(--font-body); background: var(--stone-50); color: var(--stone-900); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; word-break: break-word; overflow-wrap: break-word; }
+.cmp { width: 100%; min-width: 640px; border-collapse: collapse; background: #fff; font-size: .88rem; border: 1.5px solid var(--stone-200); border-radius: 12px; overflow: hidden; }
+.cmp th, .cmp td { padding: .7rem .85rem; border-bottom: 1px solid var(--stone-200); text-align: left; vertical-align: top; }
+.cmp thead th { background: var(--indigo-900); color: #fff; font-weight: 600; }
+.cmp tbody th { background: var(--stone-100); font-weight: 600; width: 20%; }
+.cmp tbody tr:last-child th, .cmp tbody tr:last-child td { border-bottom: 0; }
 .table-scroll { position: relative; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -.25rem; padding: 0 .25rem; }
 .table-scroll::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 28px; background: linear-gradient(to right, transparent, rgba(28,25,23,.10)); pointer-events: none; }
 .scroll-hint { display: none; font-size: .75rem; color: var(--stone-500); margin: -.25rem 0 .6rem; }
@@ -490,16 +495,16 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
 .footer__brand { }
 .footer__logo { font-family: var(--font-display); font-size: 1.4rem; color: white; margin-bottom: .75rem; }
-.footer__logo span { color: var(--terracotta); }
+.footer__logo span { color: #E58A66; }
 .footer__tagline { font-size: .875rem; line-height: 1.65; margin-bottom: 1.25rem; }
 .footer__contact-item { display: flex; align-items: center; gap: .6rem; font-size: .875rem; margin-bottom: .5rem; color: rgba(255,255,255,.6); }
 .footer__contact-item a { color: rgba(255,255,255,.7); transition: color .15s; }
 .footer__contact-item a:hover { color: white; }
-.footer__heading { font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.4); margin-bottom: 1rem; }
+.footer__heading { font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.65); margin-bottom: 1rem; }
 .footer__links { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
 .footer__links a { font-size: .875rem; color: rgba(255,255,255,.6); transition: color .15s; }
 .footer__links a:hover { color: white; }
-.footer__bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .8rem; color: rgba(255,255,255,.4); }
+.footer__bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: .8rem; color: rgba(255,255,255,.65); }
 .footer__udyam { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 6px; padding: .35rem .875rem; font-family: var(--font-mono); font-size: .75rem; }
 
 /* ============================================================ PAGE SECTIONS TABS */
@@ -532,7 +537,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 .cta-bar { background: var(--terracotta); color: white; padding: 3rem 0; }
 .cta-bar__inner { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: space-between; }
 .cta-bar h2 { color: white; }
-.cta-bar p { color: rgba(255,255,255,.8); margin-top: .5rem; }
+.cta-bar p { color: #fff; margin-top: .5rem; }
 
 /* ============================================================ RESPONSIVE */
 @media (max-width: 1180px) {
@@ -605,6 +610,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <div class="nav__dd">
           <button type="button" class="nav__link nav__dd-btn" aria-haspopup="true" aria-expanded="false" id="toolsBtn">Free Tools &amp; Resources <span aria-hidden="true">▾</span></button>
           <div class="nav__dd-menu" id="toolsMenu">
+            <a href="/build-your-home">🎮 Build Your Dream Home (fun preview)</a>
             <a href="#calculator">Cost Calculator</a>
             <a href="/project-planner">AI Project Planner</a>
             <a href="#construction-agreement">Construction Agreement Generator</a>
@@ -651,6 +657,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       <a href="#materials" class="nav__drawer-link">🧱 Materials Guide</a>
       <a href="#loan" class="nav__drawer-link">🏦 Home Loan Help</a>
       <a href="/project-planner" class="nav__drawer-link">🤖 AI Project Planner <span class="nav-badge">NEW</span></a>
+      <a href="/build-your-home" class="nav__drawer-link">🎮 Build Your Dream Home <span class="nav-badge">FUN</span></a>
 
       <div class="nav__drawer-group">Free Tools</div>
       <a href="/rental-agreement-generator-hoskote" class="nav__drawer-link">📄 Rental Agreement Generator <span class="nav-badge">FREE</span></a>
@@ -702,12 +709,12 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
     <div class="hero__grid">
       <div>
         <span class="hero__eyebrow">Hoskote · Bengaluru Rural</span>
-        <h1 class="hero__title">Build your home in Hoskote with <em>full transparency</em></h1>
-        <p class="hero__lead">See clearly what your house will cost. Know every step of the process. Follow your build through WhatsApp photo updates. Written agreement and stage-wise payments, before you commit.</p>
+        <h1 class="hero__title">Build Your Dream Home in <em>Hoskote</em></h1>
+        <p class="hero__lead">Explore transparent construction packages, understand your estimated building cost, and plan your home construction with clear specifications and stage-wise progress updates.</p>
         <div class="btn-group">
-          <a href="#calculator" class="btn btn--primary btn--lg">🧮 Get Free Cost Estimate</a>
-          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg">📱 Book Free Site Visit</a>
-          <a href="tel:+919742801802" class="btn btn--secondary btn--lg">📞 Call Now</a>
+          <a href="#contact" class="btn btn--primary btn--lg">Get a Free Construction Estimate</a>
+          <a href="#pricing" class="btn btn--secondary btn--lg">Explore Construction Packages</a>
+          <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg">📱 WhatsApp Us</a>
         </div>
         <div class="hero__trust">
           <div class="hero__stat"><div class="hero__stat-num">₹1,800+</div><div class="hero__stat-label">Construction / sq ft</div></div>
@@ -975,9 +982,16 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       </div>
     </div>
 
+    <h3 style="margin:2.5rem 0 .75rem;">Compare the three packages side by side</h3>
+    <p class="scroll-hint">← Swipe to compare →</p>
+    <div class="table-scroll"><table class="cmp">
+      <thead><tr><th scope="col">What you get</th><th scope="col">Comfortable</th><th scope="col">Better-Living</th><th scope="col">Dream Home</th></tr></thead>
+      <tbody><tr><th scope="row">Rate per sq ft</th><td>₹1,800</td><td>₹2,000</td><td>₹2,200</td></tr><tr><th scope="row">Concrete and steel</th><td>M20 concrete, TMT Fe500D steel (JSW/Jindal)</td><td>Same as Comfortable</td><td>Same as Comfortable</td></tr><tr><th scope="row">Cement</th><td>UltraTech / ACC</td><td>Same as Comfortable</td><td>Same as Comfortable</td></tr><tr><th scope="row">Flooring</th><td>Standard vitrified tiles</td><td>Premium vitrified tiles, full-height bathroom tiles</td><td>Marble or premium wooden flooring option</td></tr><tr><th scope="row">Windows and doors</th><td>Aluminium windows, flush doors</td><td>UPVC windows, moulded flush doors</td><td>Not itemised beyond Better-Living. Confirm in your quote</td></tr><tr><th scope="row">Plumbing and wiring</th><td>Ashirvad plumbing, Finolex wiring</td><td>Same as Comfortable</td><td>Same as Comfortable, plus smart-home wiring pre-installed</td></tr><tr><th scope="row">Switches</th><td>Anchor / Roma standard</td><td>Modular, Anchor Penta</td><td>Legrand / Schneider premium</td></tr><tr><th scope="row">Bathroom fittings</th><td>Cera standard range</td><td>Mid-range Jaquar / Cera</td><td>Premium Jaquar / Kohler</td></tr><tr><th scope="row">Painting</th><td>Economy interior emulsion</td><td>Weather-coat exterior, tractor emulsion interior</td><td>Not itemised beyond Better-Living. Confirm in your quote</td></tr><tr><th scope="row">Modular kitchen</th><td>Not included (optional extra)</td><td>Not included (optional extra)</td><td>Included</td></tr><tr><th scope="row">Exterior</th><td>Not itemised</td><td>Weather-coat paint</td><td>Designer exterior cladding / façade work</td></tr><tr><th scope="row">Progress updates</th><td>Weekly WhatsApp photos</td><td>Daily WhatsApp photos and videos; you approve each stage before paying</td><td>Daily updates, weekly video walkthroughs, dedicated site supervisor</td></tr><tr><th scope="row">Paperwork</th><td>Written agreement and GST invoice</td><td>Same as Comfortable</td><td>Same as Comfortable</td></tr></tbody>
+    </table></div>
+    <p style="font-size:.8rem;color:var(--stone-500);margin-top:.75rem;">Taken from the package lists above. Where a row says "confirm in your quote", the exact brand or specification is written into your agreement after the site visit. Structural design fees, approvals, GST treatment and warranty terms are covered in your written quote; ask us for them before you sign.</p>
     <div style="background:white;border:1.5px solid var(--stone-200);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-top:1.5rem;">
       <h4 role="heading" aria-level="3" style="margin-bottom:.5rem;">Not included in the per sq ft rate</h4>
-      <p style="font-size:.875rem;color:var(--stone-700);">Compound wall, gate, borewell, BMRDA approval fees, temporary electricity connection, permanent BESCOM connection, interiors, and land cost. Costs are shown below so you can plan your total budget.</p>
+      <p style="font-size:.875rem;color:var(--stone-700);">Compound wall, gate, borewell, BMRDA approval fees, temporary electricity connection, permanent BESCOM connection, loose furniture, wardrobes and décor, and land cost. A modular kitchen is included only in the Dream Home package; for the other two it is an optional extra (see below). Costs are shown below so you can plan your total budget.</p>
       <p style="font-size:.8rem;color:var(--stone-500);margin-top:.6rem;">Rates are indicative, apply to construction cost only, and are confirmed in your written quote after a site visit. Ask us how built-up area is measured and how GST is applied to your quote before you sign.</p>
     </div>
 
@@ -1032,7 +1046,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
             <div class="warranty-badge__text">Year<br>Warranty</div>
           </div>
           <div style="flex:1;">
-            <h4 style="color:white;margin-bottom:.5rem;">What our warranty covers</h4>
+            <h4 role="heading" aria-level="3" style="color:white;margin-bottom:.5rem;">What our warranty covers</h4>
             <p style="font-size:.85rem;color:rgba(255,255,255,.7);margin-bottom:1rem;">We stand behind our work. If structural issues arise within one year of handover, we fix them at no charge — no arguments, no excuses.</p>
             <div class="warranty-list">
               <div class="warranty-item">🏗️ Structural cracks</div>
@@ -1192,7 +1206,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
             <div class="calc-result__amount" id="calc-amount">—</div>
             <div class="calc-result__range" id="calc-range"></div>
           </div>
-          <a href="#contact" id="calc-cta" class="btn btn--whatsapp btn--lg" onclick="calcRequestQuote(event)">📩 Request a detailed estimate</a>
+          <div style="display:flex;flex-direction:column;gap:.6rem;"><a href="#contact" id="calc-cta" class="btn btn--primary btn--lg" onclick="calcRequestQuote(event)">📩 Request a detailed estimate</a><a href="https://wa.me/919742801802" id="calc-wa" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">📱 Share this plan on WhatsApp</a></div>
         </div>
 
         <div class="calc-breakdown" id="calc-breakdown">
@@ -1213,6 +1227,20 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
         <p style="font-size:.8rem;color:var(--stone-700);margin-top:1.25rem;"><strong>How this is calculated:</strong> built-up area per floor × number of floors × the package rate. Confirm with us how balconies, staircases and utility areas are counted in your plan.</p>
         <p style="font-size:.78rem;color:var(--stone-500);margin-top:.5rem;">* This is a preliminary estimate, not a quotation. It covers base construction cost only. Not included: BMRDA building plan approval (₹20k–₹80k), temporary electricity connection (mandatory before construction starts, ₹15k–₹40k), borewell (₹60k–₹1.2L), compound wall and gate, permanent BESCOM connection, interiors, land cost and any applicable GST. Your written quote after a site visit is the binding figure.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ DREAM HOME PREVIEW TEASER -->
+<section class="section" id="dream-preview" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+  <div class="container">
+    <div style="background:linear-gradient(135deg,#1E1B4B,#312E81);border-radius:var(--radius-lg);padding:2rem;color:#fff;display:flex;gap:1.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+      <div style="max-width:620px;">
+        <span class="eyebrow" style="color:#FDE68A;">Just for fun</span>
+        <h2 style="color:#fff;margin:.2rem 0 .5rem;font-size:clamp(1.3rem,3vw,1.8rem);">🎮 Order your dream home, then watch it get built</h2>
+        <p style="color:rgba(255,255,255,.8);font-size:.95rem;margin:0;">Design your house, fill a cart, "pay" with a pretend card and follow the build like a delivery. Nothing is booked or charged, and it uses our real package rates.</p>
+      </div>
+      <a href="/build-your-home" class="btn btn--primary btn--lg">Try the preview →</a>
     </div>
   </div>
 </section>
@@ -1248,7 +1276,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
           <img decoding="async" src="https://res.cloudinary.com/dvjocpz8j/image/upload/w_600,h_420,c_fill,g_auto,q_auto,f_auto/v1781876440/WhatsApp_Image_2026-06-19_at_12.57.10_1_nl6dg8.jpg" alt="HoskoteConstruction team at project site" loading="lazy">
         </div>
         <div style="background:var(--indigo-900);border-radius:var(--radius);padding:1.75rem;color:white;">
-          <h4 style="color:white;margin-bottom:.875rem;">Our Promise to You</h4>
+          <h4 role="heading" aria-level="3" style="color:white;margin-bottom:.875rem;">Our Promise to You</h4>
           <ul style="font-size:.875rem;color:rgba(255,255,255,.75);list-style:none;display:flex;flex-direction:column;gap:.65rem;">
             <li>✓ We will never ask for money before showing you completed work</li>
             <li>✓ We will always answer your calls and WhatsApp messages</li>
@@ -1875,7 +1903,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
     <div class="qty-calc">
       <div class="qty-calc-header">
         <h3 style="color:white;">Material Quantity Estimator</h3>
-        <p style="color:rgba(255,255,255,.7);font-size:.875rem;margin-top:.3rem;">For a single-floor RCC framed structure — ground floor only</p>
+        <p style="color:#fff;font-size:.875rem;margin-top:.3rem;">For a single-floor RCC framed structure — ground floor only</p>
       </div>
       <div class="qty-calc-body">
         <div class="calc-grid">
@@ -2306,7 +2334,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
     <p class="lead" style="margin-bottom:1rem;">Starting your house construction? Get everything in writing before a single brick is laid — total cost, payment milestones, what happens if material prices change, and what happens if the builder delays or disappears with your money. Free for anyone to use, not just our clients — because a written agreement is the single biggest protection against being cheated.</p>
 
     <div class="callout" style="background:var(--red-100,#FEE2E2);border-left:4px solid var(--red-600,#DC2626);border-radius:0 12px 12px 0;padding:1.1rem 1.3rem;margin-bottom:1.75rem;">
-      <p style="margin:0;color:var(--stone-700);font-size:.95rem;"><strong style="color:var(--red-600,#DC2626);">Why this matters in Hoskote:</strong> we've personally seen and rebuilt houses for families whose earlier contractor took a large advance, did partial work, and vanished — or kept demanding "extra" money mid-construction with nothing on paper to hold them to the original quote. A signed agreement with milestones and a fixed-cost clause is what stops that. Don't hand over money on a verbal promise, however trustworthy the builder seems.</p>
+      <p style="margin:0;color:var(--stone-700);font-size:.95rem;"><strong style="color:#B91C1C;">Why this matters in Hoskote:</strong> we've personally seen and rebuilt houses for families whose earlier contractor took a large advance, did partial work, and vanished — or kept demanding "extra" money mid-construction with nothing on paper to hold them to the original quote. A signed agreement with milestones and a fixed-cost clause is what stops that. Don't hand over money on a verbal promise, however trustworthy the builder seems.</p>
     </div>
 
     <div class="grid-2" style="gap:2rem;align-items:start;">
@@ -2612,7 +2640,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
       </div>
     </div>
     <div class="footer__bottom">
-      <span>© 2026 HoskoteConstruction.in · All rights reserved · Built and based in Hoskote, Karnataka</span>
+      <span>© 2026 HoskoteConstruction.in · All rights reserved · Built and based in Hoskote, Karnataka · <a href="/privacy" style="color:inherit;text-decoration:underline;">Privacy Policy</a> · <a href="/terms" style="color:inherit;text-decoration:underline;">Terms &amp; Disclaimers</a></span>
       <span class="footer__udyam">UDYAM-KR-02-0127051</span>
     </div>
   </div>
@@ -2693,6 +2721,7 @@ function calcCost() {
     document.getElementById('bd-rate').textContent = '—';
     document.getElementById('bd-floors').textContent = '—';
     lastCalc = null;
+    document.getElementById('calc-wa').href = 'https://wa.me/919742801802';
     return;
   }
   errEl.style.display = 'none';
@@ -2709,6 +2738,8 @@ function calcCost() {
     pkg: pkgSel.options[pkgSel.selectedIndex].text.split(' — ')[0],
     bhk: document.getElementById('bhk').value,
   };
+  const waMsg = `Hi, I used your cost calculator: ${lastCalc.pkg} package, ${lastCalc.bhk}, ${floors} floor(s) × ${area} sq ft = ${totalArea} sq ft built-up. Preliminary base estimate ${formatINR(total)} (construction only). I would like a detailed estimate.`;
+  document.getElementById('calc-wa').href = 'https://wa.me/919742801802?text=' + encodeURIComponent(waMsg);
 }
 // Sends the visitor to the enquiry form with their calculator choices filled in.
 function calcRequestQuote(e) {
@@ -2855,6 +2886,19 @@ function toggleFaq(el) {
   btn.addEventListener('click', reopenAllowed);
   btn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') reopenAllowed(); });
   dd.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { setOpen(false); dd.classList.add('force-closed'); }));
+})();
+
+// Prefill the enquiry form when a visitor arrives from the dream-home preview
+(function () {
+  try {
+    var raw = sessionStorage.getItem('hcJourney');
+    if (!raw) return;
+    sessionStorage.removeItem('hcJourney');
+    var j = JSON.parse(raw), set = function (id, v) { var el = document.getElementById(id); if (el && !el.value && v) el.value = v; };
+    var type = document.getElementById('cf-type'); if (type) type.value = 'Cost Estimate';
+    set('cf-size', j.size); set('cf-msg', j.msg);
+    var fl = document.getElementById('cf-floors'); if (fl && j.floors) fl.value = String(j.floors);
+  } catch (e) { /* storage unavailable: the form simply stays empty */ }
 })();
 
 // Analytics hook: only reports if an analytics tool is actually installed on the page.
@@ -3139,7 +3183,7 @@ function generateLoanEstimate() {
     <div class="clause-title">4. Loan Sizing Check</div>
     <p>You've indicated a target loan amount of <strong>₹${desiredLoan.toLocaleString('en-IN')}</strong>. Most banks fund around <strong>${ltv}%</strong> of your total declared project cost (Loan-to-Value), not the amount you apply for. Working backwards, your submitted estimate needs to reflect a genuine total project cost of at least <strong>₹${requiredEstimate.toLocaleString('en-IN')}</strong> for the bank's ${ltv}% funding to reach your target.</p>
     ${shortfall > 0
-      ? `<p style="color:var(--red-600,#DC2626);"><strong>Your current estimate (₹${total.toLocaleString('en-IN')}) is short by about ₹${shortfall.toLocaleString('en-IN')}.</strong> This should almost always be closed by including every <em>genuine</em> cost head you're actually incurring — interiors, compound wall, sump, landscaping, elevation design — not by inflating rates or quantities beyond real cost. Under-declaring scope is the single biggest reason people get less loan than they actually need; over-declaring beyond real cost is loan misrepresentation and should never be done. Use the Part B (Interiors) section of our full BOQ estimate template to capture the genuine additional scope.</p>`
+      ? `<p style="color:#B91C1C;"><strong>Your current estimate (₹${total.toLocaleString('en-IN')}) is short by about ₹${shortfall.toLocaleString('en-IN')}.</strong> This should almost always be closed by including every <em>genuine</em> cost head you're actually incurring — interiors, compound wall, sump, landscaping, elevation design — not by inflating rates or quantities beyond real cost. Under-declaring scope is the single biggest reason people get less loan than they actually need; over-declaring beyond real cost is loan misrepresentation and should never be done. Use the Part B (Interiors) section of our full BOQ estimate template to capture the genuine additional scope.</p>`
       : `<p style="color:var(--green-600,#16A34A);"><strong>Your current estimate already supports this loan target.</strong> Make sure every cost head in it reflects work you're genuinely planning to carry out — banks and their valuers do verify declared scope against the site.</p>`}
     `;
   }
