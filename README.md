@@ -13,7 +13,9 @@ House construction website with live project photo tracking via Cloudinary.
 hoskote-construction/
 ├── server.js           ← Express API + Cloudinary routes
 ├── public/
-│   ├── index.html      ← Main website (fetches projects from API)
+│   ├── index.html      ← Homepage (hero, projects, packages, calculator, FAQ, enquiry form)
+│   ├── assets/         ← Shared site.css, redesign.css, site.js, calc.js, tools.js
+│   ├── services, packages, projects/, construction-cost, faq, tools, contact ... (static pages)
 │   └── admin.html      ← Admin upload panel
 ├── package.json
 ├── railway.toml

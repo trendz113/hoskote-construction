@@ -524,97 +524,56 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hoskoteconstruction.in/"},{"@type":"ListItem","position":2,"name":"Terms and Disclaimers","item":"https://hoskoteconstruction.in/terms"}]}
 </script>
+<link rel="stylesheet" href="/assets/redesign.css">
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
-<nav class="nav" id="top-nav">
+<nav class="nav" id="top-nav" aria-label="Main">
   <div class="container">
     <div class="nav__inner">
-      <a href="#" class="nav__logo">Hoskote<span>Construction</span></a>
+      <a href="/" class="nav__logo" aria-label="HoskoteConstruction home">Hoskote<span>Construction</span></a>
       <div class="nav__links">
-        <a href="/#home" class="nav__link">Home</a>
-        <a href="/#projects" class="nav__link">Our Projects</a>
-        <a href="/#pricing" class="nav__link">Packages &amp; Pricing</a>
-        <a href="/construction-process" class="nav__link">Construction Process</a>
+        <a href="/" class="nav__link">Home</a>
         <div class="nav__dd">
-          <button type="button" class="nav__link nav__dd-btn" aria-haspopup="true" aria-expanded="false" id="toolsBtn">Free Tools &amp; Resources <span aria-hidden="true">▾</span></button>
-          <div class="nav__dd-menu" id="toolsMenu">
-            <a href="/build-your-home">🎮 Build Your Dream Home (fun preview)</a>
-            <a href="/#calculator">Cost Calculator</a>
-            <a href="/project-planner">AI Project Planner</a>
-            <a href="/#construction-agreement">Construction Agreement Generator</a>
-            <a href="/#loan-estimate">Bank Loan Cost Estimate</a>
-            <a href="/rental-agreement-generator-hoskote">Rental Agreement Generator</a>
-            <a href="/documents">Sqft/Sqm &amp; Documents Tool</a>
-            <a href="/vaastu.html">Vastu Planner</a>
-            <a href="/property-document-service-hoskote">Property Document Service</a>
-            <a href="/property-navigator">Property Portal Navigator</a>
-            <a href="/#properties">Properties for Sale</a>
-            <a href="/contractors">Contractor Directory</a>
-            <a href="/blog/">Guides &amp; Articles</a>
-            <a href="/#faq">FAQs</a>
-          </div>
+          <button type="button" class="nav__link nav__dd-btn" aria-haspopup="true" aria-expanded="false" id="toolsBtn">Our Services <svg class="ic " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="nav__dd-menu" id="toolsMenu"><a href="/services">Services Overview</a><a href="/packages">Packages &amp; Specifications</a><a href="/construction-process">Construction Process</a><a href="/service-areas">Service Areas</a><a href="/faq">FAQs</a><a href="/tools">Tools &amp; Resources</a></div>
         </div>
+        <a href="/projects/" class="nav__link">Projects</a>
+        <a href="/construction-cost" class="nav__link">Construction Cost</a>
         <a href="/about" class="nav__link">About Us</a>
-        <a href="/#contact" class="nav__link">Contact</a>
+        <a href="/contact" class="nav__link">Contact</a>
       </div>
-      <a href="tel:+919742801802" class="nav__call" title="Call Now">📞</a>
-      <a href="https://instagram.com/hoskoteconstruction" target="_blank" rel="noopener" class="nav__call" title="Follow on Instagram">📸</a>
-      <a href="/#contact" class="nav__cta">Get Free Estimate</a>
-      <button class="nav__mobile-toggle" id="mobileToggle" aria-label="Menu">
+      <a href="tel:+919742801802" class="nav__icon" aria-label="Call +91 97428 01802" title="Call +91 97428 01802"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></a>
+      <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20to%20book%20a%20free%20site%20visit%20for%20house%20construction%20in%20Hoskote." class="nav__icon nav__icon--wa" aria-label="WhatsApp us" title="WhatsApp us" rel="noopener"><svg class="ic ic--fill " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.5A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.2 15l-.3-.18-3.1.9.9-3-.2-.3A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-.95.93-.95 2.27s.97 2.63 1.1 2.8c.14.2 1.9 3 4.7 4.08 2.3.9 2.77.72 3.27.67.5-.04 1.6-.65 1.83-1.28.22-.63.22-1.17.15-1.28-.07-.12-.25-.2-.52-.33-.27-.14-1.6-.8-1.85-.9-.25-.08-.43-.13-.6.14-.18.27-.7.9-.85 1.08-.16.18-.32.2-.6.07-.27-.14-1.14-.42-2.17-1.34-.8-.72-1.34-1.6-1.5-1.87-.15-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.1-.18.05-.34-.02-.48-.07-.14-.6-1.5-.85-2.05-.2-.5-.42-.5-.6-.5z"/></svg></a>
+      <a href="/contact" class="nav__cta">Get Free Estimate</a>
+      <button class="nav__mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-controls="mobileDrawer" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
   <div class="nav__drawer" id="mobileDrawer">
     <div class="nav__drawer-links">
-      <a href="/#home" class="nav__drawer-link">🏠 Home</a>
-
-      <div class="nav__drawer-group">See Our Work</div>
-      <a href="/#projects" class="nav__drawer-link">🏗️ Our Projects</a>
-      <a href="/#testimonials" class="nav__drawer-link">⭐ Reviews</a>
-      <a href="/#properties" class="nav__drawer-link">🏘️ Properties for Sale <span class="nav-badge">NEW</span></a>
-
-      <div class="nav__drawer-group">Guides &amp; Tips</div>
-      <a href="/blog/" class="nav__drawer-link">📚 All Guides &amp; Articles</a>
-      <a href="/#faq" class="nav__drawer-link">❓ FAQ (50+ Questions)</a>
-
-      <div class="nav__drawer-group">Plan Your Build</div>
-      <a href="/#calculator" class="nav__drawer-link">🧮 Cost Calculator</a>
-      <a href="/construction-process" class="nav__drawer-link">📋 How It Works</a>
-      <a href="/#pricing" class="nav__drawer-link">💰 Packages & Pricing</a>
-      <a href="/#materials" class="nav__drawer-link">🧱 Materials Guide</a>
-      <a href="/#loan" class="nav__drawer-link">🏦 Home Loan Help</a>
-      <a href="/project-planner" class="nav__drawer-link">🤖 AI Project Planner <span class="nav-badge">NEW</span></a>
-      <a href="/build-your-home" class="nav__drawer-link">🎮 Build Your Dream Home <span class="nav-badge">FUN</span></a>
-
-      <div class="nav__drawer-group">Free Tools</div>
-      <a href="/rental-agreement-generator-hoskote" class="nav__drawer-link">📄 Rental Agreement Generator <span class="nav-badge">FREE</span></a>
-      <a href="/#construction-agreement" class="nav__drawer-link">🧾 Construction Agreement Generator <span class="nav-badge">FREE</span></a>
-      <a href="/#loan-estimate" class="nav__drawer-link">🏦 Bank Loan Cost Estimate Generator <span class="nav-badge">FREE</span></a>
-      <a href="/documents" class="nav__drawer-link">📐 Sqft/Sqm & Documents Tool</a>
-      <a href="/property-document-service-hoskote" class="nav__drawer-link">📁 Property Document Verification Service <span class="nav-badge">NEW</span></a>
-      <a href="/property-navigator" class="nav__drawer-link">🗺️ Karnataka Property Portal Navigator</a>
-      <a href="/vaastu.html" class="nav__drawer-link">🧭 Vastu Planner</a>
-      <a href="/contractors" class="nav__drawer-link">📋 Contractor Directory</a>
-
-      <div class="nav__drawer-group">About</div>
-      <a href="/about" class="nav__drawer-link">👥 About Us</a>
-      <a href="/#contact" class="nav__drawer-link">📞 Contact</a>
+      <a href="/" class="nav__drawer-link">Home</a>
+      <div class="nav__drawer-group">Our Services</div>
+      <a href="/services" class="nav__drawer-link">Services Overview</a><a href="/packages" class="nav__drawer-link">Packages &amp; Specifications</a><a href="/construction-process" class="nav__drawer-link">Construction Process</a><a href="/service-areas" class="nav__drawer-link">Service Areas</a><a href="/faq" class="nav__drawer-link">FAQs</a><a href="/tools" class="nav__drawer-link">Tools &amp; Resources</a>
+      <div class="nav__drawer-group">More</div>
+      <a href="/projects/" class="nav__drawer-link">Projects</a>
+      <a href="/construction-cost" class="nav__drawer-link">Construction Cost</a>
+      <a href="/about" class="nav__drawer-link">About Us</a>
+      <a href="/contact" class="nav__drawer-link">Contact</a>
       <div style="margin-top:1rem;display:flex;flex-direction:column;gap:.6rem;">
-        <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="btn btn--whatsapp btn--lg" style="width:100%;justify-content:center;">📱 WhatsApp Us Now</a>
-        <a href="tel:+919742801802" class="btn btn--secondary btn--lg" style="width:100%;justify-content:center;">📞 Call +91 97428 01802</a>
+        <a href="/contact" class="btn btn--primary btn--lg" style="width:100%;justify-content:center;">Get Free Estimate</a>
+        <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20to%20book%20a%20free%20site%20visit%20for%20house%20construction%20in%20Hoskote." class="btn btn--whatsapp btn--lg" style="width:100%;justify-content:center;"><svg class="ic ic--fill " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.5A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.2 15l-.3-.18-3.1.9.9-3-.2-.3A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-.95.93-.95 2.27s.97 2.63 1.1 2.8c.14.2 1.9 3 4.7 4.08 2.3.9 2.77.72 3.27.67.5-.04 1.6-.65 1.83-1.28.22-.63.22-1.17.15-1.28-.07-.12-.25-.2-.52-.33-.27-.14-1.6-.8-1.85-.9-.25-.08-.43-.13-.6.14-.18.27-.7.9-.85 1.08-.16.18-.32.2-.6.07-.27-.14-1.14-.42-2.17-1.34-.8-.72-1.34-1.6-1.5-1.87-.15-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.1-.18.05-.34-.02-.48-.07-.14-.6-1.5-.85-2.05-.2-.5-.42-.5-.6-.5z"/></svg> WhatsApp Us</a>
+        <a href="tel:+919742801802" class="btn btn--secondary btn--lg" style="width:100%;justify-content:center;"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> Call +91 97428 01802</a>
       </div>
     </div>
   </div>
 </nav>
-
-<!-- ============================================================ MOBILE STICKY CALL/WHATSAPP BAR -->
-<div class="mobile-float-bar">
-  <a href="tel:+919742801802" class="call-btn">📞 Call Now</a>
-  <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20a%20free%20site%20visit" class="wa-btn">📱 WhatsApp</a>
+<div class="mobile-float-bar" role="region" aria-label="Contact options">
+  <a href="tel:+919742801802" class="call-btn"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> Call</a>
+  <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20to%20book%20a%20free%20site%20visit%20for%20house%20construction%20in%20Hoskote." class="wa-btn" rel="noopener"><svg class="ic ic--fill " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.5A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.2 15l-.3-.18-3.1.9.9-3-.2-.3A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-.95.93-.95 2.27s.97 2.63 1.1 2.8c.14.2 1.9 3 4.7 4.08 2.3.9 2.77.72 3.27.67.5-.04 1.6-.65 1.83-1.28.22-.63.22-1.17.15-1.28-.07-.12-.25-.2-.52-.33-.27-.14-1.6-.8-1.85-.9-.25-.08-.43-.13-.6.14-.18.27-.7.9-.85 1.08-.16.18-.32.2-.6.07-.27-.14-1.14-.42-2.17-1.34-.8-.72-1.34-1.6-1.5-1.87-.15-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.1-.18.05-.34-.02-.48-.07-.14-.6-1.5-.85-2.05-.2-.5-.42-.5-.6-.5z"/></svg> WhatsApp</a>
+  <a href="/contact" class="est-btn">Free Estimate</a>
 </div>
-
 <main id="main">
 <div class="container" style="padding-top:1.25rem;font-size:.82rem;color:var(--stone-500);"><a href="/" style="color:var(--stone-500);">Home</a> &rsaquo; <span>Terms and Disclaimers</span></div>
 <section class="section"><div class="container" style="max-width:820px;">
@@ -680,74 +639,58 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
     <div class="footer__grid">
       <div class="footer__brand">
         <div class="footer__logo">Hoskote<span>Construction</span></div>
-        <p class="footer__tagline">Hyperlocal house construction for Hoskote and Bengaluru Rural. Real projects, transparent pricing, daily WhatsApp updates. Starting ₹1,800/sqft.</p>
-        <div class="footer__contact-item"><span>📍</span> Balaji Gold City, Hoskote 562114</div>
-        <div class="footer__contact-item"><span>📞</span> <a href="tel:+919742801802">+91 97428 01802</a></div>
-        <div class="footer__contact-item"><span>✉️</span> <a href="mailto:hello@hoskoteconstruction.in">hello@hoskoteconstruction.in</a></div>
-        <div class="footer__contact-item"><span>🏢</span> UDYAM-KR-02-0127051</div>
-        <div class="footer__contact-item"><span>📸</span> <a href="https://instagram.com/hoskoteconstruction" target="_blank" rel="noopener">@hoskoteconstruction</a></div>
+        <p class="footer__tagline">Residential construction in Hoskote and surrounding areas, with transparent pricing, written agreements and documented project progress.</p>
+        <div class="footer__contact-item"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> <span>Balaji Gold City, Hoskote, Bengaluru Rural 562114</span></div>
+        <div class="footer__contact-item"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg> <a href="tel:+919742801802">+91 97428 01802</a></div>
+        <div class="footer__contact-item"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg> <a href="mailto:hello@hoskoteconstruction.in">hello@hoskoteconstruction.in</a></div>
+        <div class="footer__contact-item"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 21V5l8-2v18M12 9h8v12M4 21h16M8 8v.01M8 12v.01M8 16v.01M16 13v.01M16 17v.01"/></svg> <span>UDYAM-KR-02-0127051</span></div>
+        <div class="footer__contact-item"><a href="https://instagram.com/hoskoteconstruction" target="_blank" rel="noopener">Instagram: @hoskoteconstruction</a></div>
       </div>
       <div>
         <div class="footer__heading">Services</div>
         <ul class="footer__links">
-          <li><a href="/#pricing">House Construction</a></li>
-          <li><a href="/#properties">Properties for Sale</a></li>
-          <li><a href="/#calculator">Cost Calculator</a></li>
-          <li><a href="/#loan">Home Loan Guidance</a></li>
-          <li><a href="/#guide">Construction Guide</a></li>
-          <li><a href="/blog/construction-loan-process-guide-hoskote">Construction Loan Guide</a></li>
-          <li><a href="/blog/sqft-to-sqmeter-site-dimensions-guide">Sqft to Sqm Guide</a></li>
-          <li><a href="/blog/floor-vibration-structural-audit-guide">Structural Audit Guide</a></li>
-          <li><a href="/blog/construction-contractor-fraud-hoskote-guide">Avoid Construction Fraud — Guide</a></li>
-          <li><a href="/project-planner">🤖 AI Project Planner</a></li>
-          <li><a href="/contractors">📋 Contractor Directory</a></li>
-          <li><a href="/list-your-business">List Your Business</a></li>
-          <li><a href="/documents">Sqft/Sqm Converter & Documents Guide</a></li>
-          <li><a href="/property-document-service-hoskote">Property Document Verification Service</a></li>
-          <li><a href="/property-navigator">Karnataka Property Portal Navigator</a></li>
-          <li><a href="/rental-agreement-generator-hoskote">Free Rental Agreement Generator</a></li>
-          <li><a href="/blog/">All Guides</a></li>
-          <li><a href="/#downloads">Free Downloads</a></li>
+          <li><a href="/services">Our Services</a></li>
+          <li><a href="/packages">Packages &amp; Specifications</a></li>
+          <li><a href="/construction-cost">Construction Cost Calculator</a></li>
+          <li><a href="/construction-process">Construction Process</a></li>
+          <li><a href="/home-loan">Home Loan Guidance</a></li>
+          <li><a href="/property-document-service-hoskote">Property Document Verification</a></li>
+          <li><a href="/properties">Properties for Sale</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer__heading">Areas We Serve</div>
+        <div class="footer__heading">Resources</div>
         <ul class="footer__links">
-          <li><a href="/#areas">Hoskote Town</a></li>
-          <li><a href="/house-construction-sulibele">Sulibele</a></li>
-          <li><a href="/house-construction-malur">Malur</a></li>
-          <li><a href="/#areas">Anugondanahalli</a></li>
-          <li><a href="/#areas">Kannamangala</a></li>
-          <li><a href="/#areas">Channasandra</a></li>
-          <li><a href="/#areas">Nandagudi</a></li>
+          <li><a href="/tools">Tools &amp; Resources</a></li>
+          <li><a href="/construction-guide">Construction Guide</a></li>
+          <li><a href="/faq">FAQs</a></li>
+          <li><a href="/blog/">Articles</a></li>
+          <li><a href="/documents">Sqft/Sqm &amp; Documents Tool</a></li>
+          <li><a href="/vaastu.html">Vastu Planner</a></li>
+          <li><a href="/project-planner">Project Planner</a></li>
+          <li><a href="/rental-agreement-generator-hoskote">Rental Agreement Generator</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer__heading">Quick Links</div>
+        <div class="footer__heading">Company</div>
         <ul class="footer__links">
-          <li><a href="/#projects">Project Gallery</a></li>
-          <li><a href="/#faq">50+ FAQs</a></li>
-          <li><a href="/#testimonials">Customer Reviews</a></li>
+          <li><a href="/projects/">Completed Projects</a></li>
+          <li><a href="/service-areas">Service Areas</a></li>
           <li><a href="/about">About Us</a></li>
-          <li><a href="/#contact">Contact</a></li>
+          <li><a href="/contact">Contact &amp; Site Visit</a></li>
+          <li><a href="/contractors">Contractor Directory</a></li>
+          <li><a href="/list-your-business">List Your Business</a></li>
         </ul>
       </div>
     </div>
     <div class="footer__bottom">
-      <span>© 2026 HoskoteConstruction.in · All rights reserved · Built and based in Hoskote, Karnataka · <a href="/privacy" style="color:inherit;text-decoration:underline;">Privacy Policy</a> · <a href="/terms" style="color:inherit;text-decoration:underline;">Terms &amp; Disclaimers</a></span>
+      <span>&copy; 2026 HoskoteConstruction.in &middot; <a href="/privacy" style="color:inherit;text-decoration:underline;">Privacy Policy</a> &middot; <a href="/terms" style="color:inherit;text-decoration:underline;">Terms</a></span>
       <span class="footer__udyam">UDYAM-KR-02-0127051</span>
     </div>
   </div>
 </footer>
 
 <!-- ============================================================ WHATSAPP FLOAT -->
-<div class="wa-float">
-  <div class="wa-float__label">Chat with us</div>
-  <a href="https://wa.me/919742801802?text=Hi%2C%20I%20want%20to%20know%20about%20construction%20in%20Hoskote" class="wa-float__btn" aria-label="WhatsApp us">
-    <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.486 2 2 6.486 2 12c0 1.847.5 3.58 1.37 5.08L2 22l5.05-1.348A9.954 9.954 0 0012 22c5.514 0 10-4.486 10-10S17.514 2 12 2zm0 18a7.952 7.952 0 01-4.252-1.228l-.306-.181-3.155.842.842-3.07-.198-.318A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
-  </a>
-</div>
-
 <script>
 // Mobile nav toggle
 const mobileToggle = document.getElementById('mobileToggle');
