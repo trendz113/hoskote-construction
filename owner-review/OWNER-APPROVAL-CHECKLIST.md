@@ -49,3 +49,13 @@ The six testimonials on the old homepage were removed from the live site and par
 2. After deploying, send one real test enquiry from the homepage and one from /contact and check /admin shows them.
 3. Revoke the GitHub token you pasted in chat on the first day.
 4. In Google Search Console, resubmit `sitemap.xml`.
+
+## 8. Added in the master-brief update (31 Oct 2026)
+- [ ] Every project now has its own detail page. Family names, cost ranges and timelines are NOT shown on these pages any more (the old pages had them). `public/projects/_data.json` still holds them; it is not served as a page. Confirm you are happy to leave them out.
+- [ ] Built-up areas on project pages are "approx." and come from `_data.json`. Send verified numbers if different. "Construction type" and "Completed" status are my labels from your descriptions.
+- [ ] Construction-stage photographs: none exist on the site, so none are shown. Send some and I will add a stages gallery per project.
+- [ ] Warranty section on /packages uses your FAQ answer (1-year warranty, 7-working-day response). Confirm or correct, and keep it identical in your agreement.
+- [ ] Real owner/team photos and genuine testimonials: none could be added. The previous team photo was removed at your request.
+- [ ] "Draft for review" banners were removed from /privacy and /terms as requested. Please still have a lawyer review both before relying on them.
+- [ ] GST FAQ (Q6) says 5% without ITC for combined land+building contracts above ₹7.5 lakh and 18% for pure construction. This is a tax statement written by you; have your CA confirm it.
+- [ ] Server now redirects plain-HTTP requests to HTTPS when Railway's proxy reports HTTP. Check the site still opens on your custom domain after deploying.

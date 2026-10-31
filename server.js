@@ -23,6 +23,13 @@ cloudinary.config({
 app.disable('x-powered-by');
 app.set('trust proxy', 1); // Railway sits behind a proxy; needed for correct client IPs
 app.use((req, res, next) => {
+  // Behind Railway's proxy: send any plain-HTTP browser request to HTTPS (never for local testing)
+  if (req.headers['x-forwarded-proto'] === 'http' && !/^(localhost|127\.0\.0\.1)/.test(req.headers.host || '')) {
+    return res.redirect(301, 'https://' + req.headers.host + req.originalUrl);
+  }
+  next();
+});
+app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');

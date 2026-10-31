@@ -284,3 +284,12 @@ body { background: #fff; color: #1C1917; }
 @media (max-width: 860px) { .wa-fab { display: none; } }
 @media (min-width: 861px) { .mobile-float-bar { display: none !important; } }
 .hero .btn--lg { padding: .8rem 1rem; font-size: .92rem; gap: .4rem; } .hero .btn-group { flex-wrap: wrap; }
+.proj-hero { width: 100%; height: auto; aspect-ratio: 4/3; max-height: 560px; object-fit: cover; border-radius: 12px; background: var(--stone-200); display: block; margin-bottom: 1.5rem; }
+.proj-facts--wide { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); border-top: 0; padding: 1rem 1.25rem; background: var(--stone-100); border-radius: 12px; margin-bottom: 2rem; }
+.proj-text { font-size: 1.02rem; line-height: 1.8; color: var(--stone-700); max-width: 760px; margin: 0 0 1rem; }
+.link-list { list-style: none; padding: 0; margin: .75rem 0 0; display: grid; gap: .4rem; }
+.link-list a { color: #14213D; text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+.calc-summary { margin-top: 1.5rem; }
+.calc-summary h4 { font-family: var(--font-body); font-size: 1rem; font-weight: 700; margin-bottom: .6rem; }
+.calc-summary .cmp th[scope="row"] { width: 52%; font-weight: 600; }
+.calc-summary .btn { margin-top: .75rem; }

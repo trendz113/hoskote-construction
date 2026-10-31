@@ -3,6 +3,10 @@
 //   plan approval 20k-80k, temporary electricity 15k-40k, permanent BESCOM 15k-45k, borewell 60k-1.2L, sump 35k-70k.
 var EXTRAS_LOW = 20000 + 15000 + 15000 + 60000 + 35000;     // 1,45,000
 var EXTRAS_HIGH = 80000 + 40000 + 45000 + 120000 + 70000;   // 3,55,000
+var EXTRAS = [
+  ['Plan approval fees', 20000, 80000], ['Temporary electricity connection', 15000, 40000],
+  ['Permanent BESCOM connection', 15000, 45000], ['Borewell', 60000, 120000], ['Water sump', 35000, 70000]
+];
 var lastCalc = null;
 
 function formatINR(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
@@ -34,6 +38,7 @@ function calcCost() {
     amountEl.textContent = '—'; document.getElementById('calc-range').textContent = '';
     ids.forEach(function (i) { document.getElementById(i).textContent = '—'; });
     lastCalc = null; waEl.href = 'https://wa.me/919742801802';
+    var sb = document.getElementById('calc-summary-body'); if (sb) sb.innerHTML = '';
     return;
   }
   errEl.style.display = 'none';
@@ -48,9 +53,20 @@ function calcCost() {
   var sel = document.getElementById('pkg');
   lastCalc = { area: area, floors: floors, totalArea: totalArea, rate: rate, base: base, lo: lo, hi: hi,
     pkg: sel.options[sel.selectedIndex].text.split(':')[0], bhk: document.getElementById('bhk').value };
+  var rows = [
+    ['Package', lastCalc.pkg + ' (₹' + rate.toLocaleString('en-IN') + ' per sq ft)'],
+    ['Built-up area', floors + ' floor(s) × ' + area.toLocaleString('en-IN') + ' sq ft = ' + totalArea.toLocaleString('en-IN') + ' sq ft'],
+    ['Base construction cost (work included in the package rate)', formatINR(base)]
+  ];
+  EXTRAS.forEach(function (x) { rows.push(['Additional estimate: ' + x[0], formatINR(x[1]) + ' – ' + formatINR(x[2])]); });
+  rows.push(['Indicative total range', compactINR(lo) + ' – ' + compactINR(hi)]);
+  rows.push(['Not included', 'Compound wall and gate, modular kitchen (included only in Dream Home), interiors and furniture, landscaping, land. GST treatment and design fees are confirmed in your written quote.']);
+  lastCalc.rows = rows;
+  var sb2 = document.getElementById('calc-summary-body');
+  if (sb2) { sb2.innerHTML = ''; rows.forEach(function (r) { var tr = document.createElement('tr'), th = document.createElement('th'), td = document.createElement('td'); th.scope = 'row'; th.textContent = r[0]; td.textContent = r[1]; tr.appendChild(th); tr.appendChild(td); sb2.appendChild(tr); }); }
   var msg = 'Hi, I used your cost calculator: ' + lastCalc.pkg + ' package, ' + lastCalc.bhk + ', ' + floors + ' floor(s) x ' + area +
     ' sq ft = ' + totalArea + ' sq ft built-up. Base construction cost ' + formatINR(base) + '; indicative budget range ' + compactINR(lo) + ' to ' + compactINR(hi) +
-    ' including typical additional costs. Please send me a detailed estimate.';
+    ' including typical additional costs. Please send me a detailed estimate.\n\n' + rows.map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
   waEl.href = 'https://wa.me/919742801802?text=' + encodeURIComponent(msg);
 }
 
@@ -73,3 +89,12 @@ function calcRequestQuote(e) {
   if (f) setTimeout(function () { f.focus({ preventScroll: true }); }, 400);
 }
 calcCost();
+
+function calcCopySummary() {
+  var st = document.getElementById('calc-copy-status');
+  if (!lastCalc) { if (st) st.textContent = 'Enter valid details first.'; return; }
+  var text = 'Construction cost estimate (indicative, not a quotation)\n' + lastCalc.rows.map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
+  var done = function (ok) { if (st) st.textContent = ok ? 'Copied.' : 'Could not copy. Select the table and copy it manually.'; };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+  else done(false);
+}
