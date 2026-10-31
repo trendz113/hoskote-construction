@@ -23,11 +23,14 @@ Nothing below was invented. These are existing site claims that I could not veri
 ## 3. Projects
 - [ ] Are all 7 projects real, completed, and is it OK to show them? Photos are your Cloudinary images.
 - [ ] Project detail pages (/projects/<slug>) still contain family first names, cost ranges and timelines from `public/projects/_data.json`. I did not change these. Please confirm each family agreed to be named and that the costs/timelines are true, or tell me to remove them.
-- [ ] Plot sizes / built-up areas were NOT shown on the new cards (not verified). Send verified numbers if you want them added.
+- [ ] Project cards now show location, floors, plot size and approximate built-up area. These numbers come from your existing `public/projects/_data.json` (the built-up figures are estimates there, e.g. 1,900 / 3,600 / 4,800 sq ft). Confirm each, or send corrected figures.
 - [ ] The hero photo (G+2, Hoskote Town) and the team photo on the homepage: confirm they are your real project and team.
 - [ ] Old hero caption "Dream Home package, 9 months, ₹68L" was removed (unverified).
 
-## 4. Testimonials (removed)
+## 4. Testimonials and team photos
+No testimonial section is shown because none could be verified. Send real reviews (name, project type, link to the Google review) and I will add them. The only team photo on the site is the existing one on the homepage and About page; send more real photos if you have them.
+
+### Removed testimonials
 The six testimonials on the old homepage were removed from the live site and parked in `owner-review/testimonials-unverified.md`. Re-add only real ones, with the customer's permission and, ideally, a link to the original Google review. The old page also showed a star rating; no rating or review count is shown now.
 
 ## 5. Business details
