@@ -84,6 +84,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
 .status-badge.site-visit-booked{background:#581c8722;color:#c084fc;}
 .status-badge.won{background:#14532d22;color:#4ade80;}
 .status-badge.lost{background:#7f1d1d22;color:#f87171;}
+.status-badge.reviewing{background:#78350f22;color:#fbbf24;}
+.status-badge.shortlisted{background:#581c8722;color:#c084fc;}
+.status-badge.onboarded{background:#14532d22;color:#4ade80;}
+.status-badge.declined{background:#7f1d1d22;color:#f87171;}
 .ctr-photos{display:flex;gap:6px;margin:10px 0;}
 .ctr-photos img{width:72px;height:54px;object-fit:cover;border-radius:6px;}
 .ctr-detail-row{display:flex;gap:8px;font-size:0.85rem;color:#999;margin-bottom:4px;}
@@ -171,6 +175,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
       <div class="tab" onclick="switchTab('projects')">🏠 Manage Projects</div>
       <div class="tab" onclick="switchTab('leads')">📞 Leads <span id="newLeadsBadge" style="display:none;background:#16A34A;color:#fff;font-size:0.68rem;padding:2px 6px;border-radius:10px;margin-left:4px;"></span></div>
       <div class="tab" onclick="switchTab('contractors')">📋 Contractor Listings <span id="pendingBadge" style="display:none;background:#B5562C;color:#fff;font-size:0.68rem;padding:2px 6px;border-radius:10px;margin-left:4px;"></span></div>
+      <div class="tab" onclick="switchTab('partners')">🤝 Partnership Applications <span id="partnersBadge" style="display:none;background:#16A34A;color:#fff;font-size:0.68rem;padding:2px 6px;border-radius:10px;margin-left:4px;"></span></div>
+      <div class="tab" onclick="switchTab('suppliers')">📦 Supplier Registrations <span id="suppliersBadge" style="display:none;background:#16A34A;color:#fff;font-size:0.68rem;padding:2px 6px;border-radius:10px;margin-left:4px;"></span></div>
     </div>
 
     <!-- UPLOAD TAB -->
@@ -256,6 +262,18 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
       <div class="projects-list" id="contractorsList">
         <div style="text-align:center;padding:40px;color:#555;">Loading applications...</div>
       </div>
+    </div>
+
+    <!-- PARTNERSHIP APPLICATIONS TAB -->
+    <div id="tabPartners" style="display:none;">
+      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;" id="partnersFilters"></div>
+      <div class="projects-list" id="partnersList"><div style="text-align:center;padding:40px;color:#555;">Loading...</div></div>
+    </div>
+
+    <!-- SUPPLIER REGISTRATIONS TAB -->
+    <div id="tabSuppliers" style="display:none;">
+      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;" id="suppliersFilters"></div>
+      <div class="projects-list" id="suppliersList"><div style="text-align:center;padding:40px;color:#555;">Loading...</div></div>
     </div>
 
   </div>
@@ -360,12 +378,16 @@ function populateProjectSelect() {
 
 // ─── TABS ───
 function switchTab(tab) {
-  const idx = { upload: 0, projects: 1, leads: 2, contractors: 3 }[tab];
+  const idx = { upload: 0, projects: 1, leads: 2, contractors: 3, partners: 4, suppliers: 5 }[tab];
   document.querySelectorAll('.tabs > .tab').forEach((t, i) => t.classList.toggle('active', i === idx));
   document.getElementById('tabUpload').style.display = tab === 'upload' ? 'block' : 'none';
   document.getElementById('tabProjects').style.display = tab === 'projects' ? 'block' : 'none';
   document.getElementById('tabLeads').style.display = tab === 'leads' ? 'block' : 'none';
   document.getElementById('tabContractors').style.display = tab === 'contractors' ? 'block' : 'none';
+  document.getElementById('tabPartners').style.display = tab === 'partners' ? 'block' : 'none';
+  document.getElementById('tabSuppliers').style.display = tab === 'suppliers' ? 'block' : 'none';
+  if (tab === 'partners') loadReg('partners');
+  if (tab === 'suppliers') loadReg('suppliers');
   if (tab === 'contractors' && !contractorsData.length) loadContractors();
   if (tab === 'leads' && !leadsData.length) loadLeads();
 }
@@ -575,6 +597,8 @@ function showMsg(el, text, type) {
 }
 
 // ─── LEADS ───
+// Everything submitted through public forms is untrusted: escape before putting it into HTML.
+function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 const LEAD_STATUS_LABELS = { new: 'new', contacted: 'contacted', 'site-visit-booked': 'site visit booked', won: 'won', lost: 'lost' };
 
 async function loadLeads() {
@@ -610,17 +634,21 @@ function renderLeadsList() {
 
   list.innerHTML = filtered.map(l => `
     <div class="project-row">
-      <div class="project-header" onclick="toggleProject('lead_${l.id}')">
+      <div class="project-header" onclick="toggleProject('lead_${esc(l.id)}')">
         <div>
-          <div class="project-title">${l.name} — ${l.type || 'General Query'}</div>
-          <div class="project-meta">${l.phone} · ${l.area || 'Area not specified'} · ${new Date(l.submittedAt).toLocaleString('en-IN')}</div>
+          <div class="project-title">${esc(l.name)} — ${esc(l.type || 'General Query')}</div>
+          <div class="project-meta">${esc(l.phone)} · ${esc(l.area || 'Area not specified')} · ${new Date(l.submittedAt).toLocaleString('en-IN')}</div>
         </div>
         <span class="status-badge ${l.status}">${LEAD_STATUS_LABELS[l.status] || l.status}</span>
       </div>
       <div class="project-body" id="body_lead_${l.id}">
-        <div class="ctr-detail-row"><strong>Plot Size</strong> ${l.size || '—'}</div>
-        <div class="ctr-detail-row"><strong>Budget</strong> ${l.budget || '—'}</div>
-        <div class="ctr-detail-row"><strong>Message</strong> ${l.message || '—'}</div>
+        ${l.propertyType ? `<div class="ctr-detail-row"><strong>Property type</strong> ${esc(l.propertyType)}</div>` : ''}
+        <div class="ctr-detail-row"><strong>Plot Size</strong> ${esc(l.size || '—')}</div>
+        <div class="ctr-detail-row"><strong>Floors</strong> ${esc(l.floors || '—')}</div>
+        <div class="ctr-detail-row"><strong>Timeline / dates</strong> ${esc(l.startDate || '—')}</div>
+        <div class="ctr-detail-row"><strong>Budget</strong> ${esc(l.budget || '—')}</div>
+        <div class="ctr-detail-row"><strong>Policy read</strong> ${l.acknowledgedInspectionPolicy ? 'Yes' : '—'}</div>
+        <div class="ctr-detail-row"><strong>Message</strong> ${esc(l.message || '—')}</div>
 
         <div class="ctr-actions">
           <a class="btn btn-secondary" href="https://wa.me/91${l.phone.replace(/\D/g,'').slice(-10)}" target="_blank" rel="noopener">📱 WhatsApp</a>
@@ -657,6 +685,72 @@ async function deleteLead(id) {
     });
     if (res.ok) { loadLeads(); }
     else { alert('Delete failed'); }
+  } catch { alert('Delete failed'); }
+}
+
+// ─── PARTNERSHIP APPLICATIONS + SUPPLIER REGISTRATIONS ───
+const REG = {
+  partners: { url: '/api/partners', list: 'partnersList', filters: 'partnersFilters', badge: 'partnersBadge', data: [], filter: 'new', label: 'applications',
+    title: x => esc(x.businessName) + ' — ' + esc(x.contactPerson),
+    meta: x => esc(x.phone) + ' · ' + esc(x.serviceAreas) + ' · ' + esc(x.yearsExperience) + ' yrs · ' + new Date(x.submittedAt).toLocaleString('en-IN'),
+    rows: x => [['Email', x.email], ['Project types', x.projectTypes], ['Team size', x.teamSize], ['Registration', x.registration], ['Experience', x.experience], ['Accepted process', x.agreedToProcess ? 'Yes' : '—'], ['Notes', x.notes]] },
+  suppliers: { url: '/api/suppliers', list: 'suppliersList', filters: 'suppliersFilters', badge: 'suppliersBadge', data: [], filter: 'new', label: 'registrations',
+    title: x => esc(x.companyName) + ' — ' + esc((x.materials || []).join(', ')),
+    meta: x => esc(x.contactPerson) + ' · ' + esc(x.phone) + ' · ' + esc(x.email) + ' · ' + new Date(x.submittedAt).toLocaleString('en-IN'),
+    rows: x => [['City', x.city], ['GST', x.gstin], ['Other registration', x.businessDetails], ['Catalogue', x.catalogue], ['Specifications', x.specifications], ['Pricing', x.pricing], ['Min. order', x.moq], ['Delivers to', x.deliveryLocations], ['Notes', x.notes]] },
+};
+const REG_STATUSES = ['new', 'reviewing', 'shortlisted', 'onboarded', 'declined'];
+
+async function loadReg(kind) {
+  const r = REG[kind];
+  try {
+    const res = await fetch(r.url, { headers: { 'x-admin-password': adminPassword } });
+    const data = await res.json();
+    r.data = data.items || [];
+    const n = r.data.filter(x => x.status === 'new').length;
+    const b = document.getElementById(r.badge);
+    if (n > 0) { b.textContent = n; b.style.display = 'inline-block'; } else { b.style.display = 'none'; }
+    renderReg(kind);
+  } catch (err) { console.error(err); }
+}
+
+function renderReg(kind) {
+  const r = REG[kind];
+  document.getElementById(r.filters).innerHTML = ['new', 'reviewing', 'shortlisted', 'onboarded', 'declined', 'all'].map(f =>
+    `<div class="tab${r.filter === f ? ' active' : ''}" style="background:#1a1a1a;border:1px solid #2a2a2a;" onclick="REG.${kind}.filter='${f}';renderReg('${kind}')">${f[0].toUpperCase() + f.slice(1)}</div>`).join('');
+  const rows = r.filter === 'all' ? r.data : r.data.filter(x => x.status === r.filter);
+  const list = document.getElementById(r.list);
+  if (!rows.length) { list.innerHTML = `<div style="text-align:center;padding:40px;color:#555;">No ${r.filter === 'all' ? '' : r.filter + ' '}${r.label}.</div>`; return; }
+  list.innerHTML = rows.map(x => `
+    <div class="project-row">
+      <div class="project-header" onclick="toggleProject('${kind}_${esc(x.id)}')">
+        <div><div class="project-title">${r.title(x)}</div><div class="project-meta">${r.meta(x)}</div></div>
+        <span class="status-badge ${esc(x.status)}">${esc(x.status)}</span>
+      </div>
+      <div class="project-body" id="body_${kind}_${esc(x.id)}">
+        ${r.rows(x).filter(p => p[1]).map(p => `<div class="ctr-detail-row"><strong>${esc(p[0])}</strong> <span style="white-space:pre-wrap;">${esc(p[1])}</span></div>`).join('')}
+        <div class="ctr-actions">
+          <a class="btn btn-secondary" href="https://wa.me/91${esc(String(x.phone).replace(/\D/g, '').slice(-10))}" target="_blank" rel="noopener">📱 WhatsApp</a>
+          <a class="btn btn-secondary" href="tel:+91${esc(String(x.phone).replace(/\D/g, '').slice(-10))}">📞 Call</a>
+          ${REG_STATUSES.filter(st => st !== x.status).map(st => `<button class="btn btn-secondary" onclick="setRegStatus('${kind}','${esc(x.id)}','${st}')">Mark ${st}</button>`).join('')}
+          <button class="btn btn-danger" onclick="deleteReg('${kind}','${esc(x.id)}')">🗑️ Delete</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+async function setRegStatus(kind, id, status) {
+  try {
+    const res = await fetch(`${REG[kind].url}/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-admin-password': adminPassword }, body: JSON.stringify({ status }) });
+    if (res.ok) loadReg(kind); else alert('Update failed');
+  } catch { alert('Update failed'); }
+}
+
+async function deleteReg(kind, id) {
+  if (!confirm('Delete this entry permanently?')) return;
+  try {
+    const res = await fetch(`${REG[kind].url}/${id}`, { method: 'DELETE', headers: { 'x-admin-password': adminPassword } });
+    if (res.ok) loadReg(kind); else alert('Delete failed');
   } catch { alert('Delete failed'); }
 }
 

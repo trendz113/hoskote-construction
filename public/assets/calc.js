@@ -1,100 +1,107 @@
-// Construction cost calculator. Base cost = area per floor x floors x package rate (plain arithmetic).
-// The range adds the typical one-time costs that are NOT in the per sq ft rate (published on the Packages page):
-//   plan approval 20k-80k, temporary electricity 15k-40k, permanent BESCOM 15k-45k, borewell 60k-1.2L, sump 35k-70k.
-var EXTRAS_LOW = 20000 + 15000 + 15000 + 60000 + 35000;     // 1,45,000
-var EXTRAS_HIGH = 80000 + 40000 + 45000 + 120000 + 70000;   // 3,55,000
-var EXTRAS = [
-  ['Plan approval fees', 20000, 80000], ['Temporary electricity connection', 15000, 40000],
-  ['Permanent BESCOM connection', 15000, 45000], ['Borewell', 60000, 120000], ['Water sump', 35000, 70000]
-];
-var lastCalc = null;
+/*
+ * Indicative construction cost calculator (homepage and /construction-cost).
+ * Plain arithmetic only:  built-up area x package rate = indicative construction cost.
+ * It never produces a quotation. Rates come from HC_CONFIG (assets/site-config.js).
+ * The page just needs:  <div id="hc-calculator"></div>
+ */
+(function () {
+  'use strict';
+  var root = document.getElementById('hc-calculator');
+  var C = window.HC_CONFIG;
+  if (!root || !C) return;
 
-function formatINR(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
-function compactINR(n) {
-  if (n >= 1e7) return '₹' + (n / 1e7).toFixed(2).replace(/\.?0+$/, '') + ' Cr';
-  return '₹' + (n / 1e5).toFixed(2).replace(/\.?0+$/, '') + ' L';
-}
-function roundDown(n, step) { return Math.floor(n / step) * step; }
-function roundUp(n, step) { return Math.ceil(n / step) * step; }
-
-function calcCost() {
-  var areaEl = document.getElementById('sqft');
-  if (!areaEl) return;
-  var errEl = document.getElementById('calc-error');
-  var floors = parseInt(document.getElementById('floors').value, 10);
-  var rate = parseFloat(document.getElementById('pkg').value);
-  var area = parseFloat(areaEl.value);
-  var amountEl = document.getElementById('calc-amount');
-  var waEl = document.getElementById('calc-wa');
-  var error = '';
-  if (areaEl.value.trim() === '') error = 'Enter the built-up area per floor to see an estimate.';
-  else if (!isFinite(area) || area <= 0) error = 'Area must be a positive number.';
-  else if (area < 300) error = 'For areas below 300 sq ft per floor, please contact us for a custom quote.';
-  else if (area > 5000) error = 'For areas above 5,000 sq ft per floor, please contact us for a custom quote.';
-  else if (!isFinite(floors) || !isFinite(rate)) error = 'Please choose floors and a package.';
-  var ids = ['bd-area', 'bd-rate', 'bd-base', 'bd-extras'];
-  if (error) {
-    errEl.textContent = error; errEl.style.display = 'block';
-    amountEl.textContent = '—'; document.getElementById('calc-range').textContent = '';
-    ids.forEach(function (i) { document.getElementById(i).textContent = '—'; });
-    lastCalc = null; waEl.href = 'https://wa.me/919742801802';
-    var sb = document.getElementById('calc-summary-body'); if (sb) sb.innerHTML = '';
-    return;
-  }
-  errEl.style.display = 'none';
-  var totalArea = area * floors, base = totalArea * rate;
-  var lo = roundDown(base + EXTRAS_LOW, 10000), hi = roundUp(base + EXTRAS_HIGH, 10000);
-  amountEl.textContent = compactINR(lo) + ' – ' + compactINR(hi);
-  document.getElementById('calc-range').textContent = 'Base construction cost ' + formatINR(base) + ' plus typical additional costs';
-  document.getElementById('bd-area').textContent = totalArea.toLocaleString('en-IN') + ' sq ft';
-  document.getElementById('bd-rate').textContent = '₹' + rate.toLocaleString('en-IN');
-  document.getElementById('bd-base').textContent = formatINR(base);
-  document.getElementById('bd-extras').textContent = compactINR(EXTRAS_LOW) + ' – ' + compactINR(EXTRAS_HIGH);
-  var sel = document.getElementById('pkg');
-  lastCalc = { area: area, floors: floors, totalArea: totalArea, rate: rate, base: base, lo: lo, hi: hi,
-    pkg: sel.options[sel.selectedIndex].text.split(':')[0], bhk: document.getElementById('bhk').value };
-  var rows = [
-    ['Package', lastCalc.pkg + ' (₹' + rate.toLocaleString('en-IN') + ' per sq ft)'],
-    ['Built-up area', floors + ' floor(s) × ' + area.toLocaleString('en-IN') + ' sq ft = ' + totalArea.toLocaleString('en-IN') + ' sq ft'],
-    ['Base construction cost (work included in the package rate)', formatINR(base)]
+  var MIN_AREA = 300, MAX_AREA = 10000;
+  // Typical separate costs, shown for information only. They are published on /packages and are NOT added to the figure above.
+  var EXTRAS = [
+    ['Plan approval fees', '₹20,000 – ₹80,000'],
+    ['Temporary electricity connection', '₹15,000 – ₹40,000'],
+    ['Permanent BESCOM connection', '₹15,000 – ₹45,000'],
+    ['Borewell', '₹60,000 – ₹1,20,000'],
+    ['Water sump', '₹35,000 – ₹70,000'],
+    ['Compound wall and gate, interiors and furniture, landscaping, land', 'Budgeted separately']
   ];
-  EXTRAS.forEach(function (x) { rows.push(['Additional estimate: ' + x[0], formatINR(x[1]) + ' – ' + formatINR(x[2])]); });
-  rows.push(['Indicative total range', compactINR(lo) + ' – ' + compactINR(hi)]);
-  rows.push(['Not included', 'Compound wall and gate, modular kitchen (included only in Dream Home), interiors and furniture, landscaping, land. GST treatment and design fees are confirmed in your written quote.']);
-  lastCalc.rows = rows;
-  var sb2 = document.getElementById('calc-summary-body');
-  if (sb2) { sb2.innerHTML = ''; rows.forEach(function (r) { var tr = document.createElement('tr'), th = document.createElement('th'), td = document.createElement('td'); th.scope = 'row'; th.textContent = r[0]; td.textContent = r[1]; tr.appendChild(th); tr.appendChild(td); sb2.appendChild(tr); }); }
-  var msg = 'Hi, I used your cost calculator: ' + lastCalc.pkg + ' package, ' + lastCalc.bhk + ', ' + floors + ' floor(s) x ' + area +
-    ' sq ft = ' + totalArea + ' sq ft built-up. Base construction cost ' + formatINR(base) + '; indicative budget range ' + compactINR(lo) + ' to ' + compactINR(hi) +
-    ' including typical additional costs. Please send me a detailed estimate.\n\n' + rows.map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
-  waEl.href = 'https://wa.me/919742801802?text=' + encodeURIComponent(msg);
-}
+  var DISCLAIMER = 'This is an indicative construction cost calculation, not a formal quotation. Actual costs depend on construction specifications, site conditions, selected package and additional requirements.';
 
-// Sends the visitor to the enquiry form with their calculator choices filled in.
-function calcRequestQuote(e) {
-  if (e) e.preventDefault();
-  if (lastCalc) {
-    var msg = document.getElementById('cf-msg'), type = document.getElementById('cf-type'),
-        size = document.getElementById('cf-size'), floors = document.getElementById('cf-floors');
-    if (type) type.value = 'Cost Estimate';
-    if (size && !size.value) size.value = lastCalc.totalArea + ' sq ft built-up';
-    if (floors) floors.value = String(lastCalc.floors);
-    if (msg && !msg.value) msg.value = 'Calculator: ' + lastCalc.pkg + ', ' + lastCalc.bhk + ', ' + lastCalc.floors + ' floor(s) x ' + lastCalc.area +
-      ' sq ft = ' + lastCalc.totalArea + ' sq ft. Base cost ' + formatINR(lastCalc.base) + ', indicative range ' + compactINR(lastCalc.lo) + ' to ' + compactINR(lastCalc.hi) + '.';
-    if (typeof trackEvent === 'function') trackEvent('calculator_completed');
+  function inr(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  var pkgOptions = (C.packages || []).map(function (p, i) {
+    return '<option value="' + p.rate + '" data-name="' + esc(p.name) + '"' + (i === 0 ? ' selected' : '') + '>' + esc(p.name) + ': from ' + inr(p.rate) + ' per sq ft</option>';
+  }).join('');
+
+  root.innerHTML =
+    '<div class="calc-wrapper calc-simple">' +
+      '<div class="calc-header"><h3>Indicative construction cost</h3>' +
+      '<p style="color:rgba(255,255,255,.75);font-size:.9rem;margin-top:.35rem;">Built-up area &times; construction rate. Starting from ' + inr(C.startingRate) + ' per sq ft.</p></div>' +
+      '<div class="calc-body">' +
+        '<div class="calc-grid">' +
+          '<div class="form-group"><label for="hcc-area">Total built-up area, all floors (sq ft)</label>' +
+            '<input type="number" id="hcc-area" value="1200" min="' + MIN_AREA + '" max="' + MAX_AREA + '" step="1" inputmode="numeric" aria-describedby="hcc-help hcc-error">' +
+            '<div class="calc-help" id="hcc-help"><strong>Use built-up area, not plot area.</strong> Plot area is the size of your land (a 30&times;40 ft plot is 1,200 sq ft of plot). Built-up area is the total constructed floor area on every floor, so a two-floor house has more built-up area than the plot footprint.</div></div>' +
+          '<div class="form-group"><label for="hcc-pkg">Construction package</label>' +
+            '<select id="hcc-pkg">' + pkgOptions + '</select>' +
+            '<div class="calc-help">The applicable rate depends on the package and specifications you choose.</div></div>' +
+        '</div>' +
+        '<div id="hcc-error" role="alert" style="display:none;color:#B91C1C;font-size:.9rem;margin-top:.75rem;"></div>' +
+        '<div class="calc-result">' +
+          '<div class="calc-result__main">' +
+            '<div class="calc-result__label">Indicative construction cost</div>' +
+            '<div class="calc-result__amount" id="hcc-amount" aria-live="polite">—</div>' +
+            '<div class="calc-result__range" id="hcc-formula"></div>' +
+          '</div>' +
+          '<div class="calc-actions">' +
+            '<a href="https://wa.me/' + C.whatsappNumber + '" id="hcc-wa" class="btn btn--whatsapp btn--lg" rel="noopener">WhatsApp: House Construction Enquiry</a>' +
+            '<a href="/inspection-policy" class="btn btn--ghost-light btn--md">Read the inspection policy first</a>' +
+          '</div>' +
+        '</div>' +
+        '<p class="calc-disclaimer"><strong>' + esc(DISCLAIMER) + '</strong> Property visits are chargeable and free personalised quotations are not given; see the <a href="/inspection-policy" style="text-decoration:underline;">Property Inspection &amp; Quotation Policy</a>.</p>' +
+        '<details class="calc-extras"><summary>Typical separate costs (not included in the figure above)</summary><ul>' +
+          EXTRAS.map(function (x) { return '<li>' + esc(x[0]) + ': ' + esc(x[1]) + '</li>'; }).join('') +
+        '</ul><p class="fine" style="margin-top:.5rem;">Indicative ranges from our Packages page. GST treatment and design fees are written into the agreement.</p></details>' +
+      '</div>' +
+    '</div>';
+
+  var areaEl = document.getElementById('hcc-area');
+  var pkgEl = document.getElementById('hcc-pkg');
+  var errEl = document.getElementById('hcc-error');
+  var amtEl = document.getElementById('hcc-amount');
+  var formulaEl = document.getElementById('hcc-formula');
+  var waEl = document.getElementById('hcc-wa');
+  var tracked = false;
+
+  function calc() {
+    var raw = areaEl.value.trim();
+    var area = parseFloat(raw);
+    var rate = parseFloat(pkgEl.value);
+    var msg = '';
+    if (raw === '') msg = 'Enter your built-up area to see an indicative cost.';
+    else if (!isFinite(area) || area <= 0) msg = 'Built-up area must be a positive number.';
+    else if (area < MIN_AREA) msg = 'For built-up areas below ' + MIN_AREA + ' sq ft, please describe your requirement in an enquiry.';
+    else if (area > MAX_AREA) msg = 'For built-up areas above ' + MAX_AREA.toLocaleString('en-IN') + ' sq ft, please describe your requirement in an enquiry.';
+    else if (!isFinite(rate)) msg = 'Please choose a package.';
+
+    if (msg) {
+      errEl.textContent = msg; errEl.style.display = 'block';
+      amtEl.textContent = '—'; formulaEl.textContent = '';
+      waEl.href = (window.HC ? HC.waLink('house') : 'https://wa.me/' + C.whatsappNumber);
+      return;
+    }
+    errEl.style.display = 'none';
+    var cost = area * rate;
+    amtEl.textContent = inr(cost);
+    formulaEl.textContent = area.toLocaleString('en-IN') + ' sq ft × ' + inr(rate) + ' per sq ft';
+    var name = pkgEl.options[pkgEl.selectedIndex].getAttribute('data-name');
+    if (window.HC) {
+      waEl.href = HC.waLink('house', {
+        area: area.toLocaleString('en-IN') + ' sq ft built-up',
+        pkg: name,
+        amount: inr(cost) + ' for ' + area.toLocaleString('en-IN') + ' sq ft at ' + inr(rate) + ' per sq ft'
+      });
+    }
+    if (!tracked && typeof trackEvent === 'function') { tracked = true; trackEvent('calculator_completed'); }
   }
-  var f = document.getElementById('cf-name');
-  var wrap = document.getElementById('contactFormWrap') || document.getElementById('contact');
-  if (wrap) wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  if (f) setTimeout(function () { f.focus({ preventScroll: true }); }, 400);
-}
-calcCost();
 
-function calcCopySummary() {
-  var st = document.getElementById('calc-copy-status');
-  if (!lastCalc) { if (st) st.textContent = 'Enter valid details first.'; return; }
-  var text = 'Construction cost estimate (indicative, not a quotation)\n' + lastCalc.rows.map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
-  var done = function (ok) { if (st) st.textContent = ok ? 'Copied.' : 'Could not copy. Select the table and copy it manually.'; };
-  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
-  else done(false);
-}
+  areaEl.addEventListener('input', calc);
+  pkgEl.addEventListener('change', calc);
+  calc();
+})();

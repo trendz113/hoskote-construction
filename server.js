@@ -522,13 +522,32 @@ app.delete('/api/contractors/:id', adminAuth, (req, res) => {
 
 // ══════════════════════════════════════════════ LEADS (quote / site visit requests) ══════════════════════════════════════════════
 
+// Shared spam checks for every public form.
+//  - honeypot: a hidden field real visitors never fill
+//  - time trap: the page sends when it was opened (_t); a form "filled" in under 3 seconds is a bot
+//  - link count: genuine enquiries rarely contain more than one link; promotional spam usually does
+// In every case we answer "success" so bots do not simply retry.
+function looksLikeSpam(body, ...textFields) {
+  if (body.website) return true;
+  const t = Number(body._t);
+  if (t && Date.now() - t < 3000) return true;
+  const urls = textFields.join(' ').match(/https?:\/\/|www\./gi) || [];
+  return urls.length > 2;
+}
+const clip = (v, n) => String(v == null ? '' : v).trim().slice(0, n);
+const isEmail = (v) => /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(String(v || '').trim());
+const GSTIN_RE = /^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/;
+
+const LEAD_TYPES = ['House Construction Enquiry', 'Paid Property Inspection', 'Cost Estimate', 'General Query'];
+
 // ─── API: SUBMIT LEAD (public) ───
+// Customer enquiries only. Contractors and suppliers have their own forms and storage below.
 app.post('/api/leads', formLimiter, (req, res) => {
   const body = req.body || {};
-  const { name, phone, area, size, budget, type, message, floors, contactMethod, startDate } = body;
+  const { name, phone, area, size, budget, message, floors, contactMethod, startDate, propertyType } = body;
+  const type = LEAD_TYPES.includes(body.type) ? body.type : 'House Construction Enquiry';
 
-  // Honeypot: real visitors never fill this hidden field. Pretend success so bots don't retry.
-  if (body.website) return res.json({ success: true });
+  if (looksLikeSpam(body, message, area, size, name)) return res.json({ success: true });
 
   if (!name || !String(name).trim() || !phone) {
     return res.status(400).json({ error: 'Name and phone are required' });
@@ -537,7 +556,25 @@ app.post('/api/leads', formLimiter, (req, res) => {
   if (!cleanedPhone) {
     return res.status(400).json({ error: 'Please enter a valid phone number' });
   }
-  const clip = (v, n) => String(v || '').trim().slice(0, n);
+  if (!clip(area, 120)) {
+    return res.status(400).json({ error: 'Please tell us the location of your plot or property.' });
+  }
+  if (type === 'House Construction Enquiry') {
+    if (clip(message, 1000).length < 15) {
+      return res.status(400).json({ error: 'Please describe your requirements (at least a sentence or two) so we can respond properly.' });
+    }
+    if (!clip(startDate, 40)) {
+      return res.status(400).json({ error: 'Please tell us your expected construction timeline.' });
+    }
+  }
+  if (type === 'Paid Property Inspection') {
+    if (!clip(propertyType, 60)) {
+      return res.status(400).json({ error: 'Please choose the property type.' });
+    }
+    if (body.acknowledged !== true) {
+      return res.status(400).json({ error: 'Please confirm that you have read the inspection policy.' });
+    }
+  }
 
   const list = readLeads();
   const entry = {
@@ -548,7 +585,9 @@ app.post('/api/leads', formLimiter, (req, res) => {
     size: clip(size, 60),
     floors: clip(floors, 20),
     budget: clip(budget, 60),
-    type: clip(type, 60),
+    type,
+    propertyType: clip(propertyType, 60),
+    acknowledgedInspectionPolicy: body.acknowledged === true,
     contactMethod: clip(contactMethod, 20),
     startDate: clip(startDate, 40),
     message: clip(message, 1000),
@@ -591,6 +630,150 @@ app.delete('/api/leads/:id', adminAuth, (req, res) => {
   if (!writeLeads(next)) return res.status(500).json({ error: 'Save failed' });
   res.json({ success: true });
 });
+
+// ══════════════════════════════════════════════════════════════════════════════════════════════
+
+// ══════════════════ CONTRACTOR PARTNERSHIP + SUPPLIER REGISTRATIONS (separate from customer leads) ══════════════════
+
+// Small JSON-file store, same approach as leads and contractor listings.
+function makeStore(fileName) {
+  const file = path.join(DATA_DIR, fileName);
+  return {
+    read() {
+      try {
+        if (!fs.existsSync(file)) return [];
+        const raw = fs.readFileSync(file, 'utf8');
+        return raw.trim() ? JSON.parse(raw) : [];
+      } catch (err) { console.error('Failed to read ' + fileName, err); return []; }
+    },
+    write(list) {
+      try {
+        fs.mkdirSync(path.dirname(file), { recursive: true });
+        const tmp = file + '.tmp';
+        fs.writeFileSync(tmp, JSON.stringify(list, null, 2));
+        fs.renameSync(tmp, file);
+        return true;
+      } catch (err) { console.error('Failed to write ' + fileName, err); return false; }
+    },
+  };
+}
+const partnersStore = makeStore('partners.json');
+const suppliersStore = makeStore('suppliers.json');
+
+const PARTNER_STATUSES = ['new', 'reviewing', 'shortlisted', 'onboarded', 'declined'];
+const SUPPLIER_STATUSES = ['new', 'reviewing', 'shortlisted', 'onboarded', 'declined'];
+const SUPPLIER_MATERIALS = ['Cement', 'TMT steel', 'Plumbing pipes and fittings', 'Electrical materials', 'Gates and fabrication', 'Tiles', 'Paints', 'Doors and windows', 'Sand and aggregates', 'Blocks and construction materials'];
+
+// ─── API: CONTRACTOR PARTNERSHIP APPLICATION (public) ───
+app.post('/api/partners', formLimiter, (req, res) => {
+  const b = req.body || {};
+  if (looksLikeSpam(b, b.experience, b.projectTypes, b.businessName)) return res.json({ success: true });
+
+  const businessName = clip(b.businessName, 120);
+  const contactPerson = clip(b.contactPerson, 80);
+  const phone = cleanPhone(b.phone);
+  const email = clip(b.email, 120);
+  const serviceAreas = clip(b.serviceAreas, 200);
+  const experience = clip(b.experience, 1500);
+  const years = Number(b.yearsExperience);
+
+  if (!businessName || !contactPerson) return res.status(400).json({ error: 'Please enter your business name and your name.' });
+  if (!phone) return res.status(400).json({ error: 'Please enter a valid phone number.' });
+  if (email && !isEmail(email)) return res.status(400).json({ error: 'That email address does not look right.' });
+  if (!serviceAreas) return res.status(400).json({ error: 'Please tell us the areas where you work.' });
+  if (!Number.isFinite(years) || years < 0 || years > 60) return res.status(400).json({ error: 'Please enter your years of experience as a number.' });
+  if (experience.length < 30) return res.status(400).json({ error: 'Please describe the residential projects you have completed (a few sentences).' });
+  if (b.agreed !== true) return res.status(400).json({ error: 'Please confirm that you have read and accept how the programme works.' });
+
+  const list = partnersStore.read();
+  const entry = {
+    id: 'ptr_' + Date.now() + '_' + crypto.randomBytes(3).toString('hex'),
+    businessName, contactPerson, phone, email, serviceAreas,
+    yearsExperience: years,
+    projectTypes: clip(b.projectTypes, 200),
+    teamSize: clip(b.teamSize, 40),
+    registration: clip(b.registration, 120),   // GST / UDYAM / licence, optional
+    experience,
+    agreedToProcess: true,
+    status: 'new',
+    submittedAt: new Date().toISOString(),
+  };
+  list.push(entry);
+  if (!partnersStore.write(list)) return res.status(500).json({ error: 'Could not save your application. Please try again in a moment.' });
+  res.json({ success: true, id: entry.id });
+});
+
+// ─── API: SUPPLIER REGISTRATION (public) ───
+app.post('/api/suppliers', formLimiter, (req, res) => {
+  const b = req.body || {};
+  if (looksLikeSpam(b, b.catalogue, b.specifications, b.pricing, b.companyName)) return res.json({ success: true });
+
+  const companyName = clip(b.companyName, 120);
+  const contactPerson = clip(b.contactPerson, 80);
+  const phone = cleanPhone(b.phone);
+  const email = clip(b.email, 120);
+  const materials = (Array.isArray(b.materials) ? b.materials : []).filter(m => SUPPLIER_MATERIALS.includes(m));
+  const gstin = clip(b.gstin, 15).toUpperCase();
+  const businessDetails = clip(b.businessDetails, 300);
+  const catalogue = clip(b.catalogue, 600);
+
+  if (!companyName || !contactPerson) return res.status(400).json({ error: 'Please enter your company name and contact person.' });
+  if (!phone) return res.status(400).json({ error: 'Please enter a valid phone number.' });
+  if (!isEmail(email)) return res.status(400).json({ error: 'Please enter a valid email address.' });
+  if (!materials.length) return res.status(400).json({ error: 'Please choose at least one material category.' });
+  if (!gstin && !businessDetails) return res.status(400).json({ error: 'Please give your GST number or other business registration details.' });
+  if (gstin && !GSTIN_RE.test(gstin)) return res.status(400).json({ error: 'That GST number does not look right. It has 15 characters, for example 29ABCDE1234F1Z5.' });
+  if (catalogue.length < 5) return res.status(400).json({ error: 'Please add a link to your product catalogue, or say that you will email it.' });
+  if (!clip(b.pricing, 800)) return res.status(400).json({ error: 'Please share your pricing (or price list details).' });
+  if (!clip(b.moq, 120)) return res.status(400).json({ error: 'Please enter your minimum order quantity.' });
+  if (!clip(b.deliveryLocations, 300)) return res.status(400).json({ error: 'Please tell us the locations you deliver to.' });
+
+  const list = suppliersStore.read();
+  const entry = {
+    id: 'sup_' + Date.now() + '_' + crypto.randomBytes(3).toString('hex'),
+    companyName, contactPerson, phone, email,
+    city: clip(b.city, 80),
+    materials,
+    gstin, businessDetails, catalogue,
+    specifications: clip(b.specifications, 1000),
+    pricing: clip(b.pricing, 800),
+    moq: clip(b.moq, 120),
+    deliveryLocations: clip(b.deliveryLocations, 300),
+    status: 'new',
+    submittedAt: new Date().toISOString(),
+  };
+  list.push(entry);
+  if (!suppliersStore.write(list)) return res.status(500).json({ error: 'Could not save your registration. Please try again in a moment.' });
+  res.json({ success: true, id: entry.id });
+});
+
+// ─── ADMIN: list / update status / delete, for both stores ───
+function registerAdminRoutes(base, store, statuses, editable) {
+  app.get(base, adminAuth, (req, res) => {
+    res.json({ items: store.read().sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt)) });
+  });
+  app.patch(base + '/:id', adminAuth, (req, res) => {
+    const list = store.read();
+    const entry = list.find(x => x.id === req.params.id);
+    if (!entry) return res.status(404).json({ error: 'Not found' });
+    if (req.body.status !== undefined) {
+      if (!statuses.includes(req.body.status)) return res.status(400).json({ error: 'Invalid status' });
+      entry.status = req.body.status;
+    }
+    editable.forEach(k => { if (req.body[k] !== undefined) entry[k] = clip(req.body[k], 1000); });
+    if (!store.write(list)) return res.status(500).json({ error: 'Save failed' });
+    res.json({ success: true, item: entry });
+  });
+  app.delete(base + '/:id', adminAuth, (req, res) => {
+    const list = store.read();
+    const next = list.filter(x => x.id !== req.params.id);
+    if (next.length === list.length) return res.status(404).json({ error: 'Not found' });
+    if (!store.write(next)) return res.status(500).json({ error: 'Save failed' });
+    res.json({ success: true });
+  });
+}
+registerAdminRoutes('/api/partners', partnersStore, PARTNER_STATUSES, ['notes']);
+registerAdminRoutes('/api/suppliers', suppliersStore, SUPPLIER_STATUSES, ['notes']);
 
 // ══════════════════════════════════════════════════════════════════════════════════════════════
 
