@@ -96,3 +96,9 @@ deploy, so without a Volume they are **lost on each redeploy**.
 3. Redeploy. The server logs a warning on startup if `DATA_DIR` is missing.
 
 Also set `ADMIN_PASSWORD` in Variables. The admin area stays locked until it is set.
+
+## New-enquiry alerts and lead pipeline
+Leads move through: new, under-review, qualified, payment-pending, inspection-confirmed, inspection-completed, quotation-sent, contract-awarded, closed (view and edit in /admin).
+An inspection cannot be confirmed until an admin marks the payment "verified" with a UPI/bank reference. The public site never marks a payment as received.
+Optional env vars: `NOTIFY_WEBHOOK_URL` (JSON POST to Slack/Discord/Make/Zapier) and `NTFY_TOPIC` (free ntfy.sh push).
+Fee and rates are edited in `public/assets/site-config.js`.

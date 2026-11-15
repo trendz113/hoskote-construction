@@ -540,6 +540,37 @@ const GSTIN_RE = /^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/;
 
 const LEAD_TYPES = ['House Construction Enquiry', 'Paid Property Inspection', 'Cost Estimate', 'General Query'];
 
+// Pipeline statuses (slug -> label shown in /admin). Older slugs are kept so existing leads still display.
+const LEAD_STATUSES = ['new', 'under-review', 'qualified', 'payment-pending', 'inspection-confirmed', 'inspection-completed', 'quotation-sent', 'contract-awarded', 'closed',
+  'contacted', 'site-visit-booked', 'won', 'lost'];
+// Inspection payment is only ever set to 'verified' by an admin after checking the UPI/bank record. The public site cannot set it.
+const PAYMENT_STATUSES = ['not-requested', 'details-shared', 'awaiting-payment', 'verified', 'not-received'];
+const QUOTATION_STATUSES = ['not-started', 'in-preparation', 'sent', 'accepted', 'declined'];
+const CONTRACT_STATUSES = ['none', 'discussion', 'agreement-sent', 'awarded', 'not-proceeding'];
+const LEAD_STAGES = [
+  'I own a plot and want to start construction',
+  'I have purchased a property and need construction',
+  'I am planning to purchase a plot',
+  'I am evaluating a bank auction property',
+  'I am only exploring construction prices',
+];
+const LEAD_PACKAGES = ['Comfortable', 'Better-Living', 'Dream Home', 'Not sure yet'];
+const OWNERSHIP = ['I own the plot', 'Purchased, registration/khata in progress', 'Planning to purchase', 'Bank auction property', 'Other'];
+
+// Optional new-enquiry alert. Set NOTIFY_WEBHOOK_URL to any endpoint that accepts a JSON POST
+// (Slack/Discord/Make/Zapier) or NTFY_TOPIC for a free ntfy.sh push. Never blocks or fails the form.
+function notifyNewLead(entry) {
+  const text = 'New ' + entry.type + ': ' + entry.name + ', ' + entry.phone + ', ' + (entry.area || 'location not given') + (entry.stage ? ' (' + entry.stage + ')' : '');
+  try {
+    if (process.env.NOTIFY_WEBHOOK_URL) {
+      fetch(process.env.NOTIFY_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text, content: text }) }).catch(() => {});
+    }
+    if (process.env.NTFY_TOPIC) {
+      fetch('https://ntfy.sh/' + encodeURIComponent(process.env.NTFY_TOPIC), { method: 'POST', body: text, headers: { Title: 'HoskoteConstruction enquiry' } }).catch(() => {});
+    }
+  } catch (e) { /* notification is best-effort */ }
+}
+
 // ─── API: SUBMIT LEAD (public) ───
 // Customer enquiries only. Contractors and suppliers have their own forms and storage below.
 app.post('/api/leads', formLimiter, (req, res) => {
@@ -547,7 +578,7 @@ app.post('/api/leads', formLimiter, (req, res) => {
   const { name, phone, area, size, budget, message, floors, contactMethod, startDate, propertyType } = body;
   const type = LEAD_TYPES.includes(body.type) ? body.type : 'House Construction Enquiry';
 
-  if (looksLikeSpam(body, message, area, size, name)) return res.json({ success: true });
+  if (looksLikeSpam(body, message, area, size, name, body.auctionDetails)) return res.json({ success: true });
 
   if (!name || !String(name).trim() || !phone) {
     return res.status(400).json({ error: 'Name and phone are required' });
@@ -556,23 +587,44 @@ app.post('/api/leads', formLimiter, (req, res) => {
   if (!cleanedPhone) {
     return res.status(400).json({ error: 'Please enter a valid phone number' });
   }
+  let cleanedWhatsapp = '';
+  if (clip(body.whatsapp, 20)) {
+    cleanedWhatsapp = cleanPhone(body.whatsapp);
+    if (!cleanedWhatsapp) return res.status(400).json({ error: 'Please enter a valid WhatsApp number, or leave it blank if it is the same as your mobile number.' });
+  }
   if (!clip(area, 120)) {
     return res.status(400).json({ error: 'Please tell us the location of your plot or property.' });
   }
+  const stage = LEAD_STAGES.includes(body.stage) ? body.stage : '';
+  const pkg = LEAD_PACKAGES.includes(body.package) ? body.package : '';
+  const ownership = OWNERSHIP.includes(body.ownership) ? body.ownership : '';
+
   if (type === 'House Construction Enquiry') {
-    if (clip(message, 1000).length < 15) {
-      return res.status(400).json({ error: 'Please describe your requirements (at least a sentence or two) so we can respond properly.' });
-    }
-    if (!clip(startDate, 40)) {
-      return res.status(400).json({ error: 'Please tell us your expected construction timeline.' });
-    }
+    if (!clip(body.plotDimensions, 60)) return res.status(400).json({ error: 'Please enter your plot dimensions, for example 30 x 40 ft.' });
+    if (!ownership) return res.status(400).json({ error: 'Please choose your plot ownership status.' });
+    if (!clip(size, 60)) return res.status(400).json({ error: 'Please enter the approximate construction (built-up) area.' });
+    if (!clip(floors, 20)) return res.status(400).json({ error: 'Please choose the number of floors.' });
+    if (!clip(startDate, 40)) return res.status(400).json({ error: 'Please tell us your expected construction start date.' });
+    if (!pkg) return res.status(400).json({ error: 'Please choose the package you are considering.' });
+    if (!clip(budget, 60)) return res.status(400).json({ error: 'Please enter your approximate budget.' });
+    if (!stage) return res.status(400).json({ error: 'Please tell us what stage you are currently at.' });
+    if (body.consent !== true) return res.status(400).json({ error: 'Please tick the consent box so we can contact you about this enquiry.' });
   }
   if (type === 'Paid Property Inspection') {
     if (!clip(propertyType, 60)) {
       return res.status(400).json({ error: 'Please choose the property type.' });
     }
+    if (clip(body.plotDimensions, 60).length < 1) {
+      return res.status(400).json({ error: 'Please enter the plot or property dimensions or size.' });
+    }
+    if (propertyType === 'Bank auction property' && clip(body.auctionDetails, 1500).length < 15) {
+      return res.status(400).json({ error: 'For a bank auction property, please share the auction notice or property details (bank, reference, address) so our team can review them first.' });
+    }
     if (body.acknowledged !== true) {
       return res.status(400).json({ error: 'Please confirm that you have read the inspection policy.' });
+    }
+    if (body.consent !== true) {
+      return res.status(400).json({ error: 'Please tick the consent box so we can contact you about this request.' });
     }
   }
 
@@ -581,23 +633,41 @@ app.post('/api/leads', formLimiter, (req, res) => {
     id: 'lead_' + Date.now() + '_' + crypto.randomBytes(3).toString('hex'),
     name: clip(name, 80),
     phone: cleanedPhone,
+    whatsapp: cleanedWhatsapp,
     area: clip(area, 120),
+    plotDimensions: clip(body.plotDimensions, 60),
+    ownership,
     size: clip(size, 60),
     floors: clip(floors, 20),
     budget: clip(budget, 60),
+    package: pkg,
+    stage,
     type,
     propertyType: clip(propertyType, 60),
+    auctionDetails: clip(body.auctionDetails, 1500),
     acknowledgedInspectionPolicy: body.acknowledged === true,
+    consentToContact: body.consent === true,
     contactMethod: clip(contactMethod, 20),
     startDate: clip(startDate, 40),
     message: clip(message, 1000),
-    status: 'new',   // new | contacted | site-visit-booked | won | lost
+    status: 'new',
+    // Inspection payment: never marked verified from the public site. Admin sets it after checking the UPI/bank record.
+    inspectionPaymentStatus: 'not-requested',
+    paymentReference: '',
+    paymentVerifiedAt: null,
+    inspectionAppointment: '',
+    quotationStatus: 'not-started',
+    contractStatus: 'none',
+    followUp: '',
+    followUpDate: '',
+    adminNotes: '',
     submittedAt: new Date().toISOString(),
   };
   list.push(entry);
   if (!writeLeads(list)) {
     return res.status(500).json({ error: 'Could not save — please try WhatsApp directly' });
   }
+  notifyNewLead(entry);
   res.json({ success: true, id: entry.id });
 });
 
@@ -613,10 +683,27 @@ app.patch('/api/leads/:id', adminAuth, (req, res) => {
   const entry = list.find(l => l.id === req.params.id);
   if (!entry) return res.status(404).json({ error: 'Lead not found' });
 
-  const allowed = ['name', 'phone', 'area', 'size', 'floors', 'budget', 'type', 'contactMethod', 'startDate', 'message', 'status'];
-  allowed.forEach(key => {
-    if (req.body[key] !== undefined) entry[key] = req.body[key];
-  });
+  const b = req.body || {};
+  const text = ['name', 'phone', 'area', 'size', 'floors', 'budget', 'type', 'contactMethod', 'startDate', 'message',
+    'paymentReference', 'inspectionAppointment', 'followUp', 'followUpDate', 'adminNotes'];
+  text.forEach(key => { if (b[key] !== undefined) entry[key] = clip(b[key], key === 'adminNotes' || key === 'message' ? 1500 : 200); });
+
+  const enums = [['status', LEAD_STATUSES], ['inspectionPaymentStatus', PAYMENT_STATUSES], ['quotationStatus', QUOTATION_STATUSES], ['contractStatus', CONTRACT_STATUSES]];
+  for (const [key, allowed] of enums) {
+    if (b[key] === undefined) continue;
+    if (!allowed.includes(b[key])) return res.status(400).json({ error: 'Invalid ' + key });
+    entry[key] = b[key];
+  }
+  // Payment must be verified by a person: needs a reference, and a visit cannot be confirmed without it.
+  if (b.inspectionPaymentStatus === 'verified') {
+    if (!clip(entry.paymentReference, 200)) return res.status(400).json({ error: 'Enter the UPI/bank reference you checked before marking payment verified.' });
+    entry.paymentVerifiedAt = new Date().toISOString();
+  } else if (b.inspectionPaymentStatus !== undefined) {
+    entry.paymentVerifiedAt = null;
+  }
+  if (b.status !== undefined && ['inspection-confirmed', 'inspection-completed', 'site-visit-booked'].includes(entry.status) && entry.type === 'Paid Property Inspection' && entry.inspectionPaymentStatus !== 'verified') {
+    return res.status(400).json({ error: 'Cannot confirm an inspection until the ₹1,000 payment is marked verified.' });
+  }
 
   if (!writeLeads(list)) return res.status(500).json({ error: 'Save failed' });
   res.json({ success: true, lead: entry });

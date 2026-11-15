@@ -59,3 +59,18 @@ The six testimonials on the old homepage were removed from the live site and par
 - [ ] "Draft for review" banners were removed from /privacy and /terms as requested. Please still have a lawyer review both before relying on them.
 - [ ] GST FAQ (Q6) says 5% without ITC for combined land+building contracts above ₹7.5 lakh and 18% for pure construction. This is a tax statement written by you; have your CA confirm it.
 - [ ] Server now redirects plain-HTTP requests to HTTPS when Railway's proxy reports HTTP. Check the site still opens on your custom domain after deploying.
+
+
+## 9. Added in master brief v2 (15 Nov 2026): please confirm
+- [ ] **Non-refundable fee** wording (₹1,000 not refundable if the customer does not proceed, "subject to applicable law") is on /inspection-policy, /book-inspection, /refund-cancellation, /terms, FAQ and forms. Have a lawyer confirm it.
+- [ ] **Cancellation / rescheduling terms** were not supplied. /refund-cancellation only says they are confirmed in writing when the appointment is fixed. Send your real terms (e.g. reschedule limits, what happens if we cancel).
+- [ ] **Payment collection.** The site takes no payment. After reviewing an enquiry you share the PhonePe/UPI details yourself, then mark the lead "Verified" in /admin (a UPI reference is mandatory) before confirming a visit. Confirm this is how you want to work, or tell me to add a payment gateway (not done, per your instruction).
+- [ ] **Claims I removed from About Us** (saved in `owner-review/about-original-removed.html`): "GST Registered", "active in Hoskote for years", "rebuilt homes for families cheated elsewhere", and the "Our Promise to You" list. Re-add only what is true. FAQ Q13 still says "GST registration"; please confirm or tell me to remove.
+- [ ] **Warranty (1 year, 7-working-day response)** is still on /packages and FAQ, from your earlier answers. The brief says not to make unverified warranty claims, so confirm it or I will remove it.
+- [ ] **Dream Home** doors/windows and painting are "not itemised" on /packages. Send the specifications.
+- [ ] Package taxes: the comparison table now says GST treatment is "confirmed in your written quotation". State the actual GST treatment when you decide.
+- [ ] **Testimonials:** none shown. A commented placeholder sits in the homepage source. Send real reviews with permission.
+- [ ] **Construction progress photos** (foundation, structure, brickwork, finishing): none exist on the site. Send some and I will add a stages gallery.
+- [ ] Notifications: set `NOTIFY_WEBHOOK_URL` (Slack/Discord/Make) or `NTFY_TOPIC` (ntfy.sh app on your phone) in Railway to get an alert for every new enquiry. Not set, no alert is sent.
+- [ ] "How It Works" in the menu points to the existing /construction-process page. Check that its six steps match your inspection flow.
+- [ ] Legal pages (Privacy, Terms, Refund) contain no draft markers now but still need a lawyer's review before you rely on them.

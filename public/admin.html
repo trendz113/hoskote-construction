@@ -87,6 +87,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
 .status-badge.reviewing{background:#78350f22;color:#fbbf24;}
 .status-badge.shortlisted{background:#581c8722;color:#c084fc;}
 .status-badge.onboarded{background:#14532d22;color:#4ade80;}
+.status-badge.under-review,.status-badge.payment-pending,.status-badge.quotation-sent{background:#78350f22;color:#fbbf24;}
+.status-badge.qualified,.status-badge.inspection-confirmed{background:#581c8722;color:#c084fc;}
+.status-badge.inspection-completed,.status-badge.contract-awarded{background:#14532d22;color:#4ade80;}
+.status-badge.closed{background:#7f1d1d22;color:#f87171;}
 .status-badge.declined{background:#7f1d1d22;color:#f87171;}
 .ctr-photos{display:flex;gap:6px;margin:10px 0;}
 .ctr-photos img{width:72px;height:54px;object-fit:cover;border-radius:6px;}
@@ -239,12 +243,16 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#B5562C;}
     <!-- LEADS TAB -->
     <div id="tabLeads" style="display:none;">
       <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
-        <div class="tab lead-filter active" onclick="filterLeads('new')" style="background:#1a1a1a;border:1px solid #2a2a2a;">New</div>
-        <div class="tab lead-filter" onclick="filterLeads('contacted')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Contacted</div>
-        <div class="tab lead-filter" onclick="filterLeads('site-visit-booked')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Site Visit Booked</div>
-        <div class="tab lead-filter" onclick="filterLeads('won')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Won</div>
-        <div class="tab lead-filter" onclick="filterLeads('lost')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Lost</div>
-        <div class="tab lead-filter" onclick="filterLeads('all')" style="background:#1a1a1a;border:1px solid #2a2a2a;">All</div>
+        <div class="tab lead-filter active" onclick="filterLeads('new')" style="background:#1a1a1a;border:1px solid #2a2a2a;">New Enquiry</div>
+        <div class="tab lead-filter" onclick="filterLeads('under-review')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Under Review</div>
+        <div class="tab lead-filter" onclick="filterLeads('qualified')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Qualified</div>
+        <div class="tab lead-filter" onclick="filterLeads('payment-pending')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Payment Pending</div>
+        <div class="tab lead-filter" onclick="filterLeads('inspection-confirmed')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Inspection Confirmed</div>
+        <div class="tab lead-filter" onclick="filterLeads('inspection-completed')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Inspection Completed</div>
+        <div class="tab lead-filter" onclick="filterLeads('quotation-sent')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Quotation Sent</div>
+        <div class="tab lead-filter" onclick="filterLeads('contract-awarded')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Contract Awarded</div>
+        <div class="tab lead-filter" onclick="filterLeads('closed')" style="background:#1a1a1a;border:1px solid #2a2a2a;">Closed</div>
+        <div class="tab lead-filter" onclick="filterLeads('all')" style="background:#1a1a1a;border:1px solid #2a2a2a;">All (incl. old statuses)</div>
       </div>
       <div class="projects-list" id="leadsList">
         <div style="text-align:center;padding:40px;color:#555;">Loading leads...</div>
@@ -599,14 +607,22 @@ function showMsg(el, text, type) {
 // ─── LEADS ───
 // Everything submitted through public forms is untrusted: escape before putting it into HTML.
 function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
-const LEAD_STATUS_LABELS = { new: 'new', contacted: 'contacted', 'site-visit-booked': 'site visit booked', won: 'won', lost: 'lost' };
+const LEAD_STATUS_LABELS = { new: 'NEW ENQUIRY', 'under-review': 'UNDER REVIEW', qualified: 'QUALIFIED', 'payment-pending': 'PAYMENT PENDING', 'inspection-confirmed': 'INSPECTION CONFIRMED', 'inspection-completed': 'INSPECTION COMPLETED', 'quotation-sent': 'QUOTATION SENT', 'contract-awarded': 'CONTRACT AWARDED', closed: 'CLOSED / NOT PROCEEDING', contacted: 'contacted (old)', 'site-visit-booked': 'site visit booked (old)', won: 'won (old)', lost: 'lost (old)' };
+const PAY_LABELS = { 'not-requested': 'Not requested', 'details-shared': 'Payment details shared', 'awaiting-payment': 'Awaiting payment', verified: 'VERIFIED by us', 'not-received': 'Not received' };
+const QUOTE_LABELS = { 'not-started': 'Not started', 'in-preparation': 'In preparation', sent: 'Sent', accepted: 'Accepted', declined: 'Declined' };
+const CONTRACT_LABELS = { none: 'None', discussion: 'In discussion', 'agreement-sent': 'Agreement sent', awarded: 'Awarded', 'not-proceeding': 'Not proceeding' };
+function opts(map, cur) { return Object.keys(map).map(k => `<option value="${k}" ${k === cur ? 'selected' : ''}>${map[k]}</option>`).join(''); }
+function saveLeadFields(id) {
+  const g = n => document.getElementById(n + '_' + id).value;
+  updateLead(id, { status: g('st'), inspectionPaymentStatus: g('pay'), paymentReference: g('ref'), inspectionAppointment: g('apt'), quotationStatus: g('quo'), contractStatus: g('con'), followUp: g('fu'), followUpDate: g('fud'), adminNotes: g('nt') });
+}
 
 async function loadLeads() {
   try {
     const res = await fetch('/api/leads', { headers: { 'x-admin-password': adminPassword } });
     const data = await res.json();
     leadsData = data.leads || [];
-    const newCount = leadsData.filter(l => l.status === 'new').length;
+    const newCount = leadsData.filter(l => l.status === 'new').length; // NEW ENQUIRY
     const badge = document.getElementById('newLeadsBadge');
     if (newCount > 0) { badge.textContent = newCount; badge.style.display = 'inline-block'; }
     else { badge.style.display = 'none'; }
@@ -643,20 +659,35 @@ function renderLeadsList() {
       </div>
       <div class="project-body" id="body_lead_${l.id}">
         ${l.propertyType ? `<div class="ctr-detail-row"><strong>Property type</strong> ${esc(l.propertyType)}</div>` : ''}
-        <div class="ctr-detail-row"><strong>Plot Size</strong> ${esc(l.size || '—')}</div>
+        ${l.stage ? `<div class="ctr-detail-row"><strong>Stage</strong> ${esc(l.stage)}</div>` : ''}
+        ${l.whatsapp ? `<div class="ctr-detail-row"><strong>WhatsApp</strong> ${esc(l.whatsapp)}</div>` : ''}
+        ${l.plotDimensions ? `<div class="ctr-detail-row"><strong>Plot dimensions</strong> ${esc(l.plotDimensions)}</div>` : ''}
+        ${l.ownership ? `<div class="ctr-detail-row"><strong>Ownership</strong> ${esc(l.ownership)}</div>` : ''}
+        ${l.package ? `<div class="ctr-detail-row"><strong>Package</strong> ${esc(l.package)}</div>` : ''}
+        ${l.auctionDetails ? `<div class="ctr-detail-row"><strong>Auction details</strong> ${esc(l.auctionDetails)}</div>` : ''}
+        <div class="ctr-detail-row"><strong>Size / built-up</strong> ${esc(l.size || '—')}</div>
         <div class="ctr-detail-row"><strong>Floors</strong> ${esc(l.floors || '—')}</div>
         <div class="ctr-detail-row"><strong>Timeline / dates</strong> ${esc(l.startDate || '—')}</div>
         <div class="ctr-detail-row"><strong>Budget</strong> ${esc(l.budget || '—')}</div>
-        <div class="ctr-detail-row"><strong>Policy read</strong> ${l.acknowledgedInspectionPolicy ? 'Yes' : '—'}</div>
+        <div class="ctr-detail-row"><strong>Policy read / consent</strong> ${l.acknowledgedInspectionPolicy ? 'Policy: yes' : 'Policy: —'} · ${l.consentToContact ? 'Consent: yes' : 'Consent: —'}</div>
         <div class="ctr-detail-row"><strong>Message</strong> ${esc(l.message || '—')}</div>
+        <div class="ctr-detail-row"><strong>Inspection payment</strong> ${esc(PAY_LABELS[l.inspectionPaymentStatus] || 'Not requested')}${l.paymentVerifiedAt ? ' on ' + new Date(l.paymentVerifiedAt).toLocaleString('en-IN') : ''}</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin:10px 0;">
+          <label>Status<select id="st_${esc(l.id)}">${opts(LEAD_STATUS_LABELS, l.status)}</select></label>
+          <label>Inspection payment (set Verified only after checking UPI/bank)<select id="pay_${esc(l.id)}">${opts(PAY_LABELS, l.inspectionPaymentStatus || 'not-requested')}</select></label>
+          <label>Payment reference (UPI/bank ref checked)<input id="ref_${esc(l.id)}" value="${esc(l.paymentReference || '')}"></label>
+          <label>Inspection appointment<input id="apt_${esc(l.id)}" value="${esc(l.inspectionAppointment || '')}" placeholder="e.g. 20 Nov, 11 AM"></label>
+          <label>Quotation<select id="quo_${esc(l.id)}">${opts(QUOTE_LABELS, l.quotationStatus || 'not-started')}</select></label>
+          <label>Contract<select id="con_${esc(l.id)}">${opts(CONTRACT_LABELS, l.contractStatus || 'none')}</select></label>
+          <label>Follow-up<input id="fu_${esc(l.id)}" value="${esc(l.followUp || '')}"></label>
+          <label>Follow-up date<input id="fud_${esc(l.id)}" type="date" value="${esc(l.followUpDate || '')}"></label>
+          <label style="grid-column:1/-1;">Notes<textarea id="nt_${esc(l.id)}" rows="2">${esc(l.adminNotes || '')}</textarea></label>
+        </div>
 
         <div class="ctr-actions">
+          <button class="btn btn-primary" onclick="saveLeadFields('${esc(l.id)}')">Save lead</button>
           <a class="btn btn-secondary" href="https://wa.me/91${l.phone.replace(/\D/g,'').slice(-10)}" target="_blank" rel="noopener">📱 WhatsApp</a>
           <a class="btn btn-secondary" href="tel:+91${l.phone.replace(/\D/g,'').slice(-10)}">📞 Call</a>
-          ${l.status !== 'contacted' ? `<button class="btn btn-secondary" onclick="updateLead('${l.id}', {status:'contacted'})">Mark Contacted</button>` : ''}
-          ${l.status !== 'site-visit-booked' ? `<button class="btn btn-secondary" onclick="updateLead('${l.id}', {status:'site-visit-booked'})">Site Visit Booked</button>` : ''}
-          ${l.status !== 'won' ? `<button class="btn btn-primary" onclick="updateLead('${l.id}', {status:'won'})">✓ Won</button>` : ''}
-          ${l.status !== 'lost' ? `<button class="btn btn-danger" onclick="updateLead('${l.id}', {status:'lost'})">✕ Lost</button>` : ''}
           <button class="btn btn-danger" onclick="deleteLead('${l.id}')">🗑️ Delete</button>
         </div>
       </div>

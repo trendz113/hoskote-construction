@@ -381,3 +381,10 @@ body { background: #fff; color: #1C1917; }
 .trust-cards.trust-cards--3 { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 980px) { .trust-cards.trust-cards--3 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .trust-cards.trust-cards--3 { grid-template-columns: 1fr; } }
+
+/* Seven main menu items plus Resources: keep the header on one line on laptop widths */
+.nav__link--minor { color: var(--stone-500); }
+@media (min-width: 1181px) and (max-width: 1439px) {
+  .nav__cta { display: none; }
+  .nav__link { padding: .5rem .5rem; font-size: .84rem; }
+}
