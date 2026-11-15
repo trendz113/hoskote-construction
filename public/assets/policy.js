@@ -39,7 +39,7 @@
     },
     inspection: function () {
       return [
-        'Hello Hoskote Construction, I would like to book a paid property inspection (' + feeText + ', payable in advance).',
+        'Hello Hoskote Construction, I would like to book a property inspection (' + feeText + ', payable in advance).',
         '',
         'Property type (vacant plot / purchased property / bank auction property / other):',
         'Location:',
