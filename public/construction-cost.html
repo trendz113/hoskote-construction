@@ -100,7 +100,7 @@
   <div class="two-col" style="align-items:start;">
     <div>
       <h2>Planning to build?</h2>
-      <p style="color:var(--stone-700);line-height:1.7;">Tell us about your plot, your requirements and your timeline. Property visits are chargeable (<span data-cfg="fee">₹1,000</span> paid in advance, adjusted in full if you build with us), and free personalised quotations are not given.</p>
+      <p style="color:var(--stone-700);line-height:1.7;">Tell us about your plot, your requirements and your timeline.</p>
       <div style="display:flex;flex-direction:column;gap:.7rem;max-width:340px;margin-top:1.25rem;">
         <a data-wa="house" href="https://wa.me/919742801802" class="btn btn--whatsapp btn--lg" rel="noopener"><svg class="ic ic--fill " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.5A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.2 15l-.3-.18-3.1.9.9-3-.2-.3A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-.95.93-.95 2.27s.97 2.63 1.1 2.8c.14.2 1.9 3 4.7 4.08 2.3.9 2.77.72 3.27.67.5-.04 1.6-.65 1.83-1.28.22-.63.22-1.17.15-1.28-.07-.12-.25-.2-.52-.33-.27-.14-1.6-.8-1.85-.9-.25-.08-.43-.13-.6.14-.18.27-.7.9-.85 1.08-.16.18-.32.2-.6.07-.27-.14-1.14-.42-2.17-1.34-.8-.72-1.34-1.6-1.5-1.87-.15-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.1-.18.05-.34-.02-.48-.07-.14-.6-1.5-.85-2.05-.2-.5-.42-.5-.6-.5z"/></svg> WhatsApp: House Construction Enquiry</a>
         <a data-wa="inspection" href="https://wa.me/919742801802" class="btn btn--secondary btn--lg" rel="noopener"> WhatsApp: Paid Property Inspection</a>
@@ -112,7 +112,7 @@
   <h3>Tell us about your project</h3>
   <p class="fine" style="margin:-.25rem 0 1rem;">House construction enquiries only. For a property inspection, use the inspection request form or WhatsApp option B.</p>
   <div class="form-error" role="alert"></div>
-  <div class="form-success" role="status" aria-live="polite"><strong>Thank you, your enquiry has been received.</strong><p style="font-size:.9rem;margin:.35rem 0 0;color:var(--stone-700);">We will review your requirements and contact you on working days. Property visits are chargeable and are scheduled after the inspection fee is paid; we will explain the next step when we reply.</p></div>
+  <div class="form-success" role="status" aria-live="polite"><strong>Thank you, your enquiry has been received.</strong><p style="font-size:.9rem;margin:.35rem 0 0;color:var(--stone-700);">We will review your requirements and contact you on working days. We will explain the next step when we reply.</p></div>
   <form data-hc-form data-endpoint="/api/leads" data-wa-fallback="house" data-track="estimate_form_submitted" novalidate>
     <input type="hidden" name="type" value="House Construction Enquiry">
     <div class="form-row">
@@ -126,7 +126,6 @@
       <div class="form-group form-group--full"><label for="cc-msg">Your requirements *</label><textarea id="cc-msg" name="message" maxlength="1000" data-minlen="15" data-msg="Please describe your requirements in a sentence or two (for example the number of bedrooms, floors and any special needs)." placeholder="Number of bedrooms, floors, package you are considering, anything special you need" required></textarea></div>
     </div>
     <div style="position:absolute;left:-9999px;" aria-hidden="true"><label for="cc-website">Website</label><input type="text" id="cc-website" name="website" tabindex="-1" autocomplete="off"></div>
-    <label class="check-row"><input type="checkbox" name="acknowledged" required data-msg="Please confirm that you understand the property visit policy."><span>I understand that property visits are chargeable (<span data-cfg="fee">₹1,000</span>, paid in advance, adjusted in full if I build with Hoskote Construction) and that free personalised quotations are not given. <a href="/inspection-policy" style="text-decoration:underline;">Read the policy</a></span></label>
     <p class="fine" style="margin:.9rem 0 0;">We use your details only to respond to this enquiry. We do not sell or publish them.</p>
     <button type="submit" class="btn btn--primary btn--lg" style="width:100%;justify-content:center;margin-top:1rem;">Send House Construction Enquiry</button>
   </form>

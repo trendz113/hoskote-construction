@@ -35,7 +35,6 @@
         lines.push('(Website calculator figure: ' + o.amount + '. I understand this is indicative only, not a quotation.)');
       }
       lines.push('');
-      lines.push('I understand that property visits are chargeable (' + feeText + ', paid in advance, adjusted in full against the construction package if I build with you) and that free quotations are not given.');
       return lines.join('\n');
     },
     inspection: function () {
@@ -108,26 +107,8 @@
     });
   }
 
-  /* ---------- slim policy notice under the header ---------- */
-  function addPolicyBar() {
-    if (document.querySelector('.hc-policybar') || document.body.hasAttribute('data-no-policybar')) return;
-    var style = document.createElement('style');
-    style.textContent =
-      '.hc-policybar{background:#F7EAE4;color:#5a2713;border-bottom:1px solid #e8cfc4;font:500 .8rem/1.45 Inter,system-ui,sans-serif;padding:.5rem 1rem;text-align:center}' +
-      '.hc-policybar a{color:#8A3B20;font-weight:700;text-decoration:underline;white-space:nowrap}' +
-      '@media(max-width:600px){.hc-policybar{font-size:.76rem;padding:.45rem .75rem;text-align:left}}';
-    document.head.appendChild(style);
-    var bar = document.createElement('div');
-    bar.className = 'hc-policybar';
-    bar.setAttribute('role', 'note');
-    bar.innerHTML = 'Property visits are chargeable: ' + feeText + ' paid in advance, adjusted in full if you build with us. <a href="/inspection-policy">Read the policy</a>';
-    var nav = document.querySelector('nav');
-    if (nav && nav.parentNode) nav.parentNode.insertBefore(bar, nav.nextSibling);
-    else document.body.insertBefore(bar, document.body.firstChild);
-  }
-
   window.HC = { inr: inr, waLink: waLink, feeText: feeText, feeKnown: feeKnown, config: C };
 
-  function init() { fillConfig(); addPolicyBar(); }
+  function init() { fillConfig(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

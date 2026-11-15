@@ -54,7 +54,7 @@
             '<a href="/inspection-policy" class="btn btn--ghost-light btn--md">Read the inspection policy first</a>' +
           '</div>' +
         '</div>' +
-        '<p class="calc-disclaimer"><strong>' + esc(DISCLAIMER) + '</strong> Property visits are chargeable and free personalised quotations are not given; see the <a href="/inspection-policy" style="text-decoration:underline;">Property Inspection &amp; Quotation Policy</a>.</p>' +
+        '<p class="calc-disclaimer"><strong>' + esc(DISCLAIMER) + '</strong> For a quotation specific to your property, see <a href="/inspection-policy" style="text-decoration:underline;">how inspections and quotations work</a>.</p>' +
         '<details class="calc-extras"><summary>Typical separate costs (not included in the figure above)</summary><ul>' +
           EXTRAS.map(function (x) { return '<li>' + esc(x[0]) + ': ' + esc(x[1]) + '</li>'; }).join('') +
         '</ul><p class="fine" style="margin-top:.5rem;">Indicative ranges from our Packages page. GST treatment and design fees are written into the agreement.</p></details>' +
