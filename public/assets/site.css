@@ -259,7 +259,7 @@ h4 { font-size: 1.15rem; font-family: var(--font-body); font-weight: 600; }
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: start; }
 .pricing-card { background: white; border: 2px solid var(--stone-200); border-radius: var(--radius-lg); padding: 2rem; transition: all .2s; }
 .pricing-card--popular { border-color: var(--indigo-600); box-shadow: 0 0 0 4px var(--indigo-100); position: relative; }
-.pricing-card--popular::before { content: 'Most Chosen'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--indigo-600); color: white; font-size: .7rem; font-weight: 700; padding: .3rem .875rem; border-radius: 4px; font-family: var(--font-mono); white-space: nowrap; }
+.pricing-card--popular::before { content: ''; display: none; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--indigo-600); color: white; font-size: .7rem; font-weight: 700; padding: .3rem .875rem; border-radius: 4px; font-family: var(--font-mono); white-space: nowrap; }
 .pricing-card__name { font-weight: 700; font-size: 1.1rem; margin-bottom: .5rem; }
 .pricing-card__price { font-family: var(--font-display); font-size: 2rem; color: var(--indigo-900); line-height: 1; margin-bottom: .25rem; }
 .pricing-card__unit { font-size: .8rem; color: var(--stone-500); margin-bottom: 1.25rem; }
