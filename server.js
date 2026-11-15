@@ -702,7 +702,7 @@ app.patch('/api/leads/:id', adminAuth, (req, res) => {
     entry.paymentVerifiedAt = null;
   }
   if (b.status !== undefined && ['inspection-confirmed', 'inspection-completed', 'site-visit-booked'].includes(entry.status) && entry.type === 'Paid Property Inspection' && entry.inspectionPaymentStatus !== 'verified') {
-    return res.status(400).json({ error: 'Cannot confirm an inspection until the ₹1,000 payment is marked verified.' });
+    return res.status(400).json({ error: 'Cannot confirm an inspection until the inspection payment is marked verified.' });
   }
 
   if (!writeLeads(list)) return res.status(500).json({ error: 'Save failed' });

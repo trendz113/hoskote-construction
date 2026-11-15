@@ -14,7 +14,7 @@
   function inr(n) { return '₹' + Number(n).toLocaleString('en-IN'); }
   var feeKnown = C.inspection && typeof C.inspection.fee === 'number' && C.inspection.fee > 0;
   var feeText = feeKnown ? inr(C.inspection.fee) : 'a fee that is confirmed before booking';
-  var feeShort = feeKnown ? inr(C.inspection.fee) : 'chargeable';
+  var feeShort = feeKnown ? inr(C.inspection.fee) : 'a fee confirmed before booking';
 
   /* ---------- WhatsApp message templates (one per enquiry type) ---------- */
   var T = {
@@ -39,7 +39,7 @@
     },
     inspection: function () {
       return [
-        'Hello Hoskote Construction, I would like to book a property inspection (' + feeText + ', payable in advance).',
+        'Hello Hoskote Construction, I would like to book a property inspection.',
         '',
         'Property type (vacant plot / purchased property / bank auction property / other):',
         'Location:',
