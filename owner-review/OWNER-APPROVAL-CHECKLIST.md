@@ -74,3 +74,7 @@ The six testimonials on the old homepage were removed from the live site and par
 - [ ] Notifications: set `NOTIFY_WEBHOOK_URL` (Slack/Discord/Make) or `NTFY_TOPIC` (ntfy.sh app on your phone) in Railway to get an alert for every new enquiry. Not set, no alert is sent.
 - [ ] "How It Works" in the menu points to the existing /construction-process page. Check that its six steps match your inspection flow.
 - [ ] Legal pages (Privacy, Terms, Refund) contain no draft markers now but still need a lawyer's review before you rely on them.
+
+## 10. Inspection fee no longer shown on the website (15 Nov 2026, your instruction)
+- [ ] The website shows no inspection fee, amount or "paid in advance" wording. Pages say only that inspection terms, including any charges, adjustment and cancellation terms, are shared in writing before an appointment is confirmed. **You must tell each customer the fee and the non-refundable / adjustment terms in writing (WhatsApp or message) before taking payment**, and keep that message as your record.
+- [ ] Lead admin still blocks confirming an inspection until you mark the payment verified with a UPI reference.

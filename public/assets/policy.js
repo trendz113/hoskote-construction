@@ -46,7 +46,7 @@
         'Approximate size:',
         'Preferred visit dates:',
         '',
-        'I understand that the visit is scheduled only after my payment is verified, that the fee is adjusted against the construction package if I build with you and is not refundable if I do not proceed, and that a physical inspection is not legal title verification, auction valuation, soil testing or a structural safety certificate. Please review my details and share the payment details.'
+        'I understand that the visit is scheduled only after the inspection terms are agreed with me, and that a physical inspection is not legal title verification, auction valuation, soil testing or a structural safety certificate. Please review my details and explain the inspection terms.'
       ].join('\n');
     },
     contractor: function () {
