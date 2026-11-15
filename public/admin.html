@@ -612,9 +612,16 @@ const PAY_LABELS = { 'not-requested': 'Not requested', 'details-shared': 'Paymen
 const QUOTE_LABELS = { 'not-started': 'Not started', 'in-preparation': 'In preparation', sent: 'Sent', accepted: 'Accepted', declined: 'Declined' };
 const CONTRACT_LABELS = { none: 'None', discussion: 'In discussion', 'agreement-sent': 'Agreement sent', awarded: 'Awarded', 'not-proceeding': 'Not proceeding' };
 function opts(map, cur) { return Object.keys(map).map(k => `<option value="${k}" ${k === cur ? 'selected' : ''}>${map[k]}</option>`).join(''); }
+const COMM_LABELS = { none: 'Not applicable', expected: 'Expected', 'partly-received': 'Partly received', received: 'Received' };
+function marginText(l) {
+  const area = parseFloat(String(l.builtUpArea || '').replace(/[^0-9.]/g, '')), c = parseFloat(String(l.customerRate || '').replace(/[^0-9.]/g, '')), k = parseFloat(String(l.contractorRate || '').replace(/[^0-9.]/g, ''));
+  if (!area || !c || !k) return 'Enter area, customer rate and contractor rate to see the margin.';
+  const per = c - k, tot = per * area;
+  return 'Margin ₹' + per.toLocaleString('en-IN') + '/sq ft, about ₹' + Math.round(tot).toLocaleString('en-IN') + ' on ' + area.toLocaleString('en-IN') + ' sq ft (' + (c ? Math.round(per / c * 100) : 0) + '% of customer rate)';
+}
 function saveLeadFields(id) {
   const g = n => document.getElementById(n + '_' + id).value;
-  updateLead(id, { status: g('st'), inspectionPaymentStatus: g('pay'), paymentReference: g('ref'), inspectionAppointment: g('apt'), quotationStatus: g('quo'), contractStatus: g('con'), followUp: g('fu'), followUpDate: g('fud'), adminNotes: g('nt') });
+  updateLead(id, { status: g('st'), inspectionPaymentStatus: g('pay'), paymentReference: g('ref'), inspectionAppointment: g('apt'), quotationStatus: g('quo'), contractStatus: g('con'), followUp: g('fu'), followUpDate: g('fud'), adminNotes: g('nt'), assignedContractor: g('ac'), builtUpArea: g('ba'), customerRate: g('cr'), contractorRate: g('kr'), commissionStatus: g('cs') });
 }
 
 async function loadLeads() {
@@ -681,6 +688,12 @@ function renderLeadsList() {
           <label>Contract<select id="con_${esc(l.id)}">${opts(CONTRACT_LABELS, l.contractStatus || 'none')}</select></label>
           <label>Follow-up<input id="fu_${esc(l.id)}" value="${esc(l.followUp || '')}"></label>
           <label>Follow-up date<input id="fud_${esc(l.id)}" type="date" value="${esc(l.followUpDate || '')}"></label>
+          <div style="grid-column:1/-1;border-top:1px solid #2a2a2a;padding-top:8px;"><strong>Partner contractor (outside Hoskote) and commission</strong><div style="font-size:.8rem;color:#aaa;">${esc(marginText(l))}</div></div>
+          <label>Assigned contractor<input id="ac_${esc(l.id)}" value="${esc(l.assignedContractor || '')}" placeholder="Name and phone"></label>
+          <label>Built-up area (sq ft)<input id="ba_${esc(l.id)}" value="${esc(l.builtUpArea || '')}"></label>
+          <label>Customer rate (₹/sq ft)<input id="cr_${esc(l.id)}" value="${esc(l.customerRate || '')}"></label>
+          <label>Contractor rate (₹/sq ft)<input id="kr_${esc(l.id)}" value="${esc(l.contractorRate || '')}"></label>
+          <label>Commission status<select id="cs_${esc(l.id)}">${opts(COMM_LABELS, l.commissionStatus || 'none')}</select></label>
           <label style="grid-column:1/-1;">Notes<textarea id="nt_${esc(l.id)}" rows="2">${esc(l.adminNotes || '')}</textarea></label>
         </div>
 

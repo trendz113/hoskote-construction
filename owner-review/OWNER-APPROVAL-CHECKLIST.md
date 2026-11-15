@@ -78,3 +78,8 @@ The six testimonials on the old homepage were removed from the live site and par
 ## 10. Inspection fee no longer shown on the website (15 Nov 2026, your instruction)
 - [ ] The website shows no inspection fee, amount or "paid in advance" wording. Pages say only that inspection terms, including any charges, adjustment and cancellation terms, are shared in writing before an appointment is confirmed. **You must tell each customer the fee and the non-refundable / adjustment terms in writing (WhatsApp or message) before taking payment**, and keep that message as your record.
 - [ ] Lead admin still blocks confirming an inspection until you mark the payment verified with a UPI reference.
+
+## 11. Partner contractors outside Hoskote (15 Nov 2026)
+- [ ] Public pages (/service-areas, FAQ, /contractor-partnership) say that plots outside core Hoskote, such as Varthur, are taken case by case through partner contractors, with the agreement, stage-wise payments and updates staying with Hoskote Construction. No commission or rate is published. Confirm the wording and add other locations when you are ready.
+- [ ] Admin (/admin, lead detail) has a private "Partner contractor and commission" panel: assigned contractor, built-up area, customer rate, contractor rate, commission status, and an automatic margin calculation.
+- [ ] Before the first project: sign a written back-to-back agreement with the contractor (rate per sq ft, scope, stage payments, quality checks) and a written customer agreement with Hoskote Construction. Have a lawyer review both.

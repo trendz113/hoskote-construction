@@ -546,6 +546,7 @@ const LEAD_STATUSES = ['new', 'under-review', 'qualified', 'payment-pending', 'i
 // Inspection payment is only ever set to 'verified' by an admin after checking the UPI/bank record. The public site cannot set it.
 const PAYMENT_STATUSES = ['not-requested', 'details-shared', 'awaiting-payment', 'verified', 'not-received'];
 const QUOTATION_STATUSES = ['not-started', 'in-preparation', 'sent', 'accepted', 'declined'];
+const COMMISSION_STATUSES = ['none', 'expected', 'partly-received', 'received'];
 const CONTRACT_STATUSES = ['none', 'discussion', 'agreement-sent', 'awarded', 'not-proceeding'];
 const LEAD_STAGES = [
   'I own a plot and want to start construction',
@@ -661,6 +662,12 @@ app.post('/api/leads', formLimiter, (req, res) => {
     followUp: '',
     followUpDate: '',
     adminNotes: '',
+    // Partner-contractor referral (private, admin only)
+    assignedContractor: '',
+    builtUpArea: '',
+    customerRate: '',
+    contractorRate: '',
+    commissionStatus: 'none',
     submittedAt: new Date().toISOString(),
   };
   list.push(entry);
@@ -685,10 +692,11 @@ app.patch('/api/leads/:id', adminAuth, (req, res) => {
 
   const b = req.body || {};
   const text = ['name', 'phone', 'area', 'size', 'floors', 'budget', 'type', 'contactMethod', 'startDate', 'message',
-    'paymentReference', 'inspectionAppointment', 'followUp', 'followUpDate', 'adminNotes'];
+    'paymentReference', 'inspectionAppointment', 'followUp', 'followUpDate', 'adminNotes',
+    'assignedContractor', 'builtUpArea', 'customerRate', 'contractorRate'];
   text.forEach(key => { if (b[key] !== undefined) entry[key] = clip(b[key], key === 'adminNotes' || key === 'message' ? 1500 : 200); });
 
-  const enums = [['status', LEAD_STATUSES], ['inspectionPaymentStatus', PAYMENT_STATUSES], ['quotationStatus', QUOTATION_STATUSES], ['contractStatus', CONTRACT_STATUSES]];
+  const enums = [['status', LEAD_STATUSES], ['inspectionPaymentStatus', PAYMENT_STATUSES], ['quotationStatus', QUOTATION_STATUSES], ['contractStatus', CONTRACT_STATUSES], ['commissionStatus', COMMISSION_STATUSES]];
   for (const [key, allowed] of enums) {
     if (b[key] === undefined) continue;
     if (!allowed.includes(b[key])) return res.status(400).json({ error: 'Invalid ' + key });
